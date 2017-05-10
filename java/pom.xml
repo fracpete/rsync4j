@@ -16,6 +16,10 @@
 
   <name>rsync4j</name>
   <description>Simple Java wrapper around rsync binaries.</description>
+  <organization>
+    <name>University of Waikato, Hamilton, NZ</name>
+    <url>http://www.waikato.ac.nz/</url>
+  </organization>
   <licenses>
     <license>
       <name>Creative Commons Attribution-ShareAlike 3.0</name>
@@ -28,7 +32,10 @@
       <id>fracpete</id>
       <name>Peter Reutemann</name>
       <email>fracpete@gmail.com</email>
-      <url>http://open.fracpete.org/</url>
+      <email>fracpete@waikato.ac.nz</email>
+      <url>http://www.cms.waikato.ac.nz/~fracpete/</url>
+      <organization>University of Waikato, CS department</organization>
+      <organizationUrl>http://www.cs.waikato.ac.nz/</organizationUrl>
       <roles>
         <role>developer</role>
       </roles>
