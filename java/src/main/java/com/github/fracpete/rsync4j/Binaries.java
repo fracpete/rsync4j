@@ -55,9 +55,9 @@ public class Binaries {
    * binary.
    *
    * @return		the filename of the binary
-   * @throws Throwable	if extraction fails
+   * @throws Exception	if extraction fails
    */
-  public static String extractBinary() throws Throwable {
+  public static String extractBinary() throws Exception {
     String			result;
     String			resource;
     InputStream 		is;
@@ -100,8 +100,8 @@ public class Binaries {
 	    + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
       }
     }
-    catch (Throwable t) {
-      throw t;
+    catch (Exception e) {
+      throw e;
     }
     finally {
       IOUtils.closeQuietly(bis);
