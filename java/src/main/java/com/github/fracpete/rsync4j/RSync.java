@@ -25,6 +25,7 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,12 @@ public class RSync {
   /** the destination path/url. */
   protected String m_Destination;
 
+  /** whether to output the commandline. */
+  protected boolean m_OutputCommandline;
+
+  /** whether to be verbose. */
+  protected boolean m_Verbose;
+
   /** whether to recurse into sub-directories. */
   protected boolean m_Recursive;
 
@@ -56,9 +63,11 @@ public class RSync {
    * Resets the members.
    */
   public void reset() {
-    m_Source      = null;
-    m_Destination = null;
-    m_Recursive   = false;
+    m_Source            = null;
+    m_Destination       = null;
+    m_OutputCommandline = false;
+    m_Verbose           = false;
+    m_Recursive         = false;
   }
 
   /**
@@ -67,7 +76,7 @@ public class RSync {
    * @param value	the source
    */
   public RSync setSource(String value) {
-    m_Source = value;
+    m_Source = value.replace("\\", "/");
     return this;
   }
 
@@ -87,7 +96,7 @@ public class RSync {
    * @return		itself
    */
   public RSync setDestination(String value) {
-    m_Destination = value;
+    m_Destination = value.replace("\\", "/");
     return this;
   }
 
@@ -98,6 +107,26 @@ public class RSync {
    */
   public String getDestination() {
     return m_Destination;
+  }
+
+  /**
+   * Sets verbose flag.
+   *
+   * @param value	true if verbose
+   * @return		itself
+   */
+  public RSync setVerbose(boolean value) {
+    m_Verbose = value;
+    return this;
+  }
+
+  /**
+   * Returns verbose flag.
+   *
+   * @return		true if verbose
+   */
+  public boolean getVerbose() {
+    return m_Verbose;
   }
 
   /**
@@ -121,17 +150,41 @@ public class RSync {
   }
 
   /**
+   * Sets output commandline flag.
+   *
+   * @param value	true if to output commandline
+   * @return		itself
+   */
+  public RSync setOutputCommandline(boolean value) {
+    m_OutputCommandline = value;
+    return this;
+  }
+
+  /**
+   * Returns output commandline flag.
+   *
+   * @return		true if to output commandline
+   */
+  public boolean getOutputCommandline() {
+    return m_OutputCommandline;
+  }
+
+  /**
    * Executes the rsync binary for the platform.
    *
    * @return		the process object
    * @throws Exception	if execution fails
    */
-  public Process execute() throws Exception {
+  public ProcessResult execute() throws Exception {
     ProcessBuilder	builder;
+    String 		binary;
     List<String>	args;
 
-    args = new ArrayList<>();
-    args.add(Binaries.extractBinary());
+    binary = Binaries.extractBinary();
+    args   = new ArrayList<>();
+    args.add(binary);
+    if (getVerbose())
+      args.add("-v");
     if (getRecursive())
       args.add("-r");
 
@@ -143,10 +196,59 @@ public class RSync {
       throw new IllegalStateException("No destination defined!");
     args.add(getDestination());
 
+    if (m_OutputCommandline)
+      System.out.println("Command-line: " + Utils.flatten(args, " "));
+
     builder = new ProcessBuilder();
+    builder.directory(new File(binary).getParentFile());
     builder.command(args);
 
-    return builder.start();
+    return new ProcessResult(args.toArray(new String[args.size()]), null, null, builder.start());
+  }
+
+  /**
+   * Sets the commandline options.
+   *
+   * @param options	the options to use
+   * @return		true if successful
+   * @throws Exception	in case of an invalid option
+   */
+  public boolean setOptions(String[] options) throws Exception {
+    ArgumentParser 	parser;
+    Namespace 		ns;
+
+    parser = ArgumentParsers.newArgumentParser(RSync.class.getName());
+    parser.addArgument("src")
+      .help("The local or remote source path (path or [user@]host:path)");
+    parser.addArgument("dest")
+      .help("The local or remote destination path (path or [user@]host:path)");
+    parser.addArgument("-v", "--verbose")
+      .dest("verbose")
+      .help("increase verbosity")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-r", "--recursive")
+      .dest("recursive")
+      .help("recurse into directories")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--output-commandline")
+      .dest("outputCommandline")
+      .help("output the command-line used")
+      .action(Arguments.storeTrue());
+    try {
+      ns = parser.parseArgs(options);
+    }
+    catch (ArgumentParserException e) {
+      parser.handleError(e);
+      return false;
+    }
+
+    setVerbose(ns.getBoolean("verbose"));
+    setRecursive(ns.getBoolean("recursive"));
+    setOutputCommandline(ns.get("outputCommandline"));
+    setSource(ns.getString("src"));
+    setDestination(ns.getString("dest"));
+
+    return true;
   }
 
   /**
@@ -154,35 +256,20 @@ public class RSync {
    *
    * @param args	the arguments
    */
-  public static void main(String[] args) throws Throwable {
-    ArgumentParser 	parser;
-    Namespace 		ns;
+  public static void main(String[] args) throws Exception {
     RSync 		rsync;
-    Process		proc;
-
-    parser = ArgumentParsers.newArgumentParser(RSync.class.getName());
-    parser.addArgument("src")
-      .help("The local or remote source path (path or [user@]host:path)");
-    parser.addArgument("dest")
-      .help("The local or remote destination path (path or [user@]host:path)");
-    parser.addArgument("-r", "--recursive")
-      .dest("recursive")
-      .help("recurse into directories")
-      .action(Arguments.storeTrue());
-    ns = null;
-    try {
-      ns = parser.parseArgs(args);
-    }
-    catch (ArgumentParserException e) {
-      parser.handleError(e);
-      System.exit(1);
-    }
+    ProcessResult 	result;
 
     rsync = new RSync();
-    rsync.setRecursive(ns.getBoolean("recursive"));
-    rsync.setSource(ns.getString("src"));
-    rsync.setDestination(ns.getString("dest"));
-    proc = rsync.execute();
-    System.out.println("Exit code: " + proc.waitFor());
+    if (rsync.setOptions(args)) {
+      result = rsync.execute();
+      System.out.println(result.getStdOut());
+      System.out.println("Exit code: " + result.getExitCode());
+      if (result.getExitCode() > 0)
+	System.err.println(result.getStdErr());
+    }
+    else {
+      System.exit(1);
+    }
   }
 }
