@@ -47,17 +47,17 @@ public class Binaries {
   /** the sub-directory for the linux binary. */
   public final static String LINUX_DIR = "linux-x86_64/";
 
-  /** the name of the linux binary. */
-  public final static String LINUX_BINARY = "rsync";
+  /** the sub-directory for the windows binaries. */
+  public final static String WINDOWS_DIR = "windows-x86_64/";
 
   /**
-   * Extracts the binary to the temp directory and returns the name of the
-   * binary.
+   * Copies the specified resource to the tmp directory.
    *
-   * @return		the filename of the binary
-   * @throws Exception	if extraction fails
+   * @param dir		the resource directory to use
+   * @param name	the name of the resource
+   * @return		the full path
    */
-  public static String extractBinary() throws Exception {
+  public static String copyResourceToTmp(String dir, String name) throws Exception {
     String			result;
     String			resource;
     InputStream 		is;
@@ -66,39 +66,25 @@ public class Binaries {
     FileOutputStream 		fos;
     BufferedOutputStream 	bos;
 
-    result   = null;
-    resource = RESOURCE_DIR;
-    is       = null;
-    bis      = null;
-    fos      = null;
-    bos      = null;
+    result = null;
+    is     = null;
+    bis    = null;
+    fos    = null;
+    bos    = null;
 
     try {
-      if (SystemUtils.IS_OS_LINUX) {
-	resource += LINUX_DIR + LINUX_BINARY;
-	is = ClassLoader.getSystemResourceAsStream(resource);
-	bis = new BufferedInputStream(is);
-	tmp = File.createTempFile("rsync", "");
-	tmp.deleteOnExit();
-	fos = new FileOutputStream(tmp);
-	bos = new BufferedOutputStream(fos);
-	IOUtils.copy(bis, bos);
-	Files.setPosixFilePermissions(tmp.toPath(), new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
-	result = tmp.getAbsolutePath();
-      }
-    /*
-    else if (SystemUtils.IS_OS_MAC_OSX) {
-      // TODO
-    }
-    else if (SystemUtils.IS_OS_WINDOWS) {
-      // TODO
-    }
-    */
-      else {
-	throw new IllegalStateException(
-	  "Unsupported operating system: "
-	    + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
-      }
+      resource = dir;
+      if (!resource.endsWith("/"))
+	resource += "/";
+      resource += name;
+      is  = ClassLoader.getSystemResourceAsStream(resource);
+      bis = new BufferedInputStream(is);
+      tmp = new File(System.getProperty("java.io.tmpdir") + File.separator + name);
+      tmp.deleteOnExit();
+      fos = new FileOutputStream(tmp);
+      bos = new BufferedOutputStream(fos);
+      IOUtils.copy(bis, bos);
+      result = tmp.getAbsolutePath();
     }
     catch (Exception e) {
       throw e;
@@ -108,6 +94,48 @@ public class Binaries {
       IOUtils.closeQuietly(is);
       IOUtils.closeQuietly(bos);
       IOUtils.closeQuietly(fos);
+    }
+
+    return result;
+  }
+
+  /**
+   * Extracts the binary to the temp directory and returns the name of the
+   * binary.
+   *
+   * @return		the filename of the binary
+   * @throws Exception	if extraction fails
+   */
+  public static String extractBinary() throws Exception {
+    String	result;
+
+    result = null;
+
+    try {
+      if (SystemUtils.IS_OS_LINUX) {
+	result = copyResourceToTmp(RESOURCE_DIR + LINUX_DIR, "rsync");
+	Files.setPosixFilePermissions(
+	  new File(result).toPath(),
+	  new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
+      }
+      else if (SystemUtils.IS_OS_WINDOWS) {
+	copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygiconv-2.dll");
+	copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygwin1.dll");
+	result = copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "rsync.exe");
+      }
+      /*
+      else if (SystemUtils.IS_OS_MAC_OSX) {
+        // TODO
+      }
+      */
+      else {
+	throw new IllegalStateException(
+	  "Unsupported operating system: "
+	    + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
+      }
+    }
+    catch (Exception e) {
+      throw e;
     }
 
     return result;
