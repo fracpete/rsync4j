@@ -28,6 +28,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Helper class for dealing with the rsync binaries.
@@ -79,6 +83,7 @@ public class Binaries {
 	fos = new FileOutputStream(tmp);
 	bos = new BufferedOutputStream(fos);
 	IOUtils.copy(bis, bos);
+	Files.setPosixFilePermissions(tmp.toPath(), new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
 	result = tmp.getAbsolutePath();
       }
     /*
