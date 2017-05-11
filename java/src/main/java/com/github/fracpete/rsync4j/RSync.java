@@ -1740,429 +1740,548 @@ public class RSync {
     parser.addArgument("-v", "--verbose")
       .dest("verbose")
       .help("increase verbosity")
+      .setDefault(false)
       .action(Arguments.storeTrue());
     parser.addArgument("--info")
+      .setDefault("")
       .help("fine-grained informational verbosity");
     parser.addArgument("--debug")
+      .setDefault("")
       .help("fine-grained debug verbosity");
     parser.addArgument("--msgs2stderr")
+      .setDefault(false)
       .dest("msgs2stderr")
       .help("special output handling for debugging")
       .action(Arguments.storeTrue());
     parser.addArgument("-q", "--quiet")
+      .setDefault(false)
       .dest("quiet")
       .help("suppress non-error messages")
       .action(Arguments.storeTrue());
     parser.addArgument("--no-motd")
+      .setDefault(false)
       .dest("nomotd")
       .help("suppress daemon-mode MOTD")
       .action(Arguments.storeTrue());
     parser.addArgument("-c", "--checksum")
+      .setDefault(false)
       .dest("checksum")
       .help("skip based on checksum, not mod-time & size")
       .action(Arguments.storeTrue());
     parser.addArgument("-a", "--archive")
+      .setDefault(false)
       .dest("archive")
       .help("archive mode; equals -rlptgoD (no -H,-A,-X)")
       .action(Arguments.storeTrue());
     parser.addArgument("-r", "--recursive")
+      .setDefault(false)
       .dest("recursive")
       .help("recurse into directories")
       .action(Arguments.storeTrue());
     parser.addArgument("-R", "--relative")
+      .setDefault(false)
       .dest("relative")
       .help("use relative path names")
       .action(Arguments.storeTrue());
     parser.addArgument("--no-implied-dirs")
+      .setDefault(false)
       .dest("noimplieddirs")
       .help("use relative path names")
       .action(Arguments.storeTrue());
     parser.addArgument("-b", "--backup")
+      .setDefault(false)
       .dest("backup")
       .help("make backups (see --suffix & --backup-dir)")
       .action(Arguments.storeTrue());
     parser.addArgument("--backup-dir")
+      .setDefault("")
       .dest("backupdir")
       .help("make backups into hierarchy based in DIR");
     parser.addArgument("--suffix")
+      .setDefault("")
       .dest("suffix")
       .help("set backup suffix (default ~ w/o --backup-dir)");
     parser.addArgument("-u", "--update")
+      .setDefault(false)
       .dest("update")
       .help("skip files that are newer on the receiver")
       .action(Arguments.storeTrue());
     parser.addArgument("--inplace")
+      .setDefault(false)
       .dest("inplace")
       .help("update destination files in-place")
       .action(Arguments.storeTrue());
     parser.addArgument("--append")
+      .setDefault(false)
       .dest("append")
       .help("append data onto shorter files")
       .action(Arguments.storeTrue());
     parser.addArgument("--append-verify")
+      .setDefault(false)
       .dest("appendverify")
       .help("like --append, but with old data in file checksum")
       .action(Arguments.storeTrue());
     parser.addArgument("-d", "--dirs")
+      .setDefault(false)
       .dest("dirs")
       .help("transfer directories without recursing")
       .action(Arguments.storeTrue());
     parser.addArgument("-l", "--links")
+      .setDefault(false)
       .dest("links")
       .help("copy symlinks as symlinks")
       .action(Arguments.storeTrue());
     parser.addArgument("-L", "--copy-links")
+      .setDefault(false)
       .dest("copylinks")
       .help("transform symlink into referent file/dir")
       .action(Arguments.storeTrue());
     parser.addArgument("--copy-unsafe-links")
+      .setDefault(false)
       .dest("copyunsafelinks")
       .help("only \"unsafe\" symlinks are transformed")
       .action(Arguments.storeTrue());
     parser.addArgument("--safe-links")
+      .setDefault(false)
       .dest("safelinks")
       .help("ignore symlinks that point outside the source tree")
       .action(Arguments.storeTrue());
     parser.addArgument("--munge-links")
+      .setDefault(false)
       .dest("mungelinks")
       .help("munge symlinks to make them safer (but unusable)")
       .action(Arguments.storeTrue());
     parser.addArgument("-k", "--copy-dirlinks")
+      .setDefault(false)
       .dest("copydirlinks")
       .help("transform symlink to a dir into referent dir")
       .action(Arguments.storeTrue());
     parser.addArgument("-K", "--keep-dirlinks")
+      .setDefault(false)
       .dest("keepdirlinks")
       .help("treat symlinked dir on receiver as dir")
       .action(Arguments.storeTrue());
     parser.addArgument("-H", "--hard-links")
+      .setDefault(false)
       .dest("hardlinks")
       .help("preserve hard links")
       .action(Arguments.storeTrue());
     parser.addArgument("-p", "--perms")
+      .setDefault(false)
       .dest("perms")
       .help("preserve permissions")
       .action(Arguments.storeTrue());
     parser.addArgument("-E", "--executability")
+      .setDefault(false)
       .dest("executability")
       .help("preserve the file's executability")
       .action(Arguments.storeTrue());
     parser.addArgument("--chmod")
+      .setDefault("")
       .dest("chmod")
       .help("affect file and/or directory permissions");
     parser.addArgument("-X", "--xattrs")
+      .setDefault(false)
       .dest("xattrs")
       .help("preserve extended attributes")
       .action(Arguments.storeTrue());
     parser.addArgument("-o", "--owner")
+      .setDefault(false)
       .dest("owner")
       .help("preserve owner (super-user only)")
       .action(Arguments.storeTrue());
     parser.addArgument("-g", "--group")
+      .setDefault(false)
       .dest("group")
       .help("preserve group")
       .action(Arguments.storeTrue());
     parser.addArgument("--devices")
+      .setDefault(false)
       .dest("devices")
       .help("preserve device files (super-user only)")
       .action(Arguments.storeTrue());
     parser.addArgument("--specials")
+      .setDefault(false)
       .dest("specials")
       .help("preserve special files")
       .action(Arguments.storeTrue());
     parser.addArgument("-t", "--times")
+      .setDefault(false)
       .dest("times")
       .help("preserve modification times")
       .action(Arguments.storeTrue());
     parser.addArgument("-O", "--omit-dir-times")
+      .setDefault(false)
       .dest("omitdirtimes")
       .help("omit directories from --times")
       .action(Arguments.storeTrue());
     parser.addArgument("-J", "--omit-link-times")
+      .setDefault(false)
       .dest("omitlinktimes")
       .help("omit symlinks from --times")
       .action(Arguments.storeTrue());
     parser.addArgument("--super")
+      .setDefault(false)
       .dest("super_")
       .help("receiver attempts super-user activities")
       .action(Arguments.storeTrue());
     parser.addArgument("--fake-super")
+      .setDefault(false)
       .dest("fakesuper")
       .help("store/recover privileged attrs using xattrs")
       .action(Arguments.storeTrue());
     parser.addArgument("-S", "--sparse")
+      .setDefault(false)
       .dest("sparse")
       .help("handle sparse files efficiently")
       .action(Arguments.storeTrue());
     parser.addArgument("--preallocate")
+      .setDefault(false)
       .dest("preallocate")
       .help("allocate dest files before writing them")
       .action(Arguments.storeTrue());
     parser.addArgument("-n", "--dry-run")
+      .setDefault(false)
       .dest("dryrun")
       .help("perform a trial run with no changes made")
       .action(Arguments.storeTrue());
     parser.addArgument("-W", "--whole-file")
+      .setDefault(false)
       .dest("wholefile")
       .help("copy files whole (without delta-xfer algorithm)")
       .action(Arguments.storeTrue());
     parser.addArgument("-B", "--block-size")
+      .setDefault("")
       .dest("blocksize")
       .help("force a fixed checksum block-size");
     parser.addArgument("-e", "--rsh")
+      .setDefault("")
       .dest("rsh")
       .help("specify the remote shell to use");
     parser.addArgument("--rsync-path")
+      .setDefault("")
       .dest("rsyncpath")
       .help("specify the rsync to run on the remote machine");
     parser.addArgument("--existing")
+      .setDefault(false)
       .dest("existing")
       .help("skip creating new files on receiver")
       .action(Arguments.storeTrue());
     parser.addArgument("--ignore-existing")
+      .setDefault(false)
       .dest("ignoreexisting")
       .help("skip updating files that already exist on receiver")
       .action(Arguments.storeTrue());
     parser.addArgument("--remove-source-files")
+      .setDefault(false)
       .dest("removesourcefiles")
       .help("sender removes synchronized files (non-dirs)")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete")
+      .setDefault(false)
       .dest("delete")
       .help("delete extraneous files from destination dirs")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-before")
+      .setDefault(false)
       .dest("deletebefore")
       .help("receiver deletes before transfer, not during")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-during")
+      .setDefault(false)
       .dest("deleteduring")
       .help("receiver deletes during the transfer")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-delay")
+      .setDefault(false)
       .dest("deletedelay")
       .help("find deletions during, delete after")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-after")
+      .setDefault(false)
       .dest("deleteafter")
       .help("receiver deletes after transfer, not during")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-excluded")
+      .setDefault(false)
       .dest("deleteexcluded")
       .help("also delete excluded files from destination dirs")
       .action(Arguments.storeTrue());
     parser.addArgument("--ignore-missing-args")
+      .setDefault(false)
       .dest("ignoremissingargs")
       .help("ignore missing source args without error")
       .action(Arguments.storeTrue());
     parser.addArgument("--delete-missing-args")
+      .setDefault(false)
       .dest("deletemissingargs")
       .help("delete missing source args from destination")
       .action(Arguments.storeTrue());
     parser.addArgument("--ignore-errors")
+      .setDefault(false)
       .dest("ignoreerrors")
       .help("delete even if there are I/O errors")
       .action(Arguments.storeTrue());
     parser.addArgument("--force")
+      .setDefault(false)
       .dest("force")
       .help("force deletion of directories even if not empty")
       .action(Arguments.storeTrue());
     parser.addArgument("--max-delete")
+      .setDefault(-1)
       .dest("maxdelete")
       .help("don't delete more than NUM files");
     parser.addArgument("--max-size")
+      .setDefault(-1)
       .dest("maxsize")
       .help("don't transfer any file larger than SIZE");
     parser.addArgument("--min-size")
+      .setDefault(-1)
       .dest("minsize")
       .help("don't transfer any file smaller than SIZE");
     parser.addArgument("--partial")
+      .setDefault(false)
       .dest("partial")
       .help("keep partially transferred files")
       .action(Arguments.storeTrue());
     parser.addArgument("--partial-dir")
+      .setDefault(false)
       .dest("partialdir")
       .help("put a partially transferred file into DIR");
     parser.addArgument("--delay-updates")
+      .setDefault(false)
       .dest("delayupdates")
       .help("put all updated files into place at transfer's end")
       .action(Arguments.storeTrue());
     parser.addArgument("-m", "--prune-empty-dirs")
+      .setDefault(false)
       .dest("pruneemptydirs")
       .help("prune empty directory chains from the file-list")
       .action(Arguments.storeTrue());
     parser.addArgument("--numeric-ids")
+      .setDefault(false)
       .dest("numericids")
       .help("don't map uid/gid values by user/group name")
       .action(Arguments.storeTrue());
     parser.addArgument("--usermap")
+      .setDefault("")
       .dest("usermap")
       .help("custom username mapping");
     parser.addArgument("--groupmap")
+      .setDefault("")
       .dest("groupmap")
       .help("custom groupname mapping");
     parser.addArgument("--chown")
+      .setDefault("")
       .dest("chown")
       .help("simple username/groupname mapping");
     parser.addArgument("--timeout")
+      .setDefault("")
       .dest("timeout")
       .help("set I/O timeout in seconds");
     parser.addArgument("--contimeout")
+      .setDefault("")
       .dest("contimeout")
       .help("set daemon connection timeout in seconds");
     parser.addArgument("-I", "--ignore-times")
+      .setDefault(false)
       .dest("ignoretimes")
       .help("don't skip files that match in size and mod-time")
       .action(Arguments.storeTrue());
     parser.addArgument("-M", "--remote-option")
+      .setDefault("")
       .dest("remoteoption")
       .help("send OPTION to the remote side only");
     parser.addArgument("--size-only")
+      .setDefault(false)
       .dest("sizeonly")
       .help("skip files that match in size")
       .action(Arguments.storeTrue());
     parser.addArgument("--modify-window")
+      .setDefault(-1)
       .dest("modifywindow")
       .help("compare mod-times with reduced accuracy");
     parser.addArgument("-T", "--temp-dir")
+      .setDefault("")
       .dest("tempdir")
       .help("create temporary files in directory DIR");
     parser.addArgument("-y", "--fuzzy")
+      .setDefault(false)
       .dest("fuzzy")
       .help("find similar file for basis if no dest file")
       .action(Arguments.storeTrue());
     parser.addArgument("--compare-dest")
+      .setDefault("")
       .dest("comparedest")
       .help("also compare destination files relative to DIR");
     parser.addArgument("--copy-dest")
+      .setDefault("")
       .dest("copydest")
       .help("... and include copies of unchanged files");
     parser.addArgument("--link-dest")
+      .setDefault("")
       .dest("linkdest")
       .help("hardlink to files in DIR when unchanged");
     parser.addArgument("-z", "--compress")
+      .setDefault(false)
       .dest("compress")
       .help("compress file data during the transfer")
       .action(Arguments.storeTrue());
     parser.addArgument("--compress-level")
+      .setDefault(-1)
       .dest("compresslevel")
       .help("explicitly set compression level");
     parser.addArgument("-C", "--cvs-exclude")
+      .setDefault(false)
       .dest("csvexclude")
       .help("auto-ignore files the same way CVS does")
       .action(Arguments.storeTrue());
     parser.addArgument("-f", "--filter-rule")
+      .setDefault("")
       .dest("filterrule")
       .help("add a file-filtering RULE");
     parser.addArgument("--exclude")
+      .setDefault("")
       .dest("exclude")
       .help("exclude files matching PATTERN");
     parser.addArgument("--exclude-from")
+      .setDefault("")
       .dest("excludefrom")
       .help("read exclude patterns from FILE");
     parser.addArgument("--include")
+      .setDefault("")
       .dest("include")
       .help("include files matching PATTERN");
     parser.addArgument("--include-from")
+      .setDefault("")
       .dest("includefrom")
       .help("read include patterns from FILE");
     parser.addArgument("--files-from")
+      .setDefault("")
       .dest("filesfrom")
       .help("read list of source-file names from FILE");
     parser.addArgument("-0", "--from0")
+      .setDefault(false)
       .dest("from0")
       .help("all *-from/filter files are delimited by 0s")
       .action(Arguments.storeTrue());
     parser.addArgument("-s", "--protect-args")
+      .setDefault(false)
       .dest("protectargs")
       .help("no space-splitting; only wildcard special-chars")
       .action(Arguments.storeTrue());
     parser.addArgument("--address")
+      .setDefault("")
       .dest("address")
       .help("bind address for outgoing socket to daemon");
     parser.addArgument("--port")
+      .setDefault(-1)
       .dest("port")
       .help("specify double-colon alternate port number");
     parser.addArgument("--sockopts")
+      .setDefault("")
       .dest("sockopts")
       .help("specify custom TCP options");
     parser.addArgument("--blocking-io")
+      .setDefault(false)
       .dest("blockingio")
       .help("use blocking I/O for the remote shell")
       .action(Arguments.storeTrue());
     parser.addArgument("--stats")
+      .setDefault(false)
       .dest("stats")
       .help("give some file-transfer stats")
       .action(Arguments.storeTrue());
     parser.addArgument("-8", "--8-bit-output")
+      .setDefault(false)
       .dest("eightbitoutput")
       .help("leave high-bit chars unescaped in output")
       .action(Arguments.storeTrue());
-    parser.addArgument("-h", "--human-readable")
+    parser.addArgument("--human-readable")
+      .setDefault(false)
       .dest("humanreadable")
       .help("output numbers in a human-readable format")
       .action(Arguments.storeTrue());
     parser.addArgument("--progress")
+      .setDefault(false)
       .dest("progress")
       .help("show progress during transfer")
       .action(Arguments.storeTrue());
     parser.addArgument("-i", "--itemize-changes")
+      .setDefault(false)
       .dest("itemizechanges")
       .help("output a change-summary for all updates")
       .action(Arguments.storeTrue());
     parser.addArgument("--out-format")
+      .setDefault("")
       .dest("outformat")
       .help("output updates using the specified FORMAT");
     parser.addArgument("--log-file")
+      .setDefault("")
       .dest("logfile")
       .help("log what we're doing to the specified FILE");
     parser.addArgument("--log-file-format")
+      .setDefault("")
       .dest("logfileformat")
       .help("log updates using the specified FMT");
     parser.addArgument("--password-file")
+      .setDefault("")
       .dest("passwordfile")
       .help("read daemon-access password from FILE");
     parser.addArgument("--list-only")
+      .setDefault(false)
       .dest("listonly")
       .help("list the files instead of copying them")
       .action(Arguments.storeTrue());
     parser.addArgument("--bwlimit")
+      .setDefault("")
       .dest("bwlimit")
       .help("limit socket I/O bandwidth");
     parser.addArgument("--outbuf")
+      .setDefault('\0')
       .dest("outbuf")
       .help("set output buffering to None, Line, or Block (N|L|B)");
     parser.addArgument("--write-batch")
+      .setDefault("")
       .dest("writebatch")
       .help("write a batched update to FILE");
     parser.addArgument("--only-write-batch")
+      .setDefault("")
       .dest("onlywritebatch")
       .help("like --write-batch but w/o updating destination");
     parser.addArgument("--read-batch")
+      .setDefault("")
       .dest("readbatch")
       .help("read a batched update from FILE");
     parser.addArgument("--protocol")
+      .setDefault(-1)
       .dest("protocol")
       .help("force an older protocol version to be used");
     parser.addArgument("--iconv")
+      .setDefault("")
       .dest("iconv")
       .help("request charset conversion of filenames");
     parser.addArgument("--checkum-seed")
+      .setDefault(-1)
       .dest("checksumseed")
       .help("set block/file checksum seed (advanced)");
     parser.addArgument("-4", "--ipv4")
+      .setDefault(false)
       .dest("ipv4")
       .help("prefer IPv4")
       .action(Arguments.storeTrue());
     parser.addArgument("-6", "--ipv6")
+      .setDefault(false)
       .dest("ipv6")
       .help("prefer IPv6")
       .action(Arguments.storeTrue());
     parser.addArgument("--version")
+      .setDefault(false)
       .dest("version")
       .help("print version number")
       .action(Arguments.storeTrue());
     parser.addArgument("--output-commandline")
+      .setDefault(false)
       .dest("outputCommandline")
       .help("output the command-line generated for the rsync binary")
       .action(Arguments.storeTrue());
