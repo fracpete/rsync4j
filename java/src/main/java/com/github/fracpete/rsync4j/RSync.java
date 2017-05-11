@@ -819,7 +819,7 @@ public class RSync {
     return omit_link_times;
   }
 
-  public RSync setOmitLinkTimes(boolean omit_link_times) {
+  public RSync omitLinkTimes(boolean omit_link_times) {
     this.omit_link_times = omit_link_times;
     return this;
   }
@@ -891,7 +891,7 @@ public class RSync {
     return block_size;
   }
 
-  public RSync setBlockSize(String block_size) {
+  public RSync blockSize(String block_size) {
     this.block_size = block_size;
     return this;
   }
@@ -2170,6 +2170,7 @@ public class RSync {
       .help("The local or remote source path (path or [user@]host:path)");
     parser.addArgument("dest")
       .help("The local or remote destination path (path or [user@]host:path)");
+
     try {
       ns = parser.parseArgs(options);
     }
@@ -2179,7 +2180,125 @@ public class RSync {
     }
 
     verbose(ns.getBoolean("verbose"));
+    info(ns.getString("info"));
+    debug(ns.getString("debug"));
+    msgs2stderr(ns.getBoolean("msgs2stderr"));
+    quiet(ns.getBoolean("quiet"));
+    noMotd(ns.getBoolean("nomotd"));
+    checksum(ns.getBoolean("checksum"));
+    archive(ns.getBoolean("archive"));
     recursive(ns.getBoolean("recursive"));
+    relative(ns.getBoolean("relative"));
+    noImpliedDirs(ns.getBoolean("noimplieddirs"));
+    backup(ns.getBoolean("backup"));
+    backupDir(ns.getString("backupdir"));
+    suffix(ns.getString("suffix"));
+    update(ns.getBoolean("update"));
+    inplace(ns.getBoolean("inplace"));
+    append(ns.getBoolean("append"));
+    appendVerify(ns.getBoolean("appendverify"));
+    dirs(ns.getBoolean("dirs"));
+    links(ns.getBoolean("links"));
+    copyLinks(ns.getBoolean("copylinks"));
+    copyUnsafeLinks(ns.getBoolean("copyunsafelinks"));
+    safeLinks(ns.getBoolean("safelinks"));
+    mungeLinks(ns.getBoolean("mungelinks"));
+    copyDirlinks(ns.getBoolean("copydirlinks"));
+    keepDirlinks(ns.getBoolean("keepdirlinks"));
+    hardLinks(ns.getBoolean("hardlinks"));
+    perms(ns.getBoolean("perms"));
+    executability(ns.getBoolean("executability"));
+    chmod(ns.getString("chmod"));
+    xattrs(ns.getBoolean("xattrs"));
+    owner(ns.getBoolean("owner"));
+    group(ns.getBoolean("group"));
+    devices(ns.getBoolean("devices"));
+    specials(ns.getBoolean("specials"));
+    times(ns.getBoolean("times"));
+    omitDirTimes(ns.getBoolean("omitdirtimes"));
+    omitLinkTimes(ns.getBoolean("omitlinktimes"));
+    super_(ns.getBoolean("super_"));
+    fakeSuper(ns.getBoolean("fakesuper"));
+    sparse(ns.getBoolean("sparse"));
+    preallocate(ns.getBoolean("preallocate"));
+    dryRun(ns.getBoolean("dryrun"));
+    wholeFile(ns.getBoolean("wholefile"));
+    oneFileSystem(ns.getBoolean("onefilesystem"));
+    blockSize(ns.getString("blocksize"));
+    rsh(ns.getString("rsh"));
+    rsyncPath(ns.getString("rsyncpath"));
+    existing(ns.getBoolean("existing"));
+    ignoreExisting(ns.getBoolean("ignoreexisting"));
+    removeSourceFiles(ns.getBoolean("removesourcefiles"));
+    delete(ns.getBoolean("delete"));
+    deleteBefore(ns.getBoolean("deletebefore"));
+    deleteDuring(ns.getBoolean("deleteduring"));
+    deleteDelay(ns.getBoolean("deletedelay"));
+    deleteAfter(ns.getBoolean("deleteafter"));
+    deleteExcluded(ns.getBoolean("deleteexcluded"));
+    ignoreMissingArgs(ns.getBoolean("ignoremissingargs"));
+    deleteMissingArgs(ns.getBoolean("deletemissingargs"));
+    ignoreErrors(ns.getBoolean("ignoreerrors"));
+    force(ns.getBoolean("force"));
+    maxDelete(ns.getInt("maxdelete"));
+    maxSize(ns.getInt("maxsize"));
+    minSize(ns.getInt("minsize"));
+    partial(ns.getBoolean("partial"));
+    delayUpdates(ns.getBoolean("delayupdates"));
+    pruneEmptyDirs(ns.getBoolean("pruneemptydirs"));
+    numericIds(ns.getBoolean("numericids"));
+    usermap(ns.getString("usermap"));
+    groupmap(ns.getString("groupmap"));
+    chown(ns.getString("chown"));
+    timeout(ns.getInt("timeout"));
+    contimeout(ns.getInt("contimeout"));
+    ignoreTimes(ns.getBoolean("ignoretimes"));
+    remoteOption(ns.getString("remoteoption"));
+    sizeOnly(ns.getBoolean("sizeonly"));
+    modifyWindow(ns.getInt("modifywindow"));
+    tempDir(ns.getString("tempdir"));
+    fuzzy(ns.getBoolean("fuzzy"));
+    compareDest(ns.getString("comparedest"));
+    copyDest(ns.getString("copydest"));
+    linkDest(ns.getString("linkdest"));
+    compress(ns.getBoolean("compress"));
+    compressLevel(ns.getInt("compresslevel"));
+    skipCompress(ns.getString("skipcompress"));
+    cvsExclude(ns.getBoolean("cvsexclude"));
+    filter(ns.getString("filter"));
+    exclude(ns.getString("exclude"));
+    excludeFrom(ns.getString("excludefrom"));
+    include(ns.getString("include"));
+    includeFrom(ns.getString("includefrom"));
+    filesFrom(ns.getString("filesfrom"));
+    from0(ns.getBoolean("from0"));
+    protectArgs(ns.getBoolean("protectargs"));
+    address(ns.getString("address"));
+    port(ns.getInt("port"));
+    sockopts(ns.getString("sockopts"));
+    blockingIO(ns.getBoolean("blockingio"));
+    stats(ns.getBoolean("stats"));
+    eightBitOutput(ns.getBoolean("eightbitoutput"));
+    humanReadable(ns.getBoolean("humanreadable"));
+    progress(ns.getBoolean("progress"));
+    itemizeChanges(ns.getBoolean("itemizechanges"));
+    outFormat(ns.getString("outformat"));
+    logFile(ns.getString("logfile"));
+    logFileFormat(ns.getString("logfileformat"));
+    passwordFile(ns.getString("passwordfile"));
+    listOnly(ns.getBoolean("listonly"));
+    bwlimit(ns.getInt("bwlimit"));
+    outbuf(ns.getString("outbuf").charAt(0));
+    writeBatch(ns.getString("writebatch"));
+    onlyWriteBatch(ns.getString("onlywritebatch"));
+    readBatch(ns.getString("readbatch"));
+    protocol(ns.getInt("protocol"));
+    iconv(ns.getString("iconv"));
+    checksumSeed(ns.getInt("checksumseed"));
+    ipv4(ns.getBoolean("ipv4"));
+    ipv6(ns.getBoolean("ipv6"));
+    version(ns.getBoolean("version"));
+
     setOutputCommandline(ns.get("outputCommandline"));
     setSource(ns.getString("src"));
     setDestination(ns.getString("dest"));
