@@ -1950,6 +1950,11 @@ public class RSync {
       .dest("wholefile")
       .help("copy files whole (without delta-xfer algorithm)")
       .action(Arguments.storeTrue());
+    parser.addArgument("-x", "--one-file-system")
+      .setDefault(false)
+      .dest("onefilesystem")
+      .help("don't cross filesystem boundaries")
+      .action(Arguments.storeTrue());
     parser.addArgument("-B", "--block-size")
       .setDefault("")
       .dest("blocksize")
@@ -2076,11 +2081,11 @@ public class RSync {
       .dest("chown")
       .help("simple username/groupname mapping");
     parser.addArgument("--timeout")
-      .setDefault("")
+      .setDefault(-1)
       .dest("timeout")
       .help("set I/O timeout in seconds");
     parser.addArgument("--contimeout")
-      .setDefault("")
+      .setDefault(-1)
       .dest("contimeout")
       .help("set daemon connection timeout in seconds");
     parser.addArgument("-I", "--ignore-times")
@@ -2131,14 +2136,19 @@ public class RSync {
       .setDefault(-1)
       .dest("compresslevel")
       .help("explicitly set compression level");
+    parser.addArgument("--skip-compress")
+      .setDefault("")
+      .dest("skipcompress")
+      .help("skip compressing files with a suffix in LIST")
+      .action(Arguments.storeTrue());
     parser.addArgument("-C", "--cvs-exclude")
       .setDefault(false)
-      .dest("csvexclude")
+      .dest("cvsexclude")
       .help("auto-ignore files the same way CVS does")
       .action(Arguments.storeTrue());
-    parser.addArgument("-f", "--filter-rule")
+    parser.addArgument("-f", "--filter")
       .setDefault("")
-      .dest("filterrule")
+      .dest("filter")
       .help("add a file-filtering RULE");
     parser.addArgument("--exclude")
       .setDefault("")
@@ -2234,7 +2244,7 @@ public class RSync {
       .help("list the files instead of copying them")
       .action(Arguments.storeTrue());
     parser.addArgument("--bwlimit")
-      .setDefault("")
+      .setDefault(-1)
       .dest("bwlimit")
       .help("limit socket I/O bandwidth");
     parser.addArgument("--outbuf")
