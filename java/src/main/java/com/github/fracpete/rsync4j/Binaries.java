@@ -54,6 +54,23 @@ public class Binaries {
   public final static String MACOSX_DIR = "macosx-x86_64/";
 
   /**
+   * Returns the "bitness", ie 32 or 64 bit of the underlying OS.
+   *
+   * @return		the number of bits
+   */
+  public synchronized static int getBitness() {
+    String	arch;
+
+    arch = System.getProperty("os.arch");
+    if (arch.endsWith("86"))
+      return 32;
+    else if (arch.endsWith("64"))
+      return 64;
+    else
+      throw new IllegalStateException("Cannot interpret 'os.arch' for bitness: " + arch);
+  }
+
+  /**
    * Copies the specified resource to the tmp directory.
    *
    * @param dir		the resource directory to use
@@ -113,6 +130,9 @@ public class Binaries {
     String	result;
 
     result = null;
+
+    if (getBitness() != 64)
+      throw new IllegalStateException("Only 64bit is supported!");
 
     if (SystemUtils.IS_OS_LINUX) {
       result = copyResourceToTmp(RESOURCE_DIR + LINUX_DIR, "rsync");
