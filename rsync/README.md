@@ -14,7 +14,20 @@ CFLAGS=-static ./configure && make clean && make
 ```
 
 ### Windows
-TODO
+* download cygwin installer
+  
+  https://cygwin.com/install.html
+  
+* install packages
+
+  * rsync
+
+* use (dependency walker)[http://www.dependencywalker.com/] to determine required 
+  dlls for `rysnc.exe` binary, most likely:
+
+  * cygwin1.dll
+  * cygiconv-2.dll
+  
 
 ### OSX
 TODO
