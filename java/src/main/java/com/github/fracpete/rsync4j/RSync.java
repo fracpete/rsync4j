@@ -1737,22 +1737,180 @@ public class RSync {
     Namespace 		ns;
 
     parser = ArgumentParsers.newArgumentParser(RSync.class.getName());
-    parser.addArgument("src")
-      .help("The local or remote source path (path or [user@]host:path)");
-    parser.addArgument("dest")
-      .help("The local or remote destination path (path or [user@]host:path)");
     parser.addArgument("-v", "--verbose")
       .dest("verbose")
       .help("increase verbosity")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--info")
+      .help("fine-grained informational verbosity");
+    parser.addArgument("--debug")
+      .help("fine-grained debug verbosity");
+    parser.addArgument("--msgs2stderr")
+      .dest("msgs2stderr")
+      .help("special output handling for debugging")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-q", "--quiet")
+      .dest("quiet")
+      .help("suppress non-error messages")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--no-motd")
+      .dest("nomotd")
+      .help("suppress daemon-mode MOTD")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-c", "--checksum")
+      .dest("checksum")
+      .help("skip based on checksum, not mod-time & size")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-a", "--archive")
+      .dest("archive")
+      .help("archive mode; equals -rlptgoD (no -H,-A,-X)")
       .action(Arguments.storeTrue());
     parser.addArgument("-r", "--recursive")
       .dest("recursive")
       .help("recurse into directories")
       .action(Arguments.storeTrue());
+    parser.addArgument("-R", "--relative")
+      .dest("relative")
+      .help("use relative path names")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--no-implied-dirs")
+      .dest("noimplieddirs")
+      .help("use relative path names")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-b", "--backup")
+      .dest("backup")
+      .help("make backups (see --suffix & --backup-dir)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--backup-dir")
+      .dest("backupdir")
+      .help("make backups into hierarchy based in DIR");
+    parser.addArgument("--suffix")
+      .dest("suffix")
+      .help("set backup suffix (default ~ w/o --backup-dir)");
+    parser.addArgument("-u", "--update")
+      .dest("update")
+      .help("skip files that are newer on the receiver")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--inplace")
+      .dest("inplace")
+      .help("update destination files in-place")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--append")
+      .dest("append")
+      .help("append data onto shorter files")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--append-verify")
+      .dest("appendverify")
+      .help("like --append, but with old data in file checksum")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-d", "--dirs")
+      .dest("dirs")
+      .help("transfer directories without recursing")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-l", "--links")
+      .dest("links")
+      .help("copy symlinks as symlinks")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-L", "--copy-links")
+      .dest("copylinks")
+      .help("transform symlink into referent file/dir")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--copy-unsafe-links")
+      .dest("copyunsafelinks")
+      .help("only \"unsafe\" symlinks are transformed")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--safe-links")
+      .dest("safelinks")
+      .help("ignore symlinks that point outside the source tree")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--munge-links")
+      .dest("mungelinks")
+      .help("munge symlinks to make them safer (but unusable)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-k", "--copy-dirlinks")
+      .dest("copydirlinks")
+      .help("transform symlink to a dir into referent dir")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-K", "--keep-dirlinks")
+      .dest("keepdirlinks")
+      .help("treat symlinked dir on receiver as dir")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-H", "--hard-links")
+      .dest("hardlinks")
+      .help("preserve hard links")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-p", "--perms")
+      .dest("perms")
+      .help("preserve permissions")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-E", "--executability")
+      .dest("executability")
+      .help("preserve the file's executability")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--chmod")
+      .dest("chmod")
+      .help("affect file and/or directory permissions");
+    parser.addArgument("-X", "--xattrs")
+      .dest("xattrs")
+      .help("preserve extended attributes")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-o", "--owner")
+      .dest("owner")
+      .help("preserve owner (super-user only)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-g", "--group")
+      .dest("group")
+      .help("preserve group")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--devices")
+      .dest("devices")
+      .help("preserve device files (super-user only)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--specials")
+      .dest("specials")
+      .help("preserve special files")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-t", "--times")
+      .dest("times")
+      .help("preserve modification times")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-O", "--omit-dir-times")
+      .dest("omitdirtimes")
+      .help("omit directories from --times")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-J", "--omit-link-times")
+      .dest("omitlinktimes")
+      .help("omit symlinks from --times")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--super")
+      .dest("super_")
+      .help("receiver attempts super-user activities")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--fake-super")
+      .dest("fakesuper")
+      .help("store/recover privileged attrs using xattrs")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-S", "--sparse")
+      .dest("sparse")
+      .help("handle sparse files efficiently")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--preallocate")
+      .dest("preallocate")
+      .help("allocate dest files before writing them")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-n", "--dry-run")
+      .dest("dryrun")
+      .help("perform a trial run with no changes made")
+      .action(Arguments.storeTrue());
+
     parser.addArgument("--output-commandline")
       .dest("outputCommandline")
       .help("output the command-line used")
       .action(Arguments.storeTrue());
+    parser.addArgument("src")
+      .help("The local or remote source path (path or [user@]host:path)");
+    parser.addArgument("dest")
+      .help("The local or remote destination path (path or [user@]host:path)");
     try {
       ns = parser.parseArgs(options);
     }
