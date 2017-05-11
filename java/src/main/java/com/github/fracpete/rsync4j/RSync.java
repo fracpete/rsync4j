@@ -2083,10 +2083,88 @@ public class RSync {
     parser.addArgument("--port")
       .dest("port")
       .help("specify double-colon alternate port number");
-
+    parser.addArgument("--sockopts")
+      .dest("sockopts")
+      .help("specify custom TCP options");
+    parser.addArgument("--blocking-io")
+      .dest("blockingio")
+      .help("use blocking I/O for the remote shell")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--stats")
+      .dest("stats")
+      .help("give some file-transfer stats")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-8", "--8-bit-output")
+      .dest("eightbitoutput")
+      .help("leave high-bit chars unescaped in output")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-h", "--human-readable")
+      .dest("humanreadable")
+      .help("output numbers in a human-readable format")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--progress")
+      .dest("progress")
+      .help("show progress during transfer")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-i", "--itemize-changes")
+      .dest("itemizechanges")
+      .help("output a change-summary for all updates")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--out-format")
+      .dest("outformat")
+      .help("output updates using the specified FORMAT");
+    parser.addArgument("--log-file")
+      .dest("logfile")
+      .help("log what we're doing to the specified FILE");
+    parser.addArgument("--log-file-format")
+      .dest("logfileformat")
+      .help("log updates using the specified FMT");
+    parser.addArgument("--password-file")
+      .dest("passwordfile")
+      .help("read daemon-access password from FILE");
+    parser.addArgument("--list-only")
+      .dest("listonly")
+      .help("list the files instead of copying them")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--bwlimit")
+      .dest("bwlimit")
+      .help("limit socket I/O bandwidth");
+    parser.addArgument("--outbuf")
+      .dest("outbuf")
+      .help("set output buffering to None, Line, or Block (N|L|B)");
+    parser.addArgument("--write-batch")
+      .dest("writebatch")
+      .help("write a batched update to FILE");
+    parser.addArgument("--only-write-batch")
+      .dest("onlywritebatch")
+      .help("like --write-batch but w/o updating destination");
+    parser.addArgument("--read-batch")
+      .dest("readbatch")
+      .help("read a batched update from FILE");
+    parser.addArgument("--protocol")
+      .dest("protocol")
+      .help("force an older protocol version to be used");
+    parser.addArgument("--iconv")
+      .dest("iconv")
+      .help("request charset conversion of filenames");
+    parser.addArgument("--checkum-seed")
+      .dest("checksumseed")
+      .help("set block/file checksum seed (advanced)");
+    parser.addArgument("-4", "--ipv4")
+      .dest("ipv4")
+      .help("prefer IPv4")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-6", "--ipv6")
+      .dest("ipv6")
+      .help("prefer IPv6")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--version")
+      .dest("version")
+      .help("print version number")
+      .action(Arguments.storeTrue());
     parser.addArgument("--output-commandline")
       .dest("outputCommandline")
-      .help("output the command-line used")
+      .help("output the command-line generated for the rsync binary")
       .action(Arguments.storeTrue());
     parser.addArgument("src")
       .help("The local or remote source path (path or [user@]host:path)");
