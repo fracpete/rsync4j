@@ -50,6 +50,9 @@ public class Binaries {
   /** the sub-directory for the windows binaries. */
   public final static String WINDOWS_DIR = "windows-x86_64/";
 
+  /** the sub-directory for the mac osx binaries. */
+  public final static String MACOSX_DIR = "macosx-x86_64/";
+
   /**
    * Copies the specified resource to the tmp directory.
    *
@@ -111,31 +114,29 @@ public class Binaries {
 
     result = null;
 
-    try {
-      if (SystemUtils.IS_OS_LINUX) {
-	result = copyResourceToTmp(RESOURCE_DIR + LINUX_DIR, "rsync");
-	Files.setPosixFilePermissions(
-	  new File(result).toPath(),
-	  new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
-      }
-      else if (SystemUtils.IS_OS_WINDOWS) {
-	copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygiconv-2.dll");
-	copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygwin1.dll");
-	result = copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "rsync.exe");
-      }
-      /*
-      else if (SystemUtils.IS_OS_MAC_OSX) {
-        // TODO
-      }
-      */
-      else {
-	throw new IllegalStateException(
-	  "Unsupported operating system: "
-	    + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
-      }
+    if (SystemUtils.IS_OS_LINUX) {
+      result = copyResourceToTmp(RESOURCE_DIR + LINUX_DIR, "rsync");
+      Files.setPosixFilePermissions(
+	new File(result).toPath(),
+	new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
     }
-    catch (Exception e) {
-      throw e;
+    else if (SystemUtils.IS_OS_WINDOWS) {
+      copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygiconv-2.dll");
+      copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygwin1.dll");
+      result = copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "rsync.exe");
+    }
+    /*
+    else if (SystemUtils.IS_OS_MAC_OSX) {
+      result = copyResourceToTmp(RESOURCE_DIR + MACOSX_DIR, "rsync");
+      Files.setPosixFilePermissions(
+	new File(result).toPath(),
+	new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
+    }
+    */
+    else {
+      throw new IllegalStateException(
+	"Unsupported operating system: "
+	  + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
     }
 
     return result;
