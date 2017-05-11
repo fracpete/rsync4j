@@ -66,6 +66,8 @@ public class RSync {
 
   protected boolean relative;
 
+  protected boolean no_implied_dirs;
+
   protected boolean backup;
 
   protected String backup_dir;
@@ -308,6 +310,7 @@ public class RSync {
     archive = false;
     recursive = false;
     relative = false;
+    no_implied_dirs = false;
     backup = false;
     backup_dir = "";
     suffix = "";
@@ -569,6 +572,15 @@ public class RSync {
     return this;
   }
 
+  public boolean isNoImpliedDirs() {
+    return no_implied_dirs;
+  }
+
+  public RSync noImpliedDirs(boolean no_implied_dirs) {
+    this.no_implied_dirs = no_implied_dirs;
+    return this;
+  }
+
   public boolean isBackup() {
     return backup;
   }
@@ -704,7 +716,7 @@ public class RSync {
     return this;
   }
 
-  public boolean isHard_links() {
+  public boolean isHardLinks() {
     return hard_links;
   }
 
@@ -1551,26 +1563,133 @@ public class RSync {
   }
 
   /**
-   * Assembles the elements of the command.
+   * Assembles the options.
    *
-   * @return		the parts of the commandline
+   * @return		the options
    */
-  public List<String> assemble() {
+  public List<String> options() {
     List<String> 	result;
 
     result = new ArrayList<>();
-    if (isVerbose())
-      result.add("--verbose");
-    if (isRecursive())
-      result.add("--recursive");
 
-    if (getSource() == null)
-      throw new IllegalStateException("No source defined!");
-    result.add(getSource());
-
-    if (getDestination() == null)
-      throw new IllegalStateException("No destination defined!");
-    result.add(getDestination());
+    if (isVerbose()) result.add("--verbose");
+    if (!getInfo().isEmpty()) result.add("--info=" + getInfo());
+    if (!getDebug().isEmpty()) result.add("--debug=" + getDebug());
+    if (isMsgs2stderr()) result.add("--msgs2stderr");
+    if (isQuiet()) result.add("--quiet");
+    if (isNoMotd()) result.add("--no-motd");
+    if (isChecksum()) result.add("--checksum");
+    if (isArchive()) result.add("--archive");
+    if (isRecursive()) result.add("--recursive");
+    if (isRelative()) result.add("--relative");
+    if (isNoImpliedDirs()) result.add("--no-implied-dirs");
+    if (isBackup()) result.add("--backup");
+    if (!getBackupDir().isEmpty()) result.add("--backup-dir=" + getBackupDir());
+    if (!getSuffix().isEmpty()) result.add("--suffix=" + getSuffix());
+    if (isUpdate()) result.add("--update");
+    if (isInplace()) result.add("--inplace");
+    if (isAppend()) result.add("--append");
+    if (isAppendVerify()) result.add("--append-verify");
+    if (isDirs()) result.add("--dirs");
+    if (isLinks()) result.add("--links");
+    if (isCopyLinks()) result.add("--copy-links");
+    if (isCopyUnsafeLinks()) result.add("--copy-unsafe-links");
+    if (isSafeLinks()) result.add("--safe-links");
+    if (isMungeLinks()) result.add("--munge-links");
+    if (isCopyDirlinks()) result.add("--copy-dirlinks");
+    if (isKeepDirlinks()) result.add("--keep-dirlinks");
+    if (isHardLinks()) result.add("--hard-links");
+    if (isPerms()) result.add("--perms");
+    if (isExecutability()) result.add("--executability");
+    if (!getChmod().isEmpty()) result.add("--chmod=" + getChmod());
+    if (isXattrs()) result.add("--xattrs");
+    if (isOwner()) result.add("--owner");
+    if (isGroup()) result.add("--group");
+    if (isDevices()) result.add("--devices");
+    if (isSpecials()) result.add("--specials");
+    if (isTimes()) result.add("--times");
+    if (isOmitDirTimes()) result.add("--omit-dir-times");
+    if (isOmitLinkTimes()) result.add("--omit-link-times");
+    if (isSuper_()) result.add("--super");
+    if (isFakeSuper()) result.add("--fake-super");
+    if (isSparse()) result.add("--sparse");
+    if (isPreallocate()) result.add("--preallocate");
+    if (isDryRun()) result.add("--dry-run");
+    if (isWholeFile()) result.add("--whole-file");
+    if (isOneFileSystem()) result.add("--one-file-system");
+    if (!getBlockSize().isEmpty()) result.add("--block-size=" + getBlockSize());
+    if (!getRsh().isEmpty()) result.add("--rsh=" + getRsh());
+    if (!getRsyncPath().isEmpty()) result.add("--rsync-path=" + getRsyncPath());
+    if (isExisting()) result.add("--existing");
+    if (isIgnoreExisting()) result.add("--ignore-existing");
+    if (isRemoveSourceFiles()) result.add("--remove-source-files");
+    if (isDelete()) result.add("--delete");
+    if (isDeleteBefore()) result.add("--delete-before");
+    if (isDeleteDuring()) result.add("--delete-during");
+    if (isDeleteDelay()) result.add("--delete-delay");
+    if (isDeleteAfter()) result.add("--delete-after");
+    if (isDeleteExcluded()) result.add("--delete-excluded");
+    if (isIgnoreMissingArgs()) result.add("--ignore-missing-args");
+    if (isDeleteMissingArgs()) result.add("--delete-missing-args");
+    if (isIgnoreErrors()) result.add("--ignore-errors");
+    if (isForce()) result.add("--force");
+    if (getMaxDelete() > -1) result.add("--max-delete=" + getMaxDelete());
+    if (getMaxSize() > -1) result.add("--max-size=" + getMaxSize());
+    if (getMinSize() > -1) result.add("--min-size=" + getMinSize());
+    if (isPartial()) result.add("--partial");
+    if (isDelayUpdates()) result.add("--delay-updates");
+    if (isPruneEmptyDirs()) result.add("--prune-empty-dirs");
+    if (isNumericIds()) result.add("--numeric-ids");
+    if (!getUsermap().isEmpty()) result.add("--usermap=" + getUsermap());
+    if (!getGroupmap().isEmpty()) result.add("--groupmap=" + getGroupmap());
+    if (getTimeout() > -1) result.add("--timeout=" + getTimeout());
+    if (getContimeout() > -1) result.add("--contimeout=" + getContimeout());
+    if (isIgnoreTimes()) result.add("--ignore-times");
+    if (!getRemoteOption().isEmpty()) result.add("--remote-option=" + getRemoteOption());
+    if (isSizeOnly()) result.add("--size-only");
+    if (getModifyWindow() > -1) result.add("--modify-window=" + getModifyWindow());
+    if (!getTempDir().isEmpty()) result.add("--temp-dir=" + getTempDir());
+    if (isFuzzy()) result.add("--fuzzy");
+    if (!getCompareDest().isEmpty()) result.add("--compare-dest=" + getCompareDest());
+    if (!getCopyDest().isEmpty()) result.add("--copy-dest=" + getCopyDest());
+    if (!getLinkDest().isEmpty()) result.add("--link-dest=" + getLinkDest());
+    if (isCompress()) result.add("--compress");
+    if (getCompressLevel() > -1) result.add("--compress-level=" + getCompressLevel());
+    if (!getSkipCompress().isEmpty()) result.add("--skip-compress=" + getSkipCompress());
+    if (isCvsExclude()) result.add("--cvs-exclude");
+    if (!getFilter().isEmpty()) result.add("--filter=" + getFilter());
+    if (!getExclude().isEmpty()) result.add("--exclude=" + getExclude());
+    if (!getExcludeFrom().isEmpty()) result.add("--exclude-from=" + getExcludeFrom());
+    if (!getInclude().isEmpty()) result.add("--include=" + getInclude());
+    if (!getIncludeFrom().isEmpty()) result.add("--include-from=" + getIncludeFrom());
+    if (!getFilesFrom().isEmpty()) result.add("--files-from=" + getFilesFrom());
+    if (isFrom0()) result.add("--from0");
+    if (isProtectArgs()) result.add("--protect-args");
+    if (!getAddress().isEmpty()) result.add("--address=" + getAddress());
+    if (getPort() > -1) result.add("--port=" + getPort());
+    if (!getSockopts().isEmpty()) result.add("--sockopts=" + getSockopts());
+    if (isBlockingIO()) result.add("--blocking-io");
+    if (isStats()) result.add("--stats");
+    if (isEightBitOutput()) result.add("--8-bit-output");
+    if (isHumanReadable()) result.add("--human-readable");
+    if (isProgress()) result.add("--progress");
+    if (isItemizeChanges()) result.add("--itemize-changes");
+    if (!getOutFormat().isEmpty()) result.add("--out-format=" + getOutFormat());
+    if (!getLogFile().isEmpty()) result.add("--log-file=" + getLogFile());
+    if (!getLogFileFormat().isEmpty()) result.add("--log-file-format=" + getLogFileFormat());
+    if (!getPasswordFile().isEmpty()) result.add("--password-file=" + getPasswordFile());
+    if (isListOnly()) result.add("--list-only");
+    if (getBwlimit() > -1) result.add("--bwlimit=" + getBwlimit());
+    if (getOutbuf() != '\0') result.add("--outbuf=" + getOutbuf());
+    if (!getWriteBatch().isEmpty()) result.add("--write-batch=" + getWriteBatch());
+    if (!getOnlyWriteBatch().isEmpty()) result.add("--only-write-batch=" + getOnlyWriteBatch());
+    if (!getReadBatch().isEmpty()) result.add("--read-batch=" + getReadBatch());
+    if (getProtocol() > -1) result.add("--protocol=" + getProtocol());
+    if (!getIconv().isEmpty()) result.add("--iconv=" + getIconv());
+    if (getChecksumSeed() > -1) result.add("--checksum-seed=" + getChecksumSeed());
+    if (isIpv4()) result.add("--ipv4");
+    if (isIpv6()) result.add("--ipv6");
+    if (isVersion()) result.add("--version");
 
     return result;
   }
@@ -1587,8 +1706,14 @@ public class RSync {
     List<String>	args;
 
     binary = Binaries.extractBinary();
-    args   = assemble();
+    args   = options();
     args.add(0, binary);
+    if (getSource() == null)
+      throw new IllegalStateException("No source defined!");
+    args.add(getSource());
+    if (getDestination() == null)
+      throw new IllegalStateException("No destination defined!");
+    args.add(getDestination());
 
     if (getOutputCommandline())
       System.out.println("Command-line: " + Utils.flatten(args, " "));
