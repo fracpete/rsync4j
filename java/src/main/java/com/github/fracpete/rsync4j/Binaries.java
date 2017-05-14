@@ -53,6 +53,8 @@ public class Binaries {
   /** the sub-directory for the mac osx binaries. */
   public final static String MACOSX_DIR = "macosx-x86_64/";
 
+  protected static String localBinary;
+
   /**
    * Returns the "bitness", ie 32 or 64 bit of the underlying OS.
    *
@@ -159,6 +161,22 @@ public class Binaries {
 	  + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
     }
 
+    localBinary = result;
+
     return result;
+  }
+
+  /**
+   * Extracts the binary (if necessary) to the temp directory and returns the
+   * name of the binary.
+   *
+   * @return		the filename of the binary
+   * @throws Exception	if extraction fails
+   */
+  public static String extractBinaryIfNecessary() throws Exception {
+    if (localBinary == null)
+      return extractBinary();
+    else
+      return localBinary;
   }
 }

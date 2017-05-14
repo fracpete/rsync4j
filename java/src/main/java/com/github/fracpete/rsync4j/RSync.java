@@ -1705,7 +1705,7 @@ public class RSync {
     String 		binary;
     List<String>	args;
 
-    binary = Binaries.extractBinary();
+    binary = Binaries.extractBinaryIfNecessary();
     args   = options();
     args.add(0, binary);
     if (getSource() == null)
