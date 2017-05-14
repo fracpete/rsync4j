@@ -53,6 +53,7 @@ public class Binaries {
   /** the sub-directory for the mac osx binaries. */
   public final static String MACOSX_DIR = "macosx-x86_64/";
 
+  /** for storing any previously extract binary. */
   protected static String localBinary;
 
   /**
