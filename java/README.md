@@ -208,7 +208,8 @@ optional arguments:
 ```
 
 ## Java
-Here is an example of configuring and running rsync from within Java: 
+Here is an example of configuring and running `rsync` from within Java, only 
+outputting the data from stdout/stderr after the process completes: 
 
 ```java
 import com.github.fracpete.rsync4j.RSync;
@@ -225,4 +226,21 @@ System.out.println(proc.getStdOut());
 System.out.println("Exit code: " + proc.getExitCode());
 if (proc.getExitCode() > 0)
   System.err.println(proc.getStdErr());
+```
+
+This example outputs stdout/stderr from the `rsync` process as it occurs, 
+rather than waiting till the end:
+
+```java
+import com.github.fracpete.rsync4j.RSync;
+import com.github.fracpete.rsync4j.process.ConsoleOutputProcessResult;
+...
+rsync = new RSync();
+rsync
+  .source("/one/place/");
+  .destination("/other/place/");
+  .archive(true)
+  .delete(true);
+new ConsoleOutputProcessResult(
+  rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
 ```
