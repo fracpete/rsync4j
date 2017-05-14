@@ -1563,7 +1563,7 @@ public class RSync {
   }
 
   /**
-   * Assembles the options.
+   * Assembles the arguments for the rsync binary.
    *
    * @return		the options
    */
@@ -1695,31 +1695,78 @@ public class RSync {
   }
 
   /**
-   * Executes the rsync binary for the platform.
+   * Assembles the full command-line arguments.
    *
-   * @return		the process object
-   * @throws Exception	if execution fails or fails to determine binary
+   * @return		the command-line arguments
+   * @throws Exception	if failed to determine binary
+   * @see		#options()
    */
-  public ProcessResult execute() throws Exception {
-    ProcessBuilder	builder;
+  public List<String> commandLineArgs() throws Exception {
+    List<String> 	result;
     String 		binary;
-    List<String>	args;
 
     binary = Binaries.extractBinaryIfNecessary();
-    args   = options();
-    args.add(0, binary);
+    result = options();
+    result.add(0, binary);
     if (getSource() == null)
       throw new IllegalStateException("No source defined!");
-    args.add(getSource());
+    result.add(getSource());
     if (getDestination() == null)
       throw new IllegalStateException("No destination defined!");
-    args.add(getDestination());
+    result.add(getDestination());
+
+    return result;
+  }
+
+  /**
+   * Starts the rsync process for the platform.
+   * <br>
+   * If you are not interested in an incremental progress output, then
+   * you can also use {@link #execute()}, which waits for the process to
+   * finish while collecting stdout and stderr output.
+   *
+   * @return		the process object
+   * @throws Exception	if execution fails or failed to determine binary
+   * @see		#commandLineArgs()
+   */
+  public Process start() throws Exception {
+    ProcessBuilder	builder;
+    List<String>	args;
+
+    args = commandLineArgs();
 
     if (getOutputCommandline())
       System.out.println("Command-line: " + Utils.flatten(args, " "));
 
     builder = new ProcessBuilder();
-    builder.directory(new File(binary).getParentFile());
+    builder.directory(new File(args.get(0)).getParentFile());
+    builder.command(args);
+
+    return builder.start();
+  }
+
+  /**
+   * Executes the rsync binary for the platform and waits for its completion.
+   * Collects stdout and stderr output in the result.
+   * <br>
+   * If you want an incremental output, you can use {@link #start()} and
+   * monitor the output yourself.
+   *
+   * @return		the process result object
+   * @throws Exception	if execution fails or failed to determine binary
+   * @see		#commandLineArgs()
+   */
+  public ProcessResult execute() throws Exception {
+    ProcessBuilder	builder;
+    List<String>	args;
+
+    args = commandLineArgs();
+
+    if (getOutputCommandline())
+      System.out.println("Command-line: " + Utils.flatten(args, " "));
+
+    builder = new ProcessBuilder();
+    builder.directory(new File(args.get(0)).getParentFile());
     builder.command(args);
 
     return new ProcessResult(args.toArray(new String[args.size()]), null, null, builder.start());
