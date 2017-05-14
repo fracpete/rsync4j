@@ -19,6 +19,7 @@
  */
 package com.github.fracpete.rsync4j;
 
+import com.github.fracpete.rsync4j.process.ProcessResult;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -1750,7 +1751,9 @@ public class RSync {
    * Collects stdout and stderr output in the result.
    * <br>
    * If you want an incremental output, you can use {@link #start()} and
-   * monitor the output yourself.
+   * monitor the output yourself. See {@link com.github.fracpete.rsync4j.process.AbstractProcessReader}
+   * and derived classes for details. {@link ProcessResult} itself uses the
+   * {@link com.github.fracpete.rsync4j.process.CollectingProcessReader}.
    *
    * @return		the process result object
    * @throws Exception	if execution fails or failed to determine binary

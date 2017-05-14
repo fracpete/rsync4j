@@ -18,11 +18,11 @@
  * Copyright (C) 2017 University of Waikato, Hamilton, NZ
  */
 
-package com.github.fracpete.rsync4j;
+package com.github.fracpete.rsync4j.process;
 
-import java.io.BufferedReader;
+import com.github.fracpete.rsync4j.Utils;
+
 import java.io.BufferedWriter;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 
@@ -48,10 +48,10 @@ public final class ProcessResult
   protected int m_ExitCode;
 
   /** the stdout content. */
-  protected String m_StdOut;
+  protected StringBuilder m_StdOut;
 
   /** the stderr content. */
-  protected String m_StdErr;
+  protected StringBuilder m_StdErr;
 
   /**
    * Initializes the container.
@@ -62,8 +62,7 @@ public final class ProcessResult
    * @param process	the process to obtain the results from
    * @throws Exception	if collection of data fails
    */
-  public ProcessResult(String cmd, String[] env, String input, Process process)
-      throws Exception {
+  public ProcessResult(String cmd, String[] env, String input, Process process) throws Exception {
     this(new String[] {cmd}, env, input, process);
   }
 
@@ -76,52 +75,22 @@ public final class ProcessResult
    * @param process	the process to obtain the results from
    * @throws Exception	if collection of data fails
    */
-  public ProcessResult(String[] cmd, String[] env, String input,
-                       final Process process) throws Exception {
+  public ProcessResult(String[] cmd, String[] env, String input, Process process) throws Exception {
+    m_StdOut = new StringBuilder();
+    m_StdErr = new StringBuilder();
+
     // stderr
-    final StringBuilder stde = new StringBuilder();
-    Thread threade = new Thread(() -> {
-      try {
-	String line;
-	BufferedReader reader = new BufferedReader(new InputStreamReader(
-	  process.getErrorStream()), 1024);
-	while ((line = reader.readLine()) != null) {
-	  stde.append(line);
-	  stde.append("\n");
-	}
-      }
-      catch (Exception e) {
-	System.err.println("Failed to reader stderr for process #"
-	  + process.hashCode() + ":");
-	e.printStackTrace();
-      }
-    });
+    Thread threade = new Thread(new CollectingProcessReader(process, false, m_StdErr));
     threade.start();
 
     // stdout
-    final StringBuilder stdo = new StringBuilder();
-    Thread threado = new Thread(() -> {
-      try {
-	String line;
-	BufferedReader reader = new BufferedReader(new InputStreamReader(
-	  process.getInputStream()), 1024);
-	while ((line = reader.readLine()) != null) {
-	  stdo.append(line);
-	  stdo.append("\n");
-	}
-      }
-      catch (Exception e) {
-	System.err.println("Failed to reader stdout for process #"
-	  + process.hashCode() + ":");
-	e.printStackTrace();
-      }
-    });
+    Thread threado = new Thread(new CollectingProcessReader(process, true, m_StdOut));
     threado.start();
 
     // writing the input to the standard input of the process
     if (input != null) {
       BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-	  process.getOutputStream()));
+	process.getOutputStream()));
       writer.write(input);
       writer.close();
     }
@@ -141,8 +110,6 @@ public final class ProcessResult
 	// ignored
       }
     }
-    m_StdOut = stdo.toString();
-    m_StdErr = stde.toString();
   }
 
   /**
@@ -187,7 +154,7 @@ public final class ProcessResult
    * @return the output
    */
   public String getStdOut() {
-    return m_StdOut;
+    return m_StdOut.toString();
   }
 
   /**
@@ -196,7 +163,7 @@ public final class ProcessResult
    * @return the output
    */
   public String getStdErr() {
-    return m_StdErr;
+    return m_StdErr.toString();
   }
 
   /**
