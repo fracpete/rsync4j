@@ -19,7 +19,8 @@
  */
 package com.github.fracpete.rsync4j;
 
-import com.github.fracpete.rsync4j.process.ProcessResult;
+import com.github.fracpete.rsync4j.process.CollectingProcessResult;
+import com.github.fracpete.rsync4j.process.ConsoleOutputProcessResult;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -1752,14 +1753,14 @@ public class RSync {
    * <br>
    * If you want an incremental output, you can use {@link #start()} and
    * monitor the output yourself. See {@link com.github.fracpete.rsync4j.process.AbstractProcessReader}
-   * and derived classes for details. {@link ProcessResult} itself uses the
+   * and derived classes for details. {@link CollectingProcessResult} itself uses the
    * {@link com.github.fracpete.rsync4j.process.CollectingProcessReader}.
    *
    * @return		the process result object
    * @throws Exception	if execution fails or failed to determine binary
    * @see		#commandLineArgs()
    */
-  public ProcessResult execute() throws Exception {
+  public CollectingProcessResult execute() throws Exception {
     ProcessBuilder	builder;
     List<String>	args;
 
@@ -1772,7 +1773,7 @@ public class RSync {
     builder.directory(new File(args.get(0)).getParentFile());
     builder.command(args);
 
-    return new ProcessResult(args.toArray(new String[args.size()]), null, null, builder.start());
+    return new CollectingProcessResult(args.toArray(new String[args.size()]), null, null, builder.start());
   }
 
   /**
@@ -2491,16 +2492,12 @@ public class RSync {
    * @param args	the arguments
    */
   public static void main(String[] args) throws Exception {
-    RSync 		rsync;
-    ProcessResult 	result;
+    RSync 			rsync;
 
     rsync = new RSync();
     if (rsync.setOptions(args)) {
-      result = rsync.execute();
-      System.out.println(result.getStdOut());
-      System.out.println("Exit code: " + result.getExitCode());
-      if (result.getExitCode() > 0)
-	System.err.println(result.getStdErr());
+      new ConsoleOutputProcessResult(
+	rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
     }
     else {
       System.exit(1);

@@ -20,8 +20,6 @@
 
 package com.github.fracpete.rsync4j.process;
 
-import com.github.fracpete.rsync4j.Utils;
-
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -32,7 +30,7 @@ import java.io.Serializable;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision: 6502 $
  */
-public final class ProcessResult
+public abstract class AbstractProcessResult
   implements Serializable {
 
   /** for serialization. */
@@ -47,12 +45,6 @@ public final class ProcessResult
   /** the exit code. */
   protected int m_ExitCode;
 
-  /** the stdout content. */
-  protected StringBuilder m_StdOut;
-
-  /** the stderr content. */
-  protected StringBuilder m_StdErr;
-
   /**
    * Initializes the container.
    *
@@ -62,7 +54,7 @@ public final class ProcessResult
    * @param process	the process to obtain the results from
    * @throws Exception	if collection of data fails
    */
-  public ProcessResult(String cmd, String[] env, String input, Process process) throws Exception {
+  public AbstractProcessResult(String cmd, String[] env, String input, Process process) throws Exception {
     this(new String[] {cmd}, env, input, process);
   }
 
@@ -75,16 +67,35 @@ public final class ProcessResult
    * @param process	the process to obtain the results from
    * @throws Exception	if collection of data fails
    */
-  public ProcessResult(String[] cmd, String[] env, String input, Process process) throws Exception {
-    m_StdOut = new StringBuilder();
-    m_StdErr = new StringBuilder();
+  public AbstractProcessResult(String[] cmd, String[] env, String input, Process process) throws Exception {
+    initialize();
 
+    m_Command     = cmd;
+    m_Environment = env;
+
+    monitor(input, process);
+  }
+
+  /**
+   * For initializing the members.
+   */
+  protected void initialize() {
+  }
+
+  /**
+   * Performs the actual process monitoring.
+   *
+   * @param input	the input to be written to the process via stdin, ignored if null
+   * @param process 	the process to monitor
+   * @throws Exception	if writing to stdin fails
+   */
+  protected void monitor(String input, Process process) throws Exception {
     // stderr
-    Thread threade = new Thread(new CollectingProcessReader(process, false, m_StdErr));
+    Thread threade = new Thread(configureStdErr(process));
     threade.start();
 
     // stdout
-    Thread threado = new Thread(new CollectingProcessReader(process, true, m_StdOut));
+    Thread threado = new Thread(configureStdOut(process));
     threado.start();
 
     // writing the input to the standard input of the process
@@ -95,9 +106,7 @@ public final class ProcessResult
       writer.close();
     }
 
-    m_Command = cmd;
-    m_Environment = env;
-    m_ExitCode = process.waitFor();
+    m_ExitCode    = process.waitFor();
 
     // wait for threads to finish
     while (threade.isAlive() || threado.isAlive()) {
@@ -110,6 +119,40 @@ public final class ProcessResult
 	// ignored
       }
     }
+  }
+
+  /**
+   * Configures the thread for stderr.
+   *
+   * @param process 	the process to monitor
+   * @return		the configured thread, not yet started
+   */
+  protected abstract Thread configureStdErr(Process process);
+
+  /**
+   * Configures the thread for stdout.
+   *
+   * @param process 	the process to monitor
+   * @return		the configured thread, not yet started
+   */
+  protected abstract Thread configureStdOut(Process process);
+
+  /**
+   * Returns the command that was used for the process.
+   *
+   * @return the command
+   */
+  public String[] getCommand() {
+    return m_Command;
+  }
+
+  /**
+   * Returns the environment.
+   *
+   * @return the environment, null if process inherited current one
+   */
+  public String[] getEnvironment() {
+    return m_Environment;
   }
 
   /**
@@ -131,42 +174,6 @@ public final class ProcessResult
   }
 
   /**
-   * Returns the command that was used for the process.
-   *
-   * @return the command
-   */
-  public String[] getCommand() {
-    return m_Command;
-  }
-
-  /**
-   * Returns the environment.
-   *
-   * @return the environment, null if process inherited current one
-   */
-  public String[] getEnvironment() {
-    return m_Environment;
-  }
-
-  /**
-   * Returns the output on stdout.
-   *
-   * @return the output
-   */
-  public String getStdOut() {
-    return m_StdOut.toString();
-  }
-
-  /**
-   * Returns the output on stderr.
-   *
-   * @return the output
-   */
-  public String getStdErr() {
-    return m_StdErr.toString();
-  }
-
-  /**
    * Returns a short description string.
    *
    * @return the description
@@ -174,35 +181,5 @@ public final class ProcessResult
   @Override
   public String toString() {
     return "exit code=" + m_ExitCode;
-  }
-
-  /**
-   * Returns an error output based on the information stored.
-   *
-   * @return the error output
-   */
-  public String toErrorOutput() {
-    StringBuilder result;
-
-    result = new StringBuilder();
-
-    if (m_ExitCode == 0) {
-      result.append("Command succeeded!");
-    }
-    else {
-      result.append("Command failed with exit code " + m_ExitCode + "!\n");
-      result.append("--> Command:\n");
-      result.append(Utils.flatten(m_Command, "\n"));
-      result.append("\n\n");
-      if (m_Environment != null) {
-	result.append("--> Environemtn:\n");
-	result.append(Utils.flatten(m_Environment, "\n"));
-	result.append("\n\n");
-      }
-      result.append("--> Error output:\n");
-      result.append(m_StdErr);
-    }
-
-    return result.toString();
   }
 }
