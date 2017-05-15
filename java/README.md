@@ -1,6 +1,8 @@
 # rsync4j
-Maven project for generating a Java wrapper around rsync binaries for
-various platforms. 64-bit only.
+Maven project for generating a Java wrapper around rsync for Linux, Mac OSX
+and Windows. For the latter, binaries are included in the jars and will set
+up an environment in the user's home directory (`%USERPROFILE%\rsync4j`). 
+Only 64-bit platforms are supported.
 
 ## Maven
 Add the following artifact to your dependencies of your `pom.xml`:

@@ -26,10 +26,12 @@ import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
+import org.apache.commons.lang.SystemUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Wrapper for rsync binaries.
@@ -38,6 +40,9 @@ import java.util.List;
  * @version $Revision: 8361 $
  */
 public class RSync {
+
+  /** for logging. */
+  protected Logger logger = Logger.getLogger(Binaries.class.getName());
 
   /** the source path/url. */
   protected String source;
@@ -430,8 +435,8 @@ public class RSync {
    *
    * @param value	the source
    */
-  public RSync setSource(String value) {
-    source = value.replace("\\", "/");
+  public RSync source(String value) {
+    source = Binaries.convertPath(value);
     return this;
   }
 
@@ -450,8 +455,8 @@ public class RSync {
    * @param value	the destination
    * @return		itself
    */
-  public RSync setDestination(String value) {
-    destination = value.replace("\\", "/");
+  public RSync destination(String value) {
+    destination = Binaries.convertPath(value);
     return this;
   }
 
@@ -470,7 +475,7 @@ public class RSync {
    * @param value	true if to output commandline
    * @return		itself
    */
-  public RSync setOutputCommandline(boolean value) {
+  public RSync outputCommandline(boolean value) {
     outputCommandline = value;
     return this;
   }
@@ -1568,8 +1573,9 @@ public class RSync {
    * Assembles the arguments for the rsync binary.
    *
    * @return		the options
+   * @throws Exception	if failed to determine binary
    */
-  public List<String> options() {
+  public List<String> options() throws Exception {
     List<String> 	result;
 
     result = new ArrayList<>();
@@ -1620,7 +1626,13 @@ public class RSync {
     if (isWholeFile()) result.add("--whole-file");
     if (isOneFileSystem()) result.add("--one-file-system");
     if (!getBlockSize().isEmpty()) result.add("--block-size=" + getBlockSize());
-    if (!getRsh().isEmpty()) result.add("--rsh=" + getRsh());
+    if (!getRsh().isEmpty()) {
+      result.add("--rsh=" + getRsh());
+    }
+    else {
+      if (SystemUtils.IS_OS_WINDOWS)
+	result.add("--rsh=\"" + Binaries.sshBinary + "\"");
+    }
     if (!getRsyncPath().isEmpty()) result.add("--rsync-path=" + getRsyncPath());
     if (isExisting()) result.add("--existing");
     if (isIgnoreExisting()) result.add("--ignore-existing");
@@ -1707,7 +1719,7 @@ public class RSync {
     List<String> 	result;
     String 		binary;
 
-    binary = Binaries.extractBinaryIfNecessary();
+    binary = Binaries.rsyncBinary();
     result = options();
     result.add(0, binary);
     if (getSource() == null)
@@ -1735,10 +1747,12 @@ public class RSync {
     args = commandLineArgs();
 
     if (getOutputCommandline())
-      System.out.println("Command-line: " + Utils.flatten(args, " "));
+      logger.info("Command-line: " + Utils.flatten(args, " "));
 
     builder = new ProcessBuilder();
     builder.directory(new File(args.get(0)).getParentFile());
+    if (SystemUtils.IS_OS_WINDOWS)
+      builder.environment().put("HOME", "%USERPROFILE%");
     builder.command(args);
 
     return builder;
@@ -2193,8 +2207,7 @@ public class RSync {
     parser.addArgument("--skip-compress")
       .setDefault("")
       .dest("skipcompress")
-      .help("skip compressing files with a suffix in LIST")
-      .action(Arguments.storeTrue());
+      .help("skip compressing files with a suffix in LIST");
     parser.addArgument("-C", "--cvs-exclude")
       .setDefault(false)
       .dest("cvsexclude")
@@ -2482,9 +2495,9 @@ public class RSync {
     ipv6(ns.getBoolean("ipv6"));
     version(ns.getBoolean("version"));
 
-    setOutputCommandline(ns.get("outputCommandline"));
-    setSource(ns.getString("src"));
-    setDestination(ns.getString("dest"));
+    outputCommandline(ns.get("outputCommandline"));
+    source(ns.getString("src"));
+    destination(ns.getString("dest"));
 
     return true;
   }
