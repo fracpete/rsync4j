@@ -30,5 +30,10 @@ CFLAGS=-static ./configure && make clean && make
   
 
 ### OSX
-TODO
+Make sure to have Xcode installed with command-line build tools support.
+
+Use the following command to compile a static rsync binary using gcc:
+```
+CFLAGS=-static ./configure && make clean && make
+```
 
