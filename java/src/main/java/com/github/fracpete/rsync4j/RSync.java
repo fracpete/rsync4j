@@ -19,8 +19,8 @@
  */
 package com.github.fracpete.rsync4j;
 
-import com.github.fracpete.rsync4j.process.CollectingProcessResult;
-import com.github.fracpete.rsync4j.process.ConsoleOutputProcessResult;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -1752,15 +1752,13 @@ public class RSync {
    * Collects stdout and stderr output in the result.
    * <br>
    * If you want an incremental output, you can use {@link #start()} and
-   * monitor the output yourself. See {@link com.github.fracpete.rsync4j.process.AbstractProcessReader}
-   * and derived classes for details. {@link CollectingProcessResult} itself uses the
-   * {@link com.github.fracpete.rsync4j.process.CollectingProcessReader}.
+   * monitor the output yourself.
    *
    * @return		the process result object
    * @throws Exception	if execution fails or failed to determine binary
    * @see		#commandLineArgs()
    */
-  public CollectingProcessResult execute() throws Exception {
+  public CollectingProcessOutput execute() throws Exception {
     ProcessBuilder	builder;
     List<String>	args;
 
@@ -1773,7 +1771,7 @@ public class RSync {
     builder.directory(new File(args.get(0)).getParentFile());
     builder.command(args);
 
-    return new CollectingProcessResult(args.toArray(new String[args.size()]), null, null, builder.start());
+    return new CollectingProcessOutput(builder);
   }
 
   /**
@@ -2496,7 +2494,7 @@ public class RSync {
 
     rsync = new RSync();
     if (rsync.setOptions(args)) {
-      new ConsoleOutputProcessResult(
+      new ConsoleOutputProcessOutput(
 	rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
     }
     else {

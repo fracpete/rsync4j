@@ -213,6 +213,7 @@ outputting the data from stdout/stderr after the process completes:
 
 ```java
 import com.github.fracpete.rsync4j.RSync;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 ...
 rsync = new RSync();
 rsync
@@ -221,11 +222,11 @@ rsync
   .recursive(true);
 // or if you prefer using commandline options:
 // rsync.setOptions(new String[]{"-r", "/one/place/", "/other/place/"});
-proc = rsync.execute();
-System.out.println(proc.getStdOut());
-System.out.println("Exit code: " + proc.getExitCode());
-if (proc.getExitCode() > 0)
-  System.err.println(proc.getStdErr());
+CollectingProcessOutput output = rsync.execute();
+System.out.println(output.getStdOut());
+System.out.println("Exit code: " + output.getExitCode());
+if (output.getExitCode() > 0)
+  System.err.println(output.getStdErr());
 ```
 
 This example outputs stdout/stderr from the `rsync` process as it occurs, 
@@ -233,7 +234,7 @@ rather than waiting till the end:
 
 ```java
 import com.github.fracpete.rsync4j.RSync;
-import com.github.fracpete.rsync4j.process.ConsoleOutputProcessResult;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 rsync = new RSync();
 rsync
@@ -241,6 +242,6 @@ rsync
   .destination("/other/place/");
   .archive(true)
   .delete(true);
-new ConsoleOutputProcessResult(
+new ConsoleOutputProcessOutput(
   rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
 ```
