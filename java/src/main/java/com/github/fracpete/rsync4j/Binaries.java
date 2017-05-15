@@ -148,14 +148,12 @@ public class Binaries {
       copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "cygwin1.dll");
       result = copyResourceToTmp(RESOURCE_DIR + WINDOWS_DIR, "rsync.exe");
     }
-    /*
     else if (SystemUtils.IS_OS_MAC_OSX) {
       result = copyResourceToTmp(RESOURCE_DIR + MACOSX_DIR, "rsync");
       Files.setPosixFilePermissions(
 	new File(result).toPath(),
 	new HashSet<>(Arrays.asList(PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_EXECUTE)));
     }
-    */
     else {
       throw new IllegalStateException(
 	"Unsupported operating system: "
