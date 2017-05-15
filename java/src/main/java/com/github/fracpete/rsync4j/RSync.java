@@ -1721,17 +1721,14 @@ public class RSync {
   }
 
   /**
-   * Starts the rsync process for the platform.
-   * <br>
-   * If you are not interested in an incremental progress output, then
-   * you can also use {@link #execute()}, which waits for the process to
-   * finish while collecting stdout and stderr output.
+   * Returns a configured {@link ProcessBuilder} to be used for executing
+   * the rsync process.
    *
-   * @return		the process object
+   * @return		the configured process builder
    * @throws Exception	if execution fails or failed to determine binary
    * @see		#commandLineArgs()
    */
-  public Process start() throws Exception {
+  public ProcessBuilder builder() throws Exception {
     ProcessBuilder	builder;
     List<String>	args;
 
@@ -1744,7 +1741,22 @@ public class RSync {
     builder.directory(new File(args.get(0)).getParentFile());
     builder.command(args);
 
-    return builder.start();
+    return builder;
+  }
+
+  /**
+   * Starts the rsync process for the platform.
+   * <br>
+   * If you are not interested in an incremental progress output, then
+   * you can also use {@link #execute()}, which waits for the process to
+   * finish while collecting stdout and stderr output.
+   *
+   * @return		the process object
+   * @throws Exception	if execution fails or failed to determine binary
+   * @see		#builder()
+   */
+  public Process start() throws Exception {
+    return builder().start();
   }
 
   /**
@@ -1759,19 +1771,12 @@ public class RSync {
    * @see		#commandLineArgs()
    */
   public CollectingProcessOutput execute() throws Exception {
-    ProcessBuilder	builder;
-    List<String>	args;
+    CollectingProcessOutput	result;
 
-    args = commandLineArgs();
+    result = new CollectingProcessOutput();
+    result.monitor(builder());
 
-    if (getOutputCommandline())
-      System.out.println("Command-line: " + Utils.flatten(args, " "));
-
-    builder = new ProcessBuilder();
-    builder.directory(new File(args.get(0)).getParentFile());
-    builder.command(args);
-
-    return new CollectingProcessOutput(builder);
+    return result;
   }
 
   /**
@@ -2491,11 +2496,12 @@ public class RSync {
    */
   public static void main(String[] args) throws Exception {
     RSync 			rsync;
+    ConsoleOutputProcessOutput	output;
 
     rsync = new RSync();
     if (rsync.setOptions(args)) {
-      new ConsoleOutputProcessOutput(
-	rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
+      output = new ConsoleOutputProcessOutput();
+      output.monitor(rsync.builder());
     }
     else {
       System.exit(1);

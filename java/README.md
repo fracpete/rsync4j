@@ -242,6 +242,6 @@ rsync
   .destination("/other/place/");
   .archive(true)
   .delete(true);
-new ConsoleOutputProcessOutput(
-  rsync.commandLineArgs().toArray(new String[0]), null, null, rsync.start());
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(rsync.builder());
 ```
