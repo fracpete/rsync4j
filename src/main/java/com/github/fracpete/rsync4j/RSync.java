@@ -28,7 +28,6 @@ import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 import org.apache.commons.lang.SystemUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -1750,9 +1749,6 @@ public class RSync {
       logger.info("Command-line: " + Utils.flatten(args, " "));
 
     builder = new ProcessBuilder();
-    builder.directory(new File(args.get(0)).getParentFile());
-    if (SystemUtils.IS_OS_WINDOWS)
-      builder.environment().put("HOME", "%USERPROFILE%");
     builder.command(args);
 
     return builder;
