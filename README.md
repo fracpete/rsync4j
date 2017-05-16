@@ -7,7 +7,7 @@ Only 64-bit platforms are supported.
 ## Maven
 Add the following artifact to your dependencies of your `pom.xml`:
 
-```
+```xml
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j</artifactId>
@@ -247,3 +247,65 @@ rsync
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(rsync.builder());
 ```
+
+## Windows
+
+### Binaries
+*rsync4j* uses the `rsync.exe` and `ssh.exe` executables and their dependencies
+from the 64-bit version of [cywgin](https://cygwin.com/).
+
+The dependencies, as of 2017-05-16, are as follows:
+
+* cygcom_err-2.dll
+* cygcrypto-1.0.0.dll
+* cyggcc_s-seh-1.dll
+* cyggssapi_krb5-2.dll
+* cygiconv-2.dll
+* cygintl-8.dll
+* cygk5crypto-3.dll
+* cygkrb5-3.dll
+* cygkrb5support-0.dll
+* cygssp-0.dll
+* cygwin1.dll
+* cygz.dll
+
+You can easily determine the dependencies by running the exexcutables. Windows
+will automatically pop up a dialog mentioning any DLLs that are missing. Place
+any missing DLLs in the following directory:
+
+```
+src/main/resources/com/github/fracpete/rsync4j/windows-x86_64
+```
+
+On first execution, these binaries will get placed in the following directory
+(on a per user basis):
+```
+%USERPROFILE%\rsync4j
+```
+
+Below that directory there are `home/%USERNAME%/.ssh` and `bin`.
+
+### SSH keys
+You can place your ssh key pairs in the following directory:
+
+```
+%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
+```
+
+### Paths
+Since cygwin is being used, local paths get converted to cywgin notation.
+
+For example:
+```
+C:\some\path\blah.txt
+```
+Will get automatically get converted to:
+```
+/cygdrive/c/some/path/blah.txt
+```
+
+## FAQ
+
+* **Q** I'm trying to sync, but it just sits there and does nothing!
+* **A** Since *rsync4j* is not interactive, you will have to connect to the 
+  remote host at least once before to add the host the `known_hosts` file.
