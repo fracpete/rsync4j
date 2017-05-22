@@ -176,9 +176,9 @@ public class RSync {
 
   protected int max_delete;
 
-  protected int max_size;
+  protected String max_size;
 
-  protected int min_size;
+  protected String min_size;
 
   protected boolean partial;
 
@@ -270,7 +270,7 @@ public class RSync {
 
   protected boolean list_only;
 
-  protected int bwlimit;
+  protected String bwlimit;
 
   protected char outbuf;
 
@@ -368,8 +368,8 @@ public class RSync {
     ignore_errors = false;
     force = false;
     max_delete = -1;
-    max_size = -1;
-    min_size = -1;
+    max_size = "";
+    min_size = "";
     partial = false;
     partial_dir = "";
     delay_updates = false;
@@ -416,7 +416,7 @@ public class RSync {
     log_file_format = "";
     password_file = "";
     list_only = false;
-    bwlimit = -1;
+    bwlimit = "";
     outbuf = '\0';
     write_batch = "";
     only_write_batch = "";
@@ -1046,20 +1046,20 @@ public class RSync {
     return this;
   }
 
-  public int getMaxSize() {
+  public String getMaxSize() {
     return max_size;
   }
 
-  public RSync maxSize(int max_size) {
+  public RSync maxSize(String max_size) {
     this.max_size = max_size;
     return this;
   }
 
-  public int getMinSize() {
+  public String getMinSize() {
     return min_size;
   }
 
-  public RSync minSize(int min_size) {
+  public RSync minSize(String min_size) {
     this.min_size = min_size;
     return this;
   }
@@ -1469,11 +1469,11 @@ public class RSync {
     return this;
   }
 
-  public int getBwlimit() {
+  public String getBwlimit() {
     return bwlimit;
   }
 
-  public RSync bwlimit(int bwlimit) {
+  public RSync bwlimit(String bwlimit) {
     this.bwlimit = bwlimit;
     return this;
   }
@@ -1647,8 +1647,8 @@ public class RSync {
     if (isIgnoreErrors()) result.add("--ignore-errors");
     if (isForce()) result.add("--force");
     if (getMaxDelete() > -1) result.add("--max-delete=" + getMaxDelete());
-    if (getMaxSize() > -1) result.add("--max-size=" + getMaxSize());
-    if (getMinSize() > -1) result.add("--min-size=" + getMinSize());
+    if (!getMaxSize().isEmpty()) result.add("--max-size=" + getMaxSize());
+    if (!getMinSize().isEmpty()) result.add("--min-size=" + getMinSize());
     if (isPartial()) result.add("--partial");
     if (isDelayUpdates()) result.add("--delay-updates");
     if (isPruneEmptyDirs()) result.add("--prune-empty-dirs");
@@ -1692,7 +1692,7 @@ public class RSync {
     if (!getLogFileFormat().isEmpty()) result.add("--log-file-format=" + getLogFileFormat());
     if (!getPasswordFile().isEmpty()) result.add("--password-file=" + getPasswordFile());
     if (isListOnly()) result.add("--list-only");
-    if (getBwlimit() > -1) result.add("--bwlimit=" + getBwlimit());
+    if (!getBwlimit().isEmpty()) result.add("--bwlimit=" + getBwlimit());
     if (getOutbuf() != '\0') result.add("--outbuf=" + getOutbuf());
     if (!getWriteBatch().isEmpty()) result.add("--write-batch=" + getWriteBatch());
     if (!getOnlyWriteBatch().isEmpty()) result.add("--only-write-batch=" + getOnlyWriteBatch());
@@ -2101,11 +2101,11 @@ public class RSync {
       .dest("maxdelete")
       .help("don't delete more than NUM files");
     parser.addArgument("--max-size")
-      .setDefault(-1)
+      .setDefault("")
       .dest("maxsize")
       .help("don't transfer any file larger than SIZE");
     parser.addArgument("--min-size")
-      .setDefault(-1)
+      .setDefault("")
       .dest("minsize")
       .help("don't transfer any file smaller than SIZE");
     parser.addArgument("--partial")
@@ -2307,7 +2307,7 @@ public class RSync {
       .help("list the files instead of copying them")
       .action(Arguments.storeTrue());
     parser.addArgument("--bwlimit")
-      .setDefault(-1)
+      .setDefault("")
       .dest("bwlimit")
       .help("limit socket I/O bandwidth");
     parser.addArgument("--outbuf")
@@ -2433,8 +2433,8 @@ public class RSync {
     ignoreErrors(ns.getBoolean("ignoreerrors"));
     force(ns.getBoolean("force"));
     maxDelete(ns.getInt("maxdelete"));
-    maxSize(ns.getInt("maxsize"));
-    minSize(ns.getInt("minsize"));
+    maxSize(ns.getString("maxsize"));
+    minSize(ns.getString("minsize"));
     partial(ns.getBoolean("partial"));
     delayUpdates(ns.getBoolean("delayupdates"));
     pruneEmptyDirs(ns.getBoolean("pruneemptydirs"));
@@ -2479,7 +2479,7 @@ public class RSync {
     logFileFormat(ns.getString("logfileformat"));
     passwordFile(ns.getString("passwordfile"));
     listOnly(ns.getBoolean("listonly"));
-    bwlimit(ns.getInt("bwlimit"));
+    bwlimit(ns.getString("bwlimit"));
     outbuf(ns.getString("outbuf").charAt(0));
     writeBatch(ns.getString("writebatch"));
     onlyWriteBatch(ns.getString("onlywritebatch"));
