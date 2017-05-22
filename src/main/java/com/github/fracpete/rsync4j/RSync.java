@@ -212,11 +212,11 @@ public class RSync {
 
   protected boolean fuzzy;
 
-  protected String compare_dest;
+  protected String[] compare_dest;
 
-  protected String copy_dest;
+  protected String[] copy_dest;
 
-  protected String link_dest;
+  protected String[] link_dest;
 
   protected boolean compress;
 
@@ -226,13 +226,13 @@ public class RSync {
 
   protected boolean cvs_exclude;
 
-  protected String filter;
+  protected String[] filter;
 
-  protected String exclude;
+  protected String[] exclude;
 
   protected String exclude_from;
 
-  protected String include;
+  protected String[] include;
 
   protected String include_from;
 
@@ -386,17 +386,17 @@ public class RSync {
     modify_window = -1;
     temp_dir = "";
     fuzzy = false;
-    compare_dest = "";
-    copy_dest = "";
-    link_dest = "";
+    compare_dest = new String[0];
+    copy_dest = new String[0];
+    link_dest = new String[0];
     compress = false;
     compress_level = -1;
     skip_compress = "";
     cvs_exclude = false;
-    filter = "";
-    exclude = "";
+    filter = new String[0];
+    exclude = new String[0];
     exclude_from = "";
-    include = "";
+    include = new String[0];
     include_from = "";
     files_from = "";
     from0 = false;
@@ -1208,29 +1208,29 @@ public class RSync {
     return this;
   }
 
-  public String getCompareDest() {
+  public String[] getCompareDest() {
     return compare_dest;
   }
 
-  public RSync compareDest(String compare_dest) {
+  public RSync compareDest(String... compare_dest) {
     this.compare_dest = compare_dest;
     return this;
   }
 
-  public String getCopyDest() {
+  public String[] getCopyDest() {
     return copy_dest;
   }
 
-  public RSync copyDest(String copy_dest) {
+  public RSync copyDest(String... copy_dest) {
     this.copy_dest = copy_dest;
     return this;
   }
 
-  public String getLinkDest() {
+  public String[] getLinkDest() {
     return link_dest;
   }
 
-  public RSync linkDest(String link_dest) {
+  public RSync linkDest(String... link_dest) {
     this.link_dest = link_dest;
     return this;
   }
@@ -1271,20 +1271,20 @@ public class RSync {
     return this;
   }
 
-  public String getFilter() {
+  public String[] getFilter() {
     return filter;
   }
 
-  public RSync filter(String filter) {
+  public RSync filter(String... filter) {
     this.filter = filter;
     return this;
   }
 
-  public String getExclude() {
+  public String[] getExclude() {
     return exclude;
   }
 
-  public RSync exclude(String exclude) {
+  public RSync exclude(String... exclude) {
     this.exclude = exclude;
     return this;
   }
@@ -1298,11 +1298,11 @@ public class RSync {
     return this;
   }
 
-  public String getInclude() {
+  public String[] getInclude() {
     return include;
   }
 
-  public RSync include(String include) {
+  public RSync include(String... include) {
     this.include = include;
     return this;
   }
@@ -1663,17 +1663,23 @@ public class RSync {
     if (getModifyWindow() > -1) result.add("--modify-window=" + getModifyWindow());
     if (!getTempDir().isEmpty()) result.add("--temp-dir=" + getTempDir());
     if (isFuzzy()) result.add("--fuzzy");
-    if (!getCompareDest().isEmpty()) result.add("--compare-dest=" + getCompareDest());
-    if (!getCopyDest().isEmpty()) result.add("--copy-dest=" + getCopyDest());
-    if (!getLinkDest().isEmpty()) result.add("--link-dest=" + getLinkDest());
+    for (String compareDest: getCompareDest())
+      result.add("--compare-dest=" + compareDest);
+    for (String copyDest: getCopyDest())
+      result.add("--copy-dest=" + copyDest);
+    for (String linkDest: getLinkDest())
+      result.add("--link-dest=" + linkDest);
     if (isCompress()) result.add("--compress");
     if (getCompressLevel() > -1) result.add("--compress-level=" + getCompressLevel());
     if (!getSkipCompress().isEmpty()) result.add("--skip-compress=" + getSkipCompress());
     if (isCvsExclude()) result.add("--cvs-exclude");
-    if (!getFilter().isEmpty()) result.add("--filter=" + getFilter());
-    if (!getExclude().isEmpty()) result.add("--exclude=" + getExclude());
+    for (String filter: getFilter())
+      result.add("--filter=" + filter);
+    for (String exclude: getExclude())
+      result.add("--exclude=" + exclude);
     if (!getExcludeFrom().isEmpty()) result.add("--exclude-from=" + getExcludeFrom());
-    if (!getInclude().isEmpty()) result.add("--include=" + getInclude());
+    for (String include: getInclude())
+      result.add("--include=" + include);
     if (!getIncludeFrom().isEmpty()) result.add("--include-from=" + getIncludeFrom());
     if (!getFilesFrom().isEmpty()) result.add("--files-from=" + getFilesFrom());
     if (isFrom0()) result.add("--from0");
@@ -2180,16 +2186,19 @@ public class RSync {
       .help("find similar file for basis if no dest file")
       .action(Arguments.storeTrue());
     parser.addArgument("--compare-dest")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("comparedest")
+      .action(Arguments.append())
       .help("also compare destination files relative to DIR");
     parser.addArgument("--copy-dest")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("copydest")
+      .action(Arguments.append())
       .help("... and include copies of unchanged files");
     parser.addArgument("--link-dest")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("linkdest")
+      .action(Arguments.append())
       .help("hardlink to files in DIR when unchanged");
     parser.addArgument("-z", "--compress")
       .setDefault(false)
@@ -2210,20 +2219,23 @@ public class RSync {
       .help("auto-ignore files the same way CVS does")
       .action(Arguments.storeTrue());
     parser.addArgument("-f", "--filter")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("filter")
+      .action(Arguments.append())
       .help("add a file-filtering RULE");
     parser.addArgument("--exclude")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("exclude")
+      .action(Arguments.append())
       .help("exclude files matching PATTERN");
     parser.addArgument("--exclude-from")
       .setDefault("")
       .dest("excludefrom")
       .help("read exclude patterns from FILE");
     parser.addArgument("--include")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("include")
+      .action(Arguments.append())
       .help("include files matching PATTERN");
     parser.addArgument("--include-from")
       .setDefault("")
@@ -2450,17 +2462,17 @@ public class RSync {
     modifyWindow(ns.getInt("modifywindow"));
     tempDir(ns.getString("tempdir"));
     fuzzy(ns.getBoolean("fuzzy"));
-    compareDest(ns.getString("comparedest"));
-    copyDest(ns.getString("copydest"));
-    linkDest(ns.getString("linkdest"));
+    compareDest(ns.getList("comparedest").toArray(new String[0]));
+    copyDest(ns.getList("copydest").toArray(new String[0]));
+    linkDest(ns.getList("linkdest").toArray(new String[0]));
     compress(ns.getBoolean("compress"));
     compressLevel(ns.getInt("compresslevel"));
     skipCompress(ns.getString("skipcompress"));
     cvsExclude(ns.getBoolean("cvsexclude"));
-    filter(ns.getString("filter"));
-    exclude(ns.getString("exclude"));
+    filter(ns.getList("filter").toArray(new String[0]));
+    exclude(ns.getList("exclude").toArray(new String[0]));
     excludeFrom(ns.getString("excludefrom"));
-    include(ns.getString("include"));
+    include(ns.getList("include").toArray(new String[0]));
     includeFrom(ns.getString("includefrom"));
     filesFrom(ns.getString("filesfrom"));
     from0(ns.getBoolean("from0"));
