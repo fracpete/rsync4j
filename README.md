@@ -11,7 +11,7 @@ Add the following artifact to your dependencies of your `pom.xml`:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j</artifactId>
-      <version>3.1.2-1</version>
+      <version>3.1.2-2</version>
     </dependency>
 ```
 
@@ -40,18 +40,18 @@ usage: com.github.fracpete.rsync4j.RSync
        [-M REMOTEOPTION] [--size-only] [--modify-window MODIFYWINDOW]
        [-T TEMPDIR] [-y] [--compare-dest COMPAREDEST]
        [--copy-dest COPYDEST] [--link-dest LINKDEST] [-z]
-       [--compress-level COMPRESSLEVEL] [--skip-compress] [-C] [-f FILTER]
-       [--exclude EXCLUDE] [--exclude-from EXCLUDEFROM] [--include INCLUDE]
-       [--include-from INCLUDEFROM] [--files-from FILESFROM] [-0] [-s]
-       [--address ADDRESS] [--port PORT] [--sockopts SOCKOPTS]
-       [--blocking-io] [--stats] [-8] [--human-readable] [--progress] [-i]
-       [--out-format OUTFORMAT] [--log-file LOGFILE]
-       [--log-file-format LOGFILEFORMAT] [--password-file PASSWORDFILE]
-       [--list-only] [--bwlimit BWLIMIT] [--outbuf OUTBUF]
-       [--write-batch WRITEBATCH] [--only-write-batch ONLYWRITEBATCH]
-       [--read-batch READBATCH] [--protocol PROTOCOL] [--iconv ICONV]
-       [--checkum-seed CHECKSUMSEED] [-4] [-6] [--version]
-       [--output-commandline] src dest
+       [--compress-level COMPRESSLEVEL] [--skip-compress SKIPCOMPRESS] [-C]
+       [-f FILTER] [--exclude EXCLUDE] [--exclude-from EXCLUDEFROM]
+       [--include INCLUDE] [--include-from INCLUDEFROM]
+       [--files-from FILESFROM] [-0] [-s] [--address ADDRESS] [--port PORT]
+       [--sockopts SOCKOPTS] [--blocking-io] [--stats] [-8]
+       [--human-readable] [--progress] [-i] [--out-format OUTFORMAT]
+       [--log-file LOGFILE] [--log-file-format LOGFILEFORMAT]
+       [--password-file PASSWORDFILE] [--list-only] [--bwlimit BWLIMIT]
+       [--outbuf OUTBUF] [--write-batch WRITEBATCH]
+       [--only-write-batch ONLYWRITEBATCH] [--read-batch READBATCH]
+       [--protocol PROTOCOL] [--iconv ICONV] [--checkum-seed CHECKSUMSEED]
+       [-4] [-6] [--version] [--output-commandline] src dest
 
 positional arguments:
   src                    The local or remote  source  path (path or [user@]
@@ -158,7 +158,8 @@ optional arguments:
   -z, --compress         compress file data during the transfer
   --compress-level COMPRESSLEVEL
                          explicitly set compression level
-  --skip-compress        skip compressing files with a suffix in LIST
+  --skip-compress SKIPCOMPRESS
+                         skip compressing files with a suffix in LIST
   -C, --cvs-exclude      auto-ignore files the same way CVS does
   -f FILTER, --filter FILTER
                          add a file-filtering RULE
