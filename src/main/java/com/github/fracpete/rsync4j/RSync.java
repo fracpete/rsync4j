@@ -1294,7 +1294,7 @@ public class RSync {
   }
 
   public RSync excludeFrom(String exclude_from) {
-    this.exclude_from = exclude_from;
+    this.exclude_from = Binaries.convertPath(exclude_from);
     return this;
   }
 
@@ -1312,7 +1312,7 @@ public class RSync {
   }
 
   public RSync includeFrom(String include_from) {
-    this.include_from = include_from;
+    this.include_from = Binaries.convertPath(include_from);
     return this;
   }
 
@@ -1321,7 +1321,7 @@ public class RSync {
   }
 
   public RSync filesFrom(String files_from) {
-    this.files_from = files_from;
+    this.files_from = Binaries.convertPath(files_from);
     return this;
   }
 
@@ -1438,7 +1438,7 @@ public class RSync {
   }
 
   public RSync logFile(String log_file) {
-    this.log_file = log_file;
+    this.log_file = Binaries.convertPath(log_file);
     return this;
   }
 
@@ -1456,7 +1456,7 @@ public class RSync {
   }
 
   public RSync passwordFile(String password_file) {
-    this.password_file = password_file;
+    this.password_file = Binaries.convertPath(password_file);
     return this;
   }
 
@@ -1492,7 +1492,7 @@ public class RSync {
   }
 
   public RSync writeBatch(String write_batch) {
-    this.write_batch = write_batch;
+    this.write_batch = Binaries.convertPath(write_batch);
     return this;
   }
 
@@ -1501,7 +1501,7 @@ public class RSync {
   }
 
   public RSync onlyWriteBatch(String only_write_batch) {
-    this.only_write_batch = only_write_batch;
+    this.only_write_batch = Binaries.convertPath(only_write_batch);
     return this;
   }
 
@@ -1510,7 +1510,7 @@ public class RSync {
   }
 
   public RSync readBatch(String read_batch) {
-    this.read_batch = read_batch;
+    this.read_batch = Binaries.convertPath(read_batch);
     return this;
   }
 
