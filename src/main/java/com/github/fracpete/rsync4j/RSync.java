@@ -292,6 +292,8 @@ public class RSync {
 
   protected boolean version;
 
+  protected int max_time;
+
   /**
    * Initializes the object.
    */
@@ -427,6 +429,7 @@ public class RSync {
     ipv4 = false;
     ipv6 = false;
     version = false;
+    max_time = -1;
   }
 
   /**
@@ -1569,6 +1572,28 @@ public class RSync {
   }
 
   /**
+   * Returns the maximum time in seconds for the rsync process to run.
+   *
+   * @return the maximum in seconds, ignored if less than 1
+   */
+  public int getMaxTime() {
+    return max_time;
+  }
+
+  /**
+   * Sets the maximum time in seconds for the rsync process to run.
+   *
+   * @param max_time the maximum time in seconds, ignored if less than 1
+   * @return itself
+   */
+  public RSync maxTime(int max_time) {
+    if (max_time < 1)
+      max_time = -1;
+    this.max_time = max_time;
+    return this;
+  }
+
+  /**
    * Assembles the arguments for the rsync binary.
    *
    * @return		the options
@@ -1790,6 +1815,7 @@ public class RSync {
     CollectingProcessOutput	result;
 
     result = new CollectingProcessOutput();
+    result.setTimeOut(max_time);
     result.monitor(builder());
 
     return result;
@@ -2370,6 +2396,10 @@ public class RSync {
       .dest("outputCommandline")
       .help("output the command-line generated for the rsync binary")
       .action(Arguments.storeTrue());
+    parser.addArgument("--maxtime")
+      .setDefault(-1)
+      .dest("maxtime")
+      .help("set the maximum time for rsync process to run in seconds before getting killed");
     parser.addArgument("src")
       .help("The local or remote source path (path or [user@]host:path)");
     parser.addArgument("dest")
@@ -2502,6 +2532,7 @@ public class RSync {
     ipv4(ns.getBoolean("ipv4"));
     ipv6(ns.getBoolean("ipv6"));
     version(ns.getBoolean("version"));
+    maxTime(ns.getInt("maxtime"));
 
     outputCommandline(ns.get("outputCommandline"));
     source(ns.getString("src"));

@@ -51,7 +51,8 @@ usage: com.github.fracpete.rsync4j.RSync
        [--outbuf OUTBUF] [--write-batch WRITEBATCH]
        [--only-write-batch ONLYWRITEBATCH] [--read-batch READBATCH]
        [--protocol PROTOCOL] [--iconv ICONV] [--checkum-seed CHECKSUMSEED]
-       [-4] [-6] [--version] [--output-commandline] src dest
+       [-4] [-6] [--version] [--output-commandline] [--maxtime MAXTIME] src
+       dest
 
 positional arguments:
   src                    The local or remote  source  path (path or [user@]
@@ -208,6 +209,8 @@ optional arguments:
   --version              print version number
   --output-commandline   output the command-line  generated  for  the rsync
                          binary
+  --maxtime MAXTIME      set the maximum time for  rsync  process to run in
+                         seconds before getting killed
 ```
 
 ## Java
