@@ -13,9 +13,9 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
+/*
  * Binaries.java
- * Copyright (C) 2017 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
  */
 
 package com.github.fracpete.rsync4j;
@@ -45,6 +45,9 @@ public class Binaries {
 
   /** the sub-directory for the windows binaries. */
   public final static String WINDOWS_DIR = "windows-x86_64/";
+
+  /** the windows environment variable for the rsyncj4 home directory. */
+  public final static String WINDOWS_HOME_DIR = "RSYNC4J_HOME";
 
   /** for storing any previously extract binary. */
   protected static Boolean binariesExtracted;
@@ -129,6 +132,30 @@ public class Binaries {
   }
 
   /**
+   * Returns the home directory to use for rsync4j.
+   * On Windows, use the {@link #WINDOWS_HOME_DIR} environment variable
+   * to point it to a custom location.
+   *
+   * @return		the directory
+   */
+  protected static String homeDir() {
+    String	result;
+    File	dir;
+
+    result = System.getProperty("user.home") + File.separator + "rsync4j";
+
+    if (SystemUtils.IS_OS_WINDOWS) {
+      if (System.getenv(WINDOWS_HOME_DIR) != null) {
+        dir = new File(System.getenv(WINDOWS_HOME_DIR));
+        if (!dir.exists() || dir.isDirectory())
+          result = dir.getAbsolutePath();
+      }
+    }
+
+    return result;
+  }
+
+  /**
    * Extracts the binaries to the tmp directory.
    *
    * @throws Exception	if extraction fails
@@ -152,7 +179,7 @@ public class Binaries {
 	throw new IllegalStateException("ssh not installed (" + sshBinary + ")?");
     }
     else if (SystemUtils.IS_OS_WINDOWS) {
-      homeDir = System.getProperty("user.home") + File.separator + "rsync4j";
+      homeDir = homeDir();
       binDir  = homeDir + File.separator + "bin";
       sshDir  = homeDir + File.separator + "home" + File.separator + System.getProperty("user.name") + File.separator + ".ssh";
       if (!new File(binDir + File.separator + "rsync.exe").exists()) {

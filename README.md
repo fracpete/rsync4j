@@ -11,7 +11,7 @@ Add the following artifact to your dependencies of your `pom.xml`:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j</artifactId>
-      <version>3.1.2-5</version>
+      <version>3.1.2-6</version>
     </dependency>
 ```
 
@@ -338,11 +338,18 @@ Will get automatically get converted to:
 /cygdrive/c/some/path/blah.txt
 ```
 
+### Custom location
+
+It is possible to use another location than `%USERPROFILE%\rsync4j`. You only
+have to set up the `RSYNC4J_HOME` environment variable to point to the top-level
+directory (doesn't have to exist) where you want to house the binaries and keys. 
+ 
+
 ## FAQ
 
 * **Q** I'm trying to sync, but it just sits there and does nothing!
 * **A** Since *rsync4j* is not interactive, you will have to connect to the 
-  remote host at least once before to add the host the `known_hosts` file.
+  remote host at least once before to add the host to the `known_hosts` file.
 * **Q** How do I use a specific public key pair?
 * **A** You can let `ssh` know what identity file to use using rsync's `--rsh` 
   option and ssh's `-i` option, e.g.: `rsync --rsh="ssh -i /some/where/id_rsa" ...`
