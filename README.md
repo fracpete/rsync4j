@@ -4,6 +4,12 @@ and Windows. For the latter, binaries are included in the jars and *rsync4j*
 will set up an environment in the user's home directory (`%USERPROFILE%\rsync4j`)
 on first usage. Only 64-bit platforms are supported.
 
+## Releases
+
+* [3.1.2-6](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-6/rsync4j-3.1.2-6-bin.zip)
+* [3.1.2-5](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-5/rsync4j-3.1.2-5-bin.zip)
+
+
 ## Maven
 Add the following artifact to your dependencies of your `pom.xml`:
 
