@@ -109,7 +109,7 @@ public class Binaries {
       resource += name;
       outFull = outDir + File.separator + name;
       LOGGER.info("Copying resource '" + resource + "' to '" + outFull + "'");
-      is  = ClassLoader.getSystemResourceAsStream(resource);
+      is  = Binaries.class.getClassLoader().getResourceAsStream(resource);
       bis = new BufferedInputStream(is);
       out = new File(outFull);
       fos = new FileOutputStream(out);
