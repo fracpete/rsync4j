@@ -8,6 +8,7 @@ Only 64-bit platforms are supported.
 
 ## Releases
 
+* 3.1.2-7: [zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-7/rsync4j-3.1.2-7-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-7/rsync4j-3.1.2-7-spring-boot.zip)
 * [3.1.2-6](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-6/rsync4j-3.1.2-6-bin.zip)
 * [3.1.2-5](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-5/rsync4j-3.1.2-5-bin.zip)
 
@@ -19,7 +20,7 @@ Add the following artifact to your dependencies of your `pom.xml`:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j</artifactId>
-      <version>3.1.2-6</version>
+      <version>3.1.2-7</version>
     </dependency>
 ```
 
@@ -311,7 +312,7 @@ The dependencies, as of 2017-05-16, are as follows:
 * cygwin1.dll
 * cygz.dll
 
-You can easily determine the dependencies by running the exexcutables. Windows
+You can easily determine the dependencies by running the executables. Windows
 will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:
 
