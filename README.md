@@ -1,6 +1,6 @@
 # rsync4j
-Maven project for generating a Java wrapper around rsync for Linux, Mac OSX
-and Windows. For the latter, binaries are included in the jars and *rsync4j* 
+Maven project for generating a Java wrapper around [rsync](http://rsync.samba.org/) 
+for Linux, Mac OSX and Windows. For the latter, binaries are included in the jars and *rsync4j* 
 will set up an environment in the user's home directory (`%USERPROFILE%\rsync4j`)
 on first usage (can be customized, see Section **Custom location**). 
 Only 64-bit platforms are supported.
