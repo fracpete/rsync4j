@@ -9,11 +9,11 @@
     <version>3.1.2-9-SNAPSHOT</version>
   </parent>
 
-  <artifactId>rsync4j-all</artifactId>
+  <artifactId>rsync4j-windows-x86</artifactId>
   <packaging>jar</packaging>
 
-  <name>rsync4j-all</name>
-  <description>Combines all rsync4j modules.</description>
+  <name>rsync4j-windows-x86</name>
+  <description>Binaries for Windows Intel 32bit.</description>
   <organization>
     <name>University of Waikato, Hamilton, NZ</name>
     <url>http://www.waikato.ac.nz/</url>
@@ -44,18 +44,6 @@
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows-x86</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows-x86_64</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

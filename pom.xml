@@ -94,6 +94,7 @@
 
   <modules>
     <module>rsync4j-core</module>
+    <module>rsync4j-windows-x86</module>
     <module>rsync4j-windows-x86_64</module>
     <module>rsync4j-all</module>
   </modules>
