@@ -1,0 +1,13 @@
+site_name: rsync4j
+theme: readthedocs
+repo_url: https://github.com/fracpete/rsync4j
+site_description: rsync4j Documentation
+pages:
+    - Home: index.md
+    - Command-line: commandline.md
+    - Java: java.md
+    - Windows: windows.md
+    - FAQ: faq.md
+    - Maven: maven.md
+    - Releases: releases.md
+
