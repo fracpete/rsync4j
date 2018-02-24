@@ -3,7 +3,7 @@ Maven project for generating a Java wrapper around [rsync](http://rsync.samba.or
 for Linux, Mac OSX and Windows. For the latter, binaries are included in the jars and *rsync4j* 
 will set up an environment in the user's home directory (`%USERPROFILE%\rsync4j`)
 on first usage (can be customized, see Section **Custom location**). 
-Only 64-bit platforms are supported.
+Now 32-bit and 64-bit platforms are supported.
 
 
 ## Releases
@@ -294,11 +294,61 @@ output.monitor(rsync.builder());
 
 ## Windows
 
-### Binaries
+On first execution, these binaries will get placed in the following directory
+(on a per user basis):
+```
+%USERPROFILE%\rsync4j
+```
+
+Below that directory there are `home/%USERNAME%/.ssh` and `bin`.
+
+### SSH keys
+You can place your ssh key pairs in the following directory:
+
+```
+%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
+```
+
+### Binaries (32-bit)
+*rsync4j* uses the `rsync.exe` and `ssh.exe` executables and their dependencies
+from the 32-bit version of [cywgin](https://cygwin.com/).
+
+The dependencies, as of 2018-02-25, are as follows:
+
+* cygcom_err-2.dll
+* cygcrypto-1.0.0.dll
+* cyggcc_s-1.dll
+* cyggssapi_krb5-2.dll
+* cygiconv-2.dll
+* cygintl-8.dll
+* cygk5crypto-3.dll
+* cygkrb5-3.dll
+* cygkrb5support-0.dll
+* cygpopt-0.dll
+* cygssp-0.dll
+* cygwin1.dll
+* cygz.dll
+
+You can easily determine the dependencies by running the executables. Windows
+will automatically pop up a dialog mentioning any DLLs that are missing. Place
+any missing DLLs in the following directory:
+
+```
+rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86
+```
+
+And list the DLLs in the following text file:
+
+```
+rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86/libraries.txt
+```
+
+
+### Binaries (64-bit)
 *rsync4j* uses the `rsync.exe` and `ssh.exe` executables and their dependencies
 from the 64-bit version of [cywgin](https://cygwin.com/).
 
-The dependencies, as of 2017-05-16, are as follows:
+The dependencies, as of 2018-02-25, are as follows:
 
 * cygcom_err-2.dll
 * cygcrypto-1.0.0.dll
@@ -318,22 +368,13 @@ will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:
 
 ```
-src/main/resources/com/github/fracpete/rsync4j/windows-x86_64
+rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64
 ```
 
-On first execution, these binaries will get placed in the following directory
-(on a per user basis):
-```
-%USERPROFILE%\rsync4j
-```
-
-Below that directory there are `home/%USERNAME%/.ssh` and `bin`.
-
-### SSH keys
-You can place your ssh key pairs in the following directory:
+And list the DLLs in the following text file:
 
 ```
-%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
+rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64/libraries.txt
 ```
 
 ### Paths

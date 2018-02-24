@@ -28,6 +28,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,18 +39,22 @@ import java.util.logging.Logger;
  * On Linux and OSX, rsync and ssh must be present.
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
- * @version $Revision$
  */
 public class Binaries {
 
   /** the resource prefix. */
   public final static String RESOURCE_DIR = "com/github/fracpete/rsync4j/";
 
-  /** the sub-directory for the windows binaries. */
-  public final static String WINDOWS_DIR = "windows-x86_64/";
+  /** the sub-directory for the windows 32bit binaries. */
+  public final static String WINDOWS_DIR_32 = "windows-x86/";
+
+  /** the sub-directory for the windows 64bit binaries. */
+  public final static String WINDOWS_DIR_64 = "windows-x86_64/";
 
   /** the windows environment variable for the rsyncj4 home directory. */
   public final static String WINDOWS_HOME_DIR = "RSYNC4J_HOME";
+
+  public static final String LIBRARIES = "libraries.txt";
 
   /** for storing any previously extract binary. */
   protected static Boolean binariesExtracted;
@@ -156,18 +163,63 @@ public class Binaries {
   }
 
   /**
+   * Returns the sub-directory for the Windows binaries, depending on the
+   * bitness.
+   *
+   * @return		the sub-directory of the binaries
+   */
+  protected static String getWindowsDir() {
+    if (getBitness() == 32)
+      return WINDOWS_DIR_32;
+    else
+      return WINDOWS_DIR_64;
+  }
+
+  /**
+   * Returns the list of libraries to copy.
+   *
+   * @return		the libraries
+   * @throws Exception	if reading
+   */
+  protected static List<String> getLibraries() throws Exception {
+    List<String>	result;
+    String		resource;
+    InputStream		is;
+    StringBuilder	buf;
+    int			c;
+
+    result   = new ArrayList<>();
+    resource = RESOURCE_DIR + getWindowsDir() + LIBRARIES;
+    is       = null;
+    try {
+      buf = new StringBuilder();
+      is = Binaries.class.getClassLoader().getResourceAsStream(resource);
+      while ((c = is.read()) != -1)
+	buf.append((char) c);
+      result.addAll(Arrays.asList(buf.toString().split("\n")));
+    }
+    catch (Exception e) {
+      throw new IllegalStateException("Failed to read list of libraries from: " + resource);
+    }
+    finally {
+      IOUtils.closeQuietly(is);
+    }
+
+    return result;
+  }
+
+  /**
    * Extracts the binaries to the tmp directory.
    *
    * @throws Exception	if extraction fails
    */
   protected static void extractBinaries() throws Exception {
     String	homeDir;
+    String	winDir;
     String	binDir;
     String	sshDir;
     File	dir;
 
-    if (getBitness() != 64)
-      throw new IllegalStateException("Only 64bit is supported!");
 
     sshBinary   = "/usr/bin/ssh";
     rsyncBinary = "/usr/bin/rsync";
@@ -197,20 +249,11 @@ public class Binaries {
 	    throw new IllegalStateException("Failed to create directory: " + dir);
 	}
 	LOGGER.info("Copy your public key pairs into: " + dir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygcom_err-2.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygcrypto-1.0.0.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cyggcc_s-seh-1.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cyggssapi_krb5-2.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygiconv-2.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygintl-8.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygk5crypto-3.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygkrb5-3.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygkrb5support-0.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygssp-0.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygwin1.dll", binDir);
-	copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "cygz.dll", binDir);
-	sshBinary   = copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "ssh.exe", binDir);
-	rsyncBinary = copyResourceTo(RESOURCE_DIR + WINDOWS_DIR, "rsync.exe", binDir);
+	winDir = getWindowsDir();
+	for (String lib: getLibraries())
+	  copyResourceTo(RESOURCE_DIR + winDir, lib, binDir);
+	sshBinary   = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
+	rsyncBinary = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
       }
       else {
 	sshBinary   = binDir + File.separator + "ssh.exe";
