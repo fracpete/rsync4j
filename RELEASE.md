@@ -12,3 +12,19 @@ How to make a release
 
   * Keep release name empty 
   * Attach `-bin.zip` and `-spring-boot.jar` to the release
+
+* Update documentation
+
+  * add new release link (`releases.md`)
+  * update artifact version (`maven.md`)
+  * test 
+    
+    ```
+    mkdocs build --clean && mkdocs serve
+    ```
+    
+  * deploy
+
+    ```
+    mkdocs gh-deploy --clean
+    ```
