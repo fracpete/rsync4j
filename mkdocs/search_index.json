@@ -27,12 +27,12 @@
         },
         {
             "location": "/maven/",
-            "text": "Add the following artifact to your dependencies of your \npom.xml\n:\n\n\n    <dependency>\n      <groupId>com.github.fracpete</groupId>\n      <artifactId>rsync4j</artifactId>\n      <version>3.1.2-8</version>\n    </dependency>",
+            "text": "Add the following artifact to your dependencies of your \npom.xml\n:\n\n\n    <dependency>\n      <groupId>com.github.fracpete</groupId>\n      <artifactId>rsync4j-all</artifactId>\n      <version>3.1.2-9</version>\n    </dependency>",
             "title": "Maven"
         },
         {
             "location": "/releases/",
-            "text": "3.1.2-8 (\nzip\n, \nspring-boot\n)\n\n\n3.1.2-7 (\nzip\n, \nspring-boot\n)\n\n\n3.1.2-6 (\nzip\n)\n\n\n3.1.2-5 (\nzip\n)",
+            "text": "3.1.2-9 (\nzip\n, \nspring-boot\n)\n\n\n3.1.2-8 (\nzip\n, \nspring-boot\n)\n\n\n3.1.2-7 (\nzip\n, \nspring-boot\n)\n\n\n3.1.2-6 (\nzip\n)\n\n\n3.1.2-5 (\nzip\n)",
             "title": "Releases"
         }
     ]
