@@ -2500,10 +2500,10 @@ public class RSync {
     skipCompress(ns.getString("skipcompress"));
     cvsExclude(ns.getBoolean("cvsexclude"));
     filter(ns.getList("filter").toArray(new String[0]));
-    exclude(ns.getList("exclude").toArray(new String[0]));
-    excludeFrom(ns.getString("excludefrom"));
     include(ns.getList("include").toArray(new String[0]));
     includeFrom(ns.getString("includefrom"));
+    exclude(ns.getList("exclude").toArray(new String[0]));
+    excludeFrom(ns.getString("excludefrom"));
     filesFrom(ns.getString("filesfrom"));
     from0(ns.getBoolean("from0"));
     protectArgs(ns.getBoolean("protectargs"));
