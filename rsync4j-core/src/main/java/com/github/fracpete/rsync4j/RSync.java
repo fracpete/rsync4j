@@ -13,9 +13,9 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
+/*
  * RSync.java
- * Copyright (C) 2017 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -36,7 +36,6 @@ import java.util.logging.Logger;
  * Wrapper for rsync binaries.
  *
  * @author  fracpete (fracpete at gmail dot com)
- * @version $Revision: 8361 $
  */
 public class RSync {
 
@@ -293,6 +292,8 @@ public class RSync {
   protected boolean version;
 
   protected int max_time;
+
+  protected String[] additional;
 
   /**
    * Initializes the object.
@@ -1216,7 +1217,7 @@ public class RSync {
   }
 
   public RSync compareDest(String... compare_dest) {
-    this.compare_dest = compare_dest;
+    this.compare_dest = compare_dest.clone();
     return this;
   }
 
@@ -1225,7 +1226,7 @@ public class RSync {
   }
 
   public RSync copyDest(String... copy_dest) {
-    this.copy_dest = copy_dest;
+    this.copy_dest = copy_dest.clone();
     return this;
   }
 
@@ -1234,7 +1235,7 @@ public class RSync {
   }
 
   public RSync linkDest(String... link_dest) {
-    this.link_dest = link_dest;
+    this.link_dest = link_dest.clone();
     return this;
   }
 
@@ -1279,7 +1280,7 @@ public class RSync {
   }
 
   public RSync filter(String... filter) {
-    this.filter = filter;
+    this.filter = filter.clone();
     return this;
   }
 
@@ -1288,7 +1289,7 @@ public class RSync {
   }
 
   public RSync exclude(String... exclude) {
-    this.exclude = exclude;
+    this.exclude = exclude.clone();
     return this;
   }
 
@@ -1306,7 +1307,7 @@ public class RSync {
   }
 
   public RSync include(String... include) {
-    this.include = include;
+    this.include = include.clone();
     return this;
   }
 
@@ -1593,6 +1594,18 @@ public class RSync {
     return this;
   }
 
+  public String[] getAdditional() {
+    return additional;
+  }
+
+  public RSync additional(String... additional) {
+    this.additional = additional.clone();
+    for (int i = 0; i < this.additional.length; i++)
+      this.additional[i] = this.additional[i].replaceFirst("^[+][+]", "--").replaceFirst("^[+]", "-");
+    System.out.println(Utils.flatten(this.additional, "\n"));
+    return this;
+  }
+
   /**
    * Assembles the arguments for the rsync binary.
    *
@@ -1734,6 +1747,11 @@ public class RSync {
     if (isIpv4()) result.add("--ipv4");
     if (isIpv6()) result.add("--ipv6");
     if (isVersion()) result.add("--version");
+    // generic options
+    for (String a: additional) {
+      if (a != null)
+	result.add(a);
+    }
 
     return result;
   }
@@ -2400,6 +2418,11 @@ public class RSync {
       .setDefault(-1)
       .dest("maxtime")
       .help("set the maximum time for rsync process to run in seconds before getting killed");
+    parser.addArgument("--additional")
+      .setDefault(new ArrayList<String>())
+      .dest("additional")
+      .action(Arguments.append())
+      .help("generic option to pass on to rsync; for command-line parsing to work though, leading dashes must get replaced with '+', eg '--additional \"++exclude=*~\"'");
     parser.addArgument("src")
       .help("The local or remote source path (path or [user@]host:path)");
     parser.addArgument("dest")
@@ -2533,6 +2556,7 @@ public class RSync {
     ipv6(ns.getBoolean("ipv6"));
     version(ns.getBoolean("version"));
     maxTime(ns.getInt("maxtime"));
+    additional(ns.getList("additional").toArray(new String[0]));
 
     outputCommandline(ns.get("outputCommandline"));
     source(ns.getString("src"));
