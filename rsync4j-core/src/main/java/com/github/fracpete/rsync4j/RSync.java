@@ -40,7 +40,7 @@ import java.util.logging.Logger;
 public class RSync {
 
   /** for logging. */
-  protected Logger logger = Logger.getLogger(Binaries.class.getName());
+  protected Logger logger = Logger.getLogger(RSync.class.getName());
 
   /** the source path/url. */
   protected String source;
@@ -1602,7 +1602,6 @@ public class RSync {
     this.additional = additional.clone();
     for (int i = 0; i < this.additional.length; i++)
       this.additional[i] = this.additional[i].replaceFirst("^[+][+]", "--").replaceFirst("^[+]", "-");
-    System.out.println(Utils.flatten(this.additional, "\n"));
     return this;
   }
 
