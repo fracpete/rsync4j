@@ -65,6 +65,9 @@ public class Binaries {
   /** the ssh binary. */
   protected static String sshBinary;
 
+  /** the keygen binary. */
+  protected static String keygenBinary;
+
   /** for logging. */
   protected static Logger LOGGER = Logger.getLogger(Binaries.class.getName());
 
@@ -221,14 +224,17 @@ public class Binaries {
     File	dir;
 
 
-    sshBinary   = "/usr/bin/ssh";
-    rsyncBinary = "/usr/bin/rsync";
+    sshBinary    = "/usr/bin/ssh";
+    rsyncBinary  = "/usr/bin/rsync";
+    keygenBinary = "/usr/bin/ssh-keygen";
 
     if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC_OSX) {
       if (!new File(rsyncBinary).exists())
 	throw new IllegalStateException("rsync not installed (" + rsyncBinary + ")?");
       if (!new File(sshBinary).exists())
 	throw new IllegalStateException("ssh not installed (" + sshBinary + ")?");
+      if (!new File(keygenBinary).exists())
+	throw new IllegalStateException("ssh-keygen not installed (" + keygenBinary + ")?");
     }
     else if (SystemUtils.IS_OS_WINDOWS) {
       homeDir = homeDir();
@@ -252,12 +258,14 @@ public class Binaries {
 	winDir = getWindowsDir();
 	for (String lib: getLibraries())
 	  copyResourceTo(RESOURCE_DIR + winDir, lib, binDir);
-	sshBinary   = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
-	rsyncBinary = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
+	sshBinary    = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
+	rsyncBinary  = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
+	keygenBinary = copyResourceTo(RESOURCE_DIR + winDir, "ssh-keygen.exe", binDir);
       }
       else {
-	sshBinary   = binDir + File.separator + "ssh.exe";
-	rsyncBinary = binDir + File.separator + "rsync.exe";
+	sshBinary    = binDir + File.separator + "ssh.exe";
+	rsyncBinary  = binDir + File.separator + "rsync.exe";
+	keygenBinary = binDir + File.separator + "ssh-keygen.exe";
       }
     }
     else {
@@ -291,6 +299,18 @@ public class Binaries {
     if (binariesExtracted == null)
       extractBinaries();
     return sshBinary;
+  }
+
+  /**
+   * Returns the ssh-keygen binary (if necessary extracts the binaries to the temp directory).
+   *
+   * @return		the filename of the binary
+   * @throws Exception	if extraction fails
+   */
+  public static String keygenBinary() throws Exception {
+    if (binariesExtracted == null)
+      extractBinaries();
+    return keygenBinary;
   }
 
   /**
