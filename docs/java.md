@@ -1,3 +1,5 @@
+## Rsync
+
 Here is an example of configuring and running `rsync` from within Java, only 
 outputting the data from stdout/stderr after the process completes: 
 
@@ -63,5 +65,22 @@ RSync rsync = new RSync()
   .verbose(true);
 StreamingProcessOutput output = new StreamingProcessOutput(new Output());
 output.monitor(rsync.builder());
+```
 
+## Ssh
+
+The following command lists all files in the `/tmp` directory of the localhost
+in verbose mode and also outputting the generated command-line:
+
+```java
+import com.github.fracpete.rsync4j.Ssh;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+...
+Ssh ssh = new Ssh()
+  .outputCommandline(true)
+  .verbose(1)
+  .hostname("localhost")
+  .command("ls /tmp");
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(ssh.builder());
 ```
