@@ -20,6 +20,7 @@
 
 package com.github.fracpete.rsync4j;
 
+import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.Namespace;
 
@@ -75,10 +76,9 @@ public class SshKeyGen
     List<String> 	result;
 
     result = new ArrayList<>();
-    if (getVerbose() > 0) {
-      result.add("-v");
-      result.add("" + getVerbose());
-    }
+    if (getVerbose() == 1) result.add("-v");
+    if (getVerbose() == 2) result.add("-vv");
+    if (getVerbose() == 3) result.add("-vvv");
 
     return result;
   }
@@ -120,9 +120,23 @@ public class SshKeyGen
     ArgumentParser 	parser;
 
     parser = super.getParser();
-    parser.addArgument("-v", "--verbose")
+    parser.addArgument("-v")
       .dest("verbose")
-      .help("increase verbosity. Maximum is 3.")
+      .help("Verbose mode.")
+      .action(Arguments.storeConst())
+      .setConst(1)
+      .setDefault(0);
+    parser.addArgument("-vv")
+      .dest("verbose")
+      .help("Very verbose mode.")
+      .action(Arguments.storeConst())
+      .setConst(2)
+      .setDefault(0);
+    parser.addArgument("-vvv")
+      .dest("verbose")
+      .help("Very, very verbose mode.")
+      .action(Arguments.storeConst())
+      .setConst(3)
       .setDefault(0);
 
     return parser;
