@@ -122,7 +122,7 @@ public class SshKeyGen
     parser = super.getParser();
     parser.addArgument("-v", "--verbose")
       .dest("verbose")
-      .help("increase verbosity")
+      .help("increase verbosity. Maximum is 3.")
       .setDefault(0);
 
     return parser;
