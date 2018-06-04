@@ -217,10 +217,15 @@ usage: com.github.fracpete.rsync4j.Ssh
        [-I PKCS11] [-K] [-k] [-L LOCAL] [-l LOGINNAME] [-M] [-m MACSPEC]
        [-N] [-n] [-O CONTROLCOMMAND] [-o OPTION] [-p PORT] [-q] [-R REMOTE]
        [-s] [-T] [-t] [-v VERBOSE] [-W FORWARDTO] [-w FORWARDTUNNEL] [-X]
-       [-x] [-Y] [-y]
+       [-x] [-Y] [-y] hostname  [command]
 
 OpenSSH  SSH  client  (remote  login   program).  No  interactive  sessions
 possible.
+
+positional arguments:
+  hostname               The hostname to connect to.
+  hostname               The hostname to connect to.
+  command                The remote command to execute.
 
 optional arguments:
   -h, --help             show this help message and exit

@@ -119,6 +119,10 @@ public class Ssh
 
   protected boolean syslog;
 
+  protected String hostname;
+
+  protected String command;
+
   /**
    * Resets the members.
    */
@@ -165,6 +169,8 @@ public class Ssh
     x11 = null;
     trustedX11 = false;
     syslog = false;
+    hostname = "";
+    command = "";
   }
 
   /**
@@ -572,6 +578,24 @@ public class Ssh
     return syslog;
   }
 
+  public Ssh hostname(String value) {
+    hostname = value;
+    return this;
+  }
+
+  public String getHostname() {
+    return hostname;
+  }
+
+  public Ssh command(String value) {
+    command = value;
+    return this;
+  }
+
+  public String getCommand() {
+    return command;
+  }
+
   /**
    * Assembles the arguments for the binary.
    *
@@ -703,6 +727,10 @@ public class Ssh
     }
     if (getTrustedX11()) result.add("-Y");
     if (getSyslog()) result.add("-y");
+
+    result.add(getHostname());
+
+    if (!getCommand().isEmpty()) result.add(getCommand());
 
     return result;
   }
@@ -927,6 +955,20 @@ public class Ssh
       .help("Send log information using the syslog system module.")
       .setDefault(false)
       .action(Arguments.storeTrue());
+    parser.addArgument("")
+      .dest("hostname")
+      .required(true)
+      .help("The hostname to connect to.");
+    parser.addArgument("hostname")
+      .metavar("")
+      .dest("hostname")
+      .required(true)
+      .help("The hostname to connect to.");
+    parser.addArgument("command")
+      .nargs("?")
+      .dest("command")
+      .required(false)
+      .help("The remote command to execute.");
 
     return parser;
   }
