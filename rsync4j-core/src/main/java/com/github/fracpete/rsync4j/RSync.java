@@ -1561,7 +1561,7 @@ public class RSync
   }
 
   /**
-   * Assembles the arguments for the rsync binary.
+   * Assembles the arguments for the binary.
    *
    * @return		the options
    * @throws Exception	if failed to determine binary
@@ -1732,6 +1732,16 @@ public class RSync
     result.add(getDestination());
 
     return result;
+  }
+
+  /**
+   * Returns a short description for the binary.
+   *
+   * @return		the description
+   */
+  @Override
+  protected String description() {
+    return "A fast, versatile, remote (and local) file-copying tool.";
   }
 
   /**
@@ -2455,7 +2465,7 @@ public class RSync
   }
 
   /**
-   * For testing.
+   * For running from the command-line.
    *
    * @param args	the arguments
    */

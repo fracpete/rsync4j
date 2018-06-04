@@ -153,6 +153,13 @@ public abstract class AbstractBinary {
   }
 
   /**
+   * Returns a short description for the binary.
+   *
+   * @return		the description
+   */
+  protected abstract String description();
+
+  /**
    * Configures and returns the commandline parser.
    *
    * @return		the parser
@@ -161,6 +168,7 @@ public abstract class AbstractBinary {
     ArgumentParser 	parser;
 
     parser = ArgumentParsers.newArgumentParser(getClass().getName());
+    parser.description(description());
     parser.addArgument("--output-commandline")
       .setDefault(false)
       .dest("outputCommandline")
