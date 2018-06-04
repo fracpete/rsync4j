@@ -3,38 +3,40 @@ the `rsync` executable itself. Here is the help screen:
 
 ```
 usage: com.github.fracpete.rsync4j.RSync
-       [-h] [-v] [--info INFO] [--debug DEBUG] [--msgs2stderr] [-q]
-       [--no-motd] [-c] [-a] [-r] [-R] [--no-implied-dirs] [-b]
-       [--backup-dir BACKUPDIR] [--suffix SUFFIX] [-u] [--inplace]
-       [--append] [--append-verify] [-d] [-l] [-L] [--copy-unsafe-links]
-       [--safe-links] [--munge-links] [-k] [-K] [-H] [-p] [-E]
-       [--chmod CHMOD] [-X] [-o] [-g] [--devices] [--specials] [-t] [-O]
-       [-J] [--super] [--fake-super] [-S] [--preallocate] [-n] [-W] [-x]
-       [-B BLOCKSIZE] [-e RSH] [--rsync-path RSYNCPATH] [--existing]
-       [--ignore-existing] [--remove-source-files] [--delete]
-       [--delete-before] [--delete-during] [--delete-delay]
-       [--delete-after] [--delete-excluded] [--ignore-missing-args]
-       [--delete-missing-args] [--ignore-errors] [--force]
-       [--max-delete MAXDELETE] [--max-size MAXSIZE] [--min-size MINSIZE]
-       [--partial] [--partial-dir PARTIALDIR] [--delay-updates] [-m]
-       [--numeric-ids] [--usermap USERMAP] [--groupmap GROUPMAP]
-       [--chown CHOWN] [--timeout TIMEOUT] [--contimeout CONTIMEOUT] [-I]
-       [-M REMOTEOPTION] [--size-only] [--modify-window MODIFYWINDOW]
-       [-T TEMPDIR] [-y] [--compare-dest COMPAREDEST]
-       [--copy-dest COPYDEST] [--link-dest LINKDEST] [-z]
-       [--compress-level COMPRESSLEVEL] [--skip-compress SKIPCOMPRESS] [-C]
-       [-f FILTER] [--exclude EXCLUDE] [--exclude-from EXCLUDEFROM]
-       [--include INCLUDE] [--include-from INCLUDEFROM]
-       [--files-from FILESFROM] [-0] [-s] [--address ADDRESS] [--port PORT]
-       [--sockopts SOCKOPTS] [--blocking-io] [--stats] [-8]
-       [--human-readable] [--progress] [-i] [--out-format OUTFORMAT]
-       [--log-file LOGFILE] [--log-file-format LOGFILEFORMAT]
-       [--password-file PASSWORDFILE] [--list-only] [--bwlimit BWLIMIT]
-       [--outbuf OUTBUF] [--write-batch WRITEBATCH]
-       [--only-write-batch ONLYWRITEBATCH] [--read-batch READBATCH]
-       [--protocol PROTOCOL] [--iconv ICONV] [--checkum-seed CHECKSUMSEED]
-       [-4] [-6] [--version] [--output-commandline] [--maxtime MAXTIME] src
-       dest
+       [-h] [--output-commandline] [--maxtime MAXTIME] [-v]
+       [--info INFO] [--debug DEBUG] [--msgs2stderr] [-q] [--no-motd] [-c]
+       [-a] [-r] [-R] [--no-implied-dirs] [-b] [--backup-dir BACKUPDIR]
+       [--suffix SUFFIX] [-u] [--inplace] [--append] [--append-verify] [-d]
+       [-l] [-L] [--copy-unsafe-links] [--safe-links] [--munge-links] [-k]
+       [-K] [-H] [-p] [-E] [--chmod CHMOD] [-X] [-o] [-g] [--devices]
+       [--specials] [-t] [-O] [-J] [--super] [--fake-super] [-S]
+       [--preallocate] [-n] [-W] [-x] [-B BLOCKSIZE] [-e RSH]
+       [--rsync-path RSYNCPATH] [--existing] [--ignore-existing]
+       [--remove-source-files] [--delete] [--delete-before]
+       [--delete-during] [--delete-delay] [--delete-after]
+       [--delete-excluded] [--ignore-missing-args] [--delete-missing-args]
+       [--ignore-errors] [--force] [--max-delete MAXDELETE]
+       [--max-size MAXSIZE] [--min-size MINSIZE] [--partial]
+       [--partial-dir PARTIALDIR] [--delay-updates] [-m] [--numeric-ids]
+       [--usermap USERMAP] [--groupmap GROUPMAP] [--chown CHOWN]
+       [--timeout TIMEOUT] [--contimeout CONTIMEOUT] [-I] [-M REMOTEOPTION]
+       [--size-only] [--modify-window MODIFYWINDOW] [-T TEMPDIR] [-y]
+       [--compare-dest COMPAREDEST] [--copy-dest COPYDEST]
+       [--link-dest LINKDEST] [-z] [--compress-level COMPRESSLEVEL]
+       [--skip-compress SKIPCOMPRESS] [-C] [-f FILTER] [--exclude EXCLUDE]
+       [--exclude-from EXCLUDEFROM] [--include INCLUDE]
+       [--include-from INCLUDEFROM] [--files-from FILESFROM] [-0] [-s]
+       [--address ADDRESS] [--port PORT] [--sockopts SOCKOPTS]
+       [--blocking-io] [--stats] [-8] [--human-readable] [--progress] [-i]
+       [--out-format OUTFORMAT] [--log-file LOGFILE]
+       [--log-file-format LOGFILEFORMAT] [--password-file PASSWORDFILE]
+       [--list-only] [--bwlimit BWLIMIT] [--outbuf OUTBUF]
+       [--write-batch WRITEBATCH] [--only-write-batch ONLYWRITEBATCH]
+       [--read-batch READBATCH] [--protocol PROTOCOL] [--iconv ICONV]
+       [--checkum-seed CHECKSUMSEED] [-4] [-6] [--version]
+       [--additional ADDITIONAL] src dest
+
+A fast, versatile, remote (and local) file-copying tool.
 
 positional arguments:
   src                    The local or remote  source  path (path or [user@]
@@ -44,6 +46,10 @@ positional arguments:
 
 optional arguments:
   -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
+                         binary
+  --maxtime MAXTIME      set the maximum time  for  the  process  to run in
+                         seconds before getting killed
   -v, --verbose          increase verbosity
   --info INFO            fine-grained informational verbosity
   --debug DEBUG          fine-grained debug verbosity
@@ -189,8 +195,9 @@ optional arguments:
   -4, --ipv4             prefer IPv4
   -6, --ipv6             prefer IPv6
   --version              print version number
-  --output-commandline   output the command-line  generated  for  the rsync
-                         binary
-  --maxtime MAXTIME      set the maximum time for  rsync  process to run in
-                         seconds before getting killed
+  --additional ADDITIONAL
+                         generic option to pass  on  to rsync; for command-
+                         line parsing to work  though,  leading dashes must
+                         get   replaced   with    '+',   eg   '--additional
+                         "++exclude=*~"'
 ```
