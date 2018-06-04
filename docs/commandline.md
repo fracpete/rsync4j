@@ -1,3 +1,5 @@
+## RSync
+
 The options of the `com.github.fracpete.rsync4j.RSync` tool are modeled after
 the `rsync` executable itself. Here is the help screen:
 
@@ -200,4 +202,105 @@ optional arguments:
                          line parsing to work  though,  leading dashes must
                          get   replaced   with    '+',   eg   '--additional
                          "++exclude=*~"'
+```
+
+## Ssh
+
+The options of the `com.github.fracpete.rsync4j.Ssh` tool are modeled after
+the `ssh` executable itself. Here is the help screen:
+
+```
+usage: com.github.fracpete.rsync4j.Ssh
+       [-h] [--output-commandline] [-1] [-2] [-4] [-6] [-A] [-a]
+       [-b BINDADDRESS] [-C] [-c CIPHERSPEC] [-D DYNAMICBINDADDRESS]
+       [-E LOGFILE] [-e ESCAPECHAR] [-F CONFIGFILE] [-f] [-G] [-g]
+       [-I PKCS11] [-K] [-k] [-L LOCAL] [-l LOGINNAME] [-M] [-m MACSPEC]
+       [-N] [-n] [-O CONTROLCOMMAND] [-o OPTION] [-p PORT] [-q] [-R REMOTE]
+       [-s] [-T] [-t] [-v VERBOSE] [-W FORWARDTO] [-w FORWARDTUNNEL] [-X]
+       [-x] [-Y] [-y]
+
+OpenSSH  SSH  client  (remote  login   program).  No  interactive  sessions
+possible.
+
+optional arguments:
+  -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
+                         binary
+  -1                     Forces ssh to try protocol version 1 only.
+  -2                     Forces ssh to try protocol version 2 only.
+  -4                     Forces ssh to use IPv4 addresses only.
+  -6                     Forces ssh to use IPv6 addresses only.
+  -A                     Enables forwarding  of  the  authentication  agent
+                         connection.
+  -a                     Disables forwarding  of  the  authentication agent
+                         connection.
+  -b BINDADDRESS         Use bind_address  on  the  local  machine  as  the
+                         source address of the connection.
+  -C                     Requests compression of all data.
+  -c CIPHERSPEC          Selects the  cipher  specification  for encrypting
+                         the session.
+  -D DYNAMICBINDADDRESS  Specifies  a  local   “dynamic”  application-level
+                         port forwarding ([bind_address:]port).
+  -E LOGFILE             Append debug logs to  log_file instead of standard
+                         error.
+  -e ESCAPECHAR          Sets the escape character for  sessions with a pty
+                         (default: ‘~’).
+  -F CONFIGFILE          Specifies an  alternative  per-user  configuration
+                         file.
+  -f                     Requests ssh  to  go  to  background  just  before
+                         command execution.
+  -G                     Causes  ssh  to  print   its  configuration  after
+                         evaluating Host and Match blocks and exit.
+  -g                     Allows remote hosts to  connect to local forwarded
+                         ports
+  -I PKCS11              Specify the PKCS#11 shared  library ssh should use
+                         to communicate with a  PKCS#11 token providing the
+                         user's private RSA key.
+  -K                     Enables    GSSAPI-based     authentication     and
+                         forwarding (delegation) of  GSSAPI  credentials to
+                         the server.
+  -k                     Disables   forwarding   (delegation)   of   GSSAPI
+                         credentials to the server.
+  -L LOCAL               Specifies that connections to  the  given TCP port
+                         or Unix socket on the  local  (client) host are to
+                         be forwarded to the given  host  and port, or Unix
+                         socket, on the remote side.
+  -l LOGINNAME           Specifies the user  to  log  in  as  on the remote
+                         machine.
+  -M                     Places the  ssh  client  into  “master”  mode  for
+                         connection sharing.
+  -m MACSPEC             A   comma-separated   list    of    MAC   (message
+                         authentication  code)  algorithms,   specified  in
+                         order of preference.
+  -N                     Do not execute a  remote  command.  This is useful
+                         for just forwarding ports.
+  -n                     Redirects   stdin   from    /dev/null   (actually,
+                         prevents reading from stdin).
+  -O CONTROLCOMMAND      Control an active  connection  multiplexing master
+                         process.
+  -o OPTION              Can be used to give options  in the format used in
+                         the configuration file.
+  -p PORT                Port to connect to on the remote host.
+  -q                     Quiet mode.  Causes  most  warning  and diagnostic
+                         messages to be suppressed.
+  -R REMOTE              Specifies that connections to  the  given TCP port
+                         or Unix socket on the  remote (server) host are to
+                         be forwarded to the given  host  and port, or Unix
+                         socket, on the local side.
+  -s                     May be used to  request  invocation of a subsystem
+                         on the remote system.
+  -T                     Disable pseudo-terminal allocation.
+  -t                     Force pseudo-terminal allocation.
+  -v VERBOSE             Verbose mode. Maximum is 3.
+  -W FORWARDTO           Requests that standard  input  and  output  on the
+                         client be  forwarded  to  host  on  port  over the
+                         secure channel.
+  -w FORWARDTUNNEL       Requests  tunnel   device   forwarding   with  the
+                         specified  tun(4)  devices   between   the  client
+                         (local_tun) and the server (remote_tun).
+  -X                     Enables X11 forwarding.
+  -x                     Disables X11 forwarding.
+  -Y                     Enables trusted X11 forwarding.
+  -y                     Send  log  information  using  the  syslog  system
+                         module.
 ```
