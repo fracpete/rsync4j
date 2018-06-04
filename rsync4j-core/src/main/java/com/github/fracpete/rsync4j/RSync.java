@@ -19,37 +19,27 @@
  */
 package com.github.fracpete.rsync4j;
 
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
-import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 import org.apache.commons.lang.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
- * Wrapper for rsync binaries.
+ * Wrapper for rsync binary.
  *
  * @author  fracpete (fracpete at gmail dot com)
  */
-public class RSync {
-
-  /** for logging. */
-  protected Logger logger = Logger.getLogger(RSync.class.getName());
+public class RSync
+  extends AbstractBinaryWithTimeout {
 
   /** the source path/url. */
   protected String source;
 
   /** the destination path/url. */
   protected String destination;
-
-  /** whether to output the commandline. */
-  protected boolean outputCommandline;
 
   protected boolean verbose;
 
@@ -291,24 +281,16 @@ public class RSync {
 
   protected boolean version;
 
-  protected int max_time;
-
   protected String[] additional;
-
-  /**
-   * Initializes the object.
-   */
-  public RSync() {
-    reset();
-  }
 
   /**
    * Resets the members.
    */
   public void reset() {
+    super.reset();
+
     source = null;
     destination = null;
-    outputCommandline = false;
     verbose = false;
     info = "";
     debug = "";
@@ -430,7 +412,6 @@ public class RSync {
     ipv4 = false;
     ipv6 = false;
     version = false;
-    max_time = -1;
   }
 
   /**
@@ -479,17 +460,7 @@ public class RSync {
    * @return		itself
    */
   public RSync outputCommandline(boolean value) {
-    outputCommandline = value;
-    return this;
-  }
-
-  /**
-   * Returns output commandline flag.
-   *
-   * @return		true if to output commandline
-   */
-  public boolean getOutputCommandline() {
-    return outputCommandline;
+    return (RSync) super.outputCommandline(value);
   }
 
   public boolean isVerbose() {
@@ -1572,32 +1543,16 @@ public class RSync {
     return this;
   }
 
-  /**
-   * Returns the maximum time in seconds for the rsync process to run.
-   *
-   * @return the maximum in seconds, ignored if less than 1
-   */
-  public int getMaxTime() {
-    return max_time;
-  }
-
-  /**
-   * Sets the maximum time in seconds for the rsync process to run.
-   *
-   * @param max_time the maximum time in seconds, ignored if less than 1
-   * @return itself
-   */
-  public RSync maxTime(int max_time) {
-    if (max_time < 1)
-      max_time = -1;
-    this.max_time = max_time;
-    return this;
-  }
-
   public String[] getAdditional() {
     return additional;
   }
 
+  /**
+   * Automatically replaces leading "+" and "++" with corresponding "-" and "--".
+   *
+   * @param additional the additional parameters
+   * @return itself
+   */
   public RSync additional(String... additional) {
     this.additional = additional.clone();
     for (int i = 0; i < this.additional.length; i++)
@@ -1780,76 +1735,14 @@ public class RSync {
   }
 
   /**
-   * Returns a configured {@link ProcessBuilder} to be used for executing
-   * the rsync process.
+   * Configures and returns the commandline parser.
    *
-   * @return		the configured process builder
-   * @throws Exception	if execution fails or failed to determine binary
-   * @see		#commandLineArgs()
+   * @return		the parser
    */
-  public ProcessBuilder builder() throws Exception {
-    ProcessBuilder	builder;
-    List<String>	args;
-
-    args = commandLineArgs();
-
-    if (getOutputCommandline())
-      logger.info("Command-line: " + Utils.flatten(args, " "));
-
-    builder = new ProcessBuilder();
-    builder.command(args);
-
-    return builder;
-  }
-
-  /**
-   * Starts the rsync process for the platform.
-   * <br>
-   * If you are not interested in an incremental progress output, then
-   * you can also use {@link #execute()}, which waits for the process to
-   * finish while collecting stdout and stderr output.
-   *
-   * @return		the process object
-   * @throws Exception	if execution fails or failed to determine binary
-   * @see		#builder()
-   */
-  public Process start() throws Exception {
-    return builder().start();
-  }
-
-  /**
-   * Executes the rsync binary for the platform and waits for its completion.
-   * Collects stdout and stderr output in the result.
-   * <br>
-   * If you want an incremental output, you can use {@link #start()} and
-   * monitor the output yourself.
-   *
-   * @return		the process result object
-   * @throws Exception	if execution fails or failed to determine binary
-   * @see		#commandLineArgs()
-   */
-  public CollectingProcessOutput execute() throws Exception {
-    CollectingProcessOutput	result;
-
-    result = new CollectingProcessOutput();
-    result.setTimeOut(max_time);
-    result.monitor(builder());
-
-    return result;
-  }
-
-  /**
-   * Sets the commandline options.
-   *
-   * @param options	the options to use
-   * @return		true if successful
-   * @throws Exception	in case of an invalid option
-   */
-  public boolean setOptions(String[] options) throws Exception {
+  protected ArgumentParser getParser() {
     ArgumentParser 	parser;
-    Namespace 		ns;
 
-    parser = ArgumentParsers.newArgumentParser(RSync.class.getName());
+    parser = super.getParser();
     parser.addArgument("-v", "--verbose")
       .dest("verbose")
       .help("increase verbosity")
@@ -2408,15 +2301,6 @@ public class RSync {
       .dest("version")
       .help("print version number")
       .action(Arguments.storeTrue());
-    parser.addArgument("--output-commandline")
-      .setDefault(false)
-      .dest("outputCommandline")
-      .help("output the command-line generated for the rsync binary")
-      .action(Arguments.storeTrue());
-    parser.addArgument("--maxtime")
-      .setDefault(-1)
-      .dest("maxtime")
-      .help("set the maximum time for rsync process to run in seconds before getting killed");
     parser.addArgument("--additional")
       .setDefault(new ArrayList<String>())
       .dest("additional")
@@ -2427,13 +2311,21 @@ public class RSync {
     parser.addArgument("dest")
       .help("The local or remote destination path (path or [user@]host:path)");
 
-    try {
-      ns = parser.parseArgs(options);
-    }
-    catch (ArgumentParserException e) {
-      parser.handleError(e);
+    return parser;
+  }
+
+  /**
+   * Sets the parsed options.
+   *
+   * @param ns		the parsed options
+   * @return		if successfully set
+   */
+  protected boolean setOptions(Namespace ns) {
+    boolean	result;
+
+    result = super.setOptions(ns);
+    if (!result)
       return false;
-    }
 
     verbose(ns.getBoolean("verbose"));
     info(ns.getString("info"));
@@ -2554,10 +2446,8 @@ public class RSync {
     ipv4(ns.getBoolean("ipv4"));
     ipv6(ns.getBoolean("ipv6"));
     version(ns.getBoolean("version"));
-    maxTime(ns.getInt("maxtime"));
     additional(ns.getList("additional").toArray(new String[0]));
 
-    outputCommandline(ns.get("outputCommandline"));
     source(ns.getString("src"));
     destination(ns.getString("dest"));
 
@@ -2570,16 +2460,6 @@ public class RSync {
    * @param args	the arguments
    */
   public static void main(String[] args) throws Exception {
-    RSync 			rsync;
-    ConsoleOutputProcessOutput	output;
-
-    rsync = new RSync();
-    if (rsync.setOptions(args)) {
-      output = new ConsoleOutputProcessOutput();
-      output.monitor(rsync.builder());
-    }
-    else {
-      System.exit(1);
-    }
+    run(new RSync(), args);
   }
 }
