@@ -39,6 +39,8 @@ usage: com.github.fracpete.rsync4j.RSync
        [--additional ADDITIONAL] src dest
 
 A fast, versatile, remote (and local) file-copying tool.
+See man page:
+https://linux.die.net/man/1/rsync
 
 positional arguments:
   src                    The local or remote  source  path (path or [user@]
@@ -211,26 +213,30 @@ the `ssh` executable itself. Here is the help screen:
 
 ```
 usage: com.github.fracpete.rsync4j.Ssh
-       [-h] [--output-commandline] [-1] [-2] [-4] [-6] [-A] [-a]
-       [-b BINDADDRESS] [-C] [-c CIPHERSPEC] [-D DYNAMICBINDADDRESS]
-       [-E LOGFILE] [-e ESCAPECHAR] [-F CONFIGFILE] [-f] [-G] [-g]
-       [-I PKCS11] [-K] [-k] [-L LOCAL] [-l LOGINNAME] [-M] [-m MACSPEC]
-       [-N] [-n] [-O CONTROLCOMMAND] [-o OPTION] [-p PORT] [-q] [-R REMOTE]
-       [-s] [-T] [-t] [-v VERBOSE] [-W FORWARDTO] [-w FORWARDTUNNEL] [-X]
-       [-x] [-Y] [-y] hostname  [command]
+       [-h] [--output-commandline] [--maxtime MAXTIME] [-1] [-2] [-4]
+       [-6] [-A] [-a] [-b BINDADDRESS] [-C] [-c CIPHERSPEC]
+       [-D DYNAMICBINDADDRESS] [-E LOGFILE] [-e ESCAPECHAR] [-F CONFIGFILE]
+       [-f] [-G] [-g] [-I PKCS11] [-K] [-k] [-L LOCAL] [-l LOGINNAME] [-M]
+       [-m MACSPEC] [-N] [-n] [-O CONTROLCOMMAND] [-o OPTION] [-p PORT]
+       [-q] [-R REMOTE] [-s] [-T] [-t] [-v] [-vv] [-vvv] [-W FORWARDTO]
+       [-w FORWARDTUNNEL] [-X] [-x] [-Y] [-y] hostname  [command]
 
 OpenSSH  SSH  client  (remote  login   program).  No  interactive  sessions
 possible.
+See man page:
+https://linux.die.net/man/1/ssh
 
 positional arguments:
   hostname               The hostname to connect to.
-  hostname               The hostname to connect to.
+                         The hostname to connect to.
   command                The remote command to execute.
 
 optional arguments:
   -h, --help             show this help message and exit
   --output-commandline   output the command-line generated  for the wrapped
                          binary
+  --maxtime MAXTIME      set the maximum time  for  the  process  to run in
+                         seconds before getting killed
   -1                     Forces ssh to try protocol version 1 only.
   -2                     Forces ssh to try protocol version 2 only.
   -4                     Forces ssh to use IPv4 addresses only.
@@ -296,7 +302,9 @@ optional arguments:
                          on the remote system.
   -T                     Disable pseudo-terminal allocation.
   -t                     Force pseudo-terminal allocation.
-  -v VERBOSE             Verbose mode. Maximum is 3.
+  -v                     Verbose mode.
+  -vv                    Very verbose mode.
+  -vvv                   Very, very verbose mode.
   -W FORWARDTO           Requests that standard  input  and  output  on the
                          client be  forwarded  to  host  on  port  over the
                          secure channel.
