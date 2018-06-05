@@ -35,6 +35,26 @@ import java.util.List;
 public class SshKeyGen
   extends AbstractBinary {
 
+  protected boolean forAll;
+
+  protected int rounds;
+
+  protected boolean bubbleBabble;
+
+  protected int bits;
+
+  protected String comment;
+
+  protected String pkcs11;
+
+  protected String fingerprint;
+
+  protected boolean export;
+
+  protected String findHost;
+
+  protected String keyFile;
+
   protected int verbose;
 
   /**
@@ -43,7 +63,107 @@ public class SshKeyGen
   @Override
   public void reset() {
     super.reset();
+    forAll = false;
+    rounds = -1;
+    bubbleBabble = false;
+    bits = -1;
+    comment = "";
+    pkcs11 = "";
+    fingerprint = "";
+    export = false;
+    findHost = "";
+    keyFile = "";
     verbose = 0;
+  }
+
+  public SshKeyGen forAll(boolean value) {
+    forAll = value;
+    return this;
+  }
+
+  public boolean isForAll() {
+    return forAll;
+  }
+
+  public SshKeyGen rounds(int value) {
+    rounds = value;
+    return this;
+  }
+
+  public int getRounds() {
+    return verbose;
+  }
+
+  public SshKeyGen bubbleBabble(boolean value) {
+    bubbleBabble = value;
+    return this;
+  }
+
+  public boolean isBubbleBabble() {
+    return bubbleBabble;
+  }
+
+  public SshKeyGen bits(int value) {
+    bits = value;
+    return this;
+  }
+
+  public int getBits() {
+    return bits;
+  }
+
+  public SshKeyGen comment(String value) {
+    comment = value;
+    return this;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public SshKeyGen pkcs11(String value) {
+    pkcs11 = value;
+    return this;
+  }
+
+  public String getPkcs11() {
+    return pkcs11;
+  }
+
+  public SshKeyGen fingerprint(String value) {
+    fingerprint = value;
+    return this;
+  }
+
+  public String getFingerprint() {
+    return fingerprint;
+  }
+
+  public SshKeyGen export(boolean value) {
+    export = value;
+    return this;
+  }
+
+  public boolean isExport() {
+    return export;
+  }
+
+  public SshKeyGen findHost(String value) {
+    findHost = value;
+    return this;
+  }
+
+  public String getFindHost() {
+    return findHost;
+  }
+
+  public SshKeyGen keyFile(String value) {
+    keyFile = value;
+    return this;
+  }
+
+  public String getKeyFile() {
+    return keyFile;
   }
 
   public SshKeyGen verbose(int value) {
@@ -76,6 +196,37 @@ public class SshKeyGen
     List<String> 	result;
 
     result = new ArrayList<>();
+    if (isForAll()) result.add("-A");
+    if (getRounds() > -1) {
+      result.add("-a");
+      result.add("" + getRounds());
+    }
+    if (isBubbleBabble()) result.add("-B");
+    if (getBits() > -1) {
+      result.add("-b");
+      result.add("" + getBits());
+    }
+    if (!getComment().isEmpty()) {
+      result.add("-C");
+      result.add(getComment());
+    }
+    if (!getPkcs11().isEmpty()) {
+      result.add("-D");
+      result.add(getPkcs11());
+    }
+    if (!getFingerprint().isEmpty()) {
+      result.add("-E");
+      result.add(getFingerprint());
+    }
+    if (isExport()) result.add("-e");
+    if (!getFindHost().isEmpty()) {
+      result.add("-F");
+      result.add(getFindHost());
+    }
+    if (!getKeyFile().isEmpty()) {
+      result.add("-f");
+      result.add(getKeyFile());
+    }
     if (getVerbose() == 1) result.add("-v");
     if (getVerbose() == 2) result.add("-vv");
     if (getVerbose() == 3) result.add("-vvv");
@@ -122,6 +273,49 @@ public class SshKeyGen
     ArgumentParser 	parser;
 
     parser = super.getParser();
+    parser.addArgument("-A")
+      .dest("forAll")
+      .help("For each of the key types (rsa1, rsa, dsa, ecdsa and ed25519) for which host keys do not exist, generate the host keys with the default key file path, an empty passphrase, default bits for the key type, and default comment.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-a")
+      .dest("rounds")
+      .help("When saving a new-format private key (i.e. an ed25519 key or any SSH protocol 2 key when the -o flag is set), this option specifies the number of KDF (key derivation function) rounds used.")
+      .setDefault(-1);
+    parser.addArgument("-B")
+      .dest("bubbleBabble")
+      .help("Show the bubblebabble digest of specified private or public key file.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-b")
+      .dest("bits")
+      .help("Specifies the number of bits in the key to create.")
+      .setDefault(-1);
+    parser.addArgument("-C")
+      .dest("comment")
+      .help("Provides a new comment.")
+      .setDefault("");
+    parser.addArgument("-D")
+      .dest("pkcs11")
+      .help("Download the RSA public keys provided by the PKCS#11 shared library pkcs11.")
+      .setDefault("");
+    parser.addArgument("-E")
+      .dest("fingerprint")
+      .help("Specifies the hash algorithm used when displaying key fingerprints.")
+      .setDefault("");
+    parser.addArgument("-e")
+      .dest("export")
+      .help("This option will read a private or public OpenSSH key file and print to stdout the key in one of the formats specified by the -m option.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-F")
+      .dest("findHost")
+      .help("Search for the specified hostname in a known_hosts file, listing any occurrences found.")
+      .setDefault("");
+    parser.addArgument("-f")
+      .dest("keyFile")
+      .help("Specifies the filename of the key file.")
+      .setDefault("");
     parser.addArgument("-v")
       .dest("verbose")
       .help("Verbose mode.")
@@ -158,6 +352,16 @@ public class SshKeyGen
     if (!result)
       return false;
 
+    forAll(ns.getBoolean("forAll"));
+    rounds(ns.getInt("rounds"));
+    bubbleBabble(ns.getBoolean("bubbleBabble"));
+    bits(ns.getInt("bits"));
+    comment(ns.getString("comment"));
+    pkcs11(ns.getString("pkcs11"));
+    fingerprint(ns.getString("fingerprint"));
+    export(ns.getBoolean("export"));
+    findHost(ns.getString("findHost"));
+    keyFile(ns.getString("keyFile"));
     verbose(ns.getInt("verbose"));
 
     return true;
