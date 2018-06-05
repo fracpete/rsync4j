@@ -108,7 +108,9 @@ public class SshKeyGen
    */
   @Override
   protected String description() {
-    return "Authentication key generation, management and conversion.";
+    return "Authentication key generation, management and conversion.\n"
+      + "See man page:\n"
+      + "https://linux.die.net/man/1/ssh-keygen";
   }
 
   /**

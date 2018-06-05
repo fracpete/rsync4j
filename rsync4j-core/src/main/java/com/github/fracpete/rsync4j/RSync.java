@@ -1741,7 +1741,9 @@ public class RSync
    */
   @Override
   protected String description() {
-    return "A fast, versatile, remote (and local) file-copying tool.";
+    return "A fast, versatile, remote (and local) file-copying tool.\n"
+      + "See man page:\n"
+      + "https://linux.die.net/man/1/rsync";
   }
 
   /**

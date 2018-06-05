@@ -37,7 +37,7 @@ import java.util.List;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  */
 public class Ssh
-  extends AbstractBinary {
+  extends AbstractBinaryWithTimeout {
 
   protected boolean version1;
 
@@ -759,7 +759,9 @@ public class Ssh
    */
   @Override
   protected String description() {
-    return "OpenSSH SSH client (remote login program). No interactive sessions possible.";
+    return "OpenSSH SSH client (remote login program). No interactive sessions possible.\n"
+      + "See man page:\n"
+      + "https://linux.die.net/man/1/ssh";
   }
 
   /**
