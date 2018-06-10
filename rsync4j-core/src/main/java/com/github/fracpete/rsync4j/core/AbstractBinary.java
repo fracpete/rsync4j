@@ -17,7 +17,7 @@
  * AbstractBinary.java
  * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
  */
-package com.github.fracpete.rsync4j;
+package com.github.fracpete.rsync4j.core;
 
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;

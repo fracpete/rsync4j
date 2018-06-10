@@ -18,7 +18,7 @@
  * Copyright (C) 2017 University of Waikato, Hamilton, NZ
  */
 
-package com.github.fracpete.rsync4j;
+package com.github.fracpete.rsync4j.core;
 
 import java.util.List;
 

@@ -18,7 +18,7 @@
  * Copyright (C) 2018 University of Waikato, Hamilton, NZ
  */
 
-package com.github.fracpete.rsync4j;
+package com.github.fracpete.rsync4j.core;
 
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 import net.sourceforge.argparse4j.inf.ArgumentParser;

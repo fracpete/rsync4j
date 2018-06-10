@@ -20,6 +20,8 @@
 
 package com.github.fracpete.rsync4j;
 
+import com.github.fracpete.rsync4j.core.AbstractBinary;
+import com.github.fracpete.rsync4j.core.Binaries;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.Namespace;
@@ -762,7 +764,7 @@ public class SshKeyGen
     List<String> 	result;
     String 		binary;
 
-    binary = Binaries.keygenBinary();
+    binary = Binaries.sshkeygenBinary();
     result = options();
     result.add(0, binary);
 

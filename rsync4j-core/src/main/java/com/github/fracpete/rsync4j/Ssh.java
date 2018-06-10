@@ -20,6 +20,8 @@
 
 package com.github.fracpete.rsync4j;
 
+import com.github.fracpete.rsync4j.core.AbstractBinaryWithTimeout;
+import com.github.fracpete.rsync4j.core.Binaries;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.FeatureControl;
