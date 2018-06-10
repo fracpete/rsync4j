@@ -90,7 +90,39 @@ public class SshKeyGen
 
   protected List<String> option;
 
+  protected boolean useOpenSshFormat;
+
+  protected String passPhrase;
+
+  protected boolean changePassPhrase;
+
+  protected boolean testRevoked;
+
+  protected boolean quiet;
+
+  protected String removeKeys;
+
+  protected String printFingerprint;
+
+  protected String startPoint;
+
+  protected String signCaKey;
+
+  protected String testCandidatePrimes;
+
+  protected String keyType;
+
+  protected boolean updateKRL;
+
+  protected String validityInterval;
+
   protected int verbose;
+
+  protected String generator;
+
+  protected boolean readPrivatePrintPublicOpenSsh;
+
+  protected String serialNumber;
 
   /**
    * Resets the members.
@@ -125,7 +157,23 @@ public class SshKeyGen
     newPassPhrase = "";
     principals = "";
     option = new ArrayList<>();
+    useOpenSshFormat = false;
+    passPhrase = "";
+    changePassPhrase = false;
+    testRevoked = false;
+    quiet = false;
+    removeKeys = "";
+    printFingerprint = "";
+    startPoint = "";
+    signCaKey = "";
+    testCandidatePrimes = "";
+    keyType = "";
+    updateKRL = false;
+    validityInterval = "";
     verbose = 0;
+    generator = "";
+    readPrivatePrintPublicOpenSsh = false;
+    serialNumber = "";
   }
 
   public SshKeyGen forAll(boolean value) {
@@ -379,6 +427,123 @@ public class SshKeyGen
     return option;
   }
 
+  public SshKeyGen useOpenSshFormat(boolean value) {
+    useOpenSshFormat = value;
+    return this;
+  }
+
+  public boolean isUseOpenSshFormat() {
+    return useOpenSshFormat;
+  }
+
+  public SshKeyGen passPhrase(String value) {
+    passPhrase = value;
+    return this;
+  }
+
+  public String getPassPhrase() {
+    return passPhrase;
+  }
+
+  public SshKeyGen changePassPhrase(boolean value) {
+    changePassPhrase = value;
+    return this;
+  }
+
+  public boolean isChangePassPhrase() {
+    return changePassPhrase;
+  }
+
+  public SshKeyGen testRevoked(boolean value) {
+    testRevoked = value;
+    return this;
+  }
+
+  public boolean isTestRevoked() {
+    return testRevoked;
+  }
+
+  public SshKeyGen quiet(boolean value) {
+    quiet = value;
+    return this;
+  }
+
+  public boolean isQuiet() {
+    return quiet;
+  }
+
+  public SshKeyGen removeKeys(String value) {
+    removeKeys = value;
+    return this;
+  }
+
+  public String getRemoveKeys() {
+    return removeKeys;
+  }
+
+  public SshKeyGen printFingerprint(String value) {
+    printFingerprint = value;
+    return this;
+  }
+
+  public String getPrintFingerprint() {
+    return printFingerprint;
+  }
+
+  public SshKeyGen startPoint(String value) {
+    startPoint = value;
+    return this;
+  }
+
+  public String getStartPoint() {
+    return startPoint;
+  }
+
+  public SshKeyGen signCaKey(String value) {
+    signCaKey = value;
+    return this;
+  }
+
+  public String getSignCaKey() {
+    return signCaKey;
+  }
+
+  public SshKeyGen testCandidatePrimes(String value) {
+    testCandidatePrimes = value;
+    return this;
+  }
+
+  public String getTestCandidatePrimes() {
+    return testCandidatePrimes;
+  }
+
+  public SshKeyGen keyType(String value) {
+    keyType = value;
+    return this;
+  }
+
+  public String getKeyType() {
+    return keyType;
+  }
+
+  public SshKeyGen updateKRL(boolean value) {
+    updateKRL = value;
+    return this;
+  }
+
+  public boolean isUpdateKRL() {
+    return updateKRL;
+  }
+
+  public SshKeyGen validityInterval(String value) {
+    validityInterval = value;
+    return this;
+  }
+
+  public String getValidityInterval() {
+    return validityInterval;
+  }
+
   public SshKeyGen verbose(int value) {
     if ((value >= -1) && (value <= 3))
       verbose = value;
@@ -387,6 +552,33 @@ public class SshKeyGen
 
   public int getVerbose() {
     return verbose;
+  }
+
+  public SshKeyGen generator(String value) {
+    generator = value;
+    return this;
+  }
+
+  public String getGenerator() {
+    return generator;
+  }
+
+  public SshKeyGen readPrivatePrintPublicOpenSsh(boolean value) {
+    readPrivatePrintPublicOpenSsh = value;
+    return this;
+  }
+
+  public boolean isReadPrivatePrintPublicOpenSsh() {
+    return readPrivatePrintPublicOpenSsh;
+  }
+
+  public SshKeyGen serialNumber(String value) {
+    serialNumber = value;
+    return this;
+  }
+
+  public String getSerialNumber() {
+    return serialNumber;
   }
 
   /**
@@ -488,9 +680,55 @@ public class SshKeyGen
       result.add("-O");
       result.add(o);
     }
+    if (isUseOpenSshFormat()) result.add("-o");
+    if (!getPassPhrase().isEmpty()) {
+      result.add("-P");
+      result.add(getPassPhrase());
+    }
+    if (isChangePassPhrase()) result.add("-p");
+    if (isTestRevoked()) result.add("-Q");
+    if (isQuiet()) result.add("-q");
+    if (!getRemoveKeys().isEmpty()) {
+      result.add("-R");
+      result.add(getRemoveKeys());
+    }
+    if (!getPrintFingerprint().isEmpty()) {
+      result.add("-r");
+      result.add(getPrintFingerprint());
+    }
+    if (!getStartPoint().isEmpty()) {
+      result.add("-S");
+      result.add(getStartPoint());
+    }
+    if (!getSignCaKey().isEmpty()) {
+      result.add("-s");
+      result.add(getSignCaKey());
+    }
+    if (!getTestCandidatePrimes().isEmpty()) {
+      result.add("-T");
+      result.add(getTestCandidatePrimes());
+    }
+    if (!getKeyType().isEmpty()) {
+      result.add("-t");
+      result.add(getKeyType());
+    }
+    if (isUpdateKRL()) result.add("-u");
+    if (!getValidityInterval().isEmpty()) {
+      result.add("-V");
+      result.add(getValidityInterval());
+    }
     if (getVerbose() == 1) result.add("-v");
     if (getVerbose() == 2) result.add("-vv");
     if (getVerbose() == 3) result.add("-vvv");
+    if (!getGenerator().isEmpty()) {
+      result.add("-W");
+      result.add(getGenerator());
+    }
+    if (isReadPrivatePrintPublicOpenSsh()) result.add("-y");
+    if (!getSerialNumber().isEmpty()) {
+      result.add("-z");
+      result.add(getSerialNumber());
+    }
 
     return result;
   }
@@ -648,6 +886,63 @@ public class SshKeyGen
       .dest("option")
       .help("Specify a certificate option when signing a key.")
       .setDefault(new ArrayList<>());
+    parser.addArgument("-o")
+      .dest("useOpenSshFormat")
+      .help("Causes ssh-keygen to save private keys using the new OpenSSH format rather than the more compatible PEM format.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-P")
+      .dest("passPhrase")
+      .help("Provides the (old) passphrase.")
+      .setDefault("");
+    parser.addArgument("-p")
+      .dest("changePassPhrase")
+      .help("Requests changing the passphrase of a private key file instead of creating a new private key.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-Q")
+      .dest("testRevoked")
+      .help("Test whether keys have been revoked in a KRL.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-q")
+      .dest("quiet")
+      .help("Silence ssh-keygen.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-R")
+      .dest("removeKeys")
+      .help("Removes all keys belonging to hostname from a known_hosts file.")
+      .setDefault("");
+    parser.addArgument("-r")
+      .dest("printFingerprint")
+      .help("Print the SSHFP fingerprint resource record named hostname for the specified public key file.")
+      .setDefault("");
+    parser.addArgument("-S")
+      .dest("startPoint")
+      .help("Specify start point (in hex) when generating candidate moduli for DH-GEX.")
+      .setDefault("");
+    parser.addArgument("-s")
+      .dest("signCaKey")
+      .help("Certify (sign) a public key using the specified CA key.")
+      .setDefault("");
+    parser.addArgument("-T")
+      .dest("testCandidatePrimes")
+      .help("Test DH group exchange candidate primes (generated using the -G option) for safety.")
+      .setDefault("");
+    parser.addArgument("-t")
+      .dest("keyType")
+      .help("Specifies the type of key to create.")
+      .setDefault("");
+    parser.addArgument("-u")
+      .dest("updateKRL")
+      .help("Update a KRL.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-V")
+      .dest("validityInterval")
+      .help("Specify a validity interval when signing a certificate.")
+      .setDefault("");
     parser.addArgument("-v")
       .dest("verbose")
       .help("Verbose mode.")
@@ -666,6 +961,19 @@ public class SshKeyGen
       .action(Arguments.storeConst())
       .setConst(3)
       .setDefault(0);
+    parser.addArgument("-W")
+      .dest("generator")
+      .help("Specify desired generator when testing candidate moduli for DH-GEX.")
+      .setDefault("");
+    parser.addArgument("-y")
+      .dest("readPrivatePrintPublicOpenSsh")
+      .help("This option will read a private OpenSSH format file and print an OpenSSH public key to stdout.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-z")
+      .dest("serialNumber")
+      .help("Specifies a serial number to be embedded in the certificate to distinguish this certificate from others from the same CA.")
+      .setDefault("");
 
     return parser;
   }
@@ -711,7 +1019,23 @@ public class SshKeyGen
     newPassPhrase(ns.getString("newPassPhrase"));
     principals(ns.getString("principals"));
     option(ns.getList("option"));
+    useOpenSshFormat(ns.getBoolean("useOpenSshFormat"));
+    passPhrase(ns.getString("passPhrase"));
+    changePassPhrase(ns.getBoolean("changePassPhrase"));
+    testRevoked(ns.getBoolean("testRevoked"));
+    quiet(ns.getBoolean("quiet"));
+    removeKeys(ns.getString("removeKeys"));
+    printFingerprint(ns.getString("printFingerprint"));
+    startPoint(ns.getString("startPoint"));
+    signCaKey(ns.getString("signCaKey"));
+    testCandidatePrimes(ns.getString("testCandidatePrimes"));
+    keyType(ns.getString("keyType"));
+    updateKRL(ns.getBoolean("updateKRL"));
+    validityInterval(ns.getString("validityInterval"));
     verbose(ns.getInt("verbose"));
+    generator(ns.getString("generator"));
+    readPrivatePrintPublicOpenSsh(ns.getBoolean("readPrivatePrintPublicOpenSsh"));
+    serialNumber(ns.getString("serialNumber"));
 
     return true;
   }
