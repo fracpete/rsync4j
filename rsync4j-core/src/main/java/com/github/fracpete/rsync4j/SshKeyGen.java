@@ -25,6 +25,7 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,6 +56,40 @@ public class SshKeyGen
 
   protected String keyFile;
 
+  protected String candidatePrimes;
+
+  protected boolean genericDnsFormat;
+
+  protected boolean hashKnownHosts;
+
+  protected boolean createHostCertificate;
+
+  protected String certificateIdentity;
+
+  protected boolean importUnencrypted;
+
+  protected int screenNumLines;
+
+  protected int screenStartLine;
+
+  protected String screenCheckPoint;
+
+  protected boolean generateKRL;
+
+  protected boolean printContents;
+
+  protected boolean showFingerprint;
+
+  protected int memory;
+
+  protected String keyFormat;
+
+  protected String newPassPhrase;
+
+  protected String principals;
+
+  protected List<String> option;
+
   protected int verbose;
 
   /**
@@ -73,6 +108,23 @@ public class SshKeyGen
     export = false;
     findHost = "";
     keyFile = "";
+    candidatePrimes = "";
+    genericDnsFormat = false;
+    hashKnownHosts = false;
+    createHostCertificate = false;
+    certificateIdentity = "";
+    importUnencrypted = false;
+    screenNumLines = -1;
+    screenStartLine = -1;
+    screenCheckPoint = "";
+    generateKRL = false;
+    printContents = false;
+    showFingerprint = false;
+    memory = -1;
+    keyFormat = "";
+    newPassPhrase = "";
+    principals = "";
+    option = new ArrayList<>();
     verbose = 0;
   }
 
@@ -166,8 +218,170 @@ public class SshKeyGen
     return keyFile;
   }
 
+  public SshKeyGen candidatePrimes(String value) {
+    candidatePrimes = value;
+    return this;
+  }
+
+  public String getCandidatePrimes() {
+    return candidatePrimes;
+  }
+
+  public SshKeyGen genericDnsFormat(boolean value) {
+    genericDnsFormat = value;
+    return this;
+  }
+
+  public boolean isGenericDnsFormat() {
+    return genericDnsFormat;
+  }
+
+  public SshKeyGen hashKnownHosts(boolean value) {
+    hashKnownHosts = value;
+    return this;
+  }
+
+  public boolean isHashKnownHosts() {
+    return hashKnownHosts;
+  }
+
+  public SshKeyGen createHostCertificate(boolean value) {
+    createHostCertificate = value;
+    return this;
+  }
+
+  public boolean isCreateHostCertificate() {
+    return createHostCertificate;
+  }
+
+  public SshKeyGen certificateIdentity(String value) {
+    certificateIdentity = value;
+    return this;
+  }
+
+  public String getCertificateIdentity() {
+    return certificateIdentity;
+  }
+
+  public SshKeyGen importUnencrypted(boolean value) {
+    importUnencrypted = value;
+    return this;
+  }
+
+  public boolean isImportUnencrypted() {
+    return importUnencrypted;
+  }
+
+  public SshKeyGen screenNumLines(int value) {
+    if (value >= -1)
+      screenNumLines = value;
+    return this;
+  }
+
+  public int getScreenNumLines() {
+    return screenNumLines;
+  }
+
+  public SshKeyGen screenStartLine(int value) {
+    if (value >= -1)
+      screenStartLine = value;
+    return this;
+  }
+
+  public int getScreenStartLine() {
+    return screenStartLine;
+  }
+
+  public SshKeyGen screenCheckPoint(String value) {
+    screenCheckPoint = value;
+    return this;
+  }
+
+  public String getScreenCheckPoint() {
+    return screenCheckPoint;
+  }
+
+  public SshKeyGen generateKRL(boolean value) {
+    generateKRL = value;
+    return this;
+  }
+
+  public boolean isGenerateKRL() {
+    return generateKRL;
+  }
+
+  public SshKeyGen printContents(boolean value) {
+    printContents = value;
+    return this;
+  }
+
+  public boolean isPrintContents() {
+    return printContents;
+  }
+
+  public SshKeyGen showFingerprint(boolean value) {
+    showFingerprint = value;
+    return this;
+  }
+
+  public boolean isShowFingerprint() {
+    return showFingerprint;
+  }
+
+  public SshKeyGen memory(int value) {
+    if ((value == -1) || (value > 0))
+      memory = value;
+    return this;
+  }
+
+  public int getMemory() {
+    return memory;
+  }
+
+  public SshKeyGen keyFormat(String value) {
+    keyFormat = value;
+    return this;
+  }
+
+  public String getKeyFormat() {
+    return keyFormat;
+  }
+
+  public SshKeyGen newPassPhrase(String value) {
+    newPassPhrase = value;
+    return this;
+  }
+
+  public String getNewPassPhrase() {
+    return newPassPhrase;
+  }
+
+  public SshKeyGen principals(String value) {
+    principals = value;
+    return this;
+  }
+
+  public String getPrincipals() {
+    return principals;
+  }
+
+  public SshKeyGen option(String... value) {
+    option = new ArrayList<>(Arrays.asList(value));
+    return this;
+  }
+
+  public SshKeyGen option(List<String> value) {
+    option = new ArrayList<>(value);
+    return this;
+  }
+
+  public List<String> getOption() {
+    return option;
+  }
+
   public SshKeyGen verbose(int value) {
-    verbose = value;
+    if ((value >= -1) && (value <= 3))
+      verbose = value;
     return this;
   }
 
@@ -226,6 +440,53 @@ public class SshKeyGen
     if (!getKeyFile().isEmpty()) {
       result.add("-f");
       result.add(getKeyFile());
+    }
+    if (!getCandidatePrimes().isEmpty()) {
+      result.add("-G");
+      result.add(getCandidatePrimes());
+    }
+    if (isGenericDnsFormat()) result.add("-g");
+    if (isHashKnownHosts()) result.add("-H");
+    if (isCreateHostCertificate()) result.add("-h");
+    if (!getCertificateIdentity().isEmpty()) {
+      result.add("-I");
+      result.add(getCertificateIdentity());
+    }
+    if (isImportUnencrypted()) result.add("-i");
+    if (getScreenNumLines() > -1) {
+      result.add("-J");
+      result.add("" + getScreenNumLines());
+    }
+    if (getScreenStartLine() > -1) {
+      result.add("-j");
+      result.add("" + getScreenStartLine());
+    }
+    if (!getScreenCheckPoint().isEmpty()) {
+      result.add("-K");
+      result.add(getScreenCheckPoint());
+    }
+    if (isGenerateKRL()) result.add("-k");
+    if (isPrintContents()) result.add("-L");
+    if (isShowFingerprint()) result.add("-l");
+    if (getMemory() > -1) {
+      result.add("-M");
+      result.add("" + getMemory());
+    }
+    if (!getKeyFormat().isEmpty()) {
+      result.add("-m");
+      result.add(getKeyFormat());
+    }
+    if (!getNewPassPhrase().isEmpty()) {
+      result.add("-N");
+      result.add(getNewPassPhrase());
+    }
+    if (!getPrincipals().isEmpty()) {
+      result.add("-n");
+      result.add(getPrincipals());
+    }
+    for (String o: getOption()) {
+      result.add("-O");
+      result.add(o);
     }
     if (getVerbose() == 1) result.add("-v");
     if (getVerbose() == 2) result.add("-vv");
@@ -316,6 +577,77 @@ public class SshKeyGen
       .dest("keyFile")
       .help("Specifies the filename of the key file.")
       .setDefault("");
+    parser.addArgument("-G")
+      .dest("candidatePrimes")
+      .help("Generate candidate primes for DH-GEX..")
+      .setDefault("");
+    parser.addArgument("-g")
+      .dest("genericDnsFormat")
+      .help("Use generic DNS format when printing fingerprint resource records using the -r command.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-H")
+      .dest("hashKnownHosts")
+      .help("Hash a known_hosts file.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("--host")
+      .dest("createHostCertificate")
+      .help("When signing a key, create a host certificate instead of a user certificate.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-i")
+      .dest("importUnencrypted")
+      .help("This option will read an unencrypted private (or public) key file in the format specified by the -m option and print an OpenSSH compatible private (or public) key to stdout.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-J")
+      .dest("screenNumLines")
+      .help("Exit after screening the specified number of lines while performing DH candidate screening using the -T option.")
+      .setDefault(-1);
+    parser.addArgument("-j")
+      .dest("screenStartLine")
+      .help("Start screening at the specified line number while performing DH candidate screening using the -T option.")
+      .setDefault(-1);
+    parser.addArgument("-K")
+      .dest("screenCheckPoint")
+      .help("Write the last line processed to the file checkpt while performing DH candidate screening using the -T option.")
+      .setDefault("");
+    parser.addArgument("-k")
+      .dest("generateKRL")
+      .help("Generate a KRL file.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-L")
+      .dest("printContents")
+      .help("Prints the contents of one or more certificates.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-l")
+      .dest("showFingerprint")
+      .help("Show fingerprint of specified public key file.")
+      .action(Arguments.storeTrue())
+      .setDefault(false);
+    parser.addArgument("-M")
+      .dest("memory")
+      .help("Specify the amount of memory to use (in megabytes) when generating candidate moduli for DH-GEX.")
+      .setDefault(-1);
+    parser.addArgument("-m")
+      .dest("keyFormat")
+      .help("Specify a key format for the -i (import) or -e (export) conversion options.")
+      .setDefault("");
+    parser.addArgument("-N")
+      .dest("newPassPhrase")
+      .help("Provides the new passphrase.")
+      .setDefault("");
+    parser.addArgument("-n")
+      .dest("principals")
+      .help("Specify one or more principals (user or host names) to be included in a certificate when signing a key.")
+      .setDefault("");
+    parser.addArgument("-O")
+      .dest("option")
+      .help("Specify a certificate option when signing a key.")
+      .setDefault(new ArrayList<>());
     parser.addArgument("-v")
       .dest("verbose")
       .help("Verbose mode.")
@@ -362,6 +694,23 @@ public class SshKeyGen
     export(ns.getBoolean("export"));
     findHost(ns.getString("findHost"));
     keyFile(ns.getString("keyFile"));
+    candidatePrimes(ns.getString("candidatePrimes"));
+    genericDnsFormat(ns.getBoolean("genericDnsFormat"));
+    hashKnownHosts(ns.getBoolean("hashKnownHosts"));
+    createHostCertificate(ns.getBoolean("createHostCertificate"));
+    certificateIdentity(ns.getString("certificateIdentity"));
+    importUnencrypted(ns.getBoolean("importUnencrypted"));
+    screenNumLines(ns.getInt("screenNumLines"));
+    screenStartLine(ns.getInt("screenStartLine"));
+    screenCheckPoint(ns.getString("screenCheckPoint"));
+    generateKRL(ns.getBoolean("generateKRL"));
+    printContents(ns.getBoolean("printContents"));
+    showFingerprint(ns.getBoolean("showFingerprint"));
+    memory(ns.getInt("memory"));
+    keyFormat(ns.getString("keyFormat"));
+    newPassPhrase(ns.getString("newPassPhrase"));
+    principals(ns.getString("principals"));
+    option(ns.getList("option"));
     verbose(ns.getInt("verbose"));
 
     return true;
