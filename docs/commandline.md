@@ -317,3 +317,122 @@ optional arguments:
   -y                     Send  log  information  using  the  syslog  system
                          module.
 ```
+
+## SshKeyGen
+
+The options of the `com.github.fracpete.rsync4j.SshKeyGen` tool are modeled after
+the `ssh-keygen` executable itself. Here is the help screen:
+
+```
+usage: com.github.fracpete.rsync4j.SshKeyGen
+       [-h] [--output-commandline] [-A] [-a ROUNDS] [-B] [-b BITS]
+       [-C COMMENT] [-D PKCS11] [-E FINGERPRINT] [-e] [-F FINDHOST]
+       [-f KEYFILE] [-G CANDIDATEPRIMES] [-g] [-H] [--host] [-i]
+       [-J SCREENNUMLINES] [-j SCREENSTARTLINE] [-K SCREENCHECKPOINT] [-k]
+       [-L] [-l] [-M MEMORY] [-m KEYFORMAT] [-N NEWPASSPHRASE]
+       [-n PRINCIPALS] [-O OPTION] [-o] [-P PASSPHRASE] [-p] [-Q] [-q]
+       [-R REMOVEKEYS] [-r PRINTFINGERPRINT] [-S STARTPOINT] [-s SIGNCAKEY]
+       [-T TESTCANDIDATEPRIMES] [-t KEYTYPE] [-u] [-V VALIDITYINTERVAL]
+       [-v] [-vv] [-vvv] [-W GENERATOR] [-y] [-z SERIALNUMBER]
+       [file [file ...]]
+
+Authentication key generation, management and conversion.
+See man page:
+https://linux.die.net/man/1/ssh-keygen
+
+positional arguments:
+  file                   The key file(s).
+
+optional arguments:
+  -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
+                         binary
+  -A                     For each of the key  types  (rsa1, rsa, dsa, ecdsa
+                         and ed25519) for  which  host  keys  do not exist,
+                         generate the host keys  with  the default key file
+                         path, an empty  passphrase,  default  bits for the
+                         key type, and default comment.
+  -a ROUNDS              When saving  a  new-format  private  key  (i.e. an
+                         ed25519 key or any SSH protocol  2 key when the -o
+                         flag is set), this option  specifies the number of
+                         KDF (key derivation function) rounds used.
+  -B                     Show the bubblebabble digest  of specified private
+                         or public key file.
+  -b BITS                Specifies the number of bits in the key to create.
+  -C COMMENT             Provides a new comment.
+  -D PKCS11              Download the  RSA  public  keys  provided  by  the
+                         PKCS#11 shared library pkcs11.
+  -E FINGERPRINT         Specifies the hash algorithm  used when displaying
+                         key fingerprints.
+  -e                     This option will read a  private or public OpenSSH
+                         key file and print  to  stdout  the  key in one of
+                         the formats specified by the -m option.
+  -F FINDHOST            Search   for   the   specified   hostname   in   a
+                         known_hosts file, listing any occurrences found.
+  -f KEYFILE             Specifies the filename of the key file.
+  -G CANDIDATEPRIMES     Generate candidate primes for DH-GEX..
+  -g                     Use generic DNS  format  when printing fingerprint
+                         resource records using the -r command.
+  -H                     Hash a known_hosts file.
+  --host                 When signing  a  key,  create  a  host certificate
+                         instead of a user certificate.
+  -i                     This option will read  an  unencrypted private (or
+                         public) key file in the  format specified by the -
+                         m option and print  an  OpenSSH compatible private
+                         (or public) key to stdout.
+  -J SCREENNUMLINES      Exit  after  screening  the  specified  number  of
+                         lines  while  performing  DH  candidate  screening
+                         using the -T option.
+  -j SCREENSTARTLINE     Start  screening  at  the  specified  line  number
+                         while performing DH candidate  screening using the
+                         -T option.
+  -K SCREENCHECKPOINT    Write the last line processed  to the file checkpt
+                         while performing DH candidate  screening using the
+                         -T option.
+  -k                     Generate a KRL file.
+  -L                     Prints the contents of one or more certificates.
+  -l                     Show fingerprint of specified public key file.
+  -M MEMORY              Specify  the  amount   of   memory   to   use  (in
+                         megabytes) when  generating  candidate  moduli for
+                         DH-GEX.
+  -m KEYFORMAT           Specify a key format  for  the  -i  (import) or -e
+                         (export) conversion options.
+  -N NEWPASSPHRASE       Provides the new passphrase.
+  -n PRINCIPALS          Specify one  or  more  principals  (user  or  host
+                         names)  to  be  included  in  a  certificate  when
+                         signing a key.
+  -O OPTION              Specify a certificate option when signing a key.
+  -o                     Causes ssh-keygen to save  private  keys using the
+                         new  OpenSSH   format   rather   than   the   more
+                         compatible PEM format.
+  -P PASSPHRASE          Provides the (old) passphrase.
+  -p                     Requests changing the passphrase  of a private key
+                         file instead of creating a new private key.
+  -Q                     Test whether keys have been revoked in a KRL.
+  -q                     Silence ssh-keygen.
+  -R REMOVEKEYS          Removes all  keys  belonging  to  hostname  from a
+                         known_hosts file.
+  -r PRINTFINGERPRINT    Print the SSHFP fingerprint  resource record named
+                         hostname for the specified public key file.
+  -S STARTPOINT          Specify  start  point  (in  hex)  when  generating
+                         candidate moduli for DH-GEX.
+  -s SIGNCAKEY           Certify (sign) a  public  key  using the specified
+                         CA key.
+  -T TESTCANDIDATEPRIMES
+                         Test   DH   group    exchange   candidate   primes
+                         (generated using the -G option) for safety.
+  -t KEYTYPE             Specifies the type of key to create.
+  -u                     Update a KRL.
+  -V VALIDITYINTERVAL    Specify  a  validity   interval   when  signing  a
+                         certificate.
+  -v                     Verbose mode.
+  -vv                    Very verbose mode.
+  -vvv                   Very, very verbose mode.
+  -W GENERATOR           Specify desired generator  when  testing candidate
+                         moduli for DH-GEX.
+  -y                     This option will  read  a  private  OpenSSH format
+                         file and print an OpenSSH public key to stdout.
+  -z SERIALNUMBER        Specifies a serial number  to  be  embedded in the
+                         certificate to distinguish  this  certificate from
+                         others from the same CA.
+```

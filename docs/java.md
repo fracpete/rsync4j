@@ -84,3 +84,24 @@ Ssh ssh = new Ssh()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(ssh.builder());
 ```
+
+## SshKeyGen
+
+The following command generates a key file named `testkey` in your home 
+directory of type `dsa`, with no pass-phrase, outputting the bubble babble 
+of the key:
+
+```java
+import com.github.fracpete.rsync4j.SshKeyGen;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+...
+SshKeyGen keygen = new SshKeyGen()
+  .outputCommandline(true)
+  .verbose(1)
+  .keyType("dsa")
+  .newPassPhrase("")
+  .comment("test key")
+  .keyFile("~/testkey");
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(keygen.builder());
+```

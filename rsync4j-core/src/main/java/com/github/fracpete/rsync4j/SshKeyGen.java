@@ -124,6 +124,8 @@ public class SshKeyGen
 
   protected String serialNumber;
 
+  protected List<String> file;
+
   /**
    * Resets the members.
    */
@@ -154,11 +156,11 @@ public class SshKeyGen
     showFingerprint = false;
     memory = -1;
     keyFormat = "";
-    newPassPhrase = "";
+    newPassPhrase = null;
     principals = "";
     option = new ArrayList<>();
     useOpenSshFormat = false;
-    passPhrase = "";
+    passPhrase = null;
     changePassPhrase = false;
     testRevoked = false;
     quiet = false;
@@ -174,6 +176,7 @@ public class SshKeyGen
     generator = "";
     readPrivatePrintPublicOpenSsh = false;
     serialNumber = "";
+    file = new ArrayList<>();
   }
 
   public SshKeyGen forAll(boolean value) {
@@ -191,7 +194,7 @@ public class SshKeyGen
   }
 
   public int getRounds() {
-    return verbose;
+    return rounds;
   }
 
   public SshKeyGen bubbleBabble(boolean value) {
@@ -581,6 +584,20 @@ public class SshKeyGen
     return serialNumber;
   }
 
+  public SshKeyGen file(String... value) {
+    file = new ArrayList<>(Arrays.asList(value));
+    return this;
+  }
+
+  public SshKeyGen file(List<String> value) {
+    file = new ArrayList<>(value);
+    return this;
+  }
+
+  public List<String> getFile() {
+    return file;
+  }
+
   /**
    * Sets output commandline flag.
    *
@@ -668,7 +685,7 @@ public class SshKeyGen
       result.add("-m");
       result.add(getKeyFormat());
     }
-    if (!getNewPassPhrase().isEmpty()) {
+    if (getNewPassPhrase() != null) {
       result.add("-N");
       result.add(getNewPassPhrase());
     }
@@ -681,7 +698,7 @@ public class SshKeyGen
       result.add(o);
     }
     if (isUseOpenSshFormat()) result.add("-o");
-    if (!getPassPhrase().isEmpty()) {
+    if (getPassPhrase() != null) {
       result.add("-P");
       result.add(getPassPhrase());
     }
@@ -729,6 +746,7 @@ public class SshKeyGen
       result.add("-z");
       result.add(getSerialNumber());
     }
+    result.addAll(getFile());
 
     return result;
   }
@@ -744,7 +762,7 @@ public class SshKeyGen
     List<String> 	result;
     String 		binary;
 
-    binary = Binaries.sshBinary();
+    binary = Binaries.keygenBinary();
     result = options();
     result.add(0, binary);
 
@@ -877,7 +895,7 @@ public class SshKeyGen
     parser.addArgument("-N")
       .dest("newPassPhrase")
       .help("Provides the new passphrase.")
-      .setDefault("");
+      .required(false);
     parser.addArgument("-n")
       .dest("principals")
       .help("Specify one or more principals (user or host names) to be included in a certificate when signing a key.")
@@ -894,7 +912,7 @@ public class SshKeyGen
     parser.addArgument("-P")
       .dest("passPhrase")
       .help("Provides the (old) passphrase.")
-      .setDefault("");
+      .required(false);
     parser.addArgument("-p")
       .dest("changePassPhrase")
       .help("Requests changing the passphrase of a private key file instead of creating a new private key.")
@@ -974,6 +992,11 @@ public class SshKeyGen
       .dest("serialNumber")
       .help("Specifies a serial number to be embedded in the certificate to distinguish this certificate from others from the same CA.")
       .setDefault("");
+    parser.addArgument("file")
+      .nargs("*")
+      .dest("file")
+      .help("The key file(s).")
+      .setDefault(new ArrayList<>());
 
     return parser;
   }
@@ -1036,6 +1059,7 @@ public class SshKeyGen
     generator(ns.getString("generator"));
     readPrivatePrintPublicOpenSsh(ns.getBoolean("readPrivatePrintPublicOpenSsh"));
     serialNumber(ns.getString("serialNumber"));
+    file(ns.getList("file"));
 
     return true;
   }
