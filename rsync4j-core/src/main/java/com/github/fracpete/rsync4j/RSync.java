@@ -1624,7 +1624,7 @@ public class RSync
     }
     else {
       if (SystemUtils.IS_OS_WINDOWS)
-	result.add("--rsh=\"" + Binaries.sshBinary + "\"");
+	result.add("--rsh=\"" + Binaries.sshBinary() + "\"");
     }
     if (!getRsyncPath().isEmpty()) result.add("--rsync-path=" + getRsyncPath());
     if (isExisting()) result.add("--existing");
