@@ -62,6 +62,15 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#rsync">RSync</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#ssh">Ssh</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#sshkeygen">SshKeyGen</a></li>
+                
+            
             </ul>
         
     </li>
@@ -138,41 +147,46 @@
           <div role="main">
             <div class="section">
               
-                <p>The options of the <code>com.github.fracpete.rsync4j.RSync</code> tool are modeled after
+                <h2 id="rsync">RSync</h2>
+<p>The options of the <code>com.github.fracpete.rsync4j.RSync</code> tool are modeled after
 the <code>rsync</code> executable itself. Here is the help screen:</p>
 <pre><code>usage: com.github.fracpete.rsync4j.RSync
-       [-h] [-v] [--info INFO] [--debug DEBUG] [--msgs2stderr] [-q]
-       [--no-motd] [-c] [-a] [-r] [-R] [--no-implied-dirs] [-b]
-       [--backup-dir BACKUPDIR] [--suffix SUFFIX] [-u] [--inplace]
-       [--append] [--append-verify] [-d] [-l] [-L] [--copy-unsafe-links]
-       [--safe-links] [--munge-links] [-k] [-K] [-H] [-p] [-E]
-       [--chmod CHMOD] [-X] [-o] [-g] [--devices] [--specials] [-t] [-O]
-       [-J] [--super] [--fake-super] [-S] [--preallocate] [-n] [-W] [-x]
-       [-B BLOCKSIZE] [-e RSH] [--rsync-path RSYNCPATH] [--existing]
-       [--ignore-existing] [--remove-source-files] [--delete]
-       [--delete-before] [--delete-during] [--delete-delay]
-       [--delete-after] [--delete-excluded] [--ignore-missing-args]
-       [--delete-missing-args] [--ignore-errors] [--force]
-       [--max-delete MAXDELETE] [--max-size MAXSIZE] [--min-size MINSIZE]
-       [--partial] [--partial-dir PARTIALDIR] [--delay-updates] [-m]
-       [--numeric-ids] [--usermap USERMAP] [--groupmap GROUPMAP]
-       [--chown CHOWN] [--timeout TIMEOUT] [--contimeout CONTIMEOUT] [-I]
-       [-M REMOTEOPTION] [--size-only] [--modify-window MODIFYWINDOW]
-       [-T TEMPDIR] [-y] [--compare-dest COMPAREDEST]
-       [--copy-dest COPYDEST] [--link-dest LINKDEST] [-z]
-       [--compress-level COMPRESSLEVEL] [--skip-compress SKIPCOMPRESS] [-C]
-       [-f FILTER] [--exclude EXCLUDE] [--exclude-from EXCLUDEFROM]
-       [--include INCLUDE] [--include-from INCLUDEFROM]
-       [--files-from FILESFROM] [-0] [-s] [--address ADDRESS] [--port PORT]
-       [--sockopts SOCKOPTS] [--blocking-io] [--stats] [-8]
-       [--human-readable] [--progress] [-i] [--out-format OUTFORMAT]
-       [--log-file LOGFILE] [--log-file-format LOGFILEFORMAT]
-       [--password-file PASSWORDFILE] [--list-only] [--bwlimit BWLIMIT]
-       [--outbuf OUTBUF] [--write-batch WRITEBATCH]
-       [--only-write-batch ONLYWRITEBATCH] [--read-batch READBATCH]
-       [--protocol PROTOCOL] [--iconv ICONV] [--checkum-seed CHECKSUMSEED]
-       [-4] [-6] [--version] [--output-commandline] [--maxtime MAXTIME] src
-       dest
+       [-h] [--output-commandline] [--maxtime MAXTIME] [-v]
+       [--info INFO] [--debug DEBUG] [--msgs2stderr] [-q] [--no-motd] [-c]
+       [-a] [-r] [-R] [--no-implied-dirs] [-b] [--backup-dir BACKUPDIR]
+       [--suffix SUFFIX] [-u] [--inplace] [--append] [--append-verify] [-d]
+       [-l] [-L] [--copy-unsafe-links] [--safe-links] [--munge-links] [-k]
+       [-K] [-H] [-p] [-E] [--chmod CHMOD] [-X] [-o] [-g] [--devices]
+       [--specials] [-t] [-O] [-J] [--super] [--fake-super] [-S]
+       [--preallocate] [-n] [-W] [-x] [-B BLOCKSIZE] [-e RSH]
+       [--rsync-path RSYNCPATH] [--existing] [--ignore-existing]
+       [--remove-source-files] [--delete] [--delete-before]
+       [--delete-during] [--delete-delay] [--delete-after]
+       [--delete-excluded] [--ignore-missing-args] [--delete-missing-args]
+       [--ignore-errors] [--force] [--max-delete MAXDELETE]
+       [--max-size MAXSIZE] [--min-size MINSIZE] [--partial]
+       [--partial-dir PARTIALDIR] [--delay-updates] [-m] [--numeric-ids]
+       [--usermap USERMAP] [--groupmap GROUPMAP] [--chown CHOWN]
+       [--timeout TIMEOUT] [--contimeout CONTIMEOUT] [-I] [-M REMOTEOPTION]
+       [--size-only] [--modify-window MODIFYWINDOW] [-T TEMPDIR] [-y]
+       [--compare-dest COMPAREDEST] [--copy-dest COPYDEST]
+       [--link-dest LINKDEST] [-z] [--compress-level COMPRESSLEVEL]
+       [--skip-compress SKIPCOMPRESS] [-C] [-f FILTER] [--exclude EXCLUDE]
+       [--exclude-from EXCLUDEFROM] [--include INCLUDE]
+       [--include-from INCLUDEFROM] [--files-from FILESFROM] [-0] [-s]
+       [--address ADDRESS] [--port PORT] [--sockopts SOCKOPTS]
+       [--blocking-io] [--stats] [-8] [--human-readable] [--progress] [-i]
+       [--out-format OUTFORMAT] [--log-file LOGFILE]
+       [--log-file-format LOGFILEFORMAT] [--password-file PASSWORDFILE]
+       [--list-only] [--bwlimit BWLIMIT] [--outbuf OUTBUF]
+       [--write-batch WRITEBATCH] [--only-write-batch ONLYWRITEBATCH]
+       [--read-batch READBATCH] [--protocol PROTOCOL] [--iconv ICONV]
+       [--checkum-seed CHECKSUMSEED] [-4] [-6] [--version]
+       [--additional ADDITIONAL] src dest
+
+A fast, versatile, remote (and local) file-copying tool.
+See man page:
+https://linux.die.net/man/1/rsync
 
 positional arguments:
   src                    The local or remote  source  path (path or [user@]
@@ -182,6 +196,10 @@ positional arguments:
 
 optional arguments:
   -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
+                         binary
+  --maxtime MAXTIME      set the maximum time  for  the  process  to run in
+                         seconds before getting killed
   -v, --verbose          increase verbosity
   --info INFO            fine-grained informational verbosity
   --debug DEBUG          fine-grained debug verbosity
@@ -327,10 +345,236 @@ optional arguments:
   -4, --ipv4             prefer IPv4
   -6, --ipv6             prefer IPv6
   --version              print version number
-  --output-commandline   output the command-line  generated  for  the rsync
+  --additional ADDITIONAL
+                         generic option to pass  on  to rsync; for command-
+                         line parsing to work  though,  leading dashes must
+                         get   replaced   with    '+',   eg   '--additional
+                         &quot;++exclude=*~&quot;'
+</code></pre>
+
+<h2 id="ssh">Ssh</h2>
+<p>The options of the <code>com.github.fracpete.rsync4j.Ssh</code> tool are modeled after
+the <code>ssh</code> executable itself. Here is the help screen:</p>
+<pre><code>usage: com.github.fracpete.rsync4j.Ssh
+       [-h] [--output-commandline] [--maxtime MAXTIME] [-1] [-2] [-4]
+       [-6] [-A] [-a] [-b BINDADDRESS] [-C] [-c CIPHERSPEC]
+       [-D DYNAMICBINDADDRESS] [-E LOGFILE] [-e ESCAPECHAR] [-F CONFIGFILE]
+       [-f] [-G] [-g] [-I PKCS11] [-K] [-k] [-L LOCAL] [-l LOGINNAME] [-M]
+       [-m MACSPEC] [-N] [-n] [-O CONTROLCOMMAND] [-o OPTION] [-p PORT]
+       [-q] [-R REMOTE] [-s] [-T] [-t] [-v] [-vv] [-vvv] [-W FORWARDTO]
+       [-w FORWARDTUNNEL] [-X] [-x] [-Y] [-y] hostname  [command]
+
+OpenSSH  SSH  client  (remote  login   program).  No  interactive  sessions
+possible.
+See man page:
+https://linux.die.net/man/1/ssh
+
+positional arguments:
+  hostname               The hostname to connect to.
+                         The hostname to connect to.
+  command                The remote command to execute.
+
+optional arguments:
+  -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
                          binary
-  --maxtime MAXTIME      set the maximum time for  rsync  process to run in
+  --maxtime MAXTIME      set the maximum time  for  the  process  to run in
                          seconds before getting killed
+  -1                     Forces ssh to try protocol version 1 only.
+  -2                     Forces ssh to try protocol version 2 only.
+  -4                     Forces ssh to use IPv4 addresses only.
+  -6                     Forces ssh to use IPv6 addresses only.
+  -A                     Enables forwarding  of  the  authentication  agent
+                         connection.
+  -a                     Disables forwarding  of  the  authentication agent
+                         connection.
+  -b BINDADDRESS         Use bind_address  on  the  local  machine  as  the
+                         source address of the connection.
+  -C                     Requests compression of all data.
+  -c CIPHERSPEC          Selects the  cipher  specification  for encrypting
+                         the session.
+  -D DYNAMICBINDADDRESS  Specifies  a  local   “dynamic”  application-level
+                         port forwarding ([bind_address:]port).
+  -E LOGFILE             Append debug logs to  log_file instead of standard
+                         error.
+  -e ESCAPECHAR          Sets the escape character for  sessions with a pty
+                         (default: ‘~’).
+  -F CONFIGFILE          Specifies an  alternative  per-user  configuration
+                         file.
+  -f                     Requests ssh  to  go  to  background  just  before
+                         command execution.
+  -G                     Causes  ssh  to  print   its  configuration  after
+                         evaluating Host and Match blocks and exit.
+  -g                     Allows remote hosts to  connect to local forwarded
+                         ports
+  -I PKCS11              Specify the PKCS#11 shared  library ssh should use
+                         to communicate with a  PKCS#11 token providing the
+                         user's private RSA key.
+  -K                     Enables    GSSAPI-based     authentication     and
+                         forwarding (delegation) of  GSSAPI  credentials to
+                         the server.
+  -k                     Disables   forwarding   (delegation)   of   GSSAPI
+                         credentials to the server.
+  -L LOCAL               Specifies that connections to  the  given TCP port
+                         or Unix socket on the  local  (client) host are to
+                         be forwarded to the given  host  and port, or Unix
+                         socket, on the remote side.
+  -l LOGINNAME           Specifies the user  to  log  in  as  on the remote
+                         machine.
+  -M                     Places the  ssh  client  into  “master”  mode  for
+                         connection sharing.
+  -m MACSPEC             A   comma-separated   list    of    MAC   (message
+                         authentication  code)  algorithms,   specified  in
+                         order of preference.
+  -N                     Do not execute a  remote  command.  This is useful
+                         for just forwarding ports.
+  -n                     Redirects   stdin   from    /dev/null   (actually,
+                         prevents reading from stdin).
+  -O CONTROLCOMMAND      Control an active  connection  multiplexing master
+                         process.
+  -o OPTION              Can be used to give options  in the format used in
+                         the configuration file.
+  -p PORT                Port to connect to on the remote host.
+  -q                     Quiet mode.  Causes  most  warning  and diagnostic
+                         messages to be suppressed.
+  -R REMOTE              Specifies that connections to  the  given TCP port
+                         or Unix socket on the  remote (server) host are to
+                         be forwarded to the given  host  and port, or Unix
+                         socket, on the local side.
+  -s                     May be used to  request  invocation of a subsystem
+                         on the remote system.
+  -T                     Disable pseudo-terminal allocation.
+  -t                     Force pseudo-terminal allocation.
+  -v                     Verbose mode.
+  -vv                    Very verbose mode.
+  -vvv                   Very, very verbose mode.
+  -W FORWARDTO           Requests that standard  input  and  output  on the
+                         client be  forwarded  to  host  on  port  over the
+                         secure channel.
+  -w FORWARDTUNNEL       Requests  tunnel   device   forwarding   with  the
+                         specified  tun(4)  devices   between   the  client
+                         (local_tun) and the server (remote_tun).
+  -X                     Enables X11 forwarding.
+  -x                     Disables X11 forwarding.
+  -Y                     Enables trusted X11 forwarding.
+  -y                     Send  log  information  using  the  syslog  system
+                         module.
+</code></pre>
+
+<h2 id="sshkeygen">SshKeyGen</h2>
+<p>The options of the <code>com.github.fracpete.rsync4j.SshKeyGen</code> tool are modeled after
+the <code>ssh-keygen</code> executable itself. Here is the help screen:</p>
+<pre><code>usage: com.github.fracpete.rsync4j.SshKeyGen
+       [-h] [--output-commandline] [-A] [-a ROUNDS] [-B] [-b BITS]
+       [-C COMMENT] [-D PKCS11] [-E FINGERPRINT] [-e] [-F FINDHOST]
+       [-f KEYFILE] [-G CANDIDATEPRIMES] [-g] [-H] [--host] [-i]
+       [-J SCREENNUMLINES] [-j SCREENSTARTLINE] [-K SCREENCHECKPOINT] [-k]
+       [-L] [-l] [-M MEMORY] [-m KEYFORMAT] [-N NEWPASSPHRASE]
+       [-n PRINCIPALS] [-O OPTION] [-o] [-P PASSPHRASE] [-p] [-Q] [-q]
+       [-R REMOVEKEYS] [-r PRINTFINGERPRINT] [-S STARTPOINT] [-s SIGNCAKEY]
+       [-T TESTCANDIDATEPRIMES] [-t KEYTYPE] [-u] [-V VALIDITYINTERVAL]
+       [-v] [-vv] [-vvv] [-W GENERATOR] [-y] [-z SERIALNUMBER]
+       [file [file ...]]
+
+Authentication key generation, management and conversion.
+See man page:
+https://linux.die.net/man/1/ssh-keygen
+
+positional arguments:
+  file                   The key file(s).
+
+optional arguments:
+  -h, --help             show this help message and exit
+  --output-commandline   output the command-line generated  for the wrapped
+                         binary
+  -A                     For each of the key  types  (rsa1, rsa, dsa, ecdsa
+                         and ed25519) for  which  host  keys  do not exist,
+                         generate the host keys  with  the default key file
+                         path, an empty  passphrase,  default  bits for the
+                         key type, and default comment.
+  -a ROUNDS              When saving  a  new-format  private  key  (i.e. an
+                         ed25519 key or any SSH protocol  2 key when the -o
+                         flag is set), this option  specifies the number of
+                         KDF (key derivation function) rounds used.
+  -B                     Show the bubblebabble digest  of specified private
+                         or public key file.
+  -b BITS                Specifies the number of bits in the key to create.
+  -C COMMENT             Provides a new comment.
+  -D PKCS11              Download the  RSA  public  keys  provided  by  the
+                         PKCS#11 shared library pkcs11.
+  -E FINGERPRINT         Specifies the hash algorithm  used when displaying
+                         key fingerprints.
+  -e                     This option will read a  private or public OpenSSH
+                         key file and print  to  stdout  the  key in one of
+                         the formats specified by the -m option.
+  -F FINDHOST            Search   for   the   specified   hostname   in   a
+                         known_hosts file, listing any occurrences found.
+  -f KEYFILE             Specifies the filename of the key file.
+  -G CANDIDATEPRIMES     Generate candidate primes for DH-GEX..
+  -g                     Use generic DNS  format  when printing fingerprint
+                         resource records using the -r command.
+  -H                     Hash a known_hosts file.
+  --host                 When signing  a  key,  create  a  host certificate
+                         instead of a user certificate.
+  -i                     This option will read  an  unencrypted private (or
+                         public) key file in the  format specified by the -
+                         m option and print  an  OpenSSH compatible private
+                         (or public) key to stdout.
+  -J SCREENNUMLINES      Exit  after  screening  the  specified  number  of
+                         lines  while  performing  DH  candidate  screening
+                         using the -T option.
+  -j SCREENSTARTLINE     Start  screening  at  the  specified  line  number
+                         while performing DH candidate  screening using the
+                         -T option.
+  -K SCREENCHECKPOINT    Write the last line processed  to the file checkpt
+                         while performing DH candidate  screening using the
+                         -T option.
+  -k                     Generate a KRL file.
+  -L                     Prints the contents of one or more certificates.
+  -l                     Show fingerprint of specified public key file.
+  -M MEMORY              Specify  the  amount   of   memory   to   use  (in
+                         megabytes) when  generating  candidate  moduli for
+                         DH-GEX.
+  -m KEYFORMAT           Specify a key format  for  the  -i  (import) or -e
+                         (export) conversion options.
+  -N NEWPASSPHRASE       Provides the new passphrase.
+  -n PRINCIPALS          Specify one  or  more  principals  (user  or  host
+                         names)  to  be  included  in  a  certificate  when
+                         signing a key.
+  -O OPTION              Specify a certificate option when signing a key.
+  -o                     Causes ssh-keygen to save  private  keys using the
+                         new  OpenSSH   format   rather   than   the   more
+                         compatible PEM format.
+  -P PASSPHRASE          Provides the (old) passphrase.
+  -p                     Requests changing the passphrase  of a private key
+                         file instead of creating a new private key.
+  -Q                     Test whether keys have been revoked in a KRL.
+  -q                     Silence ssh-keygen.
+  -R REMOVEKEYS          Removes all  keys  belonging  to  hostname  from a
+                         known_hosts file.
+  -r PRINTFINGERPRINT    Print the SSHFP fingerprint  resource record named
+                         hostname for the specified public key file.
+  -S STARTPOINT          Specify  start  point  (in  hex)  when  generating
+                         candidate moduli for DH-GEX.
+  -s SIGNCAKEY           Certify (sign) a  public  key  using the specified
+                         CA key.
+  -T TESTCANDIDATEPRIMES
+                         Test   DH   group    exchange   candidate   primes
+                         (generated using the -G option) for safety.
+  -t KEYTYPE             Specifies the type of key to create.
+  -u                     Update a KRL.
+  -V VALIDITYINTERVAL    Specify  a  validity   interval   when  signing  a
+                         certificate.
+  -v                     Verbose mode.
+  -vv                    Very verbose mode.
+  -vvv                   Very, very verbose mode.
+  -W GENERATOR           Specify desired generator  when  testing candidate
+                         moduli for DH-GEX.
+  -y                     This option will  read  a  private  OpenSSH format
+                         file and print an OpenSSH public key to stdout.
+  -z SERIALNUMBER        Specifies a serial number  to  be  embedded in the
+                         certificate to distinguish  this  certificate from
+                         others from the same CA.
 </code></pre>
               
             </div>

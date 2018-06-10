@@ -69,6 +69,15 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#rsync">Rsync</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#ssh">Ssh</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#sshkeygen">SshKeyGen</a></li>
+                
+            
             </ul>
         
     </li>
@@ -138,7 +147,8 @@
           <div role="main">
             <div class="section">
               
-                <p>Here is an example of configuring and running <code>rsync</code> from within Java, only 
+                <h2 id="rsync">Rsync</h2>
+<p>Here is an example of configuring and running <code>rsync</code> from within Java, only 
 outputting the data from stdout/stderr after the process completes: </p>
 <pre><code class="java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
@@ -197,7 +207,39 @@ RSync rsync = new RSync()
   .verbose(true);
 StreamingProcessOutput output = new StreamingProcessOutput(new Output());
 output.monitor(rsync.builder());
+</code></pre>
 
+<h2 id="ssh">Ssh</h2>
+<p>The following command lists all files in the <code>/tmp</code> directory of the localhost
+in verbose mode and also outputting the generated command-line:</p>
+<pre><code class="java">import com.github.fracpete.rsync4j.Ssh;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+...
+Ssh ssh = new Ssh()
+  .outputCommandline(true)
+  .verbose(1)
+  .hostname(&quot;localhost&quot;)
+  .command(&quot;ls /tmp&quot;);
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(ssh.builder());
+</code></pre>
+
+<h2 id="sshkeygen">SshKeyGen</h2>
+<p>The following command generates a key file named <code>testkey</code> in your home 
+directory of type <code>dsa</code>, with no pass-phrase, outputting the bubble babble 
+of the key:</p>
+<pre><code class="java">import com.github.fracpete.rsync4j.SshKeyGen;
+import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+...
+SshKeyGen keygen = new SshKeyGen()
+  .outputCommandline(true)
+  .verbose(1)
+  .keyType(&quot;dsa&quot;)
+  .newPassPhrase(&quot;&quot;)
+  .comment(&quot;test key&quot;)
+  .keyFile(&quot;~/testkey&quot;);
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(keygen.builder());
 </code></pre>
               
             </div>
