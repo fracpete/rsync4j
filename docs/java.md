@@ -8,8 +8,8 @@ import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 ...
 RSync rsync = new RSync()
-  .source("/one/place/");
-  .destination("/other/place/");
+  .source("/one/place/")
+  .destination("/other/place/")
   .recursive(true);
 // or if you prefer using commandline options:
 // rsync.setOptions(new String[]{"-r", "/one/place/", "/other/place/"});
@@ -28,8 +28,8 @@ import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 RSync rsync = new RSync()
-  .source("/one/place/");
-  .destination("/other/place/");
+  .source("/one/place/")
+  .destination("/other/place/")
   .archive(true)
   .delete(true);
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
@@ -59,13 +59,29 @@ public static class Output implements StreamingProcessOwner {
 
 ...
 RSync rsync = new RSync()
-  .source("/one/place/");
-  .destination("/other/place/");
+  .source("/one/place/")
+  .destination("/other/place/")
   .recursive(true)
   .verbose(true);
 StreamingProcessOutput output = new StreamingProcessOutput(new Output());
 output.monitor(rsync.builder());
 ```
+
+### Windows
+
+When supplying the `rsh` option with an identity, usually like `ssh -i /some/where/key.pub`, 
+you need to supply the actual Windows binary and Windows path to the identity.
+You can use the `com.github.fracpete.rsync4j.core.Binaries` class to help you
+construct the path properly, for instance: 
+
+```java
+RSync rsync = new RSync()
+  .source("C:\\somedir")
+  .destination("D:\\otherdir")
+  .recursive(true)
+  .rsh(Binaries.sshBinary() + " -i " + Binaries.convertPath("C:\\keys\\mykey.pub"));
+```
+
 
 ## Ssh
 
