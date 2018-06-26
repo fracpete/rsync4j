@@ -1,3 +1,4 @@
+* 3.1.2-11 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.1.2-11/rsync4j-all-3.1.2-11-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.1.2-11/rsync4j-all-3.1.2-11-spring-boot.jar))
 * 3.1.2-10 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.1.2-10/rsync4j-all-3.1.2-10-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.1.2-10/rsync4j-all-3.1.2-10-spring-boot.jar))
 * 3.1.2-9 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-9/rsync4j-all-3.1.2-9-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-9/rsync4j-all-3.1.2-9-spring-boot.jar))
 * 3.1.2-8 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-8/rsync4j-3.1.2-8-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-3.1.2-8/rsync4j-3.1.2-8-spring-boot.jar))
