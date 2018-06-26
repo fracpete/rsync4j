@@ -8,6 +8,5 @@ cygk5crypto-3.dll
 cygkrb5-3.dll
 cygkrb5support-0.dll
 cygpopt-0.dll
-cygssp-0.dll
 cygwin1.dll
 cygz.dll
