@@ -1706,7 +1706,7 @@ public class RSync
     // generic options
     if (additional != null) {
       for (String a : additional) {
-	if (a != null)
+	if ((a != null) && !a.isEmpty())
 	  result.add(a);
       }
     }
