@@ -1704,9 +1704,11 @@ public class RSync
     if (isIpv6()) result.add("--ipv6");
     if (isVersion()) result.add("--version");
     // generic options
-    for (String a: additional) {
-      if (a != null)
-	result.add(a);
+    if (additional != null) {
+      for (String a : additional) {
+	if (a != null)
+	  result.add(a);
+      }
     }
 
     return result;
