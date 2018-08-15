@@ -217,8 +217,6 @@ public class RSync
 
   protected boolean cvs_exclude;
 
-  protected String[] filter;
-
   protected List<String> include_exclude;
 
   protected String files_from;
@@ -374,7 +372,6 @@ public class RSync
     compress_level = -1;
     skip_compress = "";
     cvs_exclude = false;
-    filter = new String[0];
     include_exclude = new ArrayList<>();
     files_from = "";
     from0 = false;
