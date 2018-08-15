@@ -219,13 +219,7 @@ public class RSync
 
   protected String[] filter;
 
-  protected String[] exclude;
-
-  protected String exclude_from;
-
-  protected String[] include;
-
-  protected String include_from;
+  protected List<String> include_exclude;
 
   protected String files_from;
 
@@ -381,10 +375,7 @@ public class RSync
     skip_compress = "";
     cvs_exclude = false;
     filter = new String[0];
-    exclude = new String[0];
-    exclude_from = "";
-    include = new String[0];
-    include_from = "";
+    include_exclude = new ArrayList<>();
     files_from = "";
     from0 = false;
     protect_args = false;
@@ -1249,48 +1240,80 @@ public class RSync
   }
 
   public String[] getFilter() {
-    return filter;
+    return includeExcludeSubset("F");
   }
 
   public RSync filter(String... filter) {
-    this.filter = filter.clone();
+    return addIncludeExclude("F", filter);
+  }
+
+  /**
+   * Returns a subset of the include/exclude list.
+   *
+   * @param id the subset to retrieve (I, E, IF, EF, F for include, exclude, include-from, exclude-from, filter)
+   * @return the subset
+   */
+  protected String[] includeExcludeSubset(String id) {
+    List<String> result = new ArrayList<>();
+    id = id + "\t";
+    for (String ie: include_exclude) {
+      if (ie.startsWith(id))
+        result.add(ie.substring(id.length()));
+    }
+    return result.toArray(new String[0]);
+  }
+
+  /**
+   * Adds a list of include/exclude items.
+   *
+   * @param id the subset to retrieve (I, E, IF, EF, F for include, exclude, include-from, exclude-from, filter)
+   * @param list the items to add
+   * @return itself
+   */
+  protected RSync addIncludeExclude(String id, String... list) {
+    for (String l: list)
+      this.include_exclude.add(id + "\t" + l);
     return this;
+  }
+
+  protected String[] getIncludeExclude() {
+    return include_exclude.toArray(new String[0]);
   }
 
   public String[] getExclude() {
-    return exclude;
+    return includeExcludeSubset("E");
   }
 
   public RSync exclude(String... exclude) {
-    this.exclude = exclude.clone();
-    return this;
+    return addIncludeExclude("E", exclude);
   }
 
-  public String getExcludeFrom() {
-    return exclude_from;
+  public String[] getExcludeFrom() {
+    return includeExcludeSubset("EF");
   }
 
-  public RSync excludeFrom(String exclude_from) {
-    this.exclude_from = Binaries.convertPath(exclude_from);
-    return this;
+  public RSync excludeFrom(String... exclude_from) {
+    for (int i = 0; i < exclude_from.length; i++)
+      exclude_from[i] = Binaries.convertPath(exclude_from[i]);
+    return addIncludeExclude("EF", exclude_from);
   }
 
   public String[] getInclude() {
-    return include;
+    return includeExcludeSubset("I");
   }
 
   public RSync include(String... include) {
-    this.include = include.clone();
-    return this;
+    return addIncludeExclude("I", include);
   }
 
-  public String getIncludeFrom() {
-    return include_from;
+  public String[] getIncludeFrom() {
+    return includeExcludeSubset("IF");
   }
 
-  public RSync includeFrom(String include_from) {
-    this.include_from = Binaries.convertPath(include_from);
-    return this;
+  public RSync includeFrom(String... include_from) {
+    for (int i = 0; i < include_from.length; i++)
+      include_from[i] = Binaries.convertPath(include_from[i]);
+    return addIncludeExclude("IF", include_from);
   }
 
   public String getFilesFrom() {
@@ -1667,14 +1690,29 @@ public class RSync
     if (getCompressLevel() > -1) result.add("--compress-level=" + getCompressLevel());
     if (!getSkipCompress().isEmpty()) result.add("--skip-compress=" + getSkipCompress());
     if (isCvsExclude()) result.add("--cvs-exclude");
-    for (String filter: getFilter())
-      result.add("--filter=" + filter);
-    for (String exclude: getExclude())
-      result.add("--exclude=" + exclude);
-    if (!getExcludeFrom().isEmpty()) result.add("--exclude-from=" + getExcludeFrom());
-    for (String include: getInclude())
-      result.add("--include=" + include);
-    if (!getIncludeFrom().isEmpty()) result.add("--include-from=" + getIncludeFrom());
+    for (String ie: getIncludeExclude()) {
+      String id = ie.substring(0, ie.indexOf('\t'));
+      String s = ie.substring(2);
+      switch (id) {
+	case "E":
+	  result.add("--exclude=" + s);
+	  break;
+	case "EF":
+	  result.add("--exclude-from=" + s);
+	  break;
+	case "I":
+	  result.add("--include=" + s);
+	  break;
+	case "IF":
+	  result.add("--include-from=" + s);
+	  break;
+	case "F":
+	  result.add("--filter=" + s);
+	  break;
+	default:
+	  throw new IllegalStateException("Unhandled ID for include/exclude/include-from/exclude-from/filter list: " + id);
+      }
+    }
     if (!getFilesFrom().isEmpty()) result.add("--files-from=" + getFilesFrom());
     if (isFrom0()) result.add("--from0");
     if (isProtectArgs()) result.add("--protect-args");
@@ -2181,7 +2219,7 @@ public class RSync
       .action(Arguments.append())
       .help("exclude files matching PATTERN");
     parser.addArgument("--exclude-from")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("excludefrom")
       .help("read exclude patterns from FILE");
     parser.addArgument("--include")
@@ -2190,7 +2228,7 @@ public class RSync
       .action(Arguments.append())
       .help("include files matching PATTERN");
     parser.addArgument("--include-from")
-      .setDefault("")
+      .setDefault(new ArrayList<String>())
       .dest("includefrom")
       .help("read include patterns from FILE");
     parser.addArgument("--files-from")
@@ -2431,9 +2469,9 @@ public class RSync
     cvsExclude(ns.getBoolean("cvsexclude"));
     filter(ns.getList("filter").toArray(new String[0]));
     include(ns.getList("include").toArray(new String[0]));
-    includeFrom(ns.getString("includefrom"));
+    includeFrom(ns.getList("includefrom").toArray(new String[0]));
     exclude(ns.getList("exclude").toArray(new String[0]));
-    excludeFrom(ns.getString("excludefrom"));
+    excludeFrom(ns.getList("excludefrom").toArray(new String[0]));
     filesFrom(ns.getString("filesfrom"));
     from0(ns.getBoolean("from0"));
     protectArgs(ns.getBoolean("protectargs"));
