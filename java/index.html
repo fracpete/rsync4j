@@ -74,6 +74,9 @@
                     <li><a class="toctree-l4" href="#windows">Windows</a></li>
                 
             
+                <li class="toctree-l3"><a href="#rsync-daemon">Rsync daemon</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#ssh">Ssh</a></li>
                 
             
@@ -221,6 +224,42 @@ construct the path properly, for instance: </p>
   .destination(&quot;D:\\otherdir&quot;)
   .recursive(true)
   .rsh(Binaries.sshBinary() + &quot; -i &quot; + Binaries.convertPath(&quot;C:\\keys\\mykey.pub&quot;));
+</code></pre>
+
+<h2 id="rsync-daemon">Rsync daemon</h2>
+<p>Instead of using rsync via ssh, you can also use the 
+<a href="https://download.samba.org/pub/rsync/rsyncd.conf.html">rsync daemon</a> approach.</p>
+<p>On the server, you can use something like this as <code>/etc/rsyncd.conf</code> to make 
+an upload directory <code>/home/public_rsync</code> available under the name <code>files</code>:</p>
+<pre><code class="inifile">pid file = /var/run/rsyncd.pid
+lock file = /var/run/rsync.lock
+log file = /var/log/rsync.log
+port = 12000
+charset = utf–8
+
+[files]
+path = /home/public_rsync
+comment = &quot;public rsync share&quot;
+use chroot = true
+uid = root
+gid = root
+read only = false
+</code></pre>
+
+<p>For simplicity, we just start the daemon (running on port 12000) on the server 
+(192.168.1.100) as root user as follows:</p>
+<pre><code class="bash">sudo rsync --daemon
+</code></pre>
+
+<p>The following command will upload the directory <code>/home/myuser/some/where</code> on the<br />
+client to the <code>files</code> share:</p>
+<pre><code class="java">RSync rsync = new RSync()
+  .recursive(true)
+  .times(true)
+  .dirs(true)
+  .verbose(true)
+  .source(&quot;/home/myuser/some/where&quot;)
+  .destination(&quot;rsync://192.168.1.100:12000/files/&quot;);
 </code></pre>
 
 <h2 id="ssh">Ssh</h2>
