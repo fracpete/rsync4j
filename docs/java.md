@@ -82,6 +82,49 @@ RSync rsync = new RSync()
   .rsh(Binaries.sshBinary() + " -i " + Binaries.convertPath("C:\\keys\\mykey.pub"));
 ```
 
+## Rsync daemon
+
+Instead of using rsync via ssh, you can also use the 
+[rsync daemon](https://download.samba.org/pub/rsync/rsyncd.conf.html) approach.
+
+On the server, you can use something like this as `/etc/rsyncd.conf` to make 
+an upload directory `/home/public_rsync` available under the name `files`:
+
+```inifile
+pid file = /var/run/rsyncd.pid
+lock file = /var/run/rsync.lock
+log file = /var/log/rsync.log
+port = 12000
+charset = utf–8
+
+[files]
+path = /home/public_rsync
+comment = "public rsync share"
+use chroot = true
+uid = root
+gid = root
+read only = false
+```
+
+For simplicity, we just start the daemon (running on port 12000) on the server 
+(192.168.1.100) as root user as follows:
+
+```bash
+sudo rsync --daemon
+```
+
+The following command will upload the directory `/home/myuser/some/where` on the  
+client to the `files` share:
+
+```java
+RSync rsync = new RSync()
+  .recursive(true)
+  .times(true)
+  .dirs(true)
+  .verbose(true)
+  .source("/home/myuser/some/where")
+  .destination("rsync://192.168.1.100:12000/files/");
+```
 
 ## Ssh
 
