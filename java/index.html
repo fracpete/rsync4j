@@ -253,20 +253,25 @@ read only = false
 
 <p>The following command will upload the directory <code>/home/myuser/some/where</code> on the<br />
 client to the <code>files</code> share:</p>
-<pre><code class="java">RSync rsync = new RSync()
+<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
+...
+RSync rsync = new RSync()
   .recursive(true)
   .times(true)
   .dirs(true)
   .verbose(true)
   .source(&quot;/home/myuser/some/where&quot;)
   .destination(&quot;rsync://192.168.1.100:12000/files/&quot;);
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(rsync.builder());
 </code></pre>
 
 <h2 id="ssh">Ssh</h2>
 <p>The following command lists all files in the <code>/tmp</code> directory of the localhost
 in verbose mode and also outputting the generated command-line:</p>
 <pre><code class="java">import com.github.fracpete.rsync4j.Ssh;
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 Ssh ssh = new Ssh()
   .outputCommandline(true)
@@ -282,7 +287,7 @@ output.monitor(ssh.builder());
 directory of type <code>dsa</code>, with no pass-phrase, outputting the bubble babble 
 of the key:</p>
 <pre><code class="java">import com.github.fracpete.rsync4j.SshKeyGen;
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 SshKeyGen keygen = new SshKeyGen()
   .outputCommandline(true)
