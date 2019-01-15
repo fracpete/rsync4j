@@ -117,6 +117,9 @@ The following command will upload the directory `/home/myuser/some/where` on the
 client to the `files` share:
 
 ```java
+import com.github.fracpete.rsync4j.RSync;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
+...
 RSync rsync = new RSync()
   .recursive(true)
   .times(true)
@@ -124,6 +127,8 @@ RSync rsync = new RSync()
   .verbose(true)
   .source("/home/myuser/some/where")
   .destination("rsync://192.168.1.100:12000/files/");
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(rsync.builder());
 ```
 
 ## Ssh
@@ -133,7 +138,7 @@ in verbose mode and also outputting the generated command-line:
 
 ```java
 import com.github.fracpete.rsync4j.Ssh;
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 Ssh ssh = new Ssh()
   .outputCommandline(true)
@@ -152,7 +157,7 @@ of the key:
 
 ```java
 import com.github.fracpete.rsync4j.SshKeyGen;
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 SshKeyGen keygen = new SshKeyGen()
   .outputCommandline(true)
