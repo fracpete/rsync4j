@@ -15,7 +15,7 @@
 
 /*
  * RSync.java
- * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2019 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -38,7 +38,7 @@ public class RSync
   extends AbstractBinaryWithTimeout {
 
   /** the source path/url. */
-  protected String source;
+  protected List<String> sources;
 
   /** the destination path/url. */
   protected String destination;
@@ -283,7 +283,7 @@ public class RSync
   public void reset() {
     super.reset();
 
-    source = null;
+    sources = new ArrayList<>();
     destination = null;
     verbose = false;
     info = "";
@@ -410,17 +410,42 @@ public class RSync
    * @param value	the source
    */
   public RSync source(String value) {
-    source = Binaries.convertPath(value);
+    sources.clear();
+    sources.add(Binaries.convertPath(value));
     return this;
   }
 
   /**
-   * Returns the current source path/url.
+   * Sets the source paths/urls.
    *
-   * @return		the source, null if not set
+   * @param value	the sources
    */
-  public String getSource() {
-    return source;
+  public RSync sources(String[] value) {
+    sources.clear();
+    for (String s: value)
+      sources.add(Binaries.convertPath(s));
+    return this;
+  }
+
+  /**
+   * Sets the source paths/urls.
+   *
+   * @param value	the sources
+   */
+  public RSync sources(List<String> value) {
+    sources.clear();
+    for (String s: value)
+      sources.add(Binaries.convertPath(s));
+    return this;
+  }
+
+  /**
+   * Returns the current source paths/urls.
+   *
+   * @return		the sources, empty list if not set
+   */
+  public List<String> getSources() {
+    return sources;
   }
 
   /**
@@ -1763,9 +1788,9 @@ public class RSync
     binary = Binaries.rsyncBinary();
     result = options();
     result.add(0, binary);
-    if (getSource() == null)
-      throw new IllegalStateException("No source defined!");
-    result.add(getSource());
+    if (getSources().size() == 0)
+      throw new IllegalStateException("No source(s) defined!");
+    result.addAll(getSources());
     if (getDestination() == null)
       throw new IllegalStateException("No destination defined!");
     result.add(getDestination());
@@ -2357,10 +2382,9 @@ public class RSync
       .dest("additional")
       .action(Arguments.append())
       .help("generic option to pass on to rsync; for command-line parsing to work though, leading dashes must get replaced with '+', eg '--additional \"++exclude=*~\"'");
-    parser.addArgument("src")
-      .help("The local or remote source path (path or [user@]host:path)");
-    parser.addArgument("dest")
-      .help("The local or remote destination path (path or [user@]host:path)");
+    parser.addArgument("source(s)/destination")
+      .nargs("*")
+      .help("Multiple local/remote paths (path or [user@]host:path), with the last one being the target and the others the source(s).");
 
     return parser;
   }
@@ -2499,8 +2523,14 @@ public class RSync
     version(ns.getBoolean("version"));
     additional(ns.getList("additional").toArray(new String[0]));
 
-    source(ns.getString("src"));
-    destination(ns.getString("dest"));
+    List<String> src_dest = ns.getList("source(s)/destination");
+    if (src_dest.size() < 2) {
+      System.err.println("Source and destination required!");
+      return false;
+    }
+    destination(src_dest.get(src_dest.size() - 1));
+    src_dest.remove(src_dest.size() - 1);
+    sources(src_dest);
 
     return true;
   }

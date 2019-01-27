@@ -82,6 +82,39 @@ RSync rsync = new RSync()
   .rsh(Binaries.sshBinary() + " -i " + Binaries.convertPath("C:\\keys\\mykey.pub"));
 ```
 
+### Multiple sources
+
+You can specify multiple sources when using the `sources` methods.
+
+Either as array:
+
+```java
+String[] s = new String[]{
+  "/first/place/", 
+  "/second/place/",
+};
+
+RSync rsync = new RSync()
+  .sources(s)
+  .destination("/other/place/")
+  .recursive(true)
+  .verbose(true);
+```
+
+Or as `java.util.List<String>`:
+
+```java
+List<String> s = new ArrayList<>();
+s.add("/first/place");
+s.add("/second/place");
+
+RSync rsync = new RSync()
+  .sources(s)
+  .destination("/other/place/")
+  .recursive(true)
+  .verbose(true);
+```
+
 ## Rsync daemon
 
 Instead of using rsync via ssh, you can also use the 

@@ -36,17 +36,17 @@ usage: com.github.fracpete.rsync4j.RSync
        [--write-batch WRITEBATCH] [--only-write-batch ONLYWRITEBATCH]
        [--read-batch READBATCH] [--protocol PROTOCOL] [--iconv ICONV]
        [--checkum-seed CHECKSUMSEED] [-4] [-6] [--version]
-       [--additional ADDITIONAL] src dest
+       [--additional ADDITIONAL]
+       [source(s)/destination [source(s)/destination ...]]
 
 A fast, versatile, remote (and local) file-copying tool.
 See man page:
 https://linux.die.net/man/1/rsync
 
 positional arguments:
-  src                    The local or remote  source  path (path or [user@]
-                         host:path)
-  dest                   The local  or  remote  destination  path  (path or
-                         [user@]host:path)
+  source(s)/destination  Multiple local/remote paths  (path or [user@]host:
+                         path), with the last one  being the target and the
+                         others the source(s).
 
 optional arguments:
   -h, --help             show this help message and exit
