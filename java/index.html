@@ -73,6 +73,8 @@
                 
                     <li><a class="toctree-l4" href="#windows">Windows</a></li>
                 
+                    <li><a class="toctree-l4" href="#multiple-sources">Multiple sources</a></li>
+                
             
                 <li class="toctree-l3"><a href="#rsync-daemon">Rsync daemon</a></li>
                 
@@ -224,6 +226,33 @@ construct the path properly, for instance: </p>
   .destination(&quot;D:\\otherdir&quot;)
   .recursive(true)
   .rsh(Binaries.sshBinary() + &quot; -i &quot; + Binaries.convertPath(&quot;C:\\keys\\mykey.pub&quot;));
+</code></pre>
+
+<h3 id="multiple-sources">Multiple sources</h3>
+<p>You can specify multiple sources when using the <code>sources</code> methods.</p>
+<p>Either as array:</p>
+<pre><code class="java">String[] s = new String[]{
+  &quot;/first/place/&quot;, 
+  &quot;/second/place/&quot;,
+};
+
+RSync rsync = new RSync()
+  .sources(s)
+  .destination(&quot;/other/place/&quot;)
+  .recursive(true)
+  .verbose(true);
+</code></pre>
+
+<p>Or as <code>java.util.List&lt;String&gt;</code>:</p>
+<pre><code class="java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
+s.add(&quot;/first/place&quot;);
+s.add(&quot;/second/place&quot;);
+
+RSync rsync = new RSync()
+  .sources(s)
+  .destination(&quot;/other/place/&quot;)
+  .recursive(true)
+  .verbose(true);
 </code></pre>
 
 <h2 id="rsync-daemon">Rsync daemon</h2>
