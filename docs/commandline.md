@@ -102,7 +102,11 @@ optional arguments:
   -x, --one-file-system  don't cross filesystem boundaries
   -B BLOCKSIZE, --block-size BLOCKSIZE
                          force a fixed checksum block-size
-  -e RSH, --rsh RSH      specify the remote shell to use
+  -e RSH, --rsh RSH      specify the remote shell to use.
+                         On Windows, use 'ssh' to  use built-in ssh binary;
+                         otherwise    use    absolute    path,    eg    'C:
+                         \somewhere\ssh' or '/usr/bin/ssh'.
+                         Uses plain protocol if left empty.
   --rsync-path RSYNCPATH
                          specify the rsync to run on the remote machine
   --existing             skip creating new files on receiver

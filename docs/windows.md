@@ -6,6 +6,11 @@ On first execution, these binaries will get placed in the following directory
 
 Below that directory there are `home/%USERNAME%/.ssh` and `bin`.
 
+### ssh vs plain protocol
+By default, plain protocol is used. If you want to use ssh, then
+simply supply this via the dummy string `ssh`. In Java code, this is done via 
+`rsh("ssh")`. On the command-line, via `--rsh=ssh`.
+
 ### SSH keys
 You can place your ssh key pairs in the following directory:
 

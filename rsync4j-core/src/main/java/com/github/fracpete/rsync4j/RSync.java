@@ -892,10 +892,25 @@ public class RSync
     return this;
   }
 
+  /**
+   * On Windows: "ssh" will use the built-in ssh binary.
+   * Other platforms: use absolute path of binary, eg "/usr/bin/ssh"
+   * Empty for plain rsync protocol.
+   *
+   * @return		the rsh binary
+   */
   public String getRsh() {
     return rsh;
   }
 
+  /**
+   * On Windows: use "ssh" to use built-in ssh binary.
+   * Other platforms: absolute path of binary, eg "/usr/bin/ssh"
+   * Leave empty for plain rsync protocol.
+   *
+   * @param rsh		the rsh binary
+   * @return		itself
+   */
   public RSync rsh(String rsh) {
     this.rsh = rsh;
     return this;
@@ -1665,11 +1680,15 @@ public class RSync
     if (isOneFileSystem()) result.add("--one-file-system");
     if (!getBlockSize().isEmpty()) result.add("--block-size=" + getBlockSize());
     if (!getRsh().isEmpty()) {
-      result.add("--rsh=" + getRsh());
-    }
-    else {
-      if (SystemUtils.IS_OS_WINDOWS)
-	result.add("--rsh=\"" + Binaries.sshBinary() + "\"");
+      if (SystemUtils.IS_OS_WINDOWS) {
+        if (getRsh().equalsIgnoreCase("ssh"))
+          result.add("--rsh=\"" + Binaries.sshBinary() + "\"");
+        else
+          result.add("--rsh=\"" + Binaries.convertPath(getRsh()) + "\"");
+      }
+      else {
+        result.add("--rsh=" + getRsh());
+      }
     }
     if (!getRsyncPath().isEmpty()) result.add("--rsync-path=" + getRsyncPath());
     if (isExisting()) result.add("--existing");
@@ -2044,7 +2063,9 @@ public class RSync
     parser.addArgument("-e", "--rsh")
       .setDefault("")
       .dest("rsh")
-      .help("specify the remote shell to use");
+      .help("specify the remote shell to use.\n"
+	+ "On Windows, use 'ssh' to use built-in ssh binary; otherwise use absolute path, eg 'C:\\somewhere\\ssh' or '/usr/bin/ssh'.\n"
+	+ "Uses plain protocol if left empty.");
     parser.addArgument("--rsync-path")
       .setDefault("")
       .dest("rsyncpath")
