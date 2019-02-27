@@ -76,6 +76,9 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#ssh-vs-plain-protocol">ssh vs plain protocol</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#ssh-keys">SSH keys</a></li>
                 
             
@@ -159,6 +162,10 @@
 </code></pre>
 
 <p>Below that directory there are <code>home/%USERNAME%/.ssh</code> and <code>bin</code>.</p>
+<h3 id="ssh-vs-plain-protocol">ssh vs plain protocol</h3>
+<p>By default, plain protocol is used. If you want to use ssh, then
+simply supply this via the dummy string <code>ssh</code>. In Java code, this is done via 
+<code>rsh("ssh")</code>. On the command-line, via <code>--rsh=ssh</code>.</p>
 <h3 id="ssh-keys">SSH keys</h3>
 <p>You can place your ssh key pairs in the following directory:</p>
 <pre><code>%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
