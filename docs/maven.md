@@ -4,6 +4,6 @@ Add the following artifact to your dependencies of your `pom.xml`:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-all</artifactId>
-      <version>3.1.2-15</version>
+      <version>3.1.2-16</version>
     </dependency>
 ```
