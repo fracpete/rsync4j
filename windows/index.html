@@ -3,31 +3,28 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Windows - rsync4j</title>
   
-
   <link rel="shortcut icon" href="../img/favicon.ico">
-
-  
+  <title>Windows - rsync4j</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
-
   
   <script>
     // Current page data
     var mkdocs_page_name = "Windows";
+    var mkdocs_page_input_path = "windows.md";
+    var mkdocs_page_url = "/windows/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script>
-  <script src="../js/theme.js"></script> 
-
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -47,78 +44,64 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="..">Home</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../commandline/">Command-line</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../commandline/">Command-line</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../java/">Java</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../java/">Java</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Windows</a>
-        
-            <ul>
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Windows</a>
+    <ul class="subnav">
             
-                <li class="toctree-l3"><a href="#ssh-vs-plain-protocol">ssh vs plain protocol</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#ssh-keys">SSH keys</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#binaries-32-bit">Binaries (32-bit)</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#binaries-64-bit">Binaries (64-bit)</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#paths">Paths</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#custom-location">Custom location</a></li>
-                
-            
-            </ul>
-        
-    </li>
-<li>
+    <li class="toctree-l2"><a href="#ssh-vs-plain-protocol">ssh vs plain protocol</a></li>
+    
+
+    <li class="toctree-l2"><a href="#ssh-keys">SSH keys</a></li>
+    
+
+    <li class="toctree-l2"><a href="#binaries-32-bit">Binaries (32-bit)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#binaries-64-bit">Binaries (64-bit)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#paths">Paths</a></li>
+    
+
+    <li class="toctree-l2"><a href="#custom-location">Custom location</a></li>
+    
+
+    </ul>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../faq/">FAQ</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../faq/">FAQ</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../maven/">Maven</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../maven/">Maven</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../releases/">Releases</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../releases/">Releases</a>
+	    </li>
           
         </ul>
       </div>
@@ -145,9 +128,8 @@
     <li>Windows</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/fracpete/rsync4j" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/fracpete/rsync4j/edit/master/docs/windows.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -174,10 +156,10 @@ simply supply this via the dummy string <code>ssh</code>. In Java code, this is 
 <h3 id="binaries-32-bit">Binaries (32-bit)</h3>
 <p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
 their dependencies from the 32-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
-<p>The dependencies, as of 2018-11-07 (OpenSSH 7.9p1-1), are as follows:</p>
+<p>The dependencies, as of 2019-09-27 (OpenSSH 8.0p1-2), are as follows:</p>
 <ul>
 <li>cygcom_err-2.dll</li>
-<li>cygcrypto-1.0.0.dll</li>
+<li>cygcrypto-1.1.dll</li>
 <li>cyggcc_s-1.dll</li>
 <li>cyggssapi_krb5-2.dll</li>
 <li>cygiconv-2.dll</li>
@@ -202,10 +184,10 @@ any missing DLLs in the following directory:</p>
 <h3 id="binaries-64-bit">Binaries (64-bit)</h3>
 <p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
 their dependencies from the 64-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
-<p>The dependencies, as of 2018-11-07 (OpenSSH 7.9p1-1), are as follows:</p>
+<p>The dependencies, as of 2019-09-27 (OpenSSH 8.0p1-2), are as follows:</p>
 <ul>
 <li>cygcom_err-2.dll</li>
-<li>cygcrypto-1.0.0.dll</li>
+<li>cygcrypto-1.1.dll</li>
 <li>cyggcc_s-seh-1.dll</li>
 <li>cyggssapi_krb5-2.dll</li>
 <li>cygiconv-2.dll</li>
@@ -247,7 +229,7 @@ directory (doesn't have to exist) where you want to house the binaries and keys.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../faq/" class="btn btn-neutral float-right" title="FAQ"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../faq/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../java/" class="btn btn-neutral" title="Java"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -269,13 +251,13 @@ directory (doesn't have to exist) where you want to house the binaries and keys.
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/fracpete/rsync4j" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../java/" style="color: #fcfcfc;">&laquo; Previous</a></span>
@@ -285,6 +267,7 @@ directory (doesn't have to exist) where you want to house the binaries and keys.
       
     </span>
 </div>
+    <script src="../js/theme.js"></script>
 
 </body>
 </html>
