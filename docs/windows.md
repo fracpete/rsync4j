@@ -96,6 +96,16 @@ Will get automatically get converted to:
 /cygdrive/c/some/path/blah.txt
 ```
 
+### Syncing between Windows hosts
+
+You can easily synchronize two Windows hosts by using a UNC path for the remote
+host. For instance, directory `C:\some\dir` on the local machine can be synced
+to remotehost `otherbox` into directory `C:\other\dir` using these paths:
+
+* source: `/cygdrive/c/some/dir/`
+* destination: `//otherbox/C$/other/dir`
+
+
 ### Custom location
 
 It is possible to use another location than `%USERPROFILE%\rsync4j`. You only
