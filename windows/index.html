@@ -82,6 +82,9 @@
     <li class="toctree-l2"><a href="#paths">Paths</a></li>
     
 
+    <li class="toctree-l2"><a href="#syncing-between-windows-hosts">Syncing between Windows hosts</a></li>
+    
+
     <li class="toctree-l2"><a href="#custom-location">Custom location</a></li>
     
 
@@ -218,6 +221,14 @@ any missing DLLs in the following directory:</p>
 <pre><code>/cygdrive/c/some/path/blah.txt
 </code></pre>
 
+<h3 id="syncing-between-windows-hosts">Syncing between Windows hosts</h3>
+<p>You can easily synchronize two Windows hosts by using a UNC path for the remote
+host. For instance, directory <code>C:\some\dir</code> on the local machine can be synced
+to remotehost <code>otherbox</code> into directory <code>C:\other\dir</code> using these paths:</p>
+<ul>
+<li>source: <code>/cygdrive/c/some/dir/</code></li>
+<li>destination: <code>//otherbox/C$/other/dir</code></li>
+</ul>
 <h3 id="custom-location">Custom location</h3>
 <p>It is possible to use another location than <code>%USERPROFILE%\rsync4j</code>. You only
 have to set up the <code>RSYNC4J_HOME</code> environment variable to point to the top-level
