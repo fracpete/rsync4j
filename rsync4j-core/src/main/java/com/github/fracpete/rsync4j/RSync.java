@@ -15,7 +15,7 @@
 
 /*
  * RSync.java
- * Copyright (C) 2017-2019 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2020 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -1684,7 +1684,7 @@ public class RSync
         if (getRsh().equalsIgnoreCase("ssh"))
           result.add("--rsh=\"" + Binaries.sshBinary() + "\"");
         else
-          result.add("--rsh=\"" + Binaries.convertPath(getRsh()) + "\"");
+          result.add("--rsh=\"" + getRsh() + "\"");
       }
       else {
         result.add("--rsh=" + getRsh());
