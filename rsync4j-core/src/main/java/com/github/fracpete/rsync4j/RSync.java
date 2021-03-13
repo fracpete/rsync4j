@@ -1733,7 +1733,7 @@ public class RSync
     if (isCvsExclude()) result.add("--cvs-exclude");
     for (String ie: getIncludeExclude()) {
       String id = ie.substring(0, ie.indexOf('\t'));
-      String s = ie.substring(2);
+      String s = ie.substring(ie.indexOf('\t') + 1);
       switch (id) {
 	case "E":
 	  result.add("--exclude=" + s);
