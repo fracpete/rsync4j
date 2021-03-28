@@ -15,7 +15,7 @@
 
 /*
  * SshKeyGen.java
- * Copyright (C) 2018 University of Waikato, Hamilton, NZ
+ * Copyright (C) 2018-2021 University of Waikato, Hamilton, NZ
  */
 
 package com.github.fracpete.rsync4j;
@@ -181,407 +181,674 @@ public class SshKeyGen
     file = new ArrayList<>();
   }
 
+  /**
+   * Option: -A
+   */
   public SshKeyGen forAll(boolean value) {
     forAll = value;
     return this;
   }
 
+  /**
+   * Option: -A
+   */
   public boolean isForAll() {
     return forAll;
   }
 
+  /**
+   * Option: -a
+   */
   public SshKeyGen rounds(int value) {
     rounds = value;
     return this;
   }
 
+  /**
+   * Option: -a
+   */
   public int getRounds() {
     return rounds;
   }
 
+  /**
+   * Option: -B
+   */
   public SshKeyGen bubbleBabble(boolean value) {
     bubbleBabble = value;
     return this;
   }
 
+  /**
+   * Option: -B
+   */
   public boolean isBubbleBabble() {
     return bubbleBabble;
   }
 
+  /**
+   * Option: -b
+   */
   public SshKeyGen bits(int value) {
     bits = value;
     return this;
   }
 
+  /**
+   * Option: -b
+   */
   public int getBits() {
     return bits;
   }
 
+  /**
+   * Option: -C
+   */
   public SshKeyGen comment(String value) {
     comment = value;
     return this;
   }
 
+  /**
+   * Option: -C
+   */
   public String getComment() {
     return comment;
   }
 
+  /**
+   * Option: -D
+   */
   public SshKeyGen pkcs11(String value) {
     pkcs11 = value;
     return this;
   }
 
+  /**
+   * Option: -D
+   */
   public String getPkcs11() {
     return pkcs11;
   }
 
+  /**
+   * Option: -E
+   */
   public SshKeyGen fingerprint(String value) {
     fingerprint = value;
     return this;
   }
 
+  /**
+   * Option: -E
+   */
   public String getFingerprint() {
     return fingerprint;
   }
 
+  /**
+   * Option: -e
+   */
   public SshKeyGen export(boolean value) {
     export = value;
     return this;
   }
 
+  /**
+   * Option: -e
+   */
   public boolean isExport() {
     return export;
   }
 
+  /**
+   * Option: -F
+   */
   public SshKeyGen findHost(String value) {
     findHost = value;
     return this;
   }
 
+  /**
+   * Option: -F
+   */
   public String getFindHost() {
     return findHost;
   }
 
+  /**
+   * Option: -f
+   */
   public SshKeyGen keyFile(String value) {
     keyFile = value;
     return this;
   }
 
+  /**
+   * Option: -f
+   */
   public String getKeyFile() {
     return keyFile;
   }
 
+  /**
+   * Option: -G
+   */
   public SshKeyGen candidatePrimes(String value) {
     candidatePrimes = value;
     return this;
   }
 
+  /**
+   * Option: -G
+   */
   public String getCandidatePrimes() {
     return candidatePrimes;
   }
 
+  /**
+   * Option: -g
+   */
   public SshKeyGen genericDnsFormat(boolean value) {
     genericDnsFormat = value;
     return this;
   }
 
+  /**
+   * Option: -g
+   */
   public boolean isGenericDnsFormat() {
     return genericDnsFormat;
   }
 
+  /**
+   * Option: -H
+   */
   public SshKeyGen hashKnownHosts(boolean value) {
     hashKnownHosts = value;
     return this;
   }
 
+  /**
+   * Option: -H
+   */
   public boolean isHashKnownHosts() {
     return hashKnownHosts;
   }
 
+  /**
+   * Option: -h
+   */
   public SshKeyGen createHostCertificate(boolean value) {
     createHostCertificate = value;
     return this;
   }
 
+  /**
+   * Option: -h
+   */
   public boolean isCreateHostCertificate() {
     return createHostCertificate;
   }
 
+  /**
+   * Option: -I
+   */
   public SshKeyGen certificateIdentity(String value) {
     certificateIdentity = value;
     return this;
   }
 
+  /**
+   * Option: -I
+   */
   public String getCertificateIdentity() {
     return certificateIdentity;
   }
 
+  /**
+   * Option: -i
+   */
   public SshKeyGen importUnencrypted(boolean value) {
     importUnencrypted = value;
     return this;
   }
 
+  /**
+   * Option: -i
+   */
   public boolean isImportUnencrypted() {
     return importUnencrypted;
   }
 
+  /**
+   * Option: -J
+   */
   public SshKeyGen screenNumLines(int value) {
     if (value >= -1)
       screenNumLines = value;
     return this;
   }
 
+  /**
+   * Option: -J
+   */
   public int getScreenNumLines() {
     return screenNumLines;
   }
 
+  /**
+   * Option: -j
+   */
   public SshKeyGen screenStartLine(int value) {
     if (value >= -1)
       screenStartLine = value;
     return this;
   }
 
+  /**
+   * Option: -j
+   */
   public int getScreenStartLine() {
     return screenStartLine;
   }
 
+  /**
+   * Option: -K
+   */
   public SshKeyGen screenCheckPoint(String value) {
     screenCheckPoint = value;
     return this;
   }
 
+  /**
+   * Option: -K
+   */
   public String getScreenCheckPoint() {
     return screenCheckPoint;
   }
 
+  /**
+   * Option: -k
+   */
   public SshKeyGen generateKRL(boolean value) {
     generateKRL = value;
     return this;
   }
 
+  /**
+   * Option: -k
+   */
   public boolean isGenerateKRL() {
     return generateKRL;
   }
 
+  /**
+   * Option: -L
+   */
   public SshKeyGen printContents(boolean value) {
     printContents = value;
     return this;
   }
 
+  /**
+   * Option: -L
+   */
   public boolean isPrintContents() {
     return printContents;
   }
 
+  /**
+   * Option: -l
+   */
   public SshKeyGen showFingerprint(boolean value) {
     showFingerprint = value;
     return this;
   }
 
+  /**
+   * Option: -l
+   */
   public boolean isShowFingerprint() {
     return showFingerprint;
   }
 
+  /**
+   * Option: -M
+   */
   public SshKeyGen memory(int value) {
     if ((value == -1) || (value > 0))
       memory = value;
     return this;
   }
 
+  /**
+   * Option: -M
+   */
   public int getMemory() {
     return memory;
   }
 
+  /**
+   * Option: -m
+   */
   public SshKeyGen keyFormat(String value) {
     keyFormat = value;
     return this;
   }
 
+  /**
+   * Option: -m
+   */
   public String getKeyFormat() {
     return keyFormat;
   }
 
+  /**
+   * Option: -N
+   */
   public SshKeyGen newPassPhrase(String value) {
     newPassPhrase = value;
     return this;
   }
 
+  /**
+   * Option: -N
+   */
   public String getNewPassPhrase() {
     return newPassPhrase;
   }
 
+  /**
+   * Option: -n
+   */
   public SshKeyGen principals(String value) {
     principals = value;
     return this;
   }
 
+  /**
+   * Option: -n
+   */
   public String getPrincipals() {
     return principals;
   }
 
+  /**
+   * Option: -O
+   */
   public SshKeyGen option(String... value) {
     option = new ArrayList<>(Arrays.asList(value));
     return this;
   }
 
+  /**
+   * Option: -O
+   */
   public SshKeyGen option(List<String> value) {
     option = new ArrayList<>(value);
     return this;
   }
 
+  /**
+   * Option: -O
+   */
   public List<String> getOption() {
     return option;
   }
 
+  /**
+   * Option: -o
+   */
   public SshKeyGen useOpenSshFormat(boolean value) {
     useOpenSshFormat = value;
     return this;
   }
 
+  /**
+   * Option: -o
+   */
   public boolean isUseOpenSshFormat() {
     return useOpenSshFormat;
   }
 
+  /**
+   * Option: -P
+   */
   public SshKeyGen passPhrase(String value) {
     passPhrase = value;
     return this;
   }
 
+  /**
+   * Option: -P
+   */
   public String getPassPhrase() {
     return passPhrase;
   }
 
+  /**
+   * Option: -p
+   */
   public SshKeyGen changePassPhrase(boolean value) {
     changePassPhrase = value;
     return this;
   }
 
+  /**
+   * Option: -p
+   */
   public boolean isChangePassPhrase() {
     return changePassPhrase;
   }
 
+  /**
+   * Option: -Q
+   */
   public SshKeyGen testRevoked(boolean value) {
     testRevoked = value;
     return this;
   }
 
+  /**
+   * Option: -Q
+   */
   public boolean isTestRevoked() {
     return testRevoked;
   }
 
+  /**
+   * Option: -q
+   */
   public SshKeyGen quiet(boolean value) {
     quiet = value;
     return this;
   }
 
+  /**
+   * Option: -q
+   */
   public boolean isQuiet() {
     return quiet;
   }
 
+  /**
+   * Option: -R
+   */
   public SshKeyGen removeKeys(String value) {
     removeKeys = value;
     return this;
   }
 
+  /**
+   * Option: -R
+   */
   public String getRemoveKeys() {
     return removeKeys;
   }
 
+  /**
+   * Option: -r
+   */
   public SshKeyGen printFingerprint(String value) {
     printFingerprint = value;
     return this;
   }
 
+  /**
+   * Option: -r
+   */
   public String getPrintFingerprint() {
     return printFingerprint;
   }
 
+  /**
+   * Option: -S
+   */
   public SshKeyGen startPoint(String value) {
     startPoint = value;
     return this;
   }
 
+  /**
+   * Option: -S
+   */
   public String getStartPoint() {
     return startPoint;
   }
 
+  /**
+   * Option: -s
+   */
   public SshKeyGen signCaKey(String value) {
     signCaKey = value;
     return this;
   }
 
+  /**
+   * Option: -s
+   */
   public String getSignCaKey() {
     return signCaKey;
   }
 
+  /**
+   * Option: -T
+   */
   public SshKeyGen testCandidatePrimes(String value) {
     testCandidatePrimes = value;
     return this;
   }
 
+  /**
+   * Option: -T
+   */
   public String getTestCandidatePrimes() {
     return testCandidatePrimes;
   }
 
+  /**
+   * Option: -t
+   */
   public SshKeyGen keyType(String value) {
     keyType = value;
     return this;
   }
 
+  /**
+   * Option: -t
+   */
   public String getKeyType() {
     return keyType;
   }
 
+  /**
+   * Option: -u
+   */
   public SshKeyGen updateKRL(boolean value) {
     updateKRL = value;
     return this;
   }
 
+  /**
+   * Option: -u
+   */
   public boolean isUpdateKRL() {
     return updateKRL;
   }
 
+  /**
+   * Option: -V
+   */
   public SshKeyGen validityInterval(String value) {
     validityInterval = value;
     return this;
   }
 
+  /**
+   * Option: -V
+   */
   public String getValidityInterval() {
     return validityInterval;
   }
 
+  /**
+   * Option: -v/-vv/-vvv
+   */
   public SshKeyGen verbose(int value) {
     if ((value >= -1) && (value <= 3))
       verbose = value;
     return this;
   }
 
+  /**
+   * Option: -v/-vv/-vvv
+   */
   public int getVerbose() {
     return verbose;
   }
 
+  /**
+   * Option: -W
+   */
   public SshKeyGen generator(String value) {
     generator = value;
     return this;
   }
 
+  /**
+   * Option: -W
+   */
   public String getGenerator() {
     return generator;
   }
 
+  /**
+   * Option: -y
+   */
   public SshKeyGen readPrivatePrintPublicOpenSsh(boolean value) {
     readPrivatePrintPublicOpenSsh = value;
     return this;
   }
 
+  /**
+   * Option: -y
+   */
   public boolean isReadPrivatePrintPublicOpenSsh() {
     return readPrivatePrintPublicOpenSsh;
   }
 
+  /**
+   * Option: -z
+   */
   public SshKeyGen serialNumber(String value) {
     serialNumber = value;
     return this;
   }
 
+  /**
+   * Option: -z
+   */
   public String getSerialNumber() {
     return serialNumber;
   }
