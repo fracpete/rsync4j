@@ -15,7 +15,7 @@
 
 /*
  * RSync.java
- * Copyright (C) 2017-2020 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2021 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -102,6 +102,8 @@ public class RSync
   protected boolean executability;
 
   protected String chmod;
+
+  protected boolean acls;
 
   protected boolean xattrs;
 
@@ -315,6 +317,7 @@ public class RSync
     perms = false;
     executability = false;
     chmod = "";
+    acls = false;
     xattrs = false;
     owner = false;
     group = false;
@@ -478,415 +481,706 @@ public class RSync
     return (RSync) super.outputCommandline(value);
   }
 
+  /**
+   * rsync option: --verbose/-v
+   */
   public boolean isVerbose() {
     return verbose;
   }
 
+  /**
+   * rsync option: --verbose/-v
+   */
   public RSync verbose(boolean verbose) {
     this.verbose = verbose;
     return this;
   }
 
+  /**
+   * rsync option: --info
+   */
   public String getInfo() {
     return info;
   }
 
+  /**
+   * rsync option: --info
+   */
   public RSync info(String info) {
     this.info = info;
     return this;
   }
 
+  /**
+   * rsync option: --debug
+   */
   public String getDebug() {
     return debug;
   }
 
+  /**
+   * rsync option: --debug
+   */
   public RSync debug(String debug) {
     this.debug = debug;
     return this;
   }
 
+  /**
+   * rsync option: --msgs2stderr
+   */
   public boolean isMsgs2stderr() {
     return msgs2stderr;
   }
 
+  /**
+   * rsync option: --msgs2stderr
+   */
   public RSync msgs2stderr(boolean msgs2stderr) {
     this.msgs2stderr = msgs2stderr;
     return this;
   }
 
+  /**
+   * rsync option: --quiet/-q
+   */
   public boolean isQuiet() {
     return quiet;
   }
 
+  /**
+   * rsync option: --quiet/-q
+   */
   public RSync quiet(boolean quiet) {
     this.quiet = quiet;
     return this;
   }
 
+  /**
+   * rsync option: --no-motd
+   */
   public boolean isNoMotd() {
     return no_motd;
   }
 
+  /**
+   * rsync option: --no-motd
+   */
   public RSync noMotd(boolean no_motd) {
     this.no_motd = no_motd;
     return this;
   }
 
+  /**
+   * rsync option: --checksum/-c
+   */
   public boolean isChecksum() {
     return checksum;
   }
 
+  /**
+   * rsync option: --checksum/-c
+   */
   public RSync checksum(boolean checksum) {
     this.checksum = checksum;
     return this;
   }
 
+  /**
+   * rsync option: --archive/-a
+   */
   public boolean isArchive() {
     return archive;
   }
 
+  /**
+   * rsync option: --archive/-a
+   */
   public RSync archive(boolean archive) {
     this.archive = archive;
     return this;
   }
 
+  /**
+   * rsync option: --recursive/-r
+   */
   public boolean isRecursive() {
     return recursive;
   }
 
+  /**
+   * rsync option: --recursive/-r
+   */
   public RSync recursive(boolean recursive) {
     this.recursive = recursive;
     return this;
   }
 
+  /**
+   * rsync option: --relative/-R
+   */
   public boolean isRelative() {
     return relative;
   }
 
+  /**
+   * rsync option: --relative/-R
+   */
   public RSync relative(boolean relative) {
     this.relative = relative;
     return this;
   }
 
+  /**
+   * rsync option: --no-implied-dirs
+   */
   public boolean isNoImpliedDirs() {
     return no_implied_dirs;
   }
 
+  /**
+   * rsync option: --no-implied-dirs
+   */
   public RSync noImpliedDirs(boolean no_implied_dirs) {
     this.no_implied_dirs = no_implied_dirs;
     return this;
   }
 
+  /**
+   * rsync option: --backup/-b
+   */
   public boolean isBackup() {
     return backup;
   }
 
+  /**
+   * rsync option: --backup/-b
+   */
   public RSync backup(boolean backup) {
     this.backup = backup;
     return this;
   }
 
+  /**
+   * rsync option: --backup-dir
+   */
   public String getBackupDir() {
     return backup_dir;
   }
 
+  /**
+   * rsync option: --backup-dir
+   */
   public RSync backupDir(String backup_dir) {
     this.backup_dir = backup_dir;
     return this;
   }
 
+  /**
+   * rsync option: --suffix
+   */
   public String getSuffix() {
     return suffix;
   }
 
+  /**
+   * rsync option: --suffix
+   */
   public RSync suffix(String suffix) {
     this.suffix = suffix;
     return this;
   }
 
+  /**
+   * rsync option: --update/-u
+   */
   public boolean isUpdate() {
     return update;
   }
 
+  /**
+   * rsync option: --update/-u
+   */
   public RSync update(boolean update) {
     this.update = update;
     return this;
   }
 
+  /**
+   * rsync option: --inplace
+   */
   public boolean isInplace() {
     return inplace;
   }
 
+  /**
+   * rsync option: --inplace
+   */
   public RSync inplace(boolean inplace) {
     this.inplace = inplace;
     return this;
   }
 
+  /**
+   * rsync option: --append
+   */
   public boolean isAppend() {
     return append;
   }
 
+  /**
+   * rsync option: --append
+   */
   public RSync append(boolean append) {
     this.append = append;
     return this;
   }
 
+  /**
+   * rsync option: --append-verify
+   */
   public boolean isAppendVerify() {
     return append_verify;
   }
 
+  /**
+   * rsync option: --append-verify
+   */
   public RSync appendVerify(boolean append_verify) {
     this.append_verify = append_verify;
     return this;
   }
 
+  /**
+   * rsync option: --dirs/-d
+   */
   public boolean isDirs() {
     return dirs;
   }
 
+  /**
+   * rsync option: --dirs/-d
+   */
   public RSync dirs(boolean dirs) {
     this.dirs = dirs;
     return this;
   }
 
+  /**
+   * rsync option: --links/-l
+   */
   public boolean isLinks() {
     return links;
   }
 
+  /**
+   * rsync option: --links/-l
+   */
   public RSync links(boolean links) {
     this.links = links;
     return this;
   }
 
+  /**
+   * rsync option: --copy-links/-L
+   */
   public boolean isCopyLinks() {
     return copy_links;
   }
 
+  /**
+   * rsync option: --copy-links/-L
+   */
   public RSync copyLinks(boolean copy_links) {
     this.copy_links = copy_links;
     return this;
   }
 
+  /**
+   * rsync option: --copy-unsafe-links
+   */
   public boolean isCopyUnsafeLinks() {
     return copy_unsafe_links;
   }
 
+  /**
+   * rsync option: --copy-unsafe-links
+   */
   public RSync copyUnsafeLinks(boolean copy_unsafe_links) {
     this.copy_unsafe_links = copy_unsafe_links;
     return this;
   }
 
+  /**
+   * rsync option: --safe-links
+   */
   public boolean isSafeLinks() {
     return safe_links;
   }
 
+  /**
+   * rsync option: --safe-links
+   */
   public RSync safeLinks(boolean safe_links) {
     this.safe_links = safe_links;
     return this;
   }
 
+  /**
+   * rsync option: --munge-links
+   */
   public boolean isMungeLinks() {
     return munge_links;
   }
 
+  /**
+   * rsync option: --munge-links
+   */
   public RSync mungeLinks(boolean munge_links) {
     this.munge_links = munge_links;
     return this;
   }
 
+  /**
+   * rsync option: --copy-dirlinks/-k
+   */
   public boolean isCopyDirlinks() {
     return copy_dirlinks;
   }
 
+  /**
+   * rsync option: --copy-dirlinks/-k
+   */
   public RSync copyDirlinks(boolean copy_dirlinks) {
     this.copy_dirlinks = copy_dirlinks;
     return this;
   }
 
+  /**
+   * rsync option: --keep-dirlinks/-K
+   */
   public boolean isKeepDirlinks() {
     return keep_dirlinks;
   }
 
+  /**
+   * rsync option: --copy-dirlinks/-K
+   */
   public RSync keepDirlinks(boolean keep_dirlinks) {
     this.keep_dirlinks = keep_dirlinks;
     return this;
   }
 
+  /**
+   * rsync option: --hard-links/-H
+   */
   public boolean isHardLinks() {
     return hard_links;
   }
 
+  /**
+   * rsync option: --hard-links/-H
+   */
   public RSync hardLinks(boolean hard_links) {
     this.hard_links = hard_links;
     return this;
   }
 
+  /**
+   * rsync option: --perms/-p
+   */
   public boolean isPerms() {
     return perms;
   }
 
+  /**
+   * rsync option: --perms/-p
+   */
   public RSync perms(boolean perms) {
     this.perms = perms;
     return this;
   }
 
+  /**
+   * rsync option: --executability/-E
+   */
   public boolean isExecutability() {
     return executability;
   }
 
+  /**
+   * rsync option: --executability/-E
+   */
   public RSync executability(boolean executability) {
     this.executability = executability;
     return this;
   }
 
+  /**
+   * rsync option: --chmod
+   */
   public String getChmod() {
     return chmod;
   }
 
+  /**
+   * rsync option: --chmod
+   */
   public RSync chmod(String chmod) {
     this.chmod = chmod;
     return this;
   }
 
+  /**
+   * rsync option: --acls/-A
+   */
+  public boolean isAcls() {
+    return acls;
+  }
+
+  /**
+   * rsync option: --acls/-A
+   */
+  public RSync acls(boolean acls) {
+    this.acls = acls;
+    return this;
+  }
+
+  /**
+   * rsync option: --xattrs/-X
+   */
   public boolean isXattrs() {
     return xattrs;
   }
 
+  /**
+   * rsync option: --xattrs/-X
+   */
   public RSync xattrs(boolean xattrs) {
     this.xattrs = xattrs;
     return this;
   }
 
+  /**
+   * rsync option: --owner/-o
+   */
   public boolean isOwner() {
     return owner;
   }
 
+  /**
+   * rsync option: --owner/-o
+   */
   public RSync owner(boolean owner) {
     this.owner = owner;
     return this;
   }
 
+  /**
+   * rsync option: --group/-g
+   */
   public boolean isGroup() {
     return group;
   }
 
+  /**
+   * rsync option: --group/-g
+   */
   public RSync group(boolean group) {
     this.group = group;
     return this;
   }
 
+  /**
+   * rsync option: --devices
+   */
   public boolean isDevices() {
     return devices;
   }
 
+  /**
+   * rsync option: --devices
+   */
   public RSync devices(boolean devices) {
     this.devices = devices;
     return this;
   }
 
+  /**
+   * rsync option: --specials
+   */
   public boolean isSpecials() {
     return specials;
   }
 
+  /**
+   * rsync option: --specials
+   */
   public RSync specials(boolean specials) {
     this.specials = specials;
     return this;
   }
 
+  /**
+   * rsync option: --times/-t
+   */
   public boolean isTimes() {
     return times;
   }
 
+  /**
+   * rsync option: --times/-t
+   */
   public RSync times(boolean times) {
     this.times = times;
     return this;
   }
 
+  /**
+   * rsync option: --omit-dir-times/-O
+   */
   public boolean isOmitDirTimes() {
     return omit_dir_times;
   }
 
+  /**
+   * rsync option: --omit-dir-times/-O
+   */
   public RSync omitDirTimes(boolean omit_dir_times) {
     this.omit_dir_times = omit_dir_times;
     return this;
   }
 
+  /**
+   * rsync option: --omit-link-times/-J
+   */
   public boolean isOmitLinkTimes() {
     return omit_link_times;
   }
 
+  /**
+   * rsync option: --omit-link-times/-J
+   */
   public RSync omitLinkTimes(boolean omit_link_times) {
     this.omit_link_times = omit_link_times;
     return this;
   }
 
+  /**
+   * rsync option: --super
+   */
   public boolean isSuper_() {
     return super_;
   }
 
+  /**
+   * rsync option: --super
+   */
   public RSync super_(boolean super_) {
     this.super_ = super_;
     return this;
   }
 
+  /**
+   * rsync option: --fake-super
+   */
   public boolean isFakeSuper() {
     return fake_super;
   }
 
+  /**
+   * rsync option: --fake-super
+   */
   public RSync fakeSuper(boolean fake_super) {
     this.fake_super = fake_super;
     return this;
   }
 
+  /**
+   * rsync option: --sparse/-S
+   */
   public boolean isSparse() {
     return sparse;
   }
 
+  /**
+   * rsync option: --sparse/-S
+   */
   public RSync sparse(boolean sparse) {
     this.sparse = sparse;
     return this;
   }
 
+  /**
+   * rsync option: --preallocate
+   */
   public boolean isPreallocate() {
     return preallocate;
   }
 
+  /**
+   * rsync option: --preallocate
+   */
   public RSync preallocate(boolean preallocate) {
     this.preallocate = preallocate;
     return this;
   }
 
+  /**
+   * rsync option: --dry-run/-n
+   */
   public boolean isDryRun() {
     return dry_run;
   }
 
+  /**
+   * rsync option: --dry-run/-n
+   */
   public RSync dryRun(boolean dry_run) {
     this.dry_run = dry_run;
     return this;
   }
 
+  /**
+   * rsync option: --whole-file/-W
+   */
   public boolean isWholeFile() {
     return whole_file;
   }
 
+  /**
+   * rsync option: --whole-file/-W
+   */
   public RSync wholeFile(boolean whole_file) {
     this.whole_file = whole_file;
     return this;
   }
 
+  /**
+   * rsync option: --one-file-system/-x
+   */
   public boolean isOneFileSystem() {
     return one_file_system;
   }
 
+  /**
+   * rsync option: --one-file-system/-x
+   */
   public RSync oneFileSystem(boolean one_file_system) {
     this.one_file_system = one_file_system;
     return this;
   }
 
+  /**
+   * rsync option: --block-size/-B
+   */
   public String getBlockSize() {
     return block_size;
   }
 
+  /**
+   * rsync option: --block-size/-B
+   */
   public RSync blockSize(String block_size) {
     this.block_size = block_size;
     return this;
@@ -896,6 +1190,8 @@ public class RSync
    * On Windows: "ssh" will use the built-in ssh binary.
    * Other platforms: use absolute path of binary, eg "/usr/bin/ssh"
    * Empty for plain rsync protocol.
+   *
+   * rsync option: --rsh/-e
    *
    * @return		the rsh binary
    */
@@ -908,6 +1204,8 @@ public class RSync
    * Other platforms: absolute path of binary, eg "/usr/bin/ssh"
    * Leave empty for plain rsync protocol.
    *
+   * rsync option: --rsh/-e
+   *
    * @param rsh		the rsh binary
    * @return		itself
    */
@@ -916,370 +1214,616 @@ public class RSync
     return this;
   }
 
+  /**
+   * rsync option: --rsync-path
+   */
   public String getRsyncPath() {
     return rsync_path;
   }
 
+  /**
+   * rsync option: --rsync-path
+   */
   public RSync rsyncPath(String rsync_path) {
     this.rsync_path = rsync_path;
     return this;
   }
 
+  /**
+   * rsync option: --existing
+   */
   public boolean isExisting() {
     return existing;
   }
 
+  /**
+   * rsync option: --existing
+   */
   public RSync existing(boolean existing) {
     this.existing = existing;
     return this;
   }
 
+  /**
+   * rsync option: --ignore-existing
+   */
   public boolean isIgnoreExisting() {
     return ignore_existing;
   }
 
+  /**
+   * rsync option: --ignore-existing
+   */
   public RSync ignoreExisting(boolean ignore_existing) {
     this.ignore_existing = ignore_existing;
     return this;
   }
 
+  /**
+   * rsync option: --remove-source-files
+   */
   public boolean isRemoveSourceFiles() {
     return remove_source_files;
   }
 
+  /**
+   * rsync option: --remove-source-files
+   */
   public RSync removeSourceFiles(boolean remove_source_files) {
     this.remove_source_files = remove_source_files;
     return this;
   }
 
+  /**
+   * rsync option: --delete
+   */
   public boolean isDelete() {
     return delete;
   }
 
+  /**
+   * rsync option: --delete
+   */
   public RSync delete(boolean delete) {
     this.delete = delete;
     return this;
   }
 
+  /**
+   * rsync option: --delete-before
+   */
   public boolean isDeleteBefore() {
     return delete_before;
   }
 
+  /**
+   * rsync option: --delete-before
+   */
   public RSync deleteBefore(boolean delete_before) {
     this.delete_before = delete_before;
     return this;
   }
 
+  /**
+   * rsync option: --delete-during
+   */
   public boolean isDeleteDuring() {
     return delete_during;
   }
 
+  /**
+   * rsync option: --delete-during
+   */
   public RSync deleteDuring(boolean delete_during) {
     this.delete_during = delete_during;
     return this;
   }
 
+  /**
+   * rsync option: --delete-delay
+   */
   public boolean isDeleteDelay() {
     return delete_delay;
   }
 
+  /**
+   * rsync option: --delete-delay
+   */
   public RSync deleteDelay(boolean delete_delay) {
     this.delete_delay = delete_delay;
     return this;
   }
 
+  /**
+   * rsync option: --delete-after
+   */
   public boolean isDeleteAfter() {
     return delete_after;
   }
 
+  /**
+   * rsync option: --delete-after
+   */
   public RSync deleteAfter(boolean delete_after) {
     this.delete_after = delete_after;
     return this;
   }
 
+  /**
+   * rsync option: --delete-excluded
+   */
   public boolean isDeleteExcluded() {
     return delete_excluded;
   }
 
+  /**
+   * rsync option: --delete-excluded
+   */
   public RSync deleteExcluded(boolean delete_excluded) {
     this.delete_excluded = delete_excluded;
     return this;
   }
 
+  /**
+   * rsync option: --ignore-missing-args
+   */
   public boolean isIgnoreMissingArgs() {
     return ignore_missing_args;
   }
 
+  /**
+   * rsync option: --ignore-missing-args
+   */
   public RSync ignoreMissingArgs(boolean ignore_missing_args) {
     this.ignore_missing_args = ignore_missing_args;
     return this;
   }
 
+  /**
+   * rsync option: --delete-missing-args
+   */
   public boolean isDeleteMissingArgs() {
     return delete_missing_args;
   }
 
+  /**
+   * rsync option: --delete-missing-args
+   */
   public RSync deleteMissingArgs(boolean delete_missing_args) {
     this.delete_missing_args = delete_missing_args;
     return this;
   }
 
+  /**
+   * rsync option: --ignore-errors
+   */
   public boolean isIgnoreErrors() {
     return ignore_errors;
   }
 
+  /**
+   * rsync option: --ignore-errors
+   */
   public RSync ignoreErrors(boolean ignore_errors) {
     this.ignore_errors = ignore_errors;
     return this;
   }
 
+  /**
+   * rsync option: --force
+   */
   public boolean isForce() {
     return force;
   }
 
+  /**
+   * rsync option: --force
+   */
   public RSync force(boolean force) {
     this.force = force;
     return this;
   }
 
+  /**
+   * rsync option: --max-delete
+   */
   public int getMaxDelete() {
     return max_delete;
   }
 
+  /**
+   * rsync option: --max-delete
+   */
   public RSync maxDelete(int max_delete) {
     this.max_delete = max_delete;
     return this;
   }
 
+  /**
+   * rsync option: --max-size
+   */
   public String getMaxSize() {
     return max_size;
   }
 
+  /**
+   * rsync option: --max-size
+   */
   public RSync maxSize(String max_size) {
     this.max_size = max_size;
     return this;
   }
 
+  /**
+   * rsync option: --min-size
+   */
   public String getMinSize() {
     return min_size;
   }
 
+  /**
+   * rsync option: --min-size
+   */
   public RSync minSize(String min_size) {
     this.min_size = min_size;
     return this;
   }
 
+  /**
+   * rsync option: --partial
+   */
   public boolean isPartial() {
     return partial;
   }
 
+  /**
+   * rsync option: --partial
+   */
   public RSync partial(boolean partial) {
     this.partial = partial;
     return this;
   }
 
+  /**
+   * rsync option: --partial-dir
+   */
   public String getPartialDir() {
     return partial_dir;
   }
 
+  /**
+   * rsync option: --partial-dir
+   */
   public RSync partialDir(String partial_dir) {
     this.partial_dir = partial_dir;
     return this;
   }
 
+  /**
+   * rsync option: --delay-updates
+   */
   public boolean isDelayUpdates() {
     return delay_updates;
   }
 
+  /**
+   * rsync option: --delay-updates
+   */
   public RSync delayUpdates(boolean delay_updates) {
     this.delay_updates = delay_updates;
     return this;
   }
 
+  /**
+   * rsync option: --prune-empty-dirs/-m
+   */
   public boolean isPruneEmptyDirs() {
     return prune_empty_dirs;
   }
 
+  /**
+   * rsync option: --prune-empty-dirs/-m
+   */
   public RSync pruneEmptyDirs(boolean prune_empty_dirs) {
     this.prune_empty_dirs = prune_empty_dirs;
     return this;
   }
 
+  /**
+   * rsync option: --numeric-ids
+   */
   public boolean isNumericIds() {
     return numeric_ids;
   }
 
+  /**
+   * rsync option: --numeric-ids
+   */
   public RSync numericIds(boolean numeric_ids) {
     this.numeric_ids = numeric_ids;
     return this;
   }
 
+  /**
+   * rsync option: --usermap
+   */
   public String getUsermap() {
     return usermap;
   }
 
+  /**
+   * rsync option: --usermap
+   */
   public RSync usermap(String usermap) {
     this.usermap = usermap;
     return this;
   }
 
+  /**
+   * rsync option: --groupmap
+   */
   public String getGroupmap() {
     return groupmap;
   }
 
+  /**
+   * rsync option: --groupmap
+   */
   public RSync groupmap(String groupmap) {
     this.groupmap = groupmap;
     return this;
   }
 
+  /**
+   * rsync option: --chown
+   */
   public String getChown() {
     return chown;
   }
 
+  /**
+   * rsync option: --chown
+   */
   public RSync chown(String chown) {
     this.chown = chown;
     return this;
   }
 
+  /**
+   * rsync option: --timeout
+   */
   public int getTimeout() {
     return timeout;
   }
 
+  /**
+   * rsync option: --timeout
+   */
   public RSync timeout(int timeout) {
     this.timeout = timeout;
     return this;
   }
 
+  /**
+   * rsync option: --contimeout
+   */
   public int getContimeout() {
     return contimeout;
   }
 
+  /**
+   * rsync option: --contimeout
+   */
   public RSync contimeout(int contimeout) {
     this.contimeout = contimeout;
     return this;
   }
 
+  /**
+   * rsync option: --ignore-times/-I
+   */
   public boolean isIgnoreTimes() {
     return ignore_times;
   }
 
+  /**
+   * rsync option: --ignore-times/-I
+   */
   public RSync ignoreTimes(boolean ignore_times) {
     this.ignore_times = ignore_times;
     return this;
   }
 
+  /**
+   * rsync option: --remote-option/-M
+   */
   public String getRemoteOption() {
     return remote_option;
   }
 
+  /**
+   * rsync option: --remote-option/-M
+   */
   public RSync remoteOption(String remote_option) {
     this.remote_option = remote_option;
     return this;
   }
 
+  /**
+   * rsync option: --size-only
+   */
   public boolean isSizeOnly() {
     return size_only;
   }
 
+  /**
+   * rsync option: --size-only
+   */
   public RSync sizeOnly(boolean size_only) {
     this.size_only = size_only;
     return this;
   }
 
+  /**
+   * rsync option: --modify-window
+   */
   public int getModifyWindow() {
     return modify_window;
   }
 
+  /**
+   * rsync option: --modify-window
+   */
   public RSync modifyWindow(int modify_window) {
     this.modify_window = modify_window;
     return this;
   }
 
+  /**
+   * rsync option: --temp-dir/-T
+   */
   public String getTempDir() {
     return temp_dir;
   }
 
+  /**
+   * rsync option: --temp-dir/-T
+   */
   public RSync tempDir(String temp_dir) {
     this.temp_dir = temp_dir;
     return this;
   }
 
+  /**
+   * rsync option: --fuzzy/-y
+   */
   public boolean isFuzzy() {
     return fuzzy;
   }
 
+  /**
+   * rsync option: --fuzzy/-y
+   */
   public RSync fuzzy(boolean fuzzy) {
     this.fuzzy = fuzzy;
     return this;
   }
 
+  /**
+   * rsync option: --compare-dest
+   */
   public String[] getCompareDest() {
     return compare_dest;
   }
 
+  /**
+   * rsync option: --compare-dest
+   */
   public RSync compareDest(String... compare_dest) {
     this.compare_dest = compare_dest.clone();
     return this;
   }
 
+  /**
+   * rsync option: --copy-dest
+   */
   public String[] getCopyDest() {
     return copy_dest;
   }
 
+  /**
+   * rsync option: --copy-dest
+   */
   public RSync copyDest(String... copy_dest) {
     this.copy_dest = copy_dest.clone();
     return this;
   }
 
+  /**
+   * rsync option: --link-dest
+   */
   public String[] getLinkDest() {
     return link_dest;
   }
 
+  /**
+   * rsync option: --link-dest
+   */
   public RSync linkDest(String... link_dest) {
     this.link_dest = link_dest.clone();
     return this;
   }
 
+  /**
+   * rsync option: --compress/-z
+   */
   public boolean isCompress() {
     return compress;
   }
 
+  /**
+   * rsync option: --compress/-z
+   */
   public RSync compress(boolean compress) {
     this.compress = compress;
     return this;
   }
 
+  /**
+   * rsync option: --compress-level
+   */
   public int getCompressLevel() {
     return compress_level;
   }
 
+  /**
+   * rsync option: --compress-level
+   */
   public RSync compressLevel(int compress_level) {
     this.compress_level = compress_level;
     return this;
   }
 
+  /**
+   * rsync option: --skip-compress
+   */
   public String getSkipCompress() {
     return skip_compress;
   }
 
+  /**
+   * rsync option: --skip-compress
+   */
   public RSync skipCompress(String skip_compress) {
     this.skip_compress = skip_compress;
     return this;
   }
 
+  /**
+   * rsync option: --cvs-exclude/-C
+   */
   public boolean isCvsExclude() {
     return cvs_exclude;
   }
 
+  /**
+   * rsync option: --cvs-exclude/-C
+   */
   public RSync cvsExclude(boolean cvs_exclude) {
     this.cvs_exclude = cvs_exclude;
     return this;
   }
 
+  /**
+   * rsync option: --filter/-f
+   */
   public String[] getFilter() {
     return includeExcludeSubset("F");
   }
 
+  /**
+   * rsync option: --filter/-f
+   */
   public RSync filter(String... filter) {
     return addIncludeExclude("F", filter);
   }
@@ -1317,289 +1861,481 @@ public class RSync
     return include_exclude.toArray(new String[0]);
   }
 
+  /**
+   * rsync option: --exclude
+   */
   public String[] getExclude() {
     return includeExcludeSubset("E");
   }
 
+  /**
+   * rsync option: --exclude
+   */
   public RSync exclude(String... exclude) {
     return addIncludeExclude("E", exclude);
   }
 
+  /**
+   * rsync option: --exclude-from
+   */
   public String[] getExcludeFrom() {
     return includeExcludeSubset("EF");
   }
 
+  /**
+   * rsync option: --exclude-from
+   */
   public RSync excludeFrom(String... exclude_from) {
     for (int i = 0; i < exclude_from.length; i++)
       exclude_from[i] = Binaries.convertPath(exclude_from[i]);
     return addIncludeExclude("EF", exclude_from);
   }
 
+  /**
+   * rsync option: --include
+   */
   public String[] getInclude() {
     return includeExcludeSubset("I");
   }
 
+  /**
+   * rsync option: --include
+   */
   public RSync include(String... include) {
     return addIncludeExclude("I", include);
   }
 
+  /**
+   * rsync option: --include-from
+   */
   public String[] getIncludeFrom() {
     return includeExcludeSubset("IF");
   }
 
+  /**
+   * rsync option: --include-from
+   */
   public RSync includeFrom(String... include_from) {
     for (int i = 0; i < include_from.length; i++)
       include_from[i] = Binaries.convertPath(include_from[i]);
     return addIncludeExclude("IF", include_from);
   }
 
+  /**
+   * rsync option: --files-from
+   */
   public String getFilesFrom() {
     return files_from;
   }
 
+  /**
+   * rsync option: --files-from
+   */
   public RSync filesFrom(String files_from) {
     this.files_from = Binaries.convertPath(files_from);
     return this;
   }
 
+  /**
+   * rsync option: --from0/-0
+   */
   public boolean isFrom0() {
     return from0;
   }
 
+  /**
+   * rsync option: --from0/-0
+   */
   public RSync from0(boolean from0) {
     this.from0 = from0;
     return this;
   }
 
+  /**
+   * rsync option: --protect-args/-s
+   */
   public boolean isProtectArgs() {
     return protect_args;
   }
 
+  /**
+   * rsync option: --protect-args/-s
+   */
   public RSync protectArgs(boolean protect_args) {
     this.protect_args = protect_args;
     return this;
   }
 
+  /**
+   * rsync option: --address
+   */
   public String getAddress() {
     return address;
   }
 
+  /**
+   * rsync option: --address
+   */
   public RSync address(String address) {
     this.address = address;
     return this;
   }
 
+  /**
+   * rsync option: --port
+   */
   public int getPort() {
     return port;
   }
 
+  /**
+   * rsync option: --port
+   */
   public RSync port(int port) {
     this.port = port;
     return this;
   }
 
+  /**
+   * rsync option: --sockopts
+   */
   public String getSockopts() {
     return sockopts;
   }
 
+  /**
+   * rsync option: --sockopts
+   */
   public RSync sockopts(String sockopts) {
     this.sockopts = sockopts;
     return this;
   }
 
+  /**
+   * rsync option: --blocking-io
+   */
   public boolean isBlockingIO() {
     return blocking_io;
   }
 
+  /**
+   * rsync option: --blocking-io
+   */
   public RSync blockingIO(boolean blocking_io) {
     this.blocking_io = blocking_io;
     return this;
   }
 
+  /**
+   * rsync option: --stats
+   */
   public boolean isStats() {
     return stats;
   }
 
+  /**
+   * rsync option: --stats
+   */
   public RSync stats(boolean stats) {
     this.stats = stats;
     return this;
   }
 
+  /**
+   * rsync option: --8-bit-output/-8
+   */
   public boolean isEightBitOutput() {
     return eight_bit_output;
   }
 
+  /**
+   * rsync option: --8-bit-output/-8
+   */
   public RSync eightBitOutput(boolean eight_bit_output) {
     this.eight_bit_output = eight_bit_output;
     return this;
   }
 
+  /**
+   * rsync option: --human-readable/-h
+   */
   public boolean isHumanReadable() {
     return human_readable;
   }
 
+  /**
+   * rsync option: --human-readable/-h
+   */
   public RSync humanReadable(boolean human_readable) {
     this.human_readable = human_readable;
     return this;
   }
 
+  /**
+   * rsync option: --progress
+   */
   public boolean isProgress() {
     return progress;
   }
 
+  /**
+   * rsync option: --progress
+   */
   public RSync progress(boolean progress) {
     this.progress = progress;
     return this;
   }
 
+  /**
+   * rsync option: --itemize-changes/-i
+   */
   public boolean isItemizeChanges() {
     return itemize_changes;
   }
 
+  /**
+   * rsync option: --itemize-changes/-i
+   */
   public RSync itemizeChanges(boolean itemize_changes) {
     this.itemize_changes = itemize_changes;
     return this;
   }
 
+  /**
+   * rsync option: --out-format
+   */
   public String getOutFormat() {
     return out_format;
   }
 
+  /**
+   * rsync option: --out-format
+   */
   public RSync outFormat(String out_format) {
     this.out_format = out_format;
     return this;
   }
 
+  /**
+   * rsync option: --log-file
+   */
   public String getLogFile() {
     return log_file;
   }
 
+  /**
+   * rsync option: --log-file
+   */
   public RSync logFile(String log_file) {
     this.log_file = Binaries.convertPath(log_file);
     return this;
   }
 
+  /**
+   * rsync option: --log-file-format
+   */
   public String getLogFileFormat() {
     return log_file_format;
   }
 
+  /**
+   * rsync option: --log-file-format
+   */
   public RSync logFileFormat(String log_file_format) {
     this.log_file_format = log_file_format;
     return this;
   }
 
+  /**
+   * rsync option: --password-file
+   */
   public String getPasswordFile() {
     return password_file;
   }
 
+  /**
+   * rsync option: --password-file
+   */
   public RSync passwordFile(String password_file) {
     this.password_file = Binaries.convertPath(password_file);
     return this;
   }
 
+  /**
+   * rsync option: --list-only
+   */
   public boolean isListOnly() {
     return list_only;
   }
 
+  /**
+   * rsync option: --list-only
+   */
   public RSync listOnly(boolean list_only) {
     this.list_only = list_only;
     return this;
   }
 
+  /**
+   * rsync option: --bwlimit
+   */
   public String getBwlimit() {
     return bwlimit;
   }
 
+  /**
+   * rsync option: --bwlimit
+   */
   public RSync bwlimit(String bwlimit) {
     this.bwlimit = bwlimit;
     return this;
   }
 
+  /**
+   * rsync option: --outbuf
+   */
   public char getOutbuf() {
     return outbuf;
   }
 
+  /**
+   * rsync option: --outbuf
+   */
   public RSync outbuf(char outbuf) {
     this.outbuf = outbuf;
     return this;
   }
 
+  /**
+   * rsync option: --write-batch
+   */
   public String getWriteBatch() {
     return write_batch;
   }
 
+  /**
+   * rsync option: --write-batch
+   */
   public RSync writeBatch(String write_batch) {
     this.write_batch = Binaries.convertPath(write_batch);
     return this;
   }
 
+  /**
+   * rsync option: --only-write-batch
+   */
   public String getOnlyWriteBatch() {
     return only_write_batch;
   }
 
+  /**
+   * rsync option: --only-write-batch
+   */
   public RSync onlyWriteBatch(String only_write_batch) {
     this.only_write_batch = Binaries.convertPath(only_write_batch);
     return this;
   }
 
+  /**
+   * rsync option: --read-batch
+   */
   public String getReadBatch() {
     return read_batch;
   }
 
+  /**
+   * rsync option: --read-batch
+   */
   public RSync readBatch(String read_batch) {
     this.read_batch = Binaries.convertPath(read_batch);
     return this;
   }
 
+  /**
+   * rsync option: --protocol
+   */
   public int getProtocol() {
     return protocol;
   }
 
+  /**
+   * rsync option: --protocol
+   */
   public RSync protocol(int protocol) {
     this.protocol = protocol;
     return this;
   }
 
+  /**
+   * rsync option: --iconv
+   */
   public String getIconv() {
     return iconv;
   }
 
+  /**
+   * rsync option: --iconv
+   */
   public RSync iconv(String iconv) {
     this.iconv = iconv;
     return this;
   }
 
+  /**
+   * rsync option: --checksum-seed
+   */
   public int getChecksumSeed() {
     return checksum_seed;
   }
 
+  /**
+   * rsync option: --checksum-seed
+   */
   public RSync checksumSeed(int checksum_seed) {
     this.checksum_seed = checksum_seed;
     return this;
   }
 
+  /**
+   * rsync option: --ipv4/-4
+   */
   public boolean isIpv4() {
     return ipv4;
   }
 
+  /**
+   * rsync option: --ipv4/-4
+   */
   public RSync ipv4(boolean ipv4) {
     this.ipv4 = ipv4;
     return this;
   }
 
+  /**
+   * rsync option: --ipv6/-6
+   */
   public boolean isIpv6() {
     return ipv6;
   }
 
+  /**
+   * rsync option: --ipv6/-6
+   */
   public RSync ipv6(boolean ipv6) {
     this.ipv6 = ipv6;
     return this;
   }
 
+  /**
+   * rsync option: --version
+   */
   public boolean isVersion() {
     return version;
   }
 
+  /**
+   * rsync option: --version
+   */
   public RSync version(boolean version) {
     this.version = version;
     return this;
@@ -1663,6 +2399,7 @@ public class RSync
     if (isPerms()) result.add("--perms");
     if (isExecutability()) result.add("--executability");
     if (!getChmod().isEmpty()) result.add("--chmod=" + getChmod());
+    if (isAcls()) result.add("--acls");
     if (isXattrs()) result.add("--xattrs");
     if (isOwner()) result.add("--owner");
     if (isGroup()) result.add("--group");
@@ -1708,11 +2445,13 @@ public class RSync
     if (!getMaxSize().isEmpty()) result.add("--max-size=" + getMaxSize());
     if (!getMinSize().isEmpty()) result.add("--min-size=" + getMinSize());
     if (isPartial()) result.add("--partial");
+    if (!getPartialDir().isEmpty()) result.add("--partial-dir=" + getPartialDir());
     if (isDelayUpdates()) result.add("--delay-updates");
     if (isPruneEmptyDirs()) result.add("--prune-empty-dirs");
     if (isNumericIds()) result.add("--numeric-ids");
     if (!getUsermap().isEmpty()) result.add("--usermap=" + getUsermap());
     if (!getGroupmap().isEmpty()) result.add("--groupmap=" + getGroupmap());
+    if (!getChown().isEmpty()) result.add("--chown=" + getChown());
     if (getTimeout() > -1) result.add("--timeout=" + getTimeout());
     if (getContimeout() > -1) result.add("--contimeout=" + getContimeout());
     if (isIgnoreTimes()) result.add("--ignore-times");
