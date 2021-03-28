@@ -182,7 +182,7 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -A
+   * ssh-keygen option: -A
    */
   public SshKeyGen forAll(boolean value) {
     forAll = value;
@@ -190,14 +190,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -A
+   * ssh-keygen option: -A
    */
   public boolean isForAll() {
     return forAll;
   }
 
   /**
-   * Option: -a
+   * ssh-keygen option: -a
    */
   public SshKeyGen rounds(int value) {
     rounds = value;
@@ -205,14 +205,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -a
+   * ssh-keygen option: -a
    */
   public int getRounds() {
     return rounds;
   }
 
   /**
-   * Option: -B
+   * ssh-keygen option: -B
    */
   public SshKeyGen bubbleBabble(boolean value) {
     bubbleBabble = value;
@@ -220,14 +220,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -B
+   * ssh-keygen option: -B
    */
   public boolean isBubbleBabble() {
     return bubbleBabble;
   }
 
   /**
-   * Option: -b
+   * ssh-keygen option: -b
    */
   public SshKeyGen bits(int value) {
     bits = value;
@@ -235,14 +235,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -b
+   * ssh-keygen option: -b
    */
   public int getBits() {
     return bits;
   }
 
   /**
-   * Option: -C
+   * ssh-keygen option: -C
    */
   public SshKeyGen comment(String value) {
     comment = value;
@@ -250,14 +250,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -C
+   * ssh-keygen option: -C
    */
   public String getComment() {
     return comment;
   }
 
   /**
-   * Option: -D
+   * ssh-keygen option: -D
    */
   public SshKeyGen pkcs11(String value) {
     pkcs11 = value;
@@ -265,14 +265,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -D
+   * ssh-keygen option: -D
    */
   public String getPkcs11() {
     return pkcs11;
   }
 
   /**
-   * Option: -E
+   * ssh-keygen option: -E
    */
   public SshKeyGen fingerprint(String value) {
     fingerprint = value;
@@ -280,14 +280,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -E
+   * ssh-keygen option: -E
    */
   public String getFingerprint() {
     return fingerprint;
   }
 
   /**
-   * Option: -e
+   * ssh-keygen option: -e
    */
   public SshKeyGen export(boolean value) {
     export = value;
@@ -295,14 +295,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -e
+   * ssh-keygen option: -e
    */
   public boolean isExport() {
     return export;
   }
 
   /**
-   * Option: -F
+   * ssh-keygen option: -F
    */
   public SshKeyGen findHost(String value) {
     findHost = value;
@@ -310,14 +310,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -F
+   * ssh-keygen option: -F
    */
   public String getFindHost() {
     return findHost;
   }
 
   /**
-   * Option: -f
+   * ssh-keygen option: -f
    */
   public SshKeyGen keyFile(String value) {
     keyFile = value;
@@ -325,14 +325,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -f
+   * ssh-keygen option: -f
    */
   public String getKeyFile() {
     return keyFile;
   }
 
   /**
-   * Option: -G
+   * ssh-keygen option: -G
    */
   public SshKeyGen candidatePrimes(String value) {
     candidatePrimes = value;
@@ -340,14 +340,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -G
+   * ssh-keygen option: -G
    */
   public String getCandidatePrimes() {
     return candidatePrimes;
   }
 
   /**
-   * Option: -g
+   * ssh-keygen option: -g
    */
   public SshKeyGen genericDnsFormat(boolean value) {
     genericDnsFormat = value;
@@ -355,14 +355,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -g
+   * ssh-keygen option: -g
    */
   public boolean isGenericDnsFormat() {
     return genericDnsFormat;
   }
 
   /**
-   * Option: -H
+   * ssh-keygen option: -H
    */
   public SshKeyGen hashKnownHosts(boolean value) {
     hashKnownHosts = value;
@@ -370,14 +370,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -H
+   * ssh-keygen option: -H
    */
   public boolean isHashKnownHosts() {
     return hashKnownHosts;
   }
 
   /**
-   * Option: -h
+   * ssh-keygen option: -h
    */
   public SshKeyGen createHostCertificate(boolean value) {
     createHostCertificate = value;
@@ -385,14 +385,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -h
+   * ssh-keygen option: -h
    */
   public boolean isCreateHostCertificate() {
     return createHostCertificate;
   }
 
   /**
-   * Option: -I
+   * ssh-keygen option: -I
    */
   public SshKeyGen certificateIdentity(String value) {
     certificateIdentity = value;
@@ -400,14 +400,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -I
+   * ssh-keygen option: -I
    */
   public String getCertificateIdentity() {
     return certificateIdentity;
   }
 
   /**
-   * Option: -i
+   * ssh-keygen option: -i
    */
   public SshKeyGen importUnencrypted(boolean value) {
     importUnencrypted = value;
@@ -415,14 +415,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -i
+   * ssh-keygen option: -i
    */
   public boolean isImportUnencrypted() {
     return importUnencrypted;
   }
 
   /**
-   * Option: -J
+   * ssh-keygen option: -J
    */
   public SshKeyGen screenNumLines(int value) {
     if (value >= -1)
@@ -431,14 +431,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -J
+   * ssh-keygen option: -J
    */
   public int getScreenNumLines() {
     return screenNumLines;
   }
 
   /**
-   * Option: -j
+   * ssh-keygen option: -j
    */
   public SshKeyGen screenStartLine(int value) {
     if (value >= -1)
@@ -447,14 +447,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -j
+   * ssh-keygen option: -j
    */
   public int getScreenStartLine() {
     return screenStartLine;
   }
 
   /**
-   * Option: -K
+   * ssh-keygen option: -K
    */
   public SshKeyGen screenCheckPoint(String value) {
     screenCheckPoint = value;
@@ -462,14 +462,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -K
+   * ssh-keygen option: -K
    */
   public String getScreenCheckPoint() {
     return screenCheckPoint;
   }
 
   /**
-   * Option: -k
+   * ssh-keygen option: -k
    */
   public SshKeyGen generateKRL(boolean value) {
     generateKRL = value;
@@ -477,14 +477,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -k
+   * ssh-keygen option: -k
    */
   public boolean isGenerateKRL() {
     return generateKRL;
   }
 
   /**
-   * Option: -L
+   * ssh-keygen option: -L
    */
   public SshKeyGen printContents(boolean value) {
     printContents = value;
@@ -492,14 +492,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -L
+   * ssh-keygen option: -L
    */
   public boolean isPrintContents() {
     return printContents;
   }
 
   /**
-   * Option: -l
+   * ssh-keygen option: -l
    */
   public SshKeyGen showFingerprint(boolean value) {
     showFingerprint = value;
@@ -507,14 +507,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -l
+   * ssh-keygen option: -l
    */
   public boolean isShowFingerprint() {
     return showFingerprint;
   }
 
   /**
-   * Option: -M
+   * ssh-keygen option: -M
    */
   public SshKeyGen memory(int value) {
     if ((value == -1) || (value > 0))
@@ -523,14 +523,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -M
+   * ssh-keygen option: -M
    */
   public int getMemory() {
     return memory;
   }
 
   /**
-   * Option: -m
+   * ssh-keygen option: -m
    */
   public SshKeyGen keyFormat(String value) {
     keyFormat = value;
@@ -538,14 +538,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -m
+   * ssh-keygen option: -m
    */
   public String getKeyFormat() {
     return keyFormat;
   }
 
   /**
-   * Option: -N
+   * ssh-keygen option: -N
    */
   public SshKeyGen newPassPhrase(String value) {
     newPassPhrase = value;
@@ -553,14 +553,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -N
+   * ssh-keygen option: -N
    */
   public String getNewPassPhrase() {
     return newPassPhrase;
   }
 
   /**
-   * Option: -n
+   * ssh-keygen option: -n
    */
   public SshKeyGen principals(String value) {
     principals = value;
@@ -568,14 +568,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -n
+   * ssh-keygen option: -n
    */
   public String getPrincipals() {
     return principals;
   }
 
   /**
-   * Option: -O
+   * ssh-keygen option: -O
    */
   public SshKeyGen option(String... value) {
     option = new ArrayList<>(Arrays.asList(value));
@@ -583,7 +583,7 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -O
+   * ssh-keygen option: -O
    */
   public SshKeyGen option(List<String> value) {
     option = new ArrayList<>(value);
@@ -591,14 +591,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -O
+   * ssh-keygen option: -O
    */
   public List<String> getOption() {
     return option;
   }
 
   /**
-   * Option: -o
+   * ssh-keygen option: -o
    */
   public SshKeyGen useOpenSshFormat(boolean value) {
     useOpenSshFormat = value;
@@ -606,14 +606,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -o
+   * ssh-keygen option: -o
    */
   public boolean isUseOpenSshFormat() {
     return useOpenSshFormat;
   }
 
   /**
-   * Option: -P
+   * ssh-keygen option: -P
    */
   public SshKeyGen passPhrase(String value) {
     passPhrase = value;
@@ -621,14 +621,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -P
+   * ssh-keygen option: -P
    */
   public String getPassPhrase() {
     return passPhrase;
   }
 
   /**
-   * Option: -p
+   * ssh-keygen option: -p
    */
   public SshKeyGen changePassPhrase(boolean value) {
     changePassPhrase = value;
@@ -636,14 +636,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -p
+   * ssh-keygen option: -p
    */
   public boolean isChangePassPhrase() {
     return changePassPhrase;
   }
 
   /**
-   * Option: -Q
+   * ssh-keygen option: -Q
    */
   public SshKeyGen testRevoked(boolean value) {
     testRevoked = value;
@@ -651,14 +651,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -Q
+   * ssh-keygen option: -Q
    */
   public boolean isTestRevoked() {
     return testRevoked;
   }
 
   /**
-   * Option: -q
+   * ssh-keygen option: -q
    */
   public SshKeyGen quiet(boolean value) {
     quiet = value;
@@ -666,14 +666,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -q
+   * ssh-keygen option: -q
    */
   public boolean isQuiet() {
     return quiet;
   }
 
   /**
-   * Option: -R
+   * ssh-keygen option: -R
    */
   public SshKeyGen removeKeys(String value) {
     removeKeys = value;
@@ -681,14 +681,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -R
+   * ssh-keygen option: -R
    */
   public String getRemoveKeys() {
     return removeKeys;
   }
 
   /**
-   * Option: -r
+   * ssh-keygen option: -r
    */
   public SshKeyGen printFingerprint(String value) {
     printFingerprint = value;
@@ -696,14 +696,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -r
+   * ssh-keygen option: -r
    */
   public String getPrintFingerprint() {
     return printFingerprint;
   }
 
   /**
-   * Option: -S
+   * ssh-keygen option: -S
    */
   public SshKeyGen startPoint(String value) {
     startPoint = value;
@@ -711,14 +711,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -S
+   * ssh-keygen option: -S
    */
   public String getStartPoint() {
     return startPoint;
   }
 
   /**
-   * Option: -s
+   * ssh-keygen option: -s
    */
   public SshKeyGen signCaKey(String value) {
     signCaKey = value;
@@ -726,14 +726,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -s
+   * ssh-keygen option: -s
    */
   public String getSignCaKey() {
     return signCaKey;
   }
 
   /**
-   * Option: -T
+   * ssh-keygen option: -T
    */
   public SshKeyGen testCandidatePrimes(String value) {
     testCandidatePrimes = value;
@@ -741,14 +741,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -T
+   * ssh-keygen option: -T
    */
   public String getTestCandidatePrimes() {
     return testCandidatePrimes;
   }
 
   /**
-   * Option: -t
+   * ssh-keygen option: -t
    */
   public SshKeyGen keyType(String value) {
     keyType = value;
@@ -756,14 +756,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -t
+   * ssh-keygen option: -t
    */
   public String getKeyType() {
     return keyType;
   }
 
   /**
-   * Option: -u
+   * ssh-keygen option: -u
    */
   public SshKeyGen updateKRL(boolean value) {
     updateKRL = value;
@@ -771,14 +771,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -u
+   * ssh-keygen option: -u
    */
   public boolean isUpdateKRL() {
     return updateKRL;
   }
 
   /**
-   * Option: -V
+   * ssh-keygen option: -V
    */
   public SshKeyGen validityInterval(String value) {
     validityInterval = value;
@@ -786,14 +786,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -V
+   * ssh-keygen option: -V
    */
   public String getValidityInterval() {
     return validityInterval;
   }
 
   /**
-   * Option: -v/-vv/-vvv
+   * ssh-keygen option: -v/-vv/-vvv
    */
   public SshKeyGen verbose(int value) {
     if ((value >= -1) && (value <= 3))
@@ -802,14 +802,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -v/-vv/-vvv
+   * ssh-keygen option: -v/-vv/-vvv
    */
   public int getVerbose() {
     return verbose;
   }
 
   /**
-   * Option: -W
+   * ssh-keygen option: -W
    */
   public SshKeyGen generator(String value) {
     generator = value;
@@ -817,14 +817,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -W
+   * ssh-keygen option: -W
    */
   public String getGenerator() {
     return generator;
   }
 
   /**
-   * Option: -y
+   * ssh-keygen option: -y
    */
   public SshKeyGen readPrivatePrintPublicOpenSsh(boolean value) {
     readPrivatePrintPublicOpenSsh = value;
@@ -832,14 +832,14 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -y
+   * ssh-keygen option: -y
    */
   public boolean isReadPrivatePrintPublicOpenSsh() {
     return readPrivatePrintPublicOpenSsh;
   }
 
   /**
-   * Option: -z
+   * ssh-keygen option: -z
    */
   public SshKeyGen serialNumber(String value) {
     serialNumber = value;
@@ -847,7 +847,7 @@ public class SshKeyGen
   }
 
   /**
-   * Option: -z
+   * ssh-keygen option: -z
    */
   public String getSerialNumber() {
     return serialNumber;

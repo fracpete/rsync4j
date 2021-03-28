@@ -186,7 +186,7 @@ public class Ssh
   }
 
   /**
-   * Option: -1
+   * ssh option: -1
    */
   public Ssh version1(boolean value) {
     version1 = value;
@@ -194,14 +194,14 @@ public class Ssh
   }
 
   /**
-   * Option: -2
+   * ssh option: -2
    */
   public boolean getVersion1() {
     return version1;
   }
 
   /**
-   * Option: -2
+   * ssh option: -2
    */
   public Ssh version2(boolean value) {
     version2 = value;
@@ -209,14 +209,14 @@ public class Ssh
   }
 
   /**
-   * Option: -2
+   * ssh option: -2
    */
   public boolean getVersion2() {
     return version2;
   }
 
   /**
-   * Option: -4
+   * ssh option: -4
    */
   public Ssh ipv4(boolean value) {
     ipv4 = value;
@@ -224,14 +224,14 @@ public class Ssh
   }
 
   /**
-   * Option: -4
+   * ssh option: -4
    */
   public boolean getIpv4() {
     return ipv4;
   }
 
   /**
-   * Option: -6
+   * ssh option: -6
    */
   public Ssh ipv6(boolean value) {
     ipv6 = value;
@@ -239,7 +239,7 @@ public class Ssh
   }
 
   /**
-   * Option: -6
+   * ssh option: -6
    */
   public boolean getIpv6() {
     return ipv6;
@@ -249,7 +249,7 @@ public class Ssh
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
    *
-   * Option: -A (true)/-a (false)
+   * ssh option: -A (true)/-a (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -260,14 +260,14 @@ public class Ssh
   }
 
   /**
-   * Option: -A (true)/-a (false)
+   * ssh option: -A (true)/-a (false)
    */
   public Boolean getForwardAgent() {
     return forwardAgent;
   }
 
   /**
-   * Option: -b
+   * ssh option: -b
    */
   public Ssh bindAddress(String value) {
     bindAddress = value;
@@ -275,14 +275,14 @@ public class Ssh
   }
 
   /**
-   * Option: -b
+   * ssh option: -b
    */
   public String getBindAddress() {
     return bindAddress;
   }
 
   /**
-   * Option: -C
+   * ssh option: -C
    */
   public Ssh compression(boolean value) {
     compression = value;
@@ -290,14 +290,14 @@ public class Ssh
   }
 
   /**
-   * Option: -C
+   * ssh option: -C
    */
   public boolean getCompression() {
     return compression;
   }
 
   /**
-   * Option: -c
+   * ssh option: -c
    */
   public Ssh cipherSpec(String value) {
     cipherSpec = value;
@@ -305,14 +305,14 @@ public class Ssh
   }
 
   /**
-   * Option: -c
+   * ssh option: -c
    */
   public String getCipherSpec() {
     return cipherSpec;
   }
 
   /**
-   * Option: -D
+   * ssh option: -D
    */
   public Ssh dynamicBindAddress(String value) {
     dynamicBindAddress = value;
@@ -320,14 +320,14 @@ public class Ssh
   }
 
   /**
-   * Option: -D
+   * ssh option: -D
    */
   public String getDynamicBindAddress() {
     return dynamicBindAddress;
   }
 
   /**
-   * Option: -E
+   * ssh option: -E
    */
   public Ssh logFile(String value) {
     logFile = value;
@@ -335,14 +335,14 @@ public class Ssh
   }
 
   /**
-   * Option: -E
+   * ssh option: -E
    */
   public String getLogFile() {
     return logFile;
   }
 
   /**
-   * Option: -e
+   * ssh option: -e
    */
   public Ssh escapeChar(String value) {
     escapeChar = value;
@@ -350,14 +350,14 @@ public class Ssh
   }
 
   /**
-   * Option: -e
+   * ssh option: -e
    */
   public String getEscapeChar() {
     return escapeChar;
   }
 
   /**
-   * Option: -F
+   * ssh option: -F
    */
   public Ssh configFile(String value) {
     configFile = value;
@@ -365,14 +365,14 @@ public class Ssh
   }
 
   /**
-   * Option: -F
+   * ssh option: -F
    */
   public String getConfigFile() {
     return configFile;
   }
 
   /**
-   * Option: -f
+   * ssh option: -f
    */
   public Ssh background(boolean value) {
     background = value;
@@ -380,14 +380,14 @@ public class Ssh
   }
 
   /**
-   * Option: -f
+   * ssh option: -f
    */
   public boolean getBackground() {
     return background;
   }
 
   /**
-   * Option: -G
+   * ssh option: -G
    */
   public Ssh printConfig(boolean value) {
     printConfig = value;
@@ -395,14 +395,14 @@ public class Ssh
   }
 
   /**
-   * Option: -G
+   * ssh option: -G
    */
   public boolean getPrintConfig() {
     return printConfig;
   }
 
   /**
-   * Option: -g
+   * ssh option: -g
    */
   public Ssh allowRemoteConnect(boolean value) {
     allowRemoteConnect = value;
@@ -410,14 +410,14 @@ public class Ssh
   }
 
   /**
-   * Option: -g
+   * ssh option: -g
    */
   public boolean getAllowRemoteConnect() {
     return allowRemoteConnect;
   }
 
   /**
-   * Option: -I
+   * ssh option: -I
    */
   public Ssh pkcs11(String value) {
     pkcs11 = value;
@@ -425,14 +425,14 @@ public class Ssh
   }
 
   /**
-   * Option: -I
+   * ssh option: -I
    */
   public String getPkcs11() {
     return pkcs11;
   }
 
   /**
-   * Option: -i
+   * ssh option: -i
    */
   public Ssh identifyFile(String value) {
     identifyFile = value;
@@ -440,7 +440,7 @@ public class Ssh
   }
 
   /**
-   * Option: -i
+   * ssh option: -i
    */
   public String getIdentifyFile() {
     return identifyFile;
@@ -450,7 +450,7 @@ public class Ssh
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
    *
-   * Option: -K (true)/-k (false)
+   * ssh option: -K (true)/-k (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -461,14 +461,14 @@ public class Ssh
   }
 
   /**
-   * Option: -K (true)/-k (false)
+   * ssh option: -K (true)/-k (false)
    */
   public Boolean getGssapi() {
     return gssapi;
   }
 
   /**
-   * Option: -L
+   * ssh option: -L
    */
   public Ssh local(String value) {
     local = value;
@@ -476,14 +476,14 @@ public class Ssh
   }
 
   /**
-   * Option: -L
+   * ssh option: -L
    */
   public String getLocal() {
     return local;
   }
 
   /**
-   * Option: -l
+   * ssh option: -l
    */
   public Ssh loginName(String value) {
     loginName = value;
@@ -491,14 +491,14 @@ public class Ssh
   }
 
   /**
-   * Option: -l
+   * ssh option: -l
    */
   public String getLoginName() {
     return loginName;
   }
 
   /**
-   * Option: -M
+   * ssh option: -M
    */
   public Ssh masterMode(boolean value) {
     masterMode = value;
@@ -506,14 +506,14 @@ public class Ssh
   }
 
   /**
-   * Option: -M
+   * ssh option: -M
    */
   public boolean getMasterMode() {
     return masterMode;
   }
 
   /**
-   * Option: -m
+   * ssh option: -m
    */
   public Ssh macSpec(String value) {
     macSpec = value;
@@ -521,14 +521,14 @@ public class Ssh
   }
 
   /**
-   * Option: -m
+   * ssh option: -m
    */
   public String getMacSpec() {
     return macSpec;
   }
 
   /**
-   * Option: -N
+   * ssh option: -N
    */
   public Ssh noRemoteExecute(boolean value) {
     noRemoteExecute = value;
@@ -536,14 +536,14 @@ public class Ssh
   }
 
   /**
-   * Option: -N
+   * ssh option: -N
    */
   public boolean getNoRemoteExecute() {
     return noRemoteExecute;
   }
 
   /**
-   * Option: -n
+   * ssh option: -n
    */
   public Ssh fromNull(boolean value) {
     fromNull = value;
@@ -551,14 +551,14 @@ public class Ssh
   }
 
   /**
-   * Option: -n
+   * ssh option: -n
    */
   public boolean getFromNull() {
     return fromNull;
   }
 
   /**
-   * Option: -O
+   * ssh option: -O
    */
   public Ssh controlCommand(String value) {
     controlCommand = value;
@@ -566,14 +566,14 @@ public class Ssh
   }
 
   /**
-   * Option: -O
+   * ssh option: -O
    */
   public String getControlCommand() {
     return controlCommand;
   }
 
   /**
-   * Option: -o
+   * ssh option: -o
    */
   public Ssh option(String... value) {
     option = new ArrayList<>(Arrays.asList(value));
@@ -581,7 +581,7 @@ public class Ssh
   }
 
   /**
-   * Option: -o
+   * ssh option: -o
    */
   public Ssh option(List<String> value) {
     option = new ArrayList<>(value);
@@ -589,14 +589,14 @@ public class Ssh
   }
 
   /**
-   * Option: -o
+   * ssh option: -o
    */
   public List<String> getOption() {
     return option;
   }
 
   /**
-   * Option: -p
+   * ssh option: -p
    */
   public Ssh port(int value) {
     if ((value == -1) || ((value > 0) && (value < 65536)))
@@ -605,14 +605,14 @@ public class Ssh
   }
 
   /**
-   * Option: -p
+   * ssh option: -p
    */
   public int getPort() {
     return port;
   }
 
   /**
-   * Option: -Q
+   * ssh option: -Q
    */
   public Ssh queryOption(String value) {
     queryOption = value;
@@ -620,14 +620,14 @@ public class Ssh
   }
 
   /**
-   * Option: -Q
+   * ssh option: -Q
    */
   public String getQueryOption() {
     return queryOption;
   }
 
   /**
-   * Option: -q
+   * ssh option: -q
    */
   public Ssh quiet(boolean value) {
     quiet = value;
@@ -635,14 +635,14 @@ public class Ssh
   }
 
   /**
-   * Option: -q
+   * ssh option: -q
    */
   public boolean getQuiet() {
     return quiet;
   }
 
   /**
-   * Option: -R
+   * ssh option: -R
    */
   public Ssh remote(String value) {
     remote = value;
@@ -650,14 +650,14 @@ public class Ssh
   }
 
   /**
-   * Option: -R
+   * ssh option: -R
    */
   public String getRemote() {
     return remote;
   }
 
   /**
-   * Option: -S
+   * ssh option: -S
    */
   public Ssh controlSocket(String value) {
     controlSocket = value;
@@ -665,14 +665,14 @@ public class Ssh
   }
 
   /**
-   * Option: -S
+   * ssh option: -S
    */
   public String getControlSocket() {
     return controlSocket;
   }
 
   /**
-   * Option: -s
+   * ssh option: -s
    */
   public Ssh subsystem(boolean value) {
     subsystem = value;
@@ -680,7 +680,7 @@ public class Ssh
   }
 
   /**
-   * Option: -s
+   * ssh option: -s
    */
   public boolean getSubsystem() {
     return subsystem;
@@ -690,7 +690,7 @@ public class Ssh
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
    *
-   * Option: -t (true)/-T (false)
+   * ssh option: -t (true)/-T (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -701,14 +701,14 @@ public class Ssh
   }
 
   /**
-   * Option: -t (true)/-T (false)
+   * ssh option: -t (true)/-T (false)
    */
   public Boolean getTerminal() {
     return terminal;
   }
 
   /**
-   * Option: -v
+   * ssh option: -v
    */
   public Ssh version(boolean value) {
     version = value;
@@ -716,14 +716,14 @@ public class Ssh
   }
 
   /**
-   * Option: -v
+   * ssh option: -v
    */
   public boolean getVersion() {
     return version;
   }
 
   /**
-   * Option: -v/-vv/-vvv
+   * ssh option: -v/-vv/-vvv
    */
   public Ssh verbose(int value) {
     if (value >= 0)
@@ -732,14 +732,14 @@ public class Ssh
   }
 
   /**
-   * Option: -v/-vv/-vvv
+   * ssh option: -v/-vv/-vvv
    */
   public int getVerbose() {
     return verbose;
   }
 
   /**
-   * Option: -W
+   * ssh option: -W
    */
   public Ssh forwardTo(String value) {
     forwardTo = value;
@@ -747,14 +747,14 @@ public class Ssh
   }
 
   /**
-   * Option: -W
+   * ssh option: -W
    */
   public String getForwardTo() {
     return forwardTo;
   }
 
   /**
-   * Option: -w
+   * ssh option: -w
    */
   public Ssh forwardTunnel(String value) {
     forwardTunnel = value;
@@ -762,7 +762,7 @@ public class Ssh
   }
 
   /**
-   * Option: -w
+   * ssh option: -w
    */
   public String getForwardTunnel() {
     return forwardTunnel;
@@ -772,7 +772,7 @@ public class Ssh
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
    *
-   * Option: -X
+   * ssh option: -X
    *
    * @param value the value, null for default
    * @return itself
@@ -783,14 +783,14 @@ public class Ssh
   }
 
   /**
-   * Option: -X
+   * ssh option: -X
    */
   public Boolean getX11() {
     return x11;
   }
 
   /**
-   * Option: -Y
+   * ssh option: -Y
    */
   public Ssh trustedX11(boolean value) {
     trustedX11 = value;
@@ -798,14 +798,14 @@ public class Ssh
   }
 
   /**
-   * Option: -Y
+   * ssh option: -Y
    */
   public boolean getTrustedX11() {
     return trustedX11;
   }
 
   /**
-   * Option: -y
+   * ssh option: -y
    */
   public Ssh syslog(boolean value) {
     syslog = value;
@@ -813,7 +813,7 @@ public class Ssh
   }
 
   /**
-   * Option: -y
+   * ssh option: -y
    */
   public boolean getSyslog() {
     return syslog;
