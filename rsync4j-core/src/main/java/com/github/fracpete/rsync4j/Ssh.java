@@ -15,7 +15,7 @@
 
 /*
  * Ssh.java
- * Copyright (C) 2018 University of Waikato, Hamilton, NZ
+ * Copyright (C) 2018-2021 University of Waikato, Hamilton, NZ
  */
 
 package com.github.fracpete.rsync4j;
@@ -185,38 +185,62 @@ public class Ssh
     return (Ssh) super.outputCommandline(value);
   }
 
+  /**
+   * Option: -1
+   */
   public Ssh version1(boolean value) {
     version1 = value;
     return this;
   }
 
+  /**
+   * Option: -2
+   */
   public boolean getVersion1() {
     return version1;
   }
 
+  /**
+   * Option: -2
+   */
   public Ssh version2(boolean value) {
     version2 = value;
     return this;
   }
 
+  /**
+   * Option: -2
+   */
   public boolean getVersion2() {
     return version2;
   }
 
+  /**
+   * Option: -4
+   */
   public Ssh ipv4(boolean value) {
     ipv4 = value;
     return this;
   }
 
+  /**
+   * Option: -4
+   */
   public boolean getIpv4() {
     return ipv4;
   }
 
+  /**
+   * Option: -6
+   */
   public Ssh ipv6(boolean value) {
     ipv6 = value;
     return this;
   }
 
+  /**
+   * Option: -6
+   */
   public boolean getIpv6() {
     return ipv6;
   }
@@ -224,6 +248,8 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
+   *
+   * Option: -A (true)/-a (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -233,114 +259,189 @@ public class Ssh
     return this;
   }
 
+  /**
+   * Option: -A (true)/-a (false)
+   */
   public Boolean getForwardAgent() {
     return forwardAgent;
   }
 
+  /**
+   * Option: -b
+   */
   public Ssh bindAddress(String value) {
     bindAddress = value;
     return this;
   }
 
+  /**
+   * Option: -b
+   */
   public String getBindAddress() {
     return bindAddress;
   }
 
+  /**
+   * Option: -C
+   */
   public Ssh compression(boolean value) {
     compression = value;
     return this;
   }
 
+  /**
+   * Option: -C
+   */
   public boolean getCompression() {
     return compression;
   }
 
+  /**
+   * Option: -c
+   */
   public Ssh cipherSpec(String value) {
     cipherSpec = value;
     return this;
   }
 
+  /**
+   * Option: -c
+   */
   public String getCipherSpec() {
     return cipherSpec;
   }
 
+  /**
+   * Option: -D
+   */
   public Ssh dynamicBindAddress(String value) {
     dynamicBindAddress = value;
     return this;
   }
 
+  /**
+   * Option: -D
+   */
   public String getDynamicBindAddress() {
     return dynamicBindAddress;
   }
 
+  /**
+   * Option: -E
+   */
   public Ssh logFile(String value) {
     logFile = value;
     return this;
   }
 
+  /**
+   * Option: -E
+   */
   public String getLogFile() {
     return logFile;
   }
 
+  /**
+   * Option: -e
+   */
   public Ssh escapeChar(String value) {
     escapeChar = value;
     return this;
   }
 
+  /**
+   * Option: -e
+   */
   public String getEscapeChar() {
     return escapeChar;
   }
 
+  /**
+   * Option: -F
+   */
   public Ssh configFile(String value) {
     configFile = value;
     return this;
   }
 
+  /**
+   * Option: -F
+   */
   public String getConfigFile() {
     return configFile;
   }
 
+  /**
+   * Option: -f
+   */
   public Ssh background(boolean value) {
     background = value;
     return this;
   }
 
+  /**
+   * Option: -f
+   */
   public boolean getBackground() {
     return background;
   }
 
+  /**
+   * Option: -G
+   */
   public Ssh printConfig(boolean value) {
     printConfig = value;
     return this;
   }
 
+  /**
+   * Option: -G
+   */
   public boolean getPrintConfig() {
     return printConfig;
   }
 
+  /**
+   * Option: -g
+   */
   public Ssh allowRemoteConnect(boolean value) {
     allowRemoteConnect = value;
     return this;
   }
 
+  /**
+   * Option: -g
+   */
   public boolean getAllowRemoteConnect() {
     return allowRemoteConnect;
   }
 
+  /**
+   * Option: -I
+   */
   public Ssh pkcs11(String value) {
     pkcs11 = value;
     return this;
   }
 
+  /**
+   * Option: -I
+   */
   public String getPkcs11() {
     return pkcs11;
   }
 
+  /**
+   * Option: -i
+   */
   public Ssh identifyFile(String value) {
     identifyFile = value;
     return this;
   }
 
+  /**
+   * Option: -i
+   */
   public String getIdentifyFile() {
     return identifyFile;
   }
@@ -348,6 +449,8 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
+   *
+   * Option: -K (true)/-k (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -357,138 +460,228 @@ public class Ssh
     return this;
   }
 
+  /**
+   * Option: -K (true)/-k (false)
+   */
   public Boolean getGssapi() {
     return gssapi;
   }
 
+  /**
+   * Option: -L
+   */
   public Ssh local(String value) {
     local = value;
     return this;
   }
 
+  /**
+   * Option: -L
+   */
   public String getLocal() {
     return local;
   }
 
+  /**
+   * Option: -l
+   */
   public Ssh loginName(String value) {
     loginName = value;
     return this;
   }
 
+  /**
+   * Option: -l
+   */
   public String getLoginName() {
     return loginName;
   }
 
+  /**
+   * Option: -M
+   */
   public Ssh masterMode(boolean value) {
     masterMode = value;
     return this;
   }
 
+  /**
+   * Option: -M
+   */
   public boolean getMasterMode() {
     return masterMode;
   }
 
+  /**
+   * Option: -m
+   */
   public Ssh macSpec(String value) {
     macSpec = value;
     return this;
   }
 
+  /**
+   * Option: -m
+   */
   public String getMacSpec() {
     return macSpec;
   }
 
+  /**
+   * Option: -N
+   */
   public Ssh noRemoteExecute(boolean value) {
     noRemoteExecute = value;
     return this;
   }
 
+  /**
+   * Option: -N
+   */
   public boolean getNoRemoteExecute() {
     return noRemoteExecute;
   }
 
+  /**
+   * Option: -n
+   */
   public Ssh fromNull(boolean value) {
     fromNull = value;
     return this;
   }
 
+  /**
+   * Option: -n
+   */
   public boolean getFromNull() {
     return fromNull;
   }
 
+  /**
+   * Option: -O
+   */
   public Ssh controlCommand(String value) {
     controlCommand = value;
     return this;
   }
 
+  /**
+   * Option: -O
+   */
   public String getControlCommand() {
     return controlCommand;
   }
 
+  /**
+   * Option: -o
+   */
   public Ssh option(String... value) {
     option = new ArrayList<>(Arrays.asList(value));
     return this;
   }
 
+  /**
+   * Option: -o
+   */
   public Ssh option(List<String> value) {
     option = new ArrayList<>(value);
     return this;
   }
 
+  /**
+   * Option: -o
+   */
   public List<String> getOption() {
     return option;
   }
 
+  /**
+   * Option: -p
+   */
   public Ssh port(int value) {
     if ((value == -1) || ((value > 0) && (value < 65536)))
       port = value;
     return this;
   }
 
+  /**
+   * Option: -p
+   */
   public int getPort() {
     return port;
   }
 
+  /**
+   * Option: -Q
+   */
   public Ssh queryOption(String value) {
     queryOption = value;
     return this;
   }
 
+  /**
+   * Option: -Q
+   */
   public String getQueryOption() {
     return queryOption;
   }
 
+  /**
+   * Option: -q
+   */
   public Ssh quiet(boolean value) {
     quiet = value;
     return this;
   }
 
+  /**
+   * Option: -q
+   */
   public boolean getQuiet() {
     return quiet;
   }
 
+  /**
+   * Option: -R
+   */
   public Ssh remote(String value) {
     remote = value;
     return this;
   }
 
+  /**
+   * Option: -R
+   */
   public String getRemote() {
     return remote;
   }
 
+  /**
+   * Option: -S
+   */
   public Ssh controlSocket(String value) {
     controlSocket = value;
     return this;
   }
 
+  /**
+   * Option: -S
+   */
   public String getControlSocket() {
     return controlSocket;
   }
 
+  /**
+   * Option: -s
+   */
   public Ssh subsystem(boolean value) {
     subsystem = value;
     return this;
   }
 
+  /**
+   * Option: -s
+   */
   public boolean getSubsystem() {
     return subsystem;
   }
@@ -496,6 +689,8 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
+   *
+   * Option: -t (true)/-T (false)
    *
    * @param value the value, null for default
    * @return itself
@@ -505,43 +700,70 @@ public class Ssh
     return this;
   }
 
+  /**
+   * Option: -t (true)/-T (false)
+   */
   public Boolean getTerminal() {
     return terminal;
   }
 
+  /**
+   * Option: -v
+   */
   public Ssh version(boolean value) {
     version = value;
     return this;
   }
 
+  /**
+   * Option: -v
+   */
   public boolean getVersion() {
     return version;
   }
 
+  /**
+   * Option: -v/-vv/-vvv
+   */
   public Ssh verbose(int value) {
     if (value >= 0)
       verbose = value;
     return this;
   }
 
+  /**
+   * Option: -v/-vv/-vvv
+   */
   public int getVerbose() {
     return verbose;
   }
 
+  /**
+   * Option: -W
+   */
   public Ssh forwardTo(String value) {
     forwardTo = value;
     return this;
   }
 
+  /**
+   * Option: -W
+   */
   public String getForwardTo() {
     return forwardTo;
   }
 
+  /**
+   * Option: -w
+   */
   public Ssh forwardTunnel(String value) {
     forwardTunnel = value;
     return this;
   }
 
+  /**
+   * Option: -w
+   */
   public String getForwardTunnel() {
     return forwardTunnel;
   }
@@ -549,6 +771,8 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
+   *
+   * Option: -X
    *
    * @param value the value, null for default
    * @return itself
@@ -558,24 +782,39 @@ public class Ssh
     return this;
   }
 
+  /**
+   * Option: -X
+   */
   public Boolean getX11() {
     return x11;
   }
 
+  /**
+   * Option: -Y
+   */
   public Ssh trustedX11(boolean value) {
     trustedX11 = value;
     return this;
   }
 
+  /**
+   * Option: -Y
+   */
   public boolean getTrustedX11() {
     return trustedX11;
   }
 
+  /**
+   * Option: -y
+   */
   public Ssh syslog(boolean value) {
     syslog = value;
     return this;
   }
 
+  /**
+   * Option: -y
+   */
   public boolean getSyslog() {
     return syslog;
   }
@@ -625,7 +864,7 @@ public class Ssh
     }
     if (getCompression()) result.add("-C");
     if (!getCipherSpec().isEmpty()) {
-      result.add("-C");
+      result.add("-c");
       result.add(getCipherSpec());
     }
     if (!getDynamicBindAddress().isEmpty()) {
