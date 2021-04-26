@@ -15,7 +15,7 @@
 
 /*
  * Binaries.java
- * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2021 University of Waikato, Hamilton, New Zealand
  */
 
 package com.github.fracpete.rsync4j.core;
@@ -132,10 +132,10 @@ public class Binaries {
       throw e;
     }
     finally {
-      IOUtils.closeQuietly(bis);
-      IOUtils.closeQuietly(is);
-      IOUtils.closeQuietly(bos);
-      IOUtils.closeQuietly(fos);
+      IOUtils.closeQuietly(bis, null);
+      IOUtils.closeQuietly(is, null);
+      IOUtils.closeQuietly(bos, null);
+      IOUtils.closeQuietly(fos, null);
     }
 
     return result;
@@ -205,7 +205,7 @@ public class Binaries {
       throw new IllegalStateException("Failed to read list of libraries from: " + resource);
     }
     finally {
-      IOUtils.closeQuietly(is);
+      IOUtils.closeQuietly(is, null);
     }
 
     return result;
