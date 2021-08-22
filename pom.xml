@@ -86,8 +86,8 @@
   </properties>
 
   <scm>
-    <connection>scm:git:https://github.com/fracpete/rsync4j</connection>
-    <developerConnection>scm:git:https://github.com/fracpete/rsync4j</developerConnection>
+    <connection>scm:git:ssh://git@github.com/fracpete/rsync4j</connection>
+    <developerConnection>scm:git:ssh://git@github.com/fracpete/rsync4j</developerConnection>
     <url>https://github.com/fracpete/rsync4j</url>
     <tag>HEAD</tag>
   </scm>
