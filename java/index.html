@@ -13,18 +13,19 @@
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Java";
     var mkdocs_page_input_path = "java.md";
-    var mkdocs_page_url = "/java/";
+    var mkdocs_page_url = null;
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js"></script>
-  <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -38,7 +39,7 @@
         <a href=".." class="icon icon-home"> rsync4j</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -143,7 +144,7 @@
                 <h2 id="rsync">Rsync</h2>
 <p>Here is an example of configuring and running <code>rsync</code> from within Java, only 
 outputting the data from stdout/stderr after the process completes: </p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -158,10 +159,9 @@ System.out.println(&quot;Exit code: &quot; + output.getExitCode());
 if (output.getExitCode() &gt; 0)
   System.err.println(output.getStdErr());
 </code></pre>
-
 <p>This example outputs stdout/stderr from the <code>rsync</code> process as it occurs, 
 rather than waiting till the end:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -172,13 +172,12 @@ RSync rsync = new RSync()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(rsync.builder());
 </code></pre>
-
 <p>If you want to process the output (stdout/stderr) from the rsync process
 yourself, then you can use <code>StreamingProcessOutput</code> instead of 
 <code>ConsoleOutputProcessOutput</code>. You only need to supply an object of a class
 implementing the <code>StreamingProcessOwner</code> interface. Below is an example
 that simply prefixes the output with either <code>[OUT]</code> or <code>[ERR]</code>: </p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.core.StreamingProcessOutputType;
 import com.github.fracpete.processoutput4j.core.StreamingProcessOwner;
 import com.github.fracpete.processoutput4j.output.StreamingProcessOutput;
@@ -201,23 +200,21 @@ RSync rsync = new RSync()
 StreamingProcessOutput output = new StreamingProcessOutput(new Output());
 output.monitor(rsync.builder());
 </code></pre>
-
 <h3 id="windows">Windows</h3>
 <p>When supplying the <code>rsh</code> option with an identity, usually like <code>ssh -i /some/where/key.pub</code>, 
 you need to supply the actual Windows binary and Windows path to the identity.
 You can use the <code>com.github.fracpete.rsync4j.core.Binaries</code> class to help you
 construct the path properly, for instance: </p>
-<pre><code class="java">RSync rsync = new RSync()
+<pre><code class="language-java">RSync rsync = new RSync()
   .source(&quot;C:\\somedir&quot;)
   .destination(&quot;D:\\otherdir&quot;)
   .recursive(true)
   .rsh(Binaries.sshBinary() + &quot; -i &quot; + Binaries.convertPath(&quot;C:\\keys\\mykey.pub&quot;));
 </code></pre>
-
 <h3 id="multiple-sources">Multiple sources</h3>
 <p>You can specify multiple sources when using the <code>sources</code> methods.</p>
 <p>Either as array:</p>
-<pre><code class="java">String[] s = new String[]{
+<pre><code class="language-java">String[] s = new String[]{
   &quot;/first/place/&quot;, 
   &quot;/second/place/&quot;,
 };
@@ -228,9 +225,8 @@ RSync rsync = new RSync()
   .recursive(true)
   .verbose(true);
 </code></pre>
-
 <p>Or as <code>java.util.List&lt;String&gt;</code>:</p>
-<pre><code class="java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
+<pre><code class="language-java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
 s.add(&quot;/first/place&quot;);
 s.add(&quot;/second/place&quot;);
 
@@ -240,13 +236,12 @@ RSync rsync = new RSync()
   .recursive(true)
   .verbose(true);
 </code></pre>
-
 <h2 id="rsync-daemon">Rsync daemon</h2>
 <p>Instead of using rsync via ssh, you can also use the 
 <a href="https://download.samba.org/pub/rsync/rsyncd.conf.html">rsync daemon</a> approach.</p>
 <p>On the server, you can use something like this as <code>/etc/rsyncd.conf</code> to make 
 an upload directory <code>/home/public_rsync</code> available under the name <code>files</code>:</p>
-<pre><code class="inifile">pid file = /var/run/rsyncd.pid
+<pre><code class="language-inifile">pid file = /var/run/rsyncd.pid
 lock file = /var/run/rsync.lock
 log file = /var/log/rsync.log
 port = 12000
@@ -260,15 +255,13 @@ uid = root
 gid = root
 read only = false
 </code></pre>
-
 <p>For simplicity, we just start the daemon (running on port 12000) on the server 
 (192.168.1.100) as root user as follows:</p>
-<pre><code class="bash">sudo rsync --daemon
+<pre><code class="language-bash">sudo rsync --daemon
 </code></pre>
-
 <p>The following command will upload the directory <code>/home/myuser/some/where</code> on the<br />
 client to the <code>files</code> share:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -281,11 +274,10 @@ RSync rsync = new RSync()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(rsync.builder());
 </code></pre>
-
 <h2 id="ssh">Ssh</h2>
 <p>The following command lists all files in the <code>/tmp</code> directory of the localhost
 in verbose mode and also outputting the generated command-line:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.Ssh;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.Ssh;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 Ssh ssh = new Ssh()
@@ -296,12 +288,11 @@ Ssh ssh = new Ssh()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(ssh.builder());
 </code></pre>
-
 <h2 id="sshkeygen">SshKeyGen</h2>
 <p>The following command generates a key file named <code>testkey</code> in your home 
 directory of type <code>dsa</code>, with no pass-phrase, outputting the bubble babble 
 of the key:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.SshKeyGen;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.SshKeyGen;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 SshKeyGen keygen = new SshKeyGen()
@@ -338,18 +329,18 @@ output.monitor(keygen.builder());
 
   Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-	  
+      
         </div>
       </div>
 
     </section>
-    
+
   </div>
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/fracpete/rsync4j" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/fracpete/rsync4j/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../commandline/" style="color: #fcfcfc;">&laquo; Previous</a></span>
@@ -359,7 +350,9 @@ output.monitor(keygen.builder());
       
     </span>
 </div>
-    <script src="../js/theme.js"></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
 
 </body>
 </html>
