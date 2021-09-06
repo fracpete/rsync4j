@@ -2549,9 +2549,10 @@ public class RSync
     if (getSources().size() == 0)
       throw new IllegalStateException("No source(s) defined!");
     result.addAll(getSources());
-    if (getDestination() == null)
+    if ((getDestination() == null) && !isListOnly())
       throw new IllegalStateException("No destination defined!");
-    result.add(getDestination());
+    if (getDestination() != null)
+      result.add(getDestination());
 
     return result;
   }
@@ -3088,7 +3089,7 @@ public class RSync
     parser.addArgument("--list-only")
       .setDefault(false)
       .dest("listonly")
-      .help("list the files instead of copying them")
+      .help("list the files instead of copying them (no target required)")
       .action(Arguments.storeTrue());
     parser.addArgument("--bwlimit")
       .setDefault("")
@@ -3284,12 +3285,18 @@ public class RSync
     additional(ns.getList("additional").toArray(new String[0]));
 
     List<String> src_dest = ns.getList("source(s)/destination");
-    if (src_dest.size() < 2) {
+    if ((src_dest.size() < 1) && isListOnly()) {
+      System.err.println("Source required!");
+      return false;
+    }
+    if ((src_dest.size() < 2) && !isListOnly()) {
       System.err.println("Source and destination required!");
       return false;
     }
-    destination(src_dest.get(src_dest.size() - 1));
-    src_dest.remove(src_dest.size() - 1);
+    if (!isListOnly()) {
+      destination(src_dest.get(src_dest.size() - 1));
+      src_dest.remove(src_dest.size() - 1);
+    }
     sources(src_dest);
 
     return true;
