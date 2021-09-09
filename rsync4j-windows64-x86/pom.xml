@@ -9,10 +9,10 @@
     <version>3.2.3-6-SNAPSHOT</version>
   </parent>
 
-  <artifactId>rsync4j-windows-x86_64</artifactId>
+  <artifactId>rsync4j-windows64-x86</artifactId>
   <packaging>jar</packaging>
 
-  <name>rsync4j-windows-x86_64</name>
+  <name>rsync4j-windows64-x86</name>
   <description>Binaries for Windows Intel 64bit.</description>
   <organization>
     <name>University of Waikato, Hamilton, NZ</name>

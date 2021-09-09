@@ -49,7 +49,7 @@ public class Binaries {
   public final static String WINDOWS_DIR_32 = "windows-x86/";
 
   /** the sub-directory for the windows 64bit binaries. */
-  public final static String WINDOWS_DIR_64 = "windows-x86_64/";
+  public final static String WINDOWS_DIR_64 = "windows64-x86/";
 
   /** the windows environment variable for the rsyncj4 home directory. */
   public final static String WINDOWS_HOME_DIR = "RSYNC4J_HOME";
@@ -118,10 +118,9 @@ public class Binaries {
 	resource += "/";
       resource += name;
       outFull = outDir + File.separator + name;
-      LOGGER.info("Copying resource '" + resource + "' to '" + outFull + "'");
-      is  = Binaries.class.getClassLoader().getResourceAsStream(resource);
+      is  = Binaries.class.getClassLoader().getResourceAsStream(resource.trim());
       bis = new BufferedInputStream(is);
-      out = new File(outFull);
+      out = new File(outFull.trim());
       fos = new FileOutputStream(out);
       bos = new BufferedOutputStream(fos);
       IOUtils.copy(bis, bos);

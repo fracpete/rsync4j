@@ -55,7 +55,7 @@
 
     <dependency>
       <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows-x86_64</artifactId>
+      <artifactId>rsync4j-windows64-x86</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
