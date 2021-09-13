@@ -43,13 +43,13 @@ will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:
 
 ```
-rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86
+rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32
 ```
 
 And list the DLLs in the following text file:
 
 ```
-rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86/libraries.txt
+rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32/libraries.txt
 ```
 
 
@@ -79,13 +79,13 @@ will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:
 
 ```
-rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64
+rsync4j-windows64/src/main/resources/com/github/fracpete/rsync4j/windows64
 ```
 
 And list the DLLs in the following text file:
 
 ```
-rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64/libraries.txt
+rsync4j-windows64/src/main/resources/com/github/fracpete/rsync4j/windows64/libraries.txt
 ```
 
 ### Paths

@@ -46,10 +46,10 @@ public class Binaries {
   public final static String RESOURCE_DIR = "com/github/fracpete/rsync4j/";
 
   /** the sub-directory for the windows 32bit binaries. */
-  public final static String WINDOWS_DIR_32 = "windows-x86/";
+  public final static String WINDOWS_DIR_32 = "windows32/";
 
   /** the sub-directory for the windows 64bit binaries. */
-  public final static String WINDOWS_DIR_64 = "windows-x86_64/";
+  public final static String WINDOWS_DIR_64 = "windows64/";
 
   /** the windows environment variable for the rsyncj4 home directory. */
   public final static String WINDOWS_HOME_DIR = "RSYNC4J_HOME";

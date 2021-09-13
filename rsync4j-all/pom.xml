@@ -49,13 +49,13 @@
 
     <dependency>
       <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows-x86</artifactId>
+      <artifactId>rsync4j-windows32</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows-x86_64</artifactId>
+      <artifactId>rsync4j-windows64</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

@@ -9,11 +9,11 @@
     <version>3.2.3-6-SNAPSHOT</version>
   </parent>
 
-  <artifactId>rsync4j-windows-x86_64</artifactId>
+  <artifactId>rsync4j-windows32</artifactId>
   <packaging>jar</packaging>
 
-  <name>rsync4j-windows-x86_64</name>
-  <description>Binaries for Windows Intel 64bit.</description>
+  <name>rsync4j-windows32</name>
+  <description>Binaries for Windows Intel 32bit.</description>
   <organization>
     <name>University of Waikato, Hamilton, NZ</name>
     <url>http://www.waikato.ac.nz/</url>
@@ -56,7 +56,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <Automatic-Module-Name>rsync4j.windows64</Automatic-Module-Name>
+              <Automatic-Module-Name>rsync4j.windows32</Automatic-Module-Name>
             </manifestEntries>
           </archive>
         </configuration>
