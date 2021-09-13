@@ -9,8 +9,6 @@
   
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Windows - rsync4j</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
@@ -146,6 +144,7 @@
 (on a per user basis):</p>
 <pre><code>%USERPROFILE%\rsync4j
 </code></pre>
+
 <p>Below that directory there are <code>home/%USERNAME%/.ssh</code> and <code>bin</code>.</p>
 <h3 id="ssh-vs-plain-protocol">ssh vs plain protocol</h3>
 <p>By default, plain protocol is used. If you want to use ssh, then
@@ -155,6 +154,7 @@ simply supply this via the dummy string <code>ssh</code>. In Java code, this is 
 <p>You can place your ssh key pairs in the following directory:</p>
 <pre><code>%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
 </code></pre>
+
 <h3 id="binaries-32-bit">Binaries (32-bit)</h3>
 <p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
 their dependencies from the 32-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
@@ -177,11 +177,13 @@ their dependencies from the 32-bit version of <a href="https://cygwin.com/">cywg
 <p>You can easily determine the dependencies by running the executables. Windows
 will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:</p>
-<pre><code>rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86
+<pre><code>rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32
 </code></pre>
+
 <p>And list the DLLs in the following text file:</p>
-<pre><code>rsync4j-windows-x86/src/main/resources/com/github/fracpete/rsync4j/windows-x86/libraries.txt
+<pre><code>rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32/libraries.txt
 </code></pre>
+
 <h3 id="binaries-64-bit">Binaries (64-bit)</h3>
 <p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
 their dependencies from the 64-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
@@ -205,19 +207,23 @@ their dependencies from the 64-bit version of <a href="https://cygwin.com/">cywg
 <p>You can easily determine the dependencies by running the executables. Windows
 will automatically pop up a dialog mentioning any DLLs that are missing. Place
 any missing DLLs in the following directory:</p>
-<pre><code>rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64
+<pre><code>rsync4j-windows64/src/main/resources/com/github/fracpete/rsync4j/windows64
 </code></pre>
+
 <p>And list the DLLs in the following text file:</p>
-<pre><code>rsync4j-windows-x86_64/src/main/resources/com/github/fracpete/rsync4j/windows-x86_64/libraries.txt
+<pre><code>rsync4j-windows64/src/main/resources/com/github/fracpete/rsync4j/windows64/libraries.txt
 </code></pre>
+
 <h3 id="paths">Paths</h3>
 <p>Since cygwin is being used, local paths get converted to cywgin notation.</p>
 <p>For example:</p>
 <pre><code>C:\some\path\blah.txt
 </code></pre>
+
 <p>Will get automatically get converted to:</p>
 <pre><code>/cygdrive/c/some/path/blah.txt
 </code></pre>
+
 <h3 id="syncing-between-windows-hosts">Syncing between Windows hosts</h3>
 <p>You can easily synchronize two Windows hosts by using a UNC path for the remote
 host. For instance, directory <code>C:\some\dir</code> on the local machine can be synced
