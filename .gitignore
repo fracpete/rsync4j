@@ -17,3 +17,5 @@ rsync-*/
 site/
 venv/
 
+Blah*
+blah*
