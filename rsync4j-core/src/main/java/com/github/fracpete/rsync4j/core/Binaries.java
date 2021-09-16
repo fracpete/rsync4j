@@ -68,6 +68,12 @@ public class Binaries {
   /** the ssh-keygen binary. */
   protected static String sshkeygenBinary;
 
+  /** the sshpass binary. */
+  protected static String sshpassBinary;
+
+  /** whether the sshpass binary is present. */
+  protected static boolean sshpassBinaryPresent;
+
   /** for logging. */
   protected static Logger LOGGER = Logger.getLogger(Binaries.class.getName());
 
@@ -224,9 +230,11 @@ public class Binaries {
     File	dir;
 
 
-    sshBinary    = "/usr/bin/ssh";
-    rsyncBinary  = "/usr/bin/rsync";
-    sshkeygenBinary = "/usr/bin/ssh-keygen";
+    sshBinary            = "/usr/bin/ssh";
+    rsyncBinary          = "/usr/bin/rsync";
+    sshkeygenBinary      = "/usr/bin/ssh-keygen";
+    sshpassBinary        = "/usr/bin/sshpass";
+    sshpassBinaryPresent = true;
 
     if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC_OSX) {
       if (!new File(rsyncBinary).exists())
@@ -235,6 +243,10 @@ public class Binaries {
 	throw new IllegalStateException("ssh not installed (" + sshBinary + ")?");
       if (!new File(sshkeygenBinary).exists())
 	throw new IllegalStateException("ssh-keygen not installed (" + sshkeygenBinary + ")?");
+      if (!new File(sshpassBinary).exists()) {
+        sshpassBinaryPresent = false;
+        System.err.println("WARNING: sshpass binary not installed (" + sshpassBinary + ")");
+      }
     }
     else if (SystemUtils.IS_OS_WINDOWS) {
       homeDir = homeDir();
@@ -258,14 +270,16 @@ public class Binaries {
 	winDir = getWindowsDir();
 	for (String lib: getLibraries())
 	  copyResourceTo(RESOURCE_DIR + winDir, lib, binDir);
-	sshBinary    = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
-	rsyncBinary  = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
+	sshBinary       = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
+	rsyncBinary     = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
 	sshkeygenBinary = copyResourceTo(RESOURCE_DIR + winDir, "ssh-keygen.exe", binDir);
+	sshpassBinary   = copyResourceTo(RESOURCE_DIR + winDir, "sshpass.exe", binDir);
       }
       else {
-	sshBinary    = binDir + File.separator + "ssh.exe";
-	rsyncBinary  = binDir + File.separator + "rsync.exe";
+	sshBinary       = binDir + File.separator + "ssh.exe";
+	rsyncBinary     = binDir + File.separator + "rsync.exe";
 	sshkeygenBinary = binDir + File.separator + "ssh-keygen.exe";
+        sshpassBinary   = binDir + File.separator + "sshpass.exe";
       }
     }
     else {
@@ -311,6 +325,30 @@ public class Binaries {
     if (binariesExtracted == null)
       extractBinaries();
     return sshkeygenBinary;
+  }
+
+  /**
+   * Returns whether the sshpass binary is present (if necessary extracts the binaries to the temp directory).
+   *
+   * @return		true if present
+   * @throws Exception	if extraction fails
+   */
+  public static boolean sshpassBinaryPresent() throws Exception {
+    if (binariesExtracted == null)
+      extractBinaries();
+    return sshpassBinaryPresent;
+  }
+
+  /**
+   * Returns the sshpass binary (if necessary extracts the binaries to the temp directory).
+   *
+   * @return		the filename of the binary
+   * @throws Exception	if extraction fails
+   */
+  public static String sshpassBinary() throws Exception {
+    if (binariesExtracted == null)
+      extractBinaries();
+    return sshpassBinary;
   }
 
   /**

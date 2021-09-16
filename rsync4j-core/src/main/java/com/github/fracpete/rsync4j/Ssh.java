@@ -125,6 +125,8 @@ public class Ssh
 
   protected String command;
 
+  protected SshPass sshPass;
+
   /**
    * Resets the members.
    */
@@ -173,6 +175,7 @@ public class Ssh
     syslog = false;
     hostname = "";
     command = "";
+    sshPass = null;
   }
 
   /**
@@ -838,6 +841,26 @@ public class Ssh
   }
 
   /**
+   * Sets the sshpass instance to use.
+   *
+   * @param value   the instance, use null to not use sshpass
+   * @return        itselff
+   */
+  public Ssh sshPass(SshPass value) {
+    sshPass = value;
+    return this;
+  }
+
+  /**
+   * Returns the current sshpass instance in use.
+   *
+   * @return        the instance, null if none set
+   */
+  public SshPass getSshPass() {
+    return sshPass;
+  }
+
+  /**
    * Assembles the arguments for the binary.
    *
    * @return		the options
@@ -985,10 +1008,18 @@ public class Ssh
   public List<String> commandLineArgs() throws Exception {
     List<String> 	result;
     String 		binary;
+    List<String>        sshPassArgs;
+    int                 i;
 
     binary = Binaries.sshBinary();
     result = options();
     result.add(0, binary);
+
+    if (getSshPass() != null) {
+      sshPassArgs = getSshPass().commandLineArgs();
+      for (i = sshPassArgs.size() - 1; i >= 0; i--)
+        result.add(0, sshPassArgs.get(i));
+    }
 
     return result;
   }

@@ -279,6 +279,8 @@ public class RSync
 
   protected String[] additional;
 
+  protected SshPass sshPass;
+
   /**
    * Resets the members.
    */
@@ -405,6 +407,7 @@ public class RSync
     ipv4 = false;
     ipv6 = false;
     version = false;
+    sshPass = null;
   }
 
   /**
@@ -2359,6 +2362,26 @@ public class RSync
   }
 
   /**
+   * Sets the sshpass instance to use.
+   *
+   * @param value   the instance, use null to not use sshpass
+   * @return        itselff
+   */
+  public RSync sshPass(SshPass value) {
+    sshPass = value;
+    return this;
+  }
+
+  /**
+   * Returns the current sshpass instance in use.
+   *
+   * @return        the instance, null if none set
+   */
+  public SshPass getSshPass() {
+    return sshPass;
+  }
+
+  /**
    * Assembles the arguments for the binary.
    *
    * @return		the options
@@ -2542,6 +2565,8 @@ public class RSync
   public List<String> commandLineArgs() throws Exception {
     List<String> 	result;
     String 		binary;
+    List<String>        sshPassArgs;
+    int                 i;
 
     binary = Binaries.rsyncBinary();
     result = options();
@@ -2553,6 +2578,12 @@ public class RSync
       throw new IllegalStateException("No destination defined!");
     if (getDestination() != null)
       result.add(getDestination());
+
+    if (getSshPass() != null) {
+      sshPassArgs = getSshPass().commandLineArgs();
+      for (i = sshPassArgs.size() - 1; i >= 0; i--)
+        result.add(0, sshPassArgs.get(i));
+    }
 
     return result;
   }
