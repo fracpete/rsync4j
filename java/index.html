@@ -9,6 +9,8 @@
   
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Java - rsync4j</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
@@ -81,6 +83,9 @@
     <li class="toctree-l2"><a href="#sshkeygen">SshKeyGen</a></li>
     
 
+    <li class="toctree-l2"><a href="#sshpass">SshPass</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -142,7 +147,7 @@
                 <h2 id="rsync">Rsync</h2>
 <p>Here is an example of configuring and running <code>rsync</code> from within Java, only 
 outputting the data from stdout/stderr after the process completes: </p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -157,10 +162,9 @@ System.out.println(&quot;Exit code: &quot; + output.getExitCode());
 if (output.getExitCode() &gt; 0)
   System.err.println(output.getStdErr());
 </code></pre>
-
 <p>This example outputs stdout/stderr from the <code>rsync</code> process as it occurs, 
 rather than waiting till the end:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -171,13 +175,12 @@ RSync rsync = new RSync()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(rsync.builder());
 </code></pre>
-
 <p>If you want to process the output (stdout/stderr) from the rsync process
 yourself, then you can use <code>StreamingProcessOutput</code> instead of 
 <code>ConsoleOutputProcessOutput</code>. You only need to supply an object of a class
 implementing the <code>StreamingProcessOwner</code> interface. Below is an example
 that simply prefixes the output with either <code>[OUT]</code> or <code>[ERR]</code>: </p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.core.StreamingProcessOutputType;
 import com.github.fracpete.processoutput4j.core.StreamingProcessOwner;
 import com.github.fracpete.processoutput4j.output.StreamingProcessOutput;
@@ -200,23 +203,21 @@ RSync rsync = new RSync()
 StreamingProcessOutput output = new StreamingProcessOutput(new Output());
 output.monitor(rsync.builder());
 </code></pre>
-
 <h3 id="windows">Windows</h3>
 <p>When supplying the <code>rsh</code> option with an identity, usually like <code>ssh -i /some/where/key.pub</code>, 
 you need to supply the actual Windows binary and Windows path to the identity.
 You can use the <code>com.github.fracpete.rsync4j.core.Binaries</code> class to help you
 construct the path properly, for instance: </p>
-<pre><code class="java">RSync rsync = new RSync()
+<pre><code class="language-java">RSync rsync = new RSync()
   .source(&quot;C:\\somedir&quot;)
   .destination(&quot;D:\\otherdir&quot;)
   .recursive(true)
   .rsh(Binaries.sshBinary() + &quot; -i &quot; + Binaries.convertPath(&quot;C:\\keys\\mykey.pub&quot;));
 </code></pre>
-
 <h3 id="multiple-sources">Multiple sources</h3>
 <p>You can specify multiple sources when using the <code>sources</code> methods.</p>
 <p>Either as array:</p>
-<pre><code class="java">String[] s = new String[]{
+<pre><code class="language-java">String[] s = new String[]{
   &quot;/first/place/&quot;, 
   &quot;/second/place/&quot;,
 };
@@ -227,9 +228,8 @@ RSync rsync = new RSync()
   .recursive(true)
   .verbose(true);
 </code></pre>
-
 <p>Or as <code>java.util.List&lt;String&gt;</code>:</p>
-<pre><code class="java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
+<pre><code class="language-java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
 s.add(&quot;/first/place&quot;);
 s.add(&quot;/second/place&quot;);
 
@@ -239,13 +239,12 @@ RSync rsync = new RSync()
   .recursive(true)
   .verbose(true);
 </code></pre>
-
 <h2 id="rsync-daemon">Rsync daemon</h2>
 <p>Instead of using rsync via ssh, you can also use the 
 <a href="https://download.samba.org/pub/rsync/rsyncd.conf.html">rsync daemon</a> approach.</p>
 <p>On the server, you can use something like this as <code>/etc/rsyncd.conf</code> to make 
 an upload directory <code>/home/public_rsync</code> available under the name <code>files</code>:</p>
-<pre><code class="inifile">pid file = /var/run/rsyncd.pid
+<pre><code class="language-inifile">pid file = /var/run/rsyncd.pid
 lock file = /var/run/rsync.lock
 log file = /var/log/rsync.log
 port = 12000
@@ -259,15 +258,13 @@ uid = root
 gid = root
 read only = false
 </code></pre>
-
 <p>For simplicity, we just start the daemon (running on port 12000) on the server 
 (192.168.1.100) as root user as follows:</p>
-<pre><code class="bash">sudo rsync --daemon
+<pre><code class="language-bash">sudo rsync --daemon
 </code></pre>
-
 <p>The following command will upload the directory <code>/home/myuser/some/where</code> on the<br />
 client to the <code>files</code> share:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.RSync;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 RSync rsync = new RSync()
@@ -280,11 +277,10 @@ RSync rsync = new RSync()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(rsync.builder());
 </code></pre>
-
 <h2 id="ssh">Ssh</h2>
 <p>The following command lists all files in the <code>/tmp</code> directory of the localhost
 in verbose mode and also outputting the generated command-line:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.Ssh;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.Ssh;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 Ssh ssh = new Ssh()
@@ -295,12 +291,11 @@ Ssh ssh = new Ssh()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(ssh.builder());
 </code></pre>
-
 <h2 id="sshkeygen">SshKeyGen</h2>
 <p>The following command generates a key file named <code>testkey</code> in your home 
 directory of type <code>dsa</code>, with no pass-phrase, outputting the bubble babble 
 of the key:</p>
-<pre><code class="java">import com.github.fracpete.rsync4j.SshKeyGen;
+<pre><code class="language-java">import com.github.fracpete.rsync4j.SshKeyGen;
 import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 ...
 SshKeyGen keygen = new SshKeyGen()
@@ -312,6 +307,25 @@ SshKeyGen keygen = new SshKeyGen()
   .keyFile(&quot;~/testkey&quot;);
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(keygen.builder());
+</code></pre>
+<h2 id="sshpass">SshPass</h2>
+<p>If it is not possible to use ssh keys for connecting to a remote machine, you 
+can fall back on using the user/password approach. For this, you will need
+to configure an instance of <code>com.github.fracpete.rsync4j.SshPass</code> class
+and pass it to <code>Rsync</code> or <code>Ssh</code> object that requires it.</p>
+<pre><code class="language-java">import com.github.fracpete.rsync4j.Ssh;
+import com.github.fracpete.rsync4j.SshPass;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
+...
+SshPass sshpass = new SshPass()
+  .password(&quot;mysecretpassword&quot;);
+Ssh ssh = new Ssh()
+  .sshPass(sshpass)
+  .option(&quot;StrictHostKeyChecking=no&quot;)
+  .hostname(&quot;username@remote.host.com&quot;)
+  .command(&quot;ls /tmp&quot;);
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(ssh.builder());
 </code></pre>
               
             </div>

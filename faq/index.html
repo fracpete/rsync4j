@@ -9,6 +9,8 @@
   
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>FAQ - rsync4j</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
@@ -121,12 +123,25 @@
               
                 <ul>
 <li><strong>Q</strong> I'm trying to sync, but it just sits there and does nothing!</li>
-<li><strong>A</strong> Since <em>rsync4j</em> is not interactive, you will have to connect to the 
-  remote host at least once before to add the host to the <code>known_hosts</code> file.</li>
-<li><strong>Q</strong> How do I use a specific public key pair?</li>
-<li><strong>A</strong> You can let <code>ssh</code> know what identity file to use using rsync's <code>--rsh</code> 
-  option and ssh's <code>-i</code> option, e.g.: <code>rsync --rsh="ssh -i /some/where/id_rsa" ...</code></li>
 </ul>
+<p><strong>A</strong> Since <em>rsync4j</em> is not interactive, you will have to connect to the 
+  remote host at least once before to add the host to the <code>known_hosts</code> file.</p>
+<ul>
+<li><strong>Q</strong> How do I use a specific public key pair?</li>
+</ul>
+<p><strong>A</strong> You can let <code>ssh</code> know what identity file to use using rsync's <code>--rsh</code> 
+  option and ssh's <code>-i</code> option, e.g.: <code>rsync --rsh="ssh -i /some/where/id_rsa" ...</code></p>
+<ul>
+<li><strong>Q</strong> I cannot store ssh keys on the remote machine, how do I use user/password for the login?</li>
+</ul>
+<p><strong>A</strong> Using Java, you can supply an instance of the <code>SshPass</code> class to the <code>Rsync</code> or <code>Ssh</code> object 
+  that will then feed the password to the underlying binary.</p>
+<ul>
+<li><strong>Q</strong> How can I suppress the prompt for accepting a remote fingerprint 
+  (<code>The authenticity of host 'XYZ' can't be established. Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>)? </li>
+</ul>
+<p><strong>A</strong> Supply the following option to ssh (via <code>-o ...</code>): </p>
+<p><code>StrictHostKeyChecking=no</code></p>
               
             </div>
           </div>
