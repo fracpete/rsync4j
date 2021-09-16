@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.github.fracpete</groupId>
     <artifactId>rsync4j-pom</artifactId>
-    <version>3.2.3-7</version>
+    <version>3.2.3-8-SNAPSHOT</version>
   </parent>
 
   <artifactId>rsync4j-windows64</artifactId>
