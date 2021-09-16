@@ -202,3 +202,26 @@ SshKeyGen keygen = new SshKeyGen()
 ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
 output.monitor(keygen.builder());
 ```
+
+## SshPass
+
+If it is not possible to use ssh keys for connecting to a remote machine, you 
+can fall back on using the user/password approach. For this, you will need
+to configure an instance of `com.github.fracpete.rsync4j.SshPass` class
+and pass it to `Rsync` or `Ssh` object that requires it.
+
+```java
+import com.github.fracpete.rsync4j.Ssh;
+import com.github.fracpete.rsync4j.SshPass;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
+...
+SshPass sshpass = new SshPass()
+  .password("mysecretpassword");
+Ssh ssh = new Ssh()
+  .sshPass(sshpass)
+  .option("StrictHostKeyChecking=no")
+  .hostname("username@remote.host.com")
+  .command("ls /tmp");
+ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
+output.monitor(ssh.builder());
+```
