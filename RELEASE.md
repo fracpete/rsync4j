@@ -16,16 +16,21 @@ How to make a release
 
 * Update documentation
 
+  * if necessary, install mkdocs 1.0.4 in a virtual environment (newer versions stuff up code blocks?)
+    
+    * `virtualenv -p /usr/bin/python3 venv`
+    * `./venv/bin/pip install mkdocs==1.0.4`
+    
   * add new release link (`releases.md`)
   * update artifact version (`maven.md`)
   * test 
     
     ```
-    mkdocs build --clean && mkdocs serve
+    ./venv/bin/mkdocsmkdocs build --clean && ./venv/bin/mkdocsmkdocs serve
     ```
     
   * deploy
 
     ```
-    mkdocs gh-deploy --clean
+    ./venv/bin/mkdocs gh-deploy --clean
     ```
