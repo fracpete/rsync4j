@@ -23,6 +23,7 @@ How to make a release
     
   * add new release link (`releases.md`)
   * update artifact version (`maven.md`)
+  * update OpenSSH versions (`windows.md`)
   * test 
     
     ```
