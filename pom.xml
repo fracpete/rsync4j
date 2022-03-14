@@ -5,7 +5,7 @@
 
   <groupId>com.github.fracpete</groupId>
   <artifactId>rsync4j-pom</artifactId>
-  <version>3.2.3-9-SNAPSHOT</version>
+  <version>3.2.3-9</version>
   <packaging>pom</packaging>
 
   <parent>
@@ -89,7 +89,7 @@
     <connection>scm:git:ssh://git@github.com/fracpete/rsync4j</connection>
     <developerConnection>scm:git:ssh://git@github.com/fracpete/rsync4j</developerConnection>
     <url>https://github.com/fracpete/rsync4j</url>
-    <tag>HEAD</tag>
+    <tag>rsync4j-pom-3.2.3-9</tag>
   </scm>
 
   <modules>
