@@ -15,7 +15,7 @@
 
 /*
  * AbstractBinary.java
- * Copyright (C) 2017-2018 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2022 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j.core;
 
@@ -167,7 +167,7 @@ public abstract class AbstractBinary {
   protected ArgumentParser getParser() {
     ArgumentParser 	parser;
 
-    parser = ArgumentParsers.newArgumentParser(getClass().getName());
+    parser = ArgumentParsers.newFor(getClass().getName()).build();
     parser.description(description());
     parser.addArgument("--output-commandline")
       .setDefault(false)
