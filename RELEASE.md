@@ -31,8 +31,4 @@ How to make a release
     ./venv/bin/mkdocsmkdocs build --clean && ./venv/bin/mkdocsmkdocs serve
     ```
     
-  * deploy
-
-    ```
-    ./venv/bin/mkdocs gh-deploy --clean
-    ```
+  * deployment happens automatically on commit
