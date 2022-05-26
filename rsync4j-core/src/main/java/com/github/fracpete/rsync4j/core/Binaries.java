@@ -15,7 +15,7 @@
 
 /*
  * Binaries.java
- * Copyright (C) 2017-2021 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2022 University of Waikato, Hamilton, New Zealand
  */
 
 package com.github.fracpete.rsync4j.core;
@@ -162,9 +162,9 @@ public class Binaries {
 
     if (SystemUtils.IS_OS_WINDOWS) {
       if (System.getenv(WINDOWS_HOME_DIR) != null) {
-        dir = new File(System.getenv(WINDOWS_HOME_DIR));
-        if (!dir.exists() || dir.isDirectory())
-          result = dir.getAbsolutePath();
+	dir = new File(System.getenv(WINDOWS_HOME_DIR));
+	if (!dir.exists() || dir.isDirectory())
+	  result = dir.getAbsolutePath();
       }
     }
 
@@ -244,8 +244,8 @@ public class Binaries {
       if (!new File(sshkeygenBinary).exists())
 	throw new IllegalStateException("ssh-keygen not installed (" + sshkeygenBinary + ")?");
       if (!new File(sshpassBinary).exists()) {
-        sshpassBinaryPresent = false;
-        System.err.println("WARNING: sshpass binary not installed (" + sshpassBinary + ")");
+	sshpassBinaryPresent = false;
+	System.err.println("WARNING: sshpass binary not installed (" + sshpassBinary + ")");
       }
     }
     else if (SystemUtils.IS_OS_WINDOWS) {
@@ -270,22 +270,22 @@ public class Binaries {
 	winDir = getWindowsDir();
 	for (String lib: getLibraries())
 	  copyResourceTo(RESOURCE_DIR + winDir, lib, binDir);
-	sshBinary       = copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir);
-	rsyncBinary     = copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir);
-	sshkeygenBinary = copyResourceTo(RESOURCE_DIR + winDir, "ssh-keygen.exe", binDir);
-	sshpassBinary   = copyResourceTo(RESOURCE_DIR + winDir, "sshpass.exe", binDir);
+	sshBinary       = quotePath(copyResourceTo(RESOURCE_DIR + winDir, "ssh.exe", binDir));
+	rsyncBinary     = quotePath(copyResourceTo(RESOURCE_DIR + winDir, "rsync.exe", binDir));
+	sshkeygenBinary = quotePath(copyResourceTo(RESOURCE_DIR + winDir, "ssh-keygen.exe", binDir));
+	sshpassBinary   = quotePath(copyResourceTo(RESOURCE_DIR + winDir, "sshpass.exe", binDir));
       }
       else {
-	sshBinary       = binDir + File.separator + "ssh.exe";
-	rsyncBinary     = binDir + File.separator + "rsync.exe";
-	sshkeygenBinary = binDir + File.separator + "ssh-keygen.exe";
-        sshpassBinary   = binDir + File.separator + "sshpass.exe";
+	sshBinary       = quotePath(binDir + File.separator + "ssh.exe");
+	rsyncBinary     = quotePath(binDir + File.separator + "rsync.exe");
+	sshkeygenBinary = quotePath(binDir + File.separator + "ssh-keygen.exe");
+	sshpassBinary   = quotePath(binDir + File.separator + "sshpass.exe");
       }
     }
     else {
       throw new IllegalStateException(
-	"Unsupported operating system: "
-	  + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
+	  "Unsupported operating system: "
+	      + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
     }
 
     binariesExtracted = true;
@@ -352,20 +352,81 @@ public class Binaries {
   }
 
   /**
+   * Quotes the path if a single quote is in the name.
+   *
+   * @param path	the path to quote
+   * @return		the (potentially) double quoted path
+   */
+  public static String quotePath(String path) {
+    return quotePath(path, false);
+  }
+
+  /**
+   * Quotes the path if a single quote is in the name.
+   *
+   * @param path	the path to quote
+   * @param force	forces double quoting
+   * @return		the (potentially) double quoted path
+   */
+  public static String quotePath(String path, boolean force) {
+    if (!path.startsWith("\"") && !path.endsWith("\"") && (path.contains("'") || force))
+      return "\"" + path + "\"";
+    else
+      return path;
+  }
+
+  /**
    * Converts the path into cygwin notation on Windows platform.
    *
    * @param path	the path to convert
    * @return		the (potentially) converted path
    */
   public static String convertPath(String path) {
-    String result;
+    String 		result;
+    StringBuilder	tmp;
+    List<String>	parts;
+    File		f;
+    boolean             quoted;
 
     result = path;
+    quoted = false;
 
-    if (SystemUtils.IS_OS_WINDOWS) {
-      result = result.replace("\\", "/");
-      if (result.matches("^[a-zA-Z]:.*"))
-	result = "/cygdrive/" + result.substring(0, 1).toLowerCase() + "/" + result.substring(2);
+    if (SystemUtils.IS_OS_WINDOWS && (result.length() > 0)) {
+      // remove double quotes
+      if (result.startsWith("\"") && result.endsWith("\"")) {
+	result = result.substring(1, result.length() - 1);
+	quoted = true;
+      }
+
+      // split into parts
+      f     = new File(result);
+      parts = new ArrayList<>();
+      do {
+	if (!f.getName().isEmpty())
+	  parts.add(0, f.getName());
+	f = f.getParentFile();
+      }
+      while (f != null);
+
+      // drive letter?
+      if (parts.size() > 0) {
+	if (path.matches("^[a-zA-Z]:.*")) {
+	  parts.add(0, path.substring(0, 1).toLowerCase());
+	  parts.add(0, "/cygdrive");
+	}
+      }
+
+      // assemble
+      tmp = new StringBuilder();
+      for (String part: parts) {
+	if (tmp.length() > 0)
+	  tmp.append("/");
+	tmp.append(part);
+      }
+      result = tmp.toString();
+
+      // single quote in path or quoted before? -> double quotes
+      result = quotePath(result, quoted);
     }
 
     return result;
