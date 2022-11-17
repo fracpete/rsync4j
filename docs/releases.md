@@ -1,10 +1,11 @@
 Current release:
 
-* 3.2.3-10 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-10/rsync4j-all-3.2.3-10-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-10/rsync4j-all-3.2.3-10-spring-boot.jar))
+* 3.2.3-11 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-11/rsync4j-all-3.2.3-11-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-11/rsync4j-all-3.2.3-11-spring-boot.jar))
 
 
 Old releases:
 
+* 3.2.3-10 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-10/rsync4j-all-3.2.3-10-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-10/rsync4j-all-3.2.3-10-spring-boot.jar))
 * 3.2.3-9 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-9/rsync4j-all-3.2.3-9-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-9/rsync4j-all-3.2.3-9-spring-boot.jar))
 * 3.2.3-8 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-8/rsync4j-all-3.2.3-8-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-8/rsync4j-all-3.2.3-8-spring-boot.jar))
 * 3.2.3-7 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-7/rsync4j-all-3.2.3-7-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.2.3-7/rsync4j-all-3.2.3-7-spring-boot.jar))
