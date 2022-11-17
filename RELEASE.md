@@ -17,10 +17,10 @@ How to make a release
 
 * Update documentation
 
-  * if necessary, install mkdocs 1.0.4 in a virtual environment (newer versions stuff up code blocks?)
+  * if necessary, install mkdocs in a virtual environment (newer versions stuff up code blocks?)
     
     * `virtualenv -p /usr/bin/python3 venv`
-    * `./venv/bin/pip install mkdocs==1.0.4`
+    * `./venv/bin/pip install mkdocs`
     
   * add new release link (`releases.md`)
   * update artifact version (`maven.md`)
