@@ -54,6 +54,18 @@ public class Binaries {
   /** the windows environment variable for the rsyncj4 home directory. */
   public final static String WINDOWS_HOME_DIR = "RSYNC4J_HOME";
 
+  /** the environment variable for the rsync binary (Linux/Mac). */
+  public final static String RSYNC4J_RSYNC = "RSYNC4J_RSYNC";
+
+  /** the environment variable for the ssh binary (Linux/Mac). */
+  public final static String RSYNC4J_SSH = "RSYNC4J_SSH";
+
+  /** the environment variable for the sshpass binary (Linux/Mac). */
+  public final static String RSYNC4J_SSHPASS = "RSYNC4J_SSHPASS";
+
+  /** the environment variable for the ssh-keygen binary (Linux/Mac). */
+  public final static String RSYNC4J_SSHKEYGEN = "RSYNC4J_SSHKEYGEN";
+
   public static final String LIBRARIES = "libraries.txt";
 
   /** for storing any previously extract binary. */
@@ -229,23 +241,22 @@ public class Binaries {
     String	sshDir;
     File	dir;
 
-
-    sshBinary            = "/usr/bin/ssh";
-    rsyncBinary          = "/usr/bin/rsync";
-    sshkeygenBinary      = "/usr/bin/ssh-keygen";
-    sshpassBinary        = "/usr/bin/sshpass";
+    sshBinary            = System.getenv().getOrDefault(RSYNC4J_SSH,       "/usr/bin/ssh");
+    rsyncBinary          = System.getenv().getOrDefault(RSYNC4J_RSYNC,     "/usr/bin/rsync");
+    sshkeygenBinary      = System.getenv().getOrDefault(RSYNC4J_SSHKEYGEN, "/usr/bin/ssh-keygen");
+    sshpassBinary        = System.getenv().getOrDefault(RSYNC4J_SSHPASS,   "/usr/bin/sshpass");
     sshpassBinaryPresent = true;
 
     if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC_OSX) {
       if (!new File(rsyncBinary).exists())
-	throw new IllegalStateException("rsync not installed (" + rsyncBinary + ")?");
+	throw new IllegalStateException("rsync not installed? Was looking for '" + rsyncBinary + "'. You can use environment variable " + RSYNC4J_RSYNC + " to point to the binary.");
       if (!new File(sshBinary).exists())
-	throw new IllegalStateException("ssh not installed (" + sshBinary + ")?");
+	throw new IllegalStateException("ssh not installed? Was looking for '" + sshBinary + "'. You can use environment variable " + RSYNC4J_SSH + " to point to the binary.");
       if (!new File(sshkeygenBinary).exists())
-	throw new IllegalStateException("ssh-keygen not installed (" + sshkeygenBinary + ")?");
+	throw new IllegalStateException("ssh-keygen not installed? Was looking for '" + sshkeygenBinary + "'. You can use environment variable " + RSYNC4J_SSHKEYGEN + " to point to the binary.");
       if (!new File(sshpassBinary).exists()) {
 	sshpassBinaryPresent = false;
-	System.err.println("WARNING: sshpass binary not installed (" + sshpassBinary + ")");
+	System.err.println("WARNING: sshpass binary not installed? Was looking for '" + sshpassBinary + "'. You can use environment variable " + RSYNC4J_SSHPASS + " to point to the binary.");
       }
     }
     else if (SystemUtils.IS_OS_WINDOWS) {
