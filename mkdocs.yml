@@ -1,12 +1,22 @@
 site_name: rsync4j
-theme: readthedocs
 repo_url: https://github.com/fracpete/rsync4j
+edit_uri: edit/master/docs/
 site_description: rsync4j Documentation
+theme:
+    name: material
+markdown_extensions:
+    - toc:
+          baselevel: 2
+          permalink: "#"
+    - attr_list
+plugins:
+    - search
 nav:
     - Home: index.md
     - Command-line: commandline.md
     - Java: java.md
     - Windows: windows.md
+    - Environment variables: env_vars.md
     - FAQ: faq.md
     - Maven: maven.md
     - Releases: releases.md

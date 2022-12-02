@@ -110,9 +110,7 @@ to remotehost `otherbox` into directory `C:\other\dir` using these paths:
 * destination: `//otherbox/C$/other/dir`
 
 
-### Custom location
+### Custom location {: #custom-location }
 
-It is possible to use another location than `%USERPROFILE%\rsync4j`. You only
-have to set up the `RSYNC4J_HOME` environment variable to point to the top-level
-directory (doesn't have to exist) where you want to house the binaries and keys. 
+See [Environment variables/Windows](/env_vars/#windows).
 
