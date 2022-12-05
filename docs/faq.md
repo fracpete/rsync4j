@@ -19,3 +19,10 @@
   **A** Supply the following option to ssh (via `-o ...`): 
   
   `StrictHostKeyChecking=no`
+
+* **Q** How can I fix the incorrect permissions in the target directory under Windows
+  (e.g., `The permissions are incorrectly ordered, which may cause some entries to be ineffective.`  
+  or `Deny for "NULL SID"`)?
+  
+  **A** Use the `chmod` argument of the `RSync` class with something like `.chmod("ugo=rwX")` ([source](https://stackoverflow.com/a/5911943/4698227)).
+  
