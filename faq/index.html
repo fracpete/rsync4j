@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#known_hosts" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -284,9 +289,66 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         FAQ
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#known_hosts" class="md-nav__link">
+    Q: I'm trying to sync, but it just sits there and does nothing!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    Q: How do I use a specific public key pair?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sshpass" class="md-nav__link">
+    Q: I cannot store ssh keys on the remote machine, how do I use user/password for the login?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stricthostkeychecking" class="md-nav__link">
+    Q: How can I suppress the prompt for accepting a remote fingerprint (The authenticity of host 'XYZ' can't be established. Are you sure you want to continue connecting (yes/no/[fingerprint])?)?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-permissions" class="md-nav__link">
+    Q: How can I fix the incorrect permissions in the target directory under Windows (e.g., The permissions are incorrectly ordered, which may cause some entries to be ineffective. or Deny for "NULL SID")?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -340,6 +402,49 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#known_hosts" class="md-nav__link">
+    Q: I'm trying to sync, but it just sits there and does nothing!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    Q: How do I use a specific public key pair?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sshpass" class="md-nav__link">
+    Q: I cannot store ssh keys on the remote machine, how do I use user/password for the login?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stricthostkeychecking" class="md-nav__link">
+    Q: How can I suppress the prompt for accepting a remote fingerprint (The authenticity of host 'XYZ' can't be established. Are you sure you want to continue connecting (yes/no/[fingerprint])?)?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-permissions" class="md-nav__link">
+    Q: How can I fix the incorrect permissions in the target directory under Windows (e.g., The permissions are incorrectly ordered, which may cause some entries to be ineffective. or Deny for "NULL SID")?
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -360,33 +465,20 @@
 
   <h1>FAQ</h1>
 
-<ul>
-<li><strong>Q</strong> I'm trying to sync, but it just sits there and does nothing!</li>
-</ul>
-<p><strong>A</strong> Since <em>rsync4j</em> is not interactive, you will have to connect to the 
-  remote host at least once before to add the host to the <code>known_hosts</code> file.</p>
-<ul>
-<li><strong>Q</strong> How do I use a specific public key pair?</li>
-</ul>
-<p><strong>A</strong> You can let <code>ssh</code> know what identity file to use using rsync's <code>--rsh</code> 
-  option and ssh's <code>-i</code> option, e.g.: <code>rsync --rsh="ssh -i /some/where/id_rsa" ...</code></p>
-<ul>
-<li><strong>Q</strong> I cannot store ssh keys on the remote machine, how do I use user/password for the login?</li>
-</ul>
-<p><strong>A</strong> Using Java, you can supply an instance of the <code>SshPass</code> class to the <code>Rsync</code> or <code>Ssh</code> object 
-  that will then feed the password to the underlying binary.</p>
-<ul>
-<li><strong>Q</strong> How can I suppress the prompt for accepting a remote fingerprint 
-  (<code>The authenticity of host 'XYZ' can't be established. Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>)? </li>
-</ul>
-<p><strong>A</strong> Supply the following option to ssh (via <code>-o ...</code>): </p>
+<h3 id="known_hosts">Q: I'm trying to sync, but it just sits there and does nothing!<a class="headerlink" href="#known_hosts" title="Permanent link">#</a></h3>
+<p><strong>A:</strong> Since <em>rsync4j</em> is not interactive, you will have to connect to the 
+remote host at least once before to add the host to the <code>known_hosts</code> file.</p>
+<h3 id="identity">Q: How do I use a specific public key pair?<a class="headerlink" href="#identity" title="Permanent link">#</a></h3>
+<p><strong>A:</strong> You can let <code>ssh</code> know what identity file to use using rsync's <code>--rsh</code> 
+option and ssh's <code>-i</code> option, e.g.: <code>rsync --rsh="ssh -i /some/where/id_rsa" ...</code></p>
+<h3 id="sshpass">Q: I cannot store ssh keys on the remote machine, how do I use user/password for the login?<a class="headerlink" href="#sshpass" title="Permanent link">#</a></h3>
+<p><strong>A:</strong> Using Java, you can supply an instance of the <code>SshPass</code> class to the <code>Rsync</code> or <code>Ssh</code> object 
+that will then feed the password to the underlying binary.</p>
+<h3 id="stricthostkeychecking">Q: How can I suppress the prompt for accepting a remote fingerprint (<code>The authenticity of host 'XYZ' can't be established. Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>)?<a class="headerlink" href="#stricthostkeychecking" title="Permanent link">#</a></h3>
+<p><strong>A:</strong> Supply the following option to ssh (via <code>-o ...</code>): </p>
 <p><code>StrictHostKeyChecking=no</code></p>
-<ul>
-<li><strong>Q</strong> How can I fix the incorrect permissions in the target directory under Windows
-  (e.g., <code>The permissions are incorrectly ordered, which may cause some entries to be ineffective.</code><br />
-  or <code>Deny for "NULL SID"</code>)?</li>
-</ul>
-<p><strong>A</strong> Use the <code>chmod</code> argument of the <code>RSync</code> class with something like <code>.chmod("ugo=rwX")</code> (<a href="https://stackoverflow.com/a/5911943/4698227">source</a>).</p>
+<h3 id="windows-permissions">Q: How can I fix the incorrect permissions in the target directory under Windows (e.g., <code>The permissions are incorrectly ordered, which may cause some entries to be ineffective.</code> or <code>Deny for "NULL SID"</code>)?<a class="headerlink" href="#windows-permissions" title="Permanent link">#</a></h3>
+<p><strong>A:</strong> Use the <code>chmod</code> argument of the <code>RSync</code> class with something like <code>.chmod("ugo=rwX")</code> (<a href="https://stackoverflow.com/a/5911943/4698227">source</a>).</p>
 
 
 
