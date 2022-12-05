@@ -381,6 +381,12 @@
 </ul>
 <p><strong>A</strong> Supply the following option to ssh (via <code>-o ...</code>): </p>
 <p><code>StrictHostKeyChecking=no</code></p>
+<ul>
+<li><strong>Q</strong> How can I fix the incorrect permissions in the target directory under Windows
+  (e.g., <code>The permissions are incorrectly ordered, which may cause some entries to be ineffective.</code><br />
+  or <code>Deny for "NULL SID"</code>)?</li>
+</ul>
+<p><strong>A</strong> Use the <code>chmod</code> argument of the <code>RSync</code> class with something like <code>.chmod("ugo=rwX")</code> (<a href="https://stackoverflow.com/a/5911943/4698227">source</a>).</p>
 
 
 
