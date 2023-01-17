@@ -6,7 +6,7 @@ For Windows, binaries are included in the jars and *rsync4j*
 will set up an environment in the user's home directory (`%USERPROFILE%\rsync4j`)
 on first usage (can be customized, see Section [Custom location](https://fracpete.github.io/rsync4j/windows/#custom-location)). 
 
-Supports 32-bit and 64-bit platforms.
+Supports 32-bit (up to version 3.2.3-12) and 64-bit platforms (all releases).
 
 
 ## Documentation
