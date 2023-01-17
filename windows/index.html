@@ -296,13 +296,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#binaries-32-bit" class="md-nav__link">
-    Binaries (32-bit)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#binaries-64-bit" class="md-nav__link">
     Binaries (64-bit)
   </a>
@@ -437,13 +430,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#binaries-32-bit" class="md-nav__link">
-    Binaries (32-bit)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#binaries-64-bit" class="md-nav__link">
     Binaries (64-bit)
   </a>
@@ -506,37 +492,10 @@ simply supply this via the dummy string <code>ssh</code>. In Java code, this is 
 <p>You can place your ssh key pairs in the following directory:</p>
 <pre><code>%USERPROFILE%\rsync4j\home\%USERNAME%\.ssh
 </code></pre>
-<h4 id="binaries-32-bit">Binaries (32-bit)<a class="headerlink" href="#binaries-32-bit" title="Permanent link">#</a></h4>
-<p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
-their dependencies from the 32-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
-<p>The dependencies, as of 2022-11-17 (OpenSSH 9.1p1-1), are as follows:</p>
-<ul>
-<li>cygcom_err-2.dll</li>
-<li>cygcrypto-1.1.dll</li>
-<li>cyggcc_s-1.dll</li>
-<li>cyggssapi_krb5-2.dll</li>
-<li>cygiconv-2.dll</li>
-<li>cygintl-8.dll</li>
-<li>cygk5crypto-3.dll</li>
-<li>cygkrb5-3.dll</li>
-<li>cygkrb5support-0.dll</li>
-<li>cyglz4-1.dll</li>
-<li>cygwin1.dll</li>
-<li>cygz.dll</li>
-<li>cygzstd-1.dll</li>
-</ul>
-<p>You can easily determine the dependencies by running the executables. Windows
-will automatically pop up a dialog mentioning any DLLs that are missing. Place
-any missing DLLs in the following directory:</p>
-<pre><code>rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32
-</code></pre>
-<p>And list the DLLs in the following text file:</p>
-<pre><code>rsync4j-windows32/src/main/resources/com/github/fracpete/rsync4j/windows32/libraries.txt
-</code></pre>
 <h4 id="binaries-64-bit">Binaries (64-bit)<a class="headerlink" href="#binaries-64-bit" title="Permanent link">#</a></h4>
 <p><em>rsync4j</em> uses the <code>rsync.exe</code>, <code>ssh.exe</code> and <code>ssh-keygen.exe</code> executables and 
 their dependencies from the 64-bit version of <a href="https://cygwin.com/">cywgin</a>.</p>
-<p>The dependencies, as of 2022-11-17 (OpenSSH 9.1p1-1), are as follows:</p>
+<p>The dependencies, as of 2023-01-18 (OpenSSH 9.1p1-1), are as follows:</p>
 <ul>
 <li>cygcom_err-2.dll</li>
 <li>cygcrypto-1.1.dll</li>
