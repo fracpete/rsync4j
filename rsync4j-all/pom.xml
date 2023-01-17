@@ -49,12 +49,6 @@
 
     <dependency>
       <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-windows32</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-windows64</artifactId>
       <version>${project.version}</version>
     </dependency>

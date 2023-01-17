@@ -5,7 +5,7 @@
 
   <groupId>com.github.fracpete</groupId>
   <artifactId>rsync4j-pom</artifactId>
-  <version>3.2.3-13-SNAPSHOT</version>
+  <version>3.2.7-1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <parent>
@@ -94,7 +94,6 @@
 
   <modules>
     <module>rsync4j-core</module>
-    <module>rsync4j-windows32</module>
     <module>rsync4j-windows64</module>
     <module>rsync4j-all</module>
   </modules>

@@ -15,7 +15,7 @@
 
 /*
  * Binaries.java
- * Copyright (C) 2017-2022 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2023 University of Waikato, Hamilton, New Zealand
  */
 
 package com.github.fracpete.rsync4j.core;
@@ -44,9 +44,6 @@ public class Binaries {
 
   /** the resource prefix. */
   public final static String RESOURCE_DIR = "com/github/fracpete/rsync4j/";
-
-  /** the sub-directory for the windows 32bit binaries. */
-  public final static String WINDOWS_DIR_32 = "windows32/";
 
   /** the sub-directory for the windows 64bit binaries. */
   public final static String WINDOWS_DIR_64 = "windows64/";
@@ -191,7 +188,7 @@ public class Binaries {
    */
   protected static String getWindowsDir() {
     if (getBitness() == 32)
-      return WINDOWS_DIR_32;
+      throw new IllegalStateException("32-bit Windows is no longer supported! Last version with 32-bit support: 3.2.3-12");
     else
       return WINDOWS_DIR_64;
   }
