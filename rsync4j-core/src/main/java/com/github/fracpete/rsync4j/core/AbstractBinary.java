@@ -15,7 +15,7 @@
 
 /*
  * AbstractBinary.java
- * Copyright (C) 2017-2022 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2023 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j.core;
 
@@ -43,6 +43,9 @@ public abstract class AbstractBinary {
   /** whether to output the commandline. */
   protected boolean outputCommandline;
 
+  /** whether to output the commandline arguments one per line or combined in a single line. */
+  protected boolean outputSingleCommandline;
+
   /**
    * Initializes the object.
    */
@@ -55,6 +58,7 @@ public abstract class AbstractBinary {
    */
   public void reset() {
     outputCommandline = false;
+    outputSingleCommandline = true;
   }
 
   /**
@@ -78,6 +82,26 @@ public abstract class AbstractBinary {
   }
 
   /**
+   * Sets whether to output the command-line as single line or each argument on a separate one.
+   *
+   * @param value	true for single line
+   * @return		itself
+   */
+  public AbstractBinary outputSingleCommandline(boolean value) {
+    outputSingleCommandline = value;
+    return this;
+  }
+
+  /**
+   * Returns whether to output the command-line as single line or each argument on a separate one.
+   *
+   * @return		true if single line
+   */
+  public boolean getOutputSingleCommandline() {
+    return outputSingleCommandline;
+  }
+
+  /**
    * Assembles the arguments for the rsync binary.
    *
    * @return		the options
@@ -95,6 +119,17 @@ public abstract class AbstractBinary {
   public abstract List<String> commandLineArgs() throws Exception;
 
   /**
+   * Assembles the full command-line.
+   *
+   * @return		the command-line arguments
+   * @throws Exception	if failed to determine binary
+   * @see		#commandLineArgs()
+   */
+  public String commandLine() throws Exception {
+    return Utils.flatten(commandLineArgs(), " ");
+  }
+
+  /**
    * Returns a configured {@link ProcessBuilder} to be used for executing
    * the rsync process.
    *
@@ -105,11 +140,24 @@ public abstract class AbstractBinary {
   public ProcessBuilder builder() throws Exception {
     ProcessBuilder	builder;
     List<String>	args;
+    StringBuilder	lines;
 
     args = commandLineArgs();
 
-    if (getOutputCommandline())
-      logger.info("Command-line: " + Utils.flatten(args, " "));
+    if (getOutputCommandline()) {
+      if (getOutputSingleCommandline()) {
+	logger.info("Command-line: " + Utils.flatten(args, " "));
+      }
+      else {
+	lines = new StringBuilder();
+	for (String arg : args) {
+	  if (lines.length() > 0)
+	    lines.append("\n");
+	  lines.append(arg);
+	}
+	logger.info("Command-line arguments:\n" + lines);
+      }
+    }
 
     builder = new ProcessBuilder();
     builder.command(args);
