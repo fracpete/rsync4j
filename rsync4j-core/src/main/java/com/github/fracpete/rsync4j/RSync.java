@@ -15,7 +15,7 @@
 
 /*
  * RSync.java
- * Copyright (C) 2017-2021 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2023 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -2440,14 +2440,15 @@ public class RSync
     if (isOneFileSystem()) result.add("--one-file-system");
     if (!getBlockSize().isEmpty()) result.add("--block-size=" + getBlockSize());
     if (!getRsh().isEmpty()) {
+      result.add("--rsh");
       if (SystemUtils.IS_OS_WINDOWS) {
         if (getRsh().equalsIgnoreCase("ssh"))
-          result.add("--rsh=\"" + Binaries.sshBinary() + "\"");
+          result.add(Binaries.sshBinary());
         else
-          result.add("--rsh=\"" + getRsh() + "\"");
+          result.add(getRsh());
       }
       else {
-        result.add("--rsh=" + getRsh());
+        result.add(getRsh());
       }
     }
     if (!getRsyncPath().isEmpty()) result.add("--rsync-path=" + getRsyncPath());
