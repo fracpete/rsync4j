@@ -9,6 +9,7 @@ Add the following artifact to your dependencies of your `pom.xml` fot cross-plat
 ```
 
 Available artifacts:
+
 * `rsync4j-core`: just the Java wrappers (sufficient for Linux/Mac)
 * `rsync4j-windows64`: includes Windows 64-bit binaries in additin to the core module (the 32-bit version has been dropped since cygwin no longer supports win32)
 * `rsync4j-all`: combines all modules
