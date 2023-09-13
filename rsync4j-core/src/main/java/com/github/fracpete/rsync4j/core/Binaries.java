@@ -28,6 +28,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -292,8 +293,8 @@ public class Binaries {
     }
     else {
       throw new IllegalStateException(
-	  "Unsupported operating system: "
-	      + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
+	"Unsupported operating system: "
+	  + SystemUtils.OS_NAME + "/" + SystemUtils.OS_ARCH + "/" + SystemUtils.OS_VERSION);
     }
 
     binariesExtracted = true;
@@ -391,10 +392,10 @@ public class Binaries {
    */
   public static String convertPath(String path) {
     String 		result;
-    StringBuilder	tmp;
-    List<String>	parts;
-    File		f;
     boolean             quoted;
+    boolean		protocol;
+    boolean		drive;
+    boolean		unc;
 
     result = path;
     quoted = false;
@@ -406,32 +407,21 @@ public class Binaries {
 	quoted = true;
       }
 
-      // split into parts
-      f     = new File(result);
-      parts = new ArrayList<>();
-      do {
-	if (!f.getName().isEmpty())
-	  parts.add(0, f.getName());
-	f = f.getParentFile();
-      }
-      while (f != null);
+      // do we have a protocol like "rsync://"?
+      protocol = (result.matches("^[a-z]+://.*"));
 
-      // drive letter?
-      if (parts.size() > 0) {
-	if (path.matches("^[a-zA-Z]:.*")) {
-	  parts.add(0, path.substring(0, 1).toLowerCase());
-	  parts.add(0, "/cygdrive");
-	}
-      }
+      // do we have a drive letter?
+      drive = result.matches("^[a-zA-Z]:.*");
 
-      // assemble
-      tmp = new StringBuilder();
-      for (String part: parts) {
-	if (tmp.length() > 0)
-	  tmp.append("/");
-	tmp.append(part);
+      // do we have a UNC path?
+      unc = result.startsWith("\\\\");
+
+      if (!protocol) {
+        if (!unc)
+	  result = result.replace("\\", "/");
+        if (drive)
+          result = "/cygdrive/" + result.substring(0, 1).toLowerCase() + result.substring(2);
       }
-      result = tmp.toString();
 
       // single quote in path or quoted before? -> double quotes
       result = quotePath(result, quoted);
