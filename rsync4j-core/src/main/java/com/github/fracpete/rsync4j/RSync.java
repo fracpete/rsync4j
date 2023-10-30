@@ -277,6 +277,34 @@ public class RSync
 
   protected boolean version;
 
+  protected boolean trust_sender;
+
+  protected boolean fsync;
+
+  protected boolean copy_devices;
+
+  protected String stop_after;
+
+  protected String stop_at;
+
+  protected boolean crtimes;
+
+  protected boolean mkpath;
+
+  protected String max_alloc;
+
+  protected String early_input;
+
+  protected boolean atimes;
+
+  protected boolean open_noatime;
+
+  protected boolean write_devices;
+
+  protected String copy_as;
+
+  protected String checksum_choice;
+
   protected String[] additional;
 
   protected SshPass sshPass;
@@ -407,6 +435,20 @@ public class RSync
     ipv4 = false;
     ipv6 = false;
     version = false;
+    trust_sender = false;
+    fsync = false;
+    copy_devices = false;
+    stop_after = "";
+    stop_at = "";
+    crtimes = false;
+    mkpath = false;
+    max_alloc = "";
+    early_input = "";
+    atimes = false;
+    open_noatime = false;
+    write_devices = false;
+    copy_as = "";
+    checksum_choice = "";
     sshPass = null;
   }
 
@@ -1956,6 +1998,8 @@ public class RSync
 
   /**
    * rsync option: --protect-args/-s
+   * <br>
+   * NB: --secluded-args starting 3.2.6
    */
   public boolean isProtectArgs() {
     return protect_args;
@@ -1963,6 +2007,8 @@ public class RSync
 
   /**
    * rsync option: --protect-args/-s
+   * <br>
+   * NB: --secluded-args starting 3.2.6
    */
   public RSync protectArgs(boolean protect_args) {
     this.protect_args = protect_args;
@@ -2344,6 +2390,244 @@ public class RSync
     return this;
   }
 
+  /**
+   * rsync option: --trust-sender
+   * @since 3.2.5
+   */
+  public boolean isTrustSender() {
+    return trust_sender;
+  }
+
+  /**
+   * rsync option: --trust-sender
+   * @since 3.2.5
+   */
+  public RSync trustSender(boolean trust_sender) {
+    this.trust_sender = trust_sender;
+    return this;
+  }
+
+  /**
+   * rsync option: --fsync
+   * @since 3.2.4
+   */
+  public boolean isFsync() {
+    return fsync;
+  }
+
+  /**
+   * rsync option: --fsync
+   * @since 3.2.4
+   */
+  public RSync fsync(boolean fsync) {
+    this.fsync = fsync;
+    return this;
+  }
+
+  /**
+   * rsync option: --copy-devices
+   * @since 3.2.4
+   */
+  public boolean isCopyDevices() {
+    return copy_devices;
+  }
+
+  /**
+   * rsync option: --copy-devices
+   * @since 3.2.4
+   */
+  public RSync copyDevices(boolean copy_devices) {
+    this.copy_devices = copy_devices;
+    return this;
+  }
+
+  /**
+   * rsync option: --stop-after
+   * @since 3.2.3
+   */
+  public String getStopAfter() {
+    return stop_after;
+  }
+
+  /**
+   * rsync option: --stop-after
+   * @since 3.2.3
+   */
+  public RSync stopAfter(String stop_after) {
+    this.stop_after = stop_after;
+    return this;
+  }
+
+  /**
+   * rsync option: --stop-at
+   * @since 3.2.3
+   */
+  public String getStopAt() {
+    return stop_at;
+  }
+
+  /**
+   * rsync option: --stop-at
+   * @since 3.2.3
+   */
+  public RSync stopAt(String stop_at) {
+    this.stop_at = stop_at;
+    return this;
+  }
+
+  /**
+   * rsync option: --crtimes
+   * @since 3.2.3
+   */
+  public boolean isCrtimes() {
+    return crtimes;
+  }
+
+  /**
+   * rsync option: --crtimes
+   * @since 3.2.3
+   */
+  public RSync crtimes(boolean crtimes) {
+    this.crtimes = crtimes;
+    return this;
+  }
+
+  /**
+   * rsync option: --mkpath
+   * @since 3.2.3
+   */
+  public boolean isMkpath() {
+    return mkpath;
+  }
+
+  /**
+   * rsync option: --mkpath
+   * @since 3.2.3
+   */
+  public RSync mkpath(boolean mkpath) {
+    this.mkpath = mkpath;
+    return this;
+  }
+
+  /**
+   * rsync option: --max-alloc
+   * @since 3.2.2
+   */
+  public String getMaxAlloc() {
+    return max_alloc;
+  }
+
+  /**
+   * rsync option: --max-alloc
+   * @since 3.2.2
+   */
+  public RSync maxAlloc(String max_alloc) {
+    this.max_alloc = max_alloc;
+    return this;
+  }
+
+  /**
+   * rsync option: --early-input
+   * @since 3.2.1
+   */
+  public String getEarlyInput() {
+    return early_input;
+  }
+
+  /**
+   * rsync option: --early-input
+   * @since 3.2.1
+   */
+  public RSync earlyInput(String early_input) {
+    this.early_input = early_input;
+    return this;
+  }
+
+  /**
+   * rsync option: --atimes
+   * @since 3.2.0
+   */
+  public boolean isAtimes() {
+    return atimes;
+  }
+
+  /**
+   * rsync option: --atimes
+   * @since 3.2.0
+   */
+  public RSync atimes(boolean atimes) {
+    this.atimes = atimes;
+    return this;
+  }
+
+  /**
+   * rsync option: --open-noatime
+   * @since 3.2.0
+   */
+  public boolean isOpenNoatime() {
+    return open_noatime;
+  }
+
+  /**
+   * rsync option: --open-noatime
+   * @since 3.2.0
+   */
+  public RSync openNoatime(boolean open_noatime) {
+    this.open_noatime = open_noatime;
+    return this;
+  }
+
+  /**
+   * rsync option: --write-devices
+   * @since 3.2.0
+   */
+  public boolean isWriteDevices() {
+    return write_devices;
+  }
+
+  /**
+   * rsync option: --write-devices
+   * @since 3.2.0
+   */
+  public RSync writeDevices(boolean write_devices) {
+    this.write_devices = write_devices;
+    return this;
+  }
+
+  /**
+   * rsync option: --copy-as
+   * @since 3.2.0
+   */
+  public String getCopyAs() {
+    return copy_as;
+  }
+
+  /**
+   * rsync option: --copy-as
+   * @since 3.2.0
+   */
+  public RSync copyAs(String copy_as) {
+    this.copy_as = copy_as;
+    return this;
+  }
+
+  /**
+   * rsync option: --checksum-choice
+   * @since 3.1.3
+   */
+  public String getChecksumChoice() {
+    return checksum_choice;
+  }
+
+  /**
+   * rsync option: --checksum-choice
+   * @since 3.1.3
+   */
+  public RSync checksumChoice(String checksum_choice) {
+    this.checksum_choice = checksum_choice;
+    return this;
+  }
+
   public String[] getAdditional() {
     return additional;
   }
@@ -2545,6 +2829,20 @@ public class RSync
     if (isIpv4()) result.add("--ipv4");
     if (isIpv6()) result.add("--ipv6");
     if (isVersion()) result.add("--version");
+    if (isTrustSender()) result.add("--trust-sender");
+    if (isFsync()) result.add("--fsync");
+    if (isCopyDevices()) result.add("--copy-devices");
+    if (!getStopAfter().isEmpty()) result.add("--stop-after=" + getStopAfter());
+    if (!getStopAt().isEmpty()) result.add("--stop-at=" + getStopAt());
+    if (isCrtimes()) result.add("--crtimes");
+    if (isMkpath()) result.add("--mkpath");
+    if (!getMaxAlloc().isEmpty()) result.add("--max-alloc=" + getMaxAlloc());
+    if (!getEarlyInput().isEmpty()) result.add("--early-input=" + getEarlyInput());
+    if (isAtimes()) result.add("--atimes");
+    if (isOpenNoatime()) result.add("--open-noatime");
+    if (isWriteDevices()) result.add("--write-devices");
+    if (!getCopyAs().isEmpty()) result.add("--copy-as=" + getCopyAs());
+    if (!getChecksumChoice().isEmpty()) result.add("--checksum-choice=" + getChecksumChoice());
     // generic options
     if (additional != null) {
       for (String a : additional) {
@@ -3170,6 +3468,70 @@ public class RSync
       .dest("version")
       .help("print version number")
       .action(Arguments.storeTrue());
+    parser.addArgument("--checksum-choice")
+      .setDefault("auto")
+      .dest("checksumchoice")
+      .help("choose the checksum algorithm: auto, xxh128, xxh3, xxh64/xxhash, md5, md4, sha1, none (since 3.1.3)");
+    parser.addArgument("-U", "--atimes")
+      .setDefault(false)
+      .dest("atimes")
+      .help("preserve access (use) times (since 3.2.0)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--open-noatime")
+      .setDefault(false)
+      .dest("opennoatime")
+      .help("avoid changing the atime on opened files (since 3.2.0)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--write-devices")
+      .setDefault(false)
+      .dest("writedevices")
+      .help("write to devices as files, implies --inplace (since 3.2.0)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--copy-as")
+      .setDefault("")
+      .dest("copyas")
+      .help("specify user & optional group for the copy 'USER[:GROUP]' (since 3.2.0)");
+    parser.addArgument("--early-input")
+      .setDefault("")
+      .dest("earlyinput")
+      .help("use FILE for daemon's early exec input (since 3.2.1)");
+    parser.addArgument("--max-alloc")
+      .setDefault("")
+      .dest("maxalloc")
+      .help("change a limit relating to memory alloc (since 3.2.2)");
+    parser.addArgument("--mkpath")
+      .setDefault(false)
+      .dest("mkpath")
+      .help("create destination's missing path components (since 3.2.3)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("-N", "--crtimes")
+      .setDefault(false)
+      .dest("crtimes")
+      .help("preserve create times (newness) (since 3.2.3)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--stop-at")
+      .setDefault("")
+      .dest("stopat")
+      .help("stop rsync at the specified point in time 'y-m-dTh:m' (since 3.2.3)");
+    parser.addArgument("--stop-after")
+      .setDefault("")
+      .dest("stopafter")
+      .help("stop rsync after MINS minutes have elapsed (since 3.2.3)");
+    parser.addArgument("--copy-devices")
+      .setDefault(false)
+      .dest("copydevices")
+      .help("copy device contents as a regular file (since 3.2.4)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--fsync")
+      .setDefault(false)
+      .dest("fsync")
+      .help("fsync every written file (since 3.2.4)")
+      .action(Arguments.storeTrue());
+    parser.addArgument("--trust-sender")
+      .setDefault(false)
+      .dest("trustsender")
+      .help("trust the remote sender's file list (since 3.2.5)")
+      .action(Arguments.storeTrue());
     parser.addArgument("--additional")
       .setDefault(new ArrayList<String>())
       .dest("additional")
@@ -3314,6 +3676,20 @@ public class RSync
     ipv4(ns.getBoolean("ipv4"));
     ipv6(ns.getBoolean("ipv6"));
     version(ns.getBoolean("version"));
+    trustSender(ns.getBoolean("trustsender"));
+    fsync(ns.getBoolean("fsync"));
+    copyDevices(ns.getBoolean("copydevices"));
+    stopAfter(ns.getString("stopafter"));
+    stopAt(ns.getString("stopat"));
+    crtimes(ns.getBoolean("crtimes"));
+    mkpath(ns.getBoolean("mkpath"));
+    maxAlloc(ns.getString("maxalloc"));
+    earlyInput(ns.getString("earlyinput"));
+    atimes(ns.getBoolean("atimes"));
+    openNoatime(ns.getBoolean("opennoatime"));
+    writeDevices(ns.getBoolean("writedevices"));
+    copyAs(ns.getString("copyas"));
+    checksumChoice(ns.getString("checksumchoice"));
     additional(ns.getList("additional").toArray(new String[0]));
 
     List<String> src_dest = ns.getList("source(s)/destination");
