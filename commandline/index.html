@@ -472,6 +472,10 @@ the <code>rsync</code> executable itself. Here is the help screen:</p>
        [--write-batch WRITEBATCH] [--only-write-batch ONLYWRITEBATCH]
        [--read-batch READBATCH] [--protocol PROTOCOL] [--iconv ICONV]
        [--checkum-seed CHECKSUMSEED] [-4] [-6] [--version]
+       [--checksum-choice CHECKSUMCHOICE] [-U] [--open-noatime]
+       [--write-devices] [--copy-as COPYAS] [--early-input EARLYINPUT]
+       [--max-alloc MAXALLOC] [--mkpath] [-N] [--stop-at STOPAT]
+       [--stop-after STOPAFTER] [--copy-devices] [--fsync] [--trust-sender]
        [--additional ADDITIONAL]
        [source(s)/destination [source(s)/destination ...]]
 
@@ -484,7 +488,7 @@ positional arguments:
                          path), with the last one  being the target and the
                          others the source(s).
 
-optional arguments:
+named arguments:
   -h, --help             show this help message and exit
   --output-commandline   output the command-line generated  for the wrapped
                          binary
@@ -622,7 +626,8 @@ optional arguments:
                          log updates using the specified FMT
   --password-file PASSWORDFILE
                          read daemon-access password from FILE
-  --list-only            list the files instead of copying them
+  --list-only            list the files instead of  copying them (no target
+                         required)
   --bwlimit BWLIMIT      limit socket I/O bandwidth
   --outbuf OUTBUF        set output  buffering  to  None,  Line,  or  Block
                          (N|L|B)
@@ -639,6 +644,34 @@ optional arguments:
   -4, --ipv4             prefer IPv4
   -6, --ipv6             prefer IPv6
   --version              print version number
+  --checksum-choice CHECKSUMCHOICE
+                         choose  the  checksum   algorithm:  auto,  xxh128,
+                         xxh3, xxh64/xxhash, md5,  md4,  sha1,  none (since
+                         3.1.3)
+  -U, --atimes           preserve access (use) times (since 3.2.0)
+  --open-noatime         avoid changing the  atime  on  opened files (since
+                         3.2.0)
+  --write-devices        write  to  devices  as  files,  implies  --inplace
+                         (since 3.2.0)
+  --copy-as COPYAS       specify user &amp; optional group for the copy 'USER[:
+                         GROUP]' (since 3.2.0)
+  --early-input EARLYINPUT
+                         use FILE  for  daemon's  early  exec  input (since
+                         3.2.1)
+  --max-alloc MAXALLOC   change a limit  relating  to  memory  alloc (since
+                         3.2.2)
+  --mkpath               create  destination's   missing   path  components
+                         (since 3.2.3)
+  -N, --crtimes          preserve create times (newness) (since 3.2.3)
+  --stop-at STOPAT       stop rsync at the  specified  point  in time 'y-m-
+                         dTh:m' (since 3.2.3)
+  --stop-after STOPAFTER
+                         stop rsync after MINS  minutes have elapsed (since
+                         3.2.3)
+  --copy-devices         copy device  contents  as  a  regular  file (since
+                         3.2.4)
+  --fsync                fsync every written file (since 3.2.4)
+  --trust-sender         trust the remote sender's file list (since 3.2.5)
   --additional ADDITIONAL
                          generic option to pass  on  to rsync; for command-
                          line parsing to work  though,  leading dashes must
