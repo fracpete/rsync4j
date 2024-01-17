@@ -1,5 +1,6 @@
 cygcom_err-2.dll
 cygcrypto-1.1.dll
+cygcrypto-3.dll
 cyggcc_s-seh-1.dll
 cyggssapi_krb5-2.dll
 cygiconv-2.dll
