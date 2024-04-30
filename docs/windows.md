@@ -22,10 +22,9 @@ You can place your ssh key pairs in the following directory:
 *rsync4j* uses the `rsync.exe`, `ssh.exe` and `ssh-keygen.exe` executables and 
 their dependencies from the 64-bit version of [cywgin](https://cygwin.com/).
 
-The dependencies, as of 2024-03-14 (OpenSSH 9.7p1-1), are as follows:
+The dependencies, as of 2024-05-01 (OpenSSH 9.7p1-1), are as follows:
 
 * cygcom_err-2.dll
-* cygcrypto-1.1.dll
 * cygcrypto-3.dll
 * cyggcc_s-seh-1.dll
 * cyggssapi_krb5-2.dll
