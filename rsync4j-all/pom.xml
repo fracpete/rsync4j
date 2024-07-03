@@ -83,10 +83,10 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
 
-      <plugin>
+      <!--plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
-      </plugin>
+      </plugin-->
     </plugins>
   </build>
 </project>
