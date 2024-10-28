@@ -1,6 +1,6 @@
 Current release:
 
-* 3.3.0-1 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-1/rsync4j-all-3.3.0-1-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-1/rsync4j-all-3.3.0-1-spring-boot.jar))
+* 3.3.0-2 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-2/rsync4j-all-3.3.0-2-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-2/rsync4j-all-3.3.0-2-spring-boot.jar))
 
 
 Last version with Windows 32-bit support: **3.2.3-12**
@@ -10,6 +10,7 @@ Old releases:
 
 * rsync 3.3.0
 
+  * 3.3.0-1 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-1/rsync4j-all-3.3.0-1-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-1/rsync4j-all-3.3.0-1-spring-boot.jar))
   * 3.3.0-0 ([zip](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-0/rsync4j-all-3.3.0-0-bin.zip), [spring-boot](https://github.com/fracpete/rsync4j/releases/download/rsync4j-pom-3.3.0-0/rsync4j-all-3.3.0-0-spring-boot.jar))
 
 * rsync 3.2.7
