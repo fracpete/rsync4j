@@ -15,12 +15,13 @@
 
 /*
  * AbstractBinaryWithTimeout.java
- * Copyright (C) 2018 University of Waikato, Hamilton, NZ
+ * Copyright (C) 2018-2025 University of Waikato, Hamilton, NZ
  */
 
 package com.github.fracpete.rsync4j.core;
 
 import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.Namespace;
 
@@ -96,6 +97,7 @@ public abstract class AbstractBinaryWithTimeout
     parser = super.getParser();
     parser.addArgument("--maxtime")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("maxtime")
       .help("set the maximum time for the process to run in seconds before getting killed");
 
@@ -118,5 +120,23 @@ public abstract class AbstractBinaryWithTimeout
     maxTime(ns.getInt("maxtime"));
 
     return true;
+  }
+
+  /**
+   * Runs the binary with the arguments.
+   *
+   * @param args	the arguments
+   */
+  public static void run(AbstractBinaryWithTimeout binary, String[] args) throws Exception {
+    ConsoleOutputProcessOutput output;
+
+    if (binary.setOptions(args)) {
+      output = new ConsoleOutputProcessOutput();
+      output.setTimeOut(binary.getMaxTime());
+      output.monitor(binary.builder());
+    }
+    else {
+      System.exit(1);
+    }
   }
 }
