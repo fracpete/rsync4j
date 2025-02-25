@@ -2,6 +2,7 @@ How to make a release
 =====================
 
 * Switch to Java 11 (Java 9 has outdated certificates)
+* make sure that `gh-pages` branch is up-to-date
 * Run the following command to deploy the artifact:
 
   ```
