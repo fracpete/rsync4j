@@ -15,7 +15,7 @@
 
 /*
  * RSync.java
- * Copyright (C) 2017-2023 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2025 University of Waikato, Hamilton, New Zealand
  */
 package com.github.fracpete.rsync4j;
 
@@ -3207,6 +3207,7 @@ public class RSync
       .action(Arguments.storeTrue());
     parser.addArgument("--max-delete")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("maxdelete")
       .help("don't delete more than NUM files");
     parser.addArgument("--max-size")
@@ -3255,10 +3256,12 @@ public class RSync
       .help("simple username/groupname mapping");
     parser.addArgument("--timeout")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("timeout")
       .help("set I/O timeout in seconds");
     parser.addArgument("--contimeout")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("contimeout")
       .help("set daemon connection timeout in seconds");
     parser.addArgument("-I", "--ignore-times")
@@ -3277,6 +3280,7 @@ public class RSync
       .action(Arguments.storeTrue());
     parser.addArgument("--modify-window")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("modifywindow")
       .help("compare mod-times with reduced accuracy");
     parser.addArgument("-T", "--temp-dir")
@@ -3310,6 +3314,7 @@ public class RSync
       .action(Arguments.storeTrue());
     parser.addArgument("--compress-level")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("compresslevel")
       .help("explicitly set compression level");
     parser.addArgument("--skip-compress")
@@ -3364,6 +3369,7 @@ public class RSync
       .help("bind address for outgoing socket to daemon");
     parser.addArgument("--port")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("port")
       .help("specify double-colon alternate port number");
     parser.addArgument("--sockopts")
@@ -3443,6 +3449,7 @@ public class RSync
       .help("read a batched update from FILE");
     parser.addArgument("--protocol")
       .setDefault(-1)
+      .type(Integer.class)
       .dest("protocol")
       .help("force an older protocol version to be used");
     parser.addArgument("--iconv")

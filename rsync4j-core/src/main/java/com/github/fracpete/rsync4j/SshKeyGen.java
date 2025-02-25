@@ -15,7 +15,7 @@
 
 /*
  * SshKeyGen.java
- * Copyright (C) 2018-2021 University of Waikato, Hamilton, NZ
+ * Copyright (C) 2018-2025 University of Waikato, Hamilton, NZ
  */
 
 package com.github.fracpete.rsync4j;
@@ -1067,6 +1067,7 @@ public class SshKeyGen
     parser.addArgument("-a")
       .dest("rounds")
       .help("When saving a new-format private key (i.e. an ed25519 key or any SSH protocol 2 key when the -o flag is set), this option specifies the number of KDF (key derivation function) rounds used.")
+      .type(Integer.class)
       .setDefault(-1);
     parser.addArgument("-B")
       .dest("bubbleBabble")
@@ -1076,6 +1077,7 @@ public class SshKeyGen
     parser.addArgument("-b")
       .dest("bits")
       .help("Specifies the number of bits in the key to create.")
+      .type(Integer.class)
       .setDefault(-1);
     parser.addArgument("-C")
       .dest("comment")
@@ -1129,10 +1131,12 @@ public class SshKeyGen
     parser.addArgument("-J")
       .dest("screenNumLines")
       .help("Exit after screening the specified number of lines while performing DH candidate screening using the -T option.")
+      .type(Integer.class)
       .setDefault(-1);
     parser.addArgument("-j")
       .dest("screenStartLine")
       .help("Start screening at the specified line number while performing DH candidate screening using the -T option.")
+      .type(Integer.class)
       .setDefault(-1);
     parser.addArgument("-K")
       .dest("screenCheckPoint")
@@ -1156,6 +1160,7 @@ public class SshKeyGen
     parser.addArgument("-M")
       .dest("memory")
       .help("Specify the amount of memory to use (in megabytes) when generating candidate moduli for DH-GEX.")
+      .type(Integer.class)
       .setDefault(-1);
     parser.addArgument("-m")
       .dest("keyFormat")
