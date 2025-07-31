@@ -10,6 +10,7 @@
 
   <name>rsync4j-pom</name>
   <description>Simple Java wrapper around rsync binaries.</description>
+  <url>https://github.com/fracpete/rsync4j</url>
   <organization>
     <name>University of Waikato, Hamilton, NZ</name>
     <url>http://www.waikato.ac.nz/</url>
