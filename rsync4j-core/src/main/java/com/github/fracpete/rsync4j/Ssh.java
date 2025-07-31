@@ -15,7 +15,7 @@
 
 /*
  * Ssh.java
- * Copyright (C) 2018-2021 University of Waikato, Hamilton, NZ
+ * Copyright (C) 2018-2025 University of Waikato, Hamilton, NZ
  */
 
 package com.github.fracpete.rsync4j;
@@ -251,7 +251,7 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
-   *
+   * <br>
    * ssh option: -A (true)/-a (false)
    *
    * @param value the value, null for default
@@ -452,7 +452,7 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
-   *
+   * <br>
    * ssh option: -K (true)/-k (false)
    *
    * @param value the value, null for default
@@ -692,7 +692,7 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
-   *
+   * <br>
    * ssh option: -t (true)/-T (false)
    *
    * @param value the value, null for default
@@ -774,7 +774,7 @@ public class Ssh
   /**
    * Use null to set it to user/system default. Other true/false to turn
    * on/off.
-   *
+   * <br>
    * ssh option: -X
    *
    * @param value the value, null for default
