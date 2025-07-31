@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>rsync4j-pom</artifactId>
-  <version>3.3.0-5-SNAPSHOT</version>
+  <version>3.3.0-5</version>
   <packaging>pom</packaging>
 
   <parent>
@@ -115,7 +115,7 @@
     <connection>scm:git:ssh://git@github.com/fracpete/rsync4j</connection>
     <developerConnection>scm:git:ssh://git@github.com/fracpete/rsync4j</developerConnection>
     <url>https://github.com/fracpete/rsync4j</url>
-    <tag>HEAD</tag>
+    <tag>rsync4j-pom-3.3.0-5</tag>
   </scm>
 
   <modules>
