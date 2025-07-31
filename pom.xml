@@ -125,11 +125,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.3</version>
+          <version>3.11.2</version>
           <configuration>
             <show>protected</show>
             <nohelp>true</nohelp>
-            <additionalparam>-Xdoclint:none</additionalparam>
+            <doclint>none</doclint>
+            <additionalJOption>--no-module-directories</additionalJOption>
           </configuration>
           <executions>
             <execution>
@@ -145,20 +146,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>2.3.2</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.1.2</version>
-          <executions>
-            <execution>
-              <id>attach-sources</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
 
         <plugin>
