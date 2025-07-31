@@ -15,20 +15,19 @@
 
 /*
  * Binaries.java
- * Copyright (C) 2017-2023 University of Waikato, Hamilton, New Zealand
+ * Copyright (C) 2017-2025 University of Waikato, Hamilton, New Zealand
  */
 
 package com.github.fracpete.rsync4j.core;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -400,7 +399,7 @@ public class Binaries {
     result = path;
     quoted = false;
 
-    if (SystemUtils.IS_OS_WINDOWS && (result.length() > 0)) {
+    if (SystemUtils.IS_OS_WINDOWS && (!result.isEmpty())) {
       // remove double quotes
       if (result.startsWith("\"") && result.endsWith("\"")) {
 	result = result.substring(1, result.length() - 1);
