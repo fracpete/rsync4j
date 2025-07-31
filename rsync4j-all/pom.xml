@@ -78,13 +78,12 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
 
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>3.1.4</version>
         <configuration>
-          <skip>true</skip>
+          <skip>releases</skip>
         </configuration>
       </plugin>
     </plugins>
