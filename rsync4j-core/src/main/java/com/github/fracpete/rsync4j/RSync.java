@@ -417,7 +417,6 @@ public class RSync
     eight_bit_output = false;
     human_readable = false;
     progress = false;
-    progress = false;
     itemize_changes = false;
     out_format = "";
     log_file = "";
@@ -1235,7 +1234,7 @@ public class RSync
    * On Windows: "ssh" will use the built-in ssh binary.
    * Other platforms: use absolute path of binary, eg "/usr/bin/ssh"
    * Empty for plain rsync protocol.
-   *
+   * <br>
    * rsync option: --rsh/-e
    *
    * @return		the rsh binary
@@ -1248,7 +1247,7 @@ public class RSync
    * On Windows: use "ssh" to use built-in ssh binary.
    * Other platforms: absolute path of binary, eg "/usr/bin/ssh"
    * Leave empty for plain rsync protocol.
-   *
+   * <br>
    * rsync option: --rsh/-e
    *
    * @param rsh		the rsh binary
@@ -2870,7 +2869,7 @@ public class RSync
     binary = Binaries.rsyncBinary();
     result = options();
     result.add(0, binary);
-    if (getSources().size() == 0)
+    if (getSources().isEmpty())
       throw new IllegalStateException("No source(s) defined!");
     result.addAll(getSources());
     if ((getDestination() == null) && !isListOnly())
@@ -3700,7 +3699,7 @@ public class RSync
     additional(ns.getList("additional").toArray(new String[0]));
 
     List<String> src_dest = ns.getList("source(s)/destination");
-    if ((src_dest.size() < 1) && isListOnly()) {
+    if ((src_dest.isEmpty()) && isListOnly()) {
       System.err.println("Source required!");
       return false;
     }
