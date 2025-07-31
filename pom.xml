@@ -3,15 +3,10 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.github.fracpete</groupId>
   <artifactId>rsync4j-pom</artifactId>
   <version>3.3.0-5-SNAPSHOT</version>
   <packaging>pom</packaging>
-
-  <parent>
-    <groupId>com.github.fracpete</groupId>
-    <artifactId>central-portal-parent</artifactId>
-    <version>0.0.2</version>
-  </parent>
 
   <name>rsync4j-pom</name>
   <description>Simple Java wrapper around rsync binaries.</description>
@@ -43,19 +38,54 @@
 
   <profiles>
     <profile>
-      <id>release-sign-artifacts</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
+      <id>central-portal-release</id>
       <build>
         <plugins>
           <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>0.7.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <publishingServerId>central</publishingServerId>
+              <excludeArtifacts>
+                <artifact>rsync4j-all</artifact>
+              </excludeArtifacts>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.3.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.11.2</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.1</version>
+            <version>3.2.7</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
