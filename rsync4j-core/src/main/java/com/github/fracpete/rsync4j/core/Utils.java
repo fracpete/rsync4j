@@ -13,7 +13,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
+/*
  * Utils.java
  * Copyright (C) 2017 University of Waikato, Hamilton, NZ
  */
@@ -26,7 +26,6 @@ import java.util.List;
  * Various helper methods.
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
- * @version $Revision$
  */
 public class Utils {
 
