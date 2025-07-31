@@ -3,15 +3,14 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.fracpete</groupId>
   <artifactId>rsync4j-pom</artifactId>
   <version>3.3.0-5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
+    <groupId>com.github.fracpete</groupId>
+    <artifactId>central-portal-parent</artifactId>
+    <version>0.0.2</version>
   </parent>
 
   <name>rsync4j-pom</name>
