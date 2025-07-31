@@ -1,15 +1,20 @@
-Add the following artifact to your dependencies of your `pom.xml` fot cross-platform support:
+Add the following artifact to your dependencies of your `pom.xml` for Windows64 support:
 
 ```xml
     <dependency>
       <groupId>com.github.fracpete</groupId>
-      <artifactId>rsync4j-all</artifactId>
-      <version>3.3.0-4</version>
+      <artifactId>rsync4j-windows64</artifactId>
+      <version>3.3.0-5</version>
     </dependency>
 ```
 
-Available artifacts:
+Other operating systems like Linux/Mac need the rsync/ssh binaries installed locally and only require the
+dependency for the Java wrapper classes:
 
-* `rsync4j-core`: just the Java wrappers (sufficient for Linux/Mac)
-* `rsync4j-windows64`: includes Windows 64-bit binaries in addition to the core module (the 32-bit version has been dropped since cygwin no longer supports win32)
-* `rsync4j-all`: combines all modules
+```xml
+    <dependency>
+      <groupId>com.github.fracpete</groupId>
+      <artifactId>rsync4j-core</artifactId>
+      <version>3.3.0-5</version>
+    </dependency>
+```
