@@ -4,7 +4,7 @@ Add the following artifact to your dependencies of your `pom.xml` for Windows64 
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-windows64</artifactId>
-      <version>3.3.0-5</version>
+      <version>3.3.0-6</version>
     </dependency>
 ```
 
@@ -15,6 +15,6 @@ dependency for the Java wrapper classes:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-core</artifactId>
-      <version>3.3.0-5</version>
+      <version>3.3.0-6</version>
     </dependency>
 ```
