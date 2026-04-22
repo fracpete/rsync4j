@@ -1,4 +1,4 @@
-# Linux/Mac {: #linux_mac }
+# Linux/Mac
 
 Starting with release 3.2.3-12, the locations of the underlying binaries can be 
 changed via the following environment variables:
@@ -9,7 +9,7 @@ changed via the following environment variables:
 * `RSYNC4J_SSHKEYGEN`
 
 
-# Windows {: #windows }
+# Windows
 
 It is possible to use another location than `%USERPROFILE%\rsync4j`. You only
 have to configure the `RSYNC4J_HOME` environment variable to point to the top-level

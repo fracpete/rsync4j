@@ -77,5 +77,5 @@ to remotehost `otherbox` into directory `C:\other\dir` using these paths:
 
 ### Custom location {: #custom-location }
 
-See [Environment variables/Windows](/env_vars/#windows).
+See [Environment variables/Windows](env_vars.md#windows).
 
