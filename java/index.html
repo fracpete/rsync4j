@@ -10,8 +10,18 @@
       
       
       
+      
+        <link rel="prev" href="../commandline/">
+      
+      
+        <link rel="next" href="../windows/">
+      
+      
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -19,15 +29,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.472b142f.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.08040f6c.min.css">
-        
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -39,24 +48,17 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-    
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -76,16 +78,19 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="rsync4j" class="md-header__button md-logo" aria-label="rsync4j" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -105,46 +110,56 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/fracpete/rsync4j" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -174,12 +189,13 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="rsync4j" class="md-nav__button md-logo" aria-label="rsync4j" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     rsync4j
@@ -189,7 +205,7 @@
       <a href="https://github.com/fracpete/rsync4j" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -201,14 +217,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -216,14 +244,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../commandline/" class="md-nav__link">
-        Command-line
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command-line
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -231,26 +271,51 @@
     
       
       
-      
-
   
   
     
   
   
+  
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Java
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Java
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
       </a>
       
         
@@ -268,7 +333,11 @@
       
         <li class="md-nav__item">
   <a href="#rsync" class="md-nav__link">
-    Rsync
+    <span class="md-ellipsis">
+      
+        Rsync
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Rsync">
@@ -276,14 +345,22 @@
         
           <li class="md-nav__item">
   <a href="#windows" class="md-nav__link">
-    Windows
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#multiple-sources" class="md-nav__link">
-    Multiple sources
+    <span class="md-ellipsis">
+      
+        Multiple sources
+      
+    </span>
   </a>
   
 </li>
@@ -295,28 +372,44 @@
       
         <li class="md-nav__item">
   <a href="#rsync-daemon" class="md-nav__link">
-    Rsync daemon
+    <span class="md-ellipsis">
+      
+        Rsync daemon
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#ssh" class="md-nav__link">
-    Ssh
+    <span class="md-ellipsis">
+      
+        Ssh
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#sshkeygen" class="md-nav__link">
-    SshKeyGen
+    <span class="md-ellipsis">
+      
+        SshKeyGen
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#sshpass" class="md-nav__link">
-    SshPass
+    <span class="md-ellipsis">
+      
+        SshPass
+      
+    </span>
   </a>
   
 </li>
@@ -331,14 +424,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../windows/" class="md-nav__link">
-        Windows
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -346,14 +451,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../env_vars/" class="md-nav__link">
-        Environment variables
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment variables
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -361,14 +478,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../faq/" class="md-nav__link">
-        FAQ
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -376,14 +505,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../maven/" class="md-nav__link">
-        Maven
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -391,14 +532,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../releases/" class="md-nav__link">
-        Releases
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -430,7 +583,11 @@
       
         <li class="md-nav__item">
   <a href="#rsync" class="md-nav__link">
-    Rsync
+    <span class="md-ellipsis">
+      
+        Rsync
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Rsync">
@@ -438,14 +595,22 @@
         
           <li class="md-nav__item">
   <a href="#windows" class="md-nav__link">
-    Windows
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#multiple-sources" class="md-nav__link">
-    Multiple sources
+    <span class="md-ellipsis">
+      
+        Multiple sources
+      
+    </span>
   </a>
   
 </li>
@@ -457,28 +622,44 @@
       
         <li class="md-nav__item">
   <a href="#rsync-daemon" class="md-nav__link">
-    Rsync daemon
+    <span class="md-ellipsis">
+      
+        Rsync daemon
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#ssh" class="md-nav__link">
-    Ssh
+    <span class="md-ellipsis">
+      
+        Ssh
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#sshkeygen" class="md-nav__link">
-    SshKeyGen
+    <span class="md-ellipsis">
+      
+        SshKeyGen
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#sshpass" class="md-nav__link">
-    SshPass
+    <span class="md-ellipsis">
+      
+        SshPass
+      
+    </span>
   </a>
   
 </li>
@@ -493,14 +674,14 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
-  <a href="https://github.com/fracpete/rsync4j/edit/master/docs/java.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+
+  
+  
 
 
   <h1>Java</h1>
@@ -508,186 +689,193 @@
 <h3 id="rsync">Rsync<a class="headerlink" href="#rsync" title="Permanent link">#</a></h3>
 <p>Here is an example of configuring and running <code>rsync</code> from within Java, only 
 outputting the data from stdout/stderr after the process completes: </p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
-import com.github.fracpete.processoutput4j.output.CollectingProcessOutput;
-...
-RSync rsync = new RSync()
-  .source(&quot;/one/place/&quot;)
-  .destination(&quot;/other/place/&quot;)
-  .recursive(true);
-// or if you prefer using commandline options:
-// rsync.setOptions(new String[]{&quot;-r&quot;, &quot;/one/place/&quot;, &quot;/other/place/&quot;});
-CollectingProcessOutput output = rsync.execute();
-System.out.println(output.getStdOut());
-System.out.println(&quot;Exit code: &quot; + output.getExitCode());
-if (output.getExitCode() &gt; 0)
-  System.err.println(output.getStdErr());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.RSync</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.CollectingProcessOutput</span><span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">...</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="s">&quot;/one/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;/other/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">// or if you prefer using commandline options:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">// rsync.setOptions(new String[]{&quot;-r&quot;, &quot;/one/place/&quot;, &quot;/other/place/&quot;});</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">CollectingProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rsync</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="na">getStdOut</span><span class="p">());</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Exit code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">output</span><span class="p">.</span><span class="na">getExitCode</span><span class="p">());</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="na">getExitCode</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="na">getStdErr</span><span class="p">());</span>
+</span></code></pre></div>
 <p>This example outputs stdout/stderr from the <code>rsync</code> process as it occurs, 
 rather than waiting till the end:</p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-...
-RSync rsync = new RSync()
-  .source(&quot;/one/place/&quot;)
-  .destination(&quot;/other/place/&quot;)
-  .archive(true)
-  .delete(true);
-ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
-output.monitor(rsync.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.RSync</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">...</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="s">&quot;/one/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;/other/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="p">.</span><span class="na">archive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">ConsoleOutputProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsoleOutputProcessOutput</span><span class="p">();</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">rsync</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
 <p>If you want to process the output (stdout/stderr) from the rsync process
 yourself, then you can use <code>StreamingProcessOutput</code> instead of 
 <code>ConsoleOutputProcessOutput</code>. You only need to supply an object of a class
 implementing the <code>StreamingProcessOwner</code> interface. Below is an example
 that simply prefixes the output with either <code>[OUT]</code> or <code>[ERR]</code>: </p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
-import com.github.fracpete.processoutput4j.core.StreamingProcessOutputType;
-import com.github.fracpete.processoutput4j.core.StreamingProcessOwner;
-import com.github.fracpete.processoutput4j.output.StreamingProcessOutput;
-
-public static class Output implements StreamingProcessOwner {
-  public StreamingProcessOutputType getOutputType() {
-    return StreamingProcessOutputType.BOTH;
-  }
-  public void processOutput(String line, boolean stdout) {
-    System.out.println((stdout ? &quot;[OUT] &quot; : &quot;[ERR] &quot;) + line);
-  }
-}
-
-...
-RSync rsync = new RSync()
-  .source(&quot;/one/place/&quot;)
-  .destination(&quot;/other/place/&quot;)
-  .recursive(true)
-  .verbose(true);
-StreamingProcessOutput output = new StreamingProcessOutput(new Output());
-output.monitor(rsync.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.RSync</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.core.StreamingProcessOutputType</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.core.StreamingProcessOwner</span><span class="p">;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.StreamingProcessOutput</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Output</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">StreamingProcessOwner</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">StreamingProcessOutputType</span><span class="w"> </span><span class="nf">getOutputType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">StreamingProcessOutputType</span><span class="p">.</span><span class="na">BOTH</span><span class="p">;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processOutput</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">stdout</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">((</span><span class="n">stdout</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;[OUT] &quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[ERR] &quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">line</span><span class="p">);</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">...</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="s">&quot;/one/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;/other/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">StreamingProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StreamingProcessOutput</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Output</span><span class="p">());</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">rsync</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
 <h4 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">#</a></h4>
 <p>When supplying the <code>rsh</code> option with an identity, usually like <code>ssh -i /some/where/key.pub</code>, 
 you need to supply the actual Windows binary and Windows path to the identity.
 You can use the <code>com.github.fracpete.rsync4j.core.Binaries</code> class to help you
 construct the path properly, for instance: </p>
-<pre><code class="language-java">RSync rsync = new RSync()
-  .source(&quot;C:\\somedir&quot;)
-  .destination(&quot;D:\\otherdir&quot;)
-  .recursive(true)
-  .rsh(Binaries.sshBinary() + &quot; -i &quot; + Binaries.convertPath(&quot;C:\\keys\\mykey.pub&quot;));
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="s">&quot;C:\\somedir&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;D:\\otherdir&quot;</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p">.</span><span class="na">rsh</span><span class="p">(</span><span class="n">Binaries</span><span class="p">.</span><span class="na">sshBinary</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; -i &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Binaries</span><span class="p">.</span><span class="na">convertPath</span><span class="p">(</span><span class="s">&quot;C:\\keys\\mykey.pub&quot;</span><span class="p">));</span>
+</span></code></pre></div>
 <h4 id="multiple-sources">Multiple sources<a class="headerlink" href="#multiple-sources" title="Permanent link">#</a></h4>
 <p>You can specify multiple sources when using the <code>sources</code> methods.</p>
 <p>Either as array:</p>
-<pre><code class="language-java">String[] s = new String[]{
-  &quot;/first/place/&quot;, 
-  &quot;/second/place/&quot;,
-};
-
-RSync rsync = new RSync()
-  .sources(s)
-  .destination(&quot;/other/place/&quot;)
-  .recursive(true)
-  .verbose(true);
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="s">&quot;/first/place/&quot;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="s">&quot;/second/place/&quot;</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">};</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">.</span><span class="na">sources</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;/other/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></code></pre></div>
 <p>Or as <code>java.util.List&lt;String&gt;</code>:</p>
-<pre><code class="language-java">List&lt;String&gt; s = new ArrayList&lt;&gt;();
-s.add(&quot;/first/place&quot;);
-s.add(&quot;/second/place&quot;);
-
-RSync rsync = new RSync()
-  .sources(s)
-  .destination(&quot;/other/place/&quot;)
-  .recursive(true)
-  .verbose(true);
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">s</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;/first/place&quot;</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">s</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;/second/place&quot;</span><span class="p">);</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="p">.</span><span class="na">sources</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;/other/place/&quot;</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></code></pre></div>
 <h3 id="rsync-daemon">Rsync daemon<a class="headerlink" href="#rsync-daemon" title="Permanent link">#</a></h3>
 <p>Instead of using rsync via ssh, you can also use the 
 <a href="https://download.samba.org/pub/rsync/rsyncd.conf.html">rsync daemon</a> approach.</p>
 <p>On the server, you can use something like this as <code>/etc/rsyncd.conf</code> to make 
 an upload directory <code>/home/public_rsync</code> available under the name <code>files</code>:</p>
-<pre><code class="language-inifile">pid file = /var/run/rsyncd.pid
-lock file = /var/run/rsync.lock
-log file = /var/log/rsync.log
-port = 12000
-charset = utf–8
-
-[files]
-path = /home/public_rsync
-comment = &quot;public rsync share&quot;
-use chroot = true
-uid = root
-gid = root
-read only = false
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pid file = /var/run/rsyncd.pid
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>lock file = /var/run/rsync.lock
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>log file = /var/log/rsync.log
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>port = 12000
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>charset = utf–8
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>[files]
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>path = /home/public_rsync
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>comment = &quot;public rsync share&quot;
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>use chroot = true
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>uid = root
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>gid = root
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>read only = false
+</span></code></pre></div>
 <p>For simplicity, we just start the daemon (running on port 12000) on the server 
 (192.168.1.100) as root user as follows:</p>
-<pre><code class="language-bash">sudo rsync --daemon
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>rsync<span class="w"> </span>--daemon
+</span></code></pre></div>
 <p>The following command will upload the directory <code>/home/myuser/some/where</code> on the<br />
 client to the <code>files</code> share:</p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.RSync;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-...
-RSync rsync = new RSync()
-  .recursive(true)
-  .times(true)
-  .dirs(true)
-  .verbose(true)
-  .source(&quot;/home/myuser/some/where&quot;)
-  .destination(&quot;rsync://192.168.1.100:12000/files/&quot;);
-ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
-output.monitor(rsync.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.RSync</span><span class="p">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput</span><span class="p">;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">...</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">RSync</span><span class="w"> </span><span class="n">rsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RSync</span><span class="p">()</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="p">.</span><span class="na">recursive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="p">.</span><span class="na">times</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">.</span><span class="na">dirs</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="s">&quot;/home/myuser/some/where&quot;</span><span class="p">)</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span><span class="p">.</span><span class="na">destination</span><span class="p">(</span><span class="s">&quot;rsync://192.168.1.100:12000/files/&quot;</span><span class="p">);</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">ConsoleOutputProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsoleOutputProcessOutput</span><span class="p">();</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">rsync</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
 <h3 id="ssh">Ssh<a class="headerlink" href="#ssh" title="Permanent link">#</a></h3>
 <p>The following command lists all files in the <code>/tmp</code> directory of the localhost
 in verbose mode and also outputting the generated command-line:</p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.Ssh;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-...
-Ssh ssh = new Ssh()
-  .outputCommandline(true)
-  .verbose(1)
-  .hostname(&quot;localhost&quot;)
-  .command(&quot;ls /tmp&quot;);
-ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
-output.monitor(ssh.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.Ssh</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">...</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">Ssh</span><span class="w"> </span><span class="n">ssh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ssh</span><span class="p">()</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p">.</span><span class="na">outputCommandline</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p">.</span><span class="na">hostname</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="p">.</span><span class="na">command</span><span class="p">(</span><span class="s">&quot;ls /tmp&quot;</span><span class="p">);</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">ConsoleOutputProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsoleOutputProcessOutput</span><span class="p">();</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">ssh</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
 <h3 id="sshkeygen">SshKeyGen<a class="headerlink" href="#sshkeygen" title="Permanent link">#</a></h3>
 <p>The following command generates a key file named <code>testkey</code> in your home 
 directory of type <code>dsa</code>, with no pass-phrase, outputting the bubble babble 
 of the key:</p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.SshKeyGen;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-...
-SshKeyGen keygen = new SshKeyGen()
-  .outputCommandline(true)
-  .verbose(1)
-  .keyType(&quot;dsa&quot;)
-  .newPassPhrase(&quot;&quot;)
-  .comment(&quot;test key&quot;)
-  .keyFile(&quot;~/testkey&quot;);
-ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
-output.monitor(keygen.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.SshKeyGen</span><span class="p">;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput</span><span class="p">;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">...</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">SshKeyGen</span><span class="w"> </span><span class="n">keygen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SshKeyGen</span><span class="p">()</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="p">.</span><span class="na">outputCommandline</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="p">.</span><span class="na">verbose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="p">.</span><span class="na">keyType</span><span class="p">(</span><span class="s">&quot;dsa&quot;</span><span class="p">)</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="p">.</span><span class="na">newPassPhrase</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="p">.</span><span class="na">comment</span><span class="p">(</span><span class="s">&quot;test key&quot;</span><span class="p">)</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span><span class="p">.</span><span class="na">keyFile</span><span class="p">(</span><span class="s">&quot;~/testkey&quot;</span><span class="p">);</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">ConsoleOutputProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsoleOutputProcessOutput</span><span class="p">();</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">keygen</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
 <h3 id="sshpass">SshPass<a class="headerlink" href="#sshpass" title="Permanent link">#</a></h3>
 <p>If it is not possible to use ssh keys for connecting to a remote machine, you 
 can fall back on using the user/password approach. For this, you will need
 to configure an instance of <code>com.github.fracpete.rsync4j.SshPass</code> class
 and pass it to <code>Rsync</code> or <code>Ssh</code> object that requires it.</p>
-<pre><code class="language-java">import com.github.fracpete.rsync4j.Ssh;
-import com.github.fracpete.rsync4j.SshPass;
-import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
-...
-SshPass sshpass = new SshPass()
-  .password(&quot;mysecretpassword&quot;);
-Ssh ssh = new Ssh()
-  .sshPass(sshpass)
-  .option(&quot;StrictHostKeyChecking=no&quot;)
-  .hostname(&quot;username@remote.host.com&quot;)
-  .command(&quot;ls /tmp&quot;);
-ConsoleOutputProcessOutput output = new ConsoleOutputProcessOutput();
-output.monitor(ssh.builder());
-</code></pre>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.Ssh</span><span class="p">;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.rsync4j.SshPass</span><span class="p">;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput</span><span class="p">;</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">...</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">SshPass</span><span class="w"> </span><span class="n">sshpass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SshPass</span><span class="p">()</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="p">.</span><span class="na">password</span><span class="p">(</span><span class="s">&quot;mysecretpassword&quot;</span><span class="p">);</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">Ssh</span><span class="w"> </span><span class="n">ssh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ssh</span><span class="p">()</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="p">.</span><span class="na">sshPass</span><span class="p">(</span><span class="n">sshpass</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="s">&quot;StrictHostKeyChecking=no&quot;</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">  </span><span class="p">.</span><span class="na">hostname</span><span class="p">(</span><span class="s">&quot;username@remote.host.com&quot;</span><span class="p">)</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">  </span><span class="p">.</span><span class="na">command</span><span class="p">(</span><span class="s">&quot;ls /tmp&quot;</span><span class="p">);</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">ConsoleOutputProcessOutput</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsoleOutputProcessOutput</span><span class="p">();</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="n">output</span><span class="p">.</span><span class="na">monitor</span><span class="p">(</span><span class="n">ssh</span><span class="p">.</span><span class="na">builder</span><span class="p">());</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
 
 
 
@@ -698,47 +886,12 @@ output.monitor(ssh.builder());
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../commandline/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Command-line" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Command-line
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../windows/" class="md-footer__link md-footer__link--next" aria-label="Next: Windows" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Windows
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -761,10 +914,14 @@ output.monitor(ssh.builder());
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
