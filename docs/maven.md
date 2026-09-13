@@ -15,6 +15,6 @@ dependency for the Java wrapper classes:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>rsync4j-core</artifactId>
-      <version>3.3.0-8</version>
+      <version>3.3.0-9</version>
     </dependency>
 ```
